@@ -1,0 +1,419 @@
+[gd_scene load_steps=50 format=3 uid="uid://cjbrvc38vhm6n"]
+
+[ext_resource type="Script" path="res://components/shared/scripts/levels/Decorations.gd" id="1_8bjj4"]
+[ext_resource type="Texture2D" uid="uid://dkua1tjulngk3" path="res://textures/decals/Grime/dust_subtle_01.png" id="2_fk57i"]
+[ext_resource type="Texture2D" uid="uid://c6cwq3q5geskx" path="res://textures/decals/Cracks/crack_01.png" id="3_f3hkx"]
+[ext_resource type="Texture2D" uid="uid://dhi5i7vm3500i" path="res://textures/decals/Cracks/crack_03.png" id="4_gg8gg"]
+[ext_resource type="PackedScene" uid="uid://cuvl4ncxl738u" path="res://models/scenes/vines/vines_ceiling_small_01.tscn" id="5_esyiq"]
+[ext_resource type="PackedScene" uid="uid://c10mp77km6kgx" path="res://models/scenes/vines/vines_ceiling_small_02.tscn" id="6_uhcr6"]
+[ext_resource type="PackedScene" uid="uid://cfu55xt5quu6a" path="res://models/scenes/vines/vines_ceiling_small_03.tscn" id="7_eq47o"]
+[ext_resource type="Texture2D" uid="uid://dscoavfvq5e6s" path="res://textures/prison/bricks.png" id="7_qxboj"]
+[ext_resource type="PackedScene" uid="uid://f5ycakm730an" path="res://models/scenes/vines/vines_ceiling_small_04.tscn" id="8_8dnvr"]
+[ext_resource type="Texture2D" uid="uid://bcbu7rffkikyt" path="res://textures/decals/Leaking/green_leakage_02.png" id="8_lcwbx"]
+[ext_resource type="PackedScene" uid="uid://cuk4pl5jo1jw6" path="res://models/scenes/vines/vines_ceiling_01.tscn" id="9_fdvn7"]
+[ext_resource type="Texture2D" uid="uid://detbygbni8tu2" path="res://textures/decals/Vines/vines_decal_01.png" id="9_yox2n"]
+[ext_resource type="PackedScene" uid="uid://bn3rb164yx6kr" path="res://models/scenes/vines/vines_ceiling_02.tscn" id="10_65wyo"]
+[ext_resource type="Texture2D" uid="uid://csm3tmvrnb1of" path="res://textures/decals/Leaking/green_leakage_03.png" id="10_e3urc"]
+[ext_resource type="Texture2D" uid="uid://d6xn7pjgw2ha" path="res://textures/decals/Leaking/green_leakage_01.png" id="10_yb81n"]
+[ext_resource type="Texture2D" uid="uid://ny7yeuc5yi5k" path="res://textures/decals/Vines/wall_vines_02.png" id="11_3pjeo"]
+[ext_resource type="PackedScene" uid="uid://d0ijf62xi4ig" path="res://models/scenes/vines/vines_ceiling_03.tscn" id="11_4c0x3"]
+[ext_resource type="PackedScene" uid="uid://c6e4sueliundj" path="res://models/scenes/vines/vines_ceiling_04.tscn" id="12_a7ww7"]
+[ext_resource type="PackedScene" uid="uid://bmi1ca8oxx85n" path="res://models/scenes/pebbles/pebble_02.tscn" id="13_877h7"]
+[ext_resource type="PackedScene" uid="uid://b83unikdug34" path="res://models/scenes/pebbles/pebble_03.tscn" id="14_xsx0i"]
+[ext_resource type="PackedScene" uid="uid://dythur6bwyjt5" path="res://models/scenes/pebbles/pebble_04.tscn" id="15_17onl"]
+[ext_resource type="PackedScene" uid="uid://drslnbqluoxiy" path="res://models/scenes/pebbles/pebble_05.tscn" id="16_bl5ux"]
+[ext_resource type="PackedScene" uid="uid://b5bdid3ka5xx5" path="res://models/scenes/pebbles/pebble_06.tscn" id="17_mp600"]
+[ext_resource type="PackedScene" uid="uid://dwssxgcd6pwki" path="res://models/scenes/pebbles/pebble_07.tscn" id="18_qkttw"]
+[ext_resource type="PackedScene" uid="uid://hmqr7kiwjpg5" path="res://models/scenes/pebbles/pebble_08.tscn" id="19_lxwdk"]
+[ext_resource type="PackedScene" uid="uid://1trojicuae27" path="res://models/scenes/fungi/mush_01.tscn" id="20_d4m88"]
+[ext_resource type="PackedScene" uid="uid://danqsjtcuxsxy" path="res://models/scenes/fungi/mush_cluster_01.tscn" id="21_0pkq4"]
+[ext_resource type="PackedScene" uid="uid://oep30dfsc0n0" path="res://models/scenes/fungi/mush_02.tscn" id="22_rkbsa"]
+[ext_resource type="Texture2D" uid="uid://s11r07hgjcu3" path="res://textures/prison/bricks_n.png" id="24_y3tro"]
+[ext_resource type="Texture2D" uid="uid://biyj82l1q7wdj" path="res://textures/particles/bit.png" id="30_pcwxr"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8gr8k"]
+albedo_texture = ExtResource("7_qxboj")
+normal_enabled = true
+normal_texture = ExtResource("24_y3tro")
+texture_filter = 0
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_4jllp"]
+material = SubResource("StandardMaterial3D_8gr8k")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ja4v3"]
+size = Vector3(2, 0.001, 2)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tl4re"]
+albedo_texture = ExtResource("7_qxboj")
+normal_enabled = true
+normal_texture = ExtResource("24_y3tro")
+texture_filter = 0
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_aoyd2"]
+material = SubResource("StandardMaterial3D_tl4re")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lfu00"]
+albedo_texture = ExtResource("7_qxboj")
+normal_enabled = true
+normal_texture = ExtResource("24_y3tro")
+heightmap_enabled = true
+texture_filter = 0
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_2p0td"]
+material = SubResource("StandardMaterial3D_lfu00")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_v2lp3"]
+albedo_texture = ExtResource("7_qxboj")
+normal_enabled = true
+normal_texture = ExtResource("24_y3tro")
+texture_filter = 0
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_xedni"]
+material = SubResource("StandardMaterial3D_v2lp3")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wh4q8"]
+albedo_texture = ExtResource("7_qxboj")
+normal_enabled = true
+normal_texture = ExtResource("24_y3tro")
+texture_filter = 0
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_8pg0l"]
+material = SubResource("StandardMaterial3D_wh4q8")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hjn6s"]
+albedo_texture = ExtResource("7_qxboj")
+normal_enabled = true
+normal_texture = ExtResource("24_y3tro")
+texture_filter = 0
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_rxjy6"]
+material = SubResource("StandardMaterial3D_hjn6s")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_twyvc"]
+size = Vector3(1.9, 1.9, 1.9)
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_d6xjb"]
+vertices = PackedVector3Array(-1, 0, -1, -1, 0, 1, 1, 0, 1, 1, 0, -1)
+polygons = [PackedInt32Array(3, 2, 0), PackedInt32Array(0, 2, 1)]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_klk57"]
+size = Vector2(1, 1)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_bfctb"]
+emission_shape = 3
+emission_box_extents = Vector3(1, 1, 1)
+flatness = 0.07
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 0.1
+initial_velocity_max = 0.1
+color = Color(0.666667, 0.666667, 0.666667, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_d6pn5"]
+albedo_texture = ExtResource("30_pcwxr")
+billboard_mode = 2
+
+[sub_resource type="QuadMesh" id="QuadMesh_g00xs"]
+material = SubResource("StandardMaterial3D_d6pn5")
+size = Vector2(0.03, 0.03)
+
+[node name="Hallway" type="Node3D"]
+script = ExtResource("1_8bjj4")
+metadata/RoomType = "Hallway"
+metadata/AllowedConnections = {
+"Administration": 3.0,
+"Hallway": 5.0,
+"PrisonCell": 3.0
+}
+
+[node name="Decorations" type="Node3D" parent="."]
+
+[node name="Dust3" type="Decal" parent="Decorations"]
+transform = Transform3D(1, 0, 0, 0, -0.998695, 0.0510635, 0, -0.0510635, -0.998695, -0.09577, 0.0771152, 0.0267564)
+size = Vector3(1.5, 0.5, 1.5)
+texture_albedo = ExtResource("2_fk57i")
+metadata/PercentChance = 30
+
+[node name="Dust4" type="Decal" parent="Decorations"]
+transform = Transform3D(0.497458, 0.114084, -0.859953, -0.0795197, 0.993138, 0.0857534, 0.863835, 0.0257245, 0.503117, 0.0208586, 1.96129, 0.0267564)
+size = Vector3(1.5, 0.5, 1.5)
+texture_albedo = ExtResource("2_fk57i")
+metadata/PercentChance = 30
+
+[node name="Crack3" type="Decal" parent="Decorations"]
+transform = Transform3D(-0.845717, 0.0431531, -0.531883, 0.0517288, 0.99866, -0.00122713, 0.531117, -0.0285515, -0.846817, 0.173907, 0.161309, -0.236636)
+size = Vector3(1.5, 1, 1.5)
+texture_albedo = ExtResource("3_f3hkx")
+metadata/PercentChance = 30
+
+[node name="Crack4" type="Decal" parent="Decorations"]
+transform = Transform3D(-0.959309, 0.050032, 0.277888, 0.0517288, 0.99866, -0.00122713, -0.277577, 0.0131976, -0.960613, -0.442112, 0.161309, -0.120418)
+size = Vector3(1.5, 1, 1.5)
+texture_albedo = ExtResource("4_gg8gg")
+metadata/PercentChance = 30
+
+[node name="vines_ceiling_small_01" parent="Decorations" instance=ExtResource("5_esyiq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.419115, 1.99705, 0.0768701)
+metadata/PercentChance = 25
+
+[node name="vines_ceiling_small_02" parent="Decorations" instance=ExtResource("6_uhcr6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.258392, 1.99634, 0.490551)
+metadata/PercentChance = 25
+
+[node name="vines_ceiling_small_03" parent="Decorations" instance=ExtResource("7_eq47o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.143733, 1.9991, -0.495721)
+metadata/PercentChance = 25
+
+[node name="vines_ceiling_small_04" parent="Decorations" instance=ExtResource("8_8dnvr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.509229, 1.99988, -0.105263)
+metadata/PercentChance = 25
+
+[node name="vines_ceiling_01" parent="Decorations" instance=ExtResource("9_fdvn7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.99527, 0)
+metadata/PercentChance = 25
+
+[node name="vines_ceiling_02" parent="Decorations" instance=ExtResource("10_65wyo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.543834, 2.00835, 0.547652)
+metadata/PercentChance = 25
+
+[node name="vines_ceiling_03" parent="Decorations" instance=ExtResource("11_4c0x3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.515726, 1.99783, -0.594729)
+metadata/PercentChance = 25
+
+[node name="vines_ceiling_04" parent="Decorations" instance=ExtResource("12_a7ww7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.734751, 2.0004, -0.771214)
+metadata/PercentChance = 25
+
+[node name="pebble_13" parent="Decorations" instance=ExtResource("13_877h7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.81453, 0.0627781, 0)
+metadata/PercentChance = 25
+
+[node name="pebble_03" parent="Decorations" instance=ExtResource("14_xsx0i")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.147001, 0.0613936, 0.587546)
+metadata/PercentChance = 25
+
+[node name="pebble_04" parent="Decorations" instance=ExtResource("15_17onl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.221904, 0.0619487, -0.293082)
+metadata/PercentChance = 25
+
+[node name="pebble_15" parent="Decorations" instance=ExtResource("15_17onl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.460702, 0.0534884, 0.793849)
+metadata/PercentChance = 25
+
+[node name="pebble_16" parent="Decorations" instance=ExtResource("15_17onl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0908012, 0.0534884, -0.659419)
+metadata/PercentChance = 25
+
+[node name="pebble_05" parent="Decorations" instance=ExtResource("16_bl5ux")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.658198, 0.0615354, 0.552685)
+metadata/PercentChance = 25
+
+[node name="pebble_14" parent="Decorations" instance=ExtResource("16_bl5ux")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.439788, 0.0615354, -0.0201191)
+metadata/PercentChance = 25
+
+[node name="pebble_10" parent="Decorations" instance=ExtResource("16_bl5ux")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.201318, 0.0615354, -0.63683)
+metadata/PercentChance = 25
+
+[node name="pebble_06" parent="Decorations" instance=ExtResource("17_mp600")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.546268, 0.0690186, -0.557367)
+metadata/PercentChance = 25
+
+[node name="pebble_11" parent="Decorations" instance=ExtResource("17_mp600")]
+transform = Transform3D(0.999581, 0, 0.0289335, 0, 1, 0, -0.0289335, 0, 0.999581, 0.0186862, 0.0690186, 0.203469)
+metadata/PercentChance = 25
+
+[node name="pebble_07" parent="Decorations" instance=ExtResource("18_qkttw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.57575, 0.06173, -0.782179)
+metadata/PercentChance = 25
+
+[node name="pebble_08" parent="Decorations" instance=ExtResource("19_lxwdk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.490368, 0.0643048, 0)
+metadata/PercentChance = 25
+
+[node name="pebble_12" parent="Decorations" instance=ExtResource("19_lxwdk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.797396, 0.0643048, -0.417211)
+metadata/PercentChance = 25
+
+[node name="pebble_09" parent="Decorations" instance=ExtResource("19_lxwdk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.68008, 0.0643048, 0.456475)
+metadata/PercentChance = 25
+
+[node name="mush_01" parent="Decorations" instance=ExtResource("20_d4m88")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.41374, 0, -0.30519)
+metadata/PercentChance = 5
+
+[node name="mush_05" parent="Decorations" instance=ExtResource("20_d4m88")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.531632, 0, -0.652042)
+metadata/PercentChance = 5
+
+[node name="mush_04" parent="Decorations" instance=ExtResource("20_d4m88")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.155822, 0, 0.784636)
+metadata/PercentChance = 4
+
+[node name="mush_cluster_01" parent="Decorations" instance=ExtResource("21_0pkq4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.578498, 0, 0.496303)
+metadata/PercentChance = 3
+
+[node name="mush_02" parent="Decorations" instance=ExtResource("22_rkbsa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.798615, 0, 0.76652)
+metadata/PercentChance = 5
+
+[node name="mush_03" parent="Decorations" instance=ExtResource("22_rkbsa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00185561, 0, -0.175314)
+metadata/PercentChance = 5
+
+[node name="Floor" type="MeshInstance3D" parent="."]
+mesh = SubResource("PlaneMesh_4jllp")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Floor"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor/StaticBody3D"]
+shape = SubResource("BoxShape3D_ja4v3")
+
+[node name="Ceiling" type="MeshInstance3D" parent="."]
+transform = Transform3D(-1, 1.19209e-07, 0, -1.19209e-07, -1, 0, 0, 0, 1, 0, 2, 0)
+mesh = SubResource("PlaneMesh_aoyd2")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Ceiling"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ceiling/StaticBody3D"]
+shape = SubResource("BoxShape3D_ja4v3")
+
+[node name="ConnectionPoints" type="Node3D" parent="."]
+
+[node name="Wall1" type="MeshInstance3D" parent="ConnectionPoints"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 1, -1)
+mesh = SubResource("PlaneMesh_2p0td")
+skeleton = NodePath("../..")
+metadata/ConnectionPointUsed = false
+metadata/Variations = ["res://textures/prison/Walls/bricks_variation_01.png", "res://textures/prison/Walls/bricks_variation_02.png", "res://textures/prison/Walls/bricks_variation_03.png", "res://textures/prison/Walls/bricks_variation_04.png", "res://textures/prison/Walls/bricks_variation_05.png", "res://textures/prison/Walls/bricks_variation_06.png", "res://textures/prison/Walls/bricks_variation_07.png", "res://textures/prison/Walls/bricks_variation_08.png", "res://textures/prison/Walls/bricks_variation_09.png", "res://textures/prison/Walls/bricks_variation_10.png"]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="ConnectionPoints/Wall1"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ConnectionPoints/Wall1/StaticBody3D"]
+shape = SubResource("BoxShape3D_ja4v3")
+
+[node name="green_leakage_wall_01" type="Decal" parent="ConnectionPoints/Wall1"]
+transform = Transform3D(-1, -8.74228e-08, 0, 8.74228e-08, -1, 0, 0, 0, 1, -0.0184331, 0.547494, 0.00684655)
+size = Vector3(1.96, 1.645, 2)
+texture_albedo = ExtResource("10_yb81n")
+metadata/PercentChance = 25
+
+[node name="wall_vines_01" type="Decal" parent="ConnectionPoints/Wall1"]
+transform = Transform3D(-1, 2.98e-08, 8.2187e-08, -3.11699e-08, -0.99986, -0.0167191, 8.16773e-08, -0.0167191, 0.99986, -0.0751103, -0.0211656, -0.11571)
+size = Vector3(1.75, 1, 1.75)
+texture_albedo = ExtResource("9_yox2n")
+metadata/PercentChance = 5
+
+[node name="NavigationObstacle3D" type="NavigationObstacle3D" parent="ConnectionPoints/Wall1"]
+radius = 0.1
+
+[node name="Wall2" type="MeshInstance3D" parent="ConnectionPoints"]
+transform = Transform3D(-4.37114e-08, 1, -4.37114e-08, 0, -4.37114e-08, -1, -1, -4.37114e-08, 1.91069e-15, -1, 1, 0)
+mesh = SubResource("PlaneMesh_xedni")
+skeleton = NodePath("../..")
+metadata/ConnectionPointUsed = false
+metadata/Variations = ["res://textures/prison/Walls/bricks_variation_01.png", "res://textures/prison/Walls/bricks_variation_02.png", "res://textures/prison/Walls/bricks_variation_03.png", "res://textures/prison/Walls/bricks_variation_04.png", "res://textures/prison/Walls/bricks_variation_05.png", "res://textures/prison/Walls/bricks_variation_06.png", "res://textures/prison/Walls/bricks_variation_07.png", "res://textures/prison/Walls/bricks_variation_08.png", "res://textures/prison/Walls/bricks_variation_09.png", "res://textures/prison/Walls/bricks_variation_10.png"]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="ConnectionPoints/Wall2"]
+collision_mask = 5
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ConnectionPoints/Wall2/StaticBody3D"]
+shape = SubResource("BoxShape3D_ja4v3")
+
+[node name="green_leakage_wall_02" type="Decal" parent="ConnectionPoints/Wall2"]
+transform = Transform3D(-0.999207, 0.0382742, -0.0109525, -0.0375174, -0.997339, -0.0625122, -0.013316, -0.0620516, 0.997984, 0.107099, 0.0994181, 0.0172912)
+size = Vector3(1.605, 0.905, 2)
+texture_albedo = ExtResource("8_lcwbx")
+metadata/PercentChance = 25
+
+[node name="wall_vines_01" type="Decal" parent="ConnectionPoints/Wall2"]
+transform = Transform3D(-0.999987, -0.00107073, -0.00496471, 0.00131446, -0.998781, -0.0493518, -0.00490581, -0.0493577, 0.998769, 0.173984, 0.0216195, -0.323227)
+size = Vector3(1.78, 1, 1.345)
+texture_albedo = ExtResource("9_yox2n")
+metadata/PercentChance = 10
+
+[node name="NavigationObstacle3D" type="NavigationObstacle3D" parent="ConnectionPoints/Wall2"]
+radius = 0.1
+
+[node name="Wall3" type="MeshInstance3D" parent="ConnectionPoints"]
+transform = Transform3D(-1, -3.82137e-15, 8.74228e-08, -8.74228e-08, 4.37114e-08, -1, 0, -1, -4.37114e-08, 0, 1, 1)
+mesh = SubResource("PlaneMesh_8pg0l")
+skeleton = NodePath("../..")
+metadata/ConnectionPointUsed = false
+metadata/Variations = ["res://textures/prison/Walls/bricks_variation_01.png", "res://textures/prison/Walls/bricks_variation_02.png", "res://textures/prison/Walls/bricks_variation_03.png", "res://textures/prison/Walls/bricks_variation_04.png", "res://textures/prison/Walls/bricks_variation_05.png", "res://textures/prison/Walls/bricks_variation_06.png", "res://textures/prison/Walls/bricks_variation_07.png"]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="ConnectionPoints/Wall3"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ConnectionPoints/Wall3/StaticBody3D"]
+shape = SubResource("BoxShape3D_ja4v3")
+
+[node name="green_leakage_wall_04" type="Decal" parent="ConnectionPoints/Wall3"]
+transform = Transform3D(-1, 9.29533e-09, 6.2955e-08, -3.97742e-08, -0.863536, -0.504287, 4.96764e-08, -0.504287, 0.863536, 0.162516, -0.183027, 0.0366762)
+size = Vector3(1.415, 0.915, 2)
+texture_albedo = ExtResource("10_e3urc")
+metadata/PercentChance = 25
+
+[node name="wall_vine_02" type="Decal" parent="ConnectionPoints/Wall3"]
+transform = Transform3D(1, 4.03897e-28, 1.11075e-28, 0, 1, 0, 0, 0, 1, -0.0365603, -0.00357026, -0.10161)
+size = Vector3(1.895, 1, 1.75)
+texture_albedo = ExtResource("11_3pjeo")
+metadata/PercentChance = 10
+
+[node name="NavigationObstacle3D" type="NavigationObstacle3D" parent="ConnectionPoints/Wall3"]
+radius = 0.1
+
+[node name="Wall4" type="MeshInstance3D" parent="ConnectionPoints"]
+transform = Transform3D(-5.96046e-08, -1, 0, -4.37114e-08, 2.6054e-15, -1, 1, -5.96046e-08, -4.37114e-08, 1, 1, 0)
+mesh = SubResource("PlaneMesh_rxjy6")
+skeleton = NodePath("../..")
+metadata/ConnectionPointUsed = false
+metadata/Variations = ["res://textures/prison/Walls/bricks_variation_01.png", "res://textures/prison/Walls/bricks_variation_02.png", "res://textures/prison/Walls/bricks_variation_03.png", "res://textures/prison/Walls/bricks_variation_04.png", "res://textures/prison/Walls/bricks_variation_05.png", "res://textures/prison/Walls/bricks_variation_06.png", "res://textures/prison/Walls/bricks_variation_07.png"]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="ConnectionPoints/Wall4"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ConnectionPoints/Wall4/StaticBody3D"]
+shape = SubResource("BoxShape3D_ja4v3")
+
+[node name="green_leakage_wall_05" type="Decal" parent="ConnectionPoints/Wall4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000698537, -0.00847578, 0.00369787)
+size = Vector3(2, 0.25, 2)
+texture_albedo = ExtResource("8_lcwbx")
+metadata/PercentChance = 25
+
+[node name="Dust3" type="Decal" parent="ConnectionPoints/Wall4"]
+transform = Transform3D(1, 0, 0, 0, -0.998695, 0.0510635, 0, -0.0510635, -0.998695, -0.09577, 0.0115377, 0.0267564)
+size = Vector3(1.5, 0.466685, 1.5)
+texture_albedo = ExtResource("2_fk57i")
+metadata/PercentChance = 10
+
+[node name="NavigationObstacle3D" type="NavigationObstacle3D" parent="ConnectionPoints/Wall4"]
+radius = 0.1
+
+[node name="Bounds" type="Area3D" parent="."]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Bounds"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("BoxShape3D_twyvc")
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
+navigation_mesh = SubResource("NavigationMesh_d6xjb")
+
+[node name="BakingSourceGeometryMesh" type="MeshInstance3D" parent="NavigationRegion3D"]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, -0.5, 0)
+visible = false
+mesh = SubResource("PlaneMesh_klk57")
+
+[node name="EnemySpawnPoint" type="Node3D" parent="." groups=["EnemySpawnPoint"]]
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+cast_shadow = 0
+visibility_range_end = 10.0
+amount = 3
+lifetime = 9.29
+process_material = SubResource("ParticleProcessMaterial_bfctb")
+draw_pass_1 = SubResource("QuadMesh_g00xs")

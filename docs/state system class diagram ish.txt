@@ -1,0 +1,71 @@
+Ok so here's the updated plan.
+
+Add BaseState:
+- var active = false
+- var state_type = Enums.ActorStates.IDLE
+- signal request_state_change(state, data = {}) # for when the state requests the state machine to go to another state
+- begin(data = {})
+	if active == false: return
+- update()
+	if active == false: return
+- end()
+	if active == false: return
+
+Add BaseStateMachine:
+- var current_state_node
+- var default_state = Enums.ActorStates.IDLE
+- var states_to_nodes = {} # dictionary that links up states to their corresponding nodes
+
+- get_node_for_state(state)
+	use state to lookup the corresponding node in states_to_nodes dictionary
+	return node
+	
+- transition_to_state(state, data):
+	if current_state_node != null:
+		current_state_node.active = false
+	current_state_node = get_node_for_next_state(state)
+	current_state_node.active = true
+	current_state_node.begin(data)
+	
+- transition_to_default_state():
+	transition_to_state(default_state)
+	
+- on_request_state_change(state, data = {}):
+	transition_to_state(state, data)
+
+- _process:
+	maybe check if a particular state has been on for too long and reset the player to a default state if so.
+	prevents getting stuck i.e. transition_to_default_state()
+
+implement player state machine:
+- _ready:
+	default_state = Enums.ActorStates.IDLE # or anything else
+	transition_to_default_state()
+
+Implement IdleState extends BaseState
+- var state = Enums.ActorStates.IDLE
+- var hotbar_checker = $HotbarChecker # child node will find the player's weapon
+
+- _input
+	If mouse click, 
+		request_state_change.emit(ATK_WINDUP, data = { "weapon": weapon })
+		
+- _on_activated_object(object_node)
+	for the future, maybe state change to "sitting" if player presses E on a chair. idk it's just an example lol.
+	This is just to show how the system can be expanded
+	
+- _on_self_damaged(source) # listen for signal about the player being damaged by something
+
+HotbarChecker (child of player IdleState)
+- var hotbar_item
+
+- is_hotbar_item_a_weapon():
+	if hotbar_item.is_in_group('weapons'): return true, otherwise false
+
+- _on_hotbar_item_changed(item) #picks up signal for when the hotbar item changes
+	hotbar_item = item
+		
+Implement windup state extends BaseState:
+- var state = Enums.ActorStates.ATK_WINDUP
+- begin()
+	

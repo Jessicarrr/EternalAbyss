@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://ckupwe2jmpgk1"]
+
+[sub_resource type="Environment" id="Environment_i1mgk"]
+ambient_light_source = 2
+ambient_light_color = Color(0.156863, 0.156863, 0.156863, 1)
+ssao_enabled = true
+fog_enabled = true
+fog_light_color = Color(0, 0, 0, 1)
+fog_density = 0.35
+volumetric_fog_albedo = Color(0.141176, 0.141176, 0.141176, 1)
+volumetric_fog_length = 16.0
+adjustment_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment"]
+environment = SubResource("Environment_i1mgk")

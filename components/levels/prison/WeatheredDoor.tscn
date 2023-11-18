@@ -1,0 +1,148 @@
+[gd_scene load_steps=21 format=3 uid="uid://b6u3wrs6gna1b"]
+
+[ext_resource type="Texture2D" uid="uid://b1nmn3rorrdsk" path="res://textures/prison/welder_stone.png" id="1_rxwp0"]
+[ext_resource type="Texture2D" uid="uid://cklv83hp3804y" path="res://textures/prison/bricks64x_doorway.png" id="2_0ot8v"]
+[ext_resource type="Texture2D" uid="uid://crsn8sxon2b7d" path="res://textures/prison/Doors/bricks64x_door_wrecked.png" id="3_c537h"]
+[ext_resource type="Texture2D" uid="uid://da0hvlopehc4d" path="res://textures/prison/Doors/bricks64x_door_wrecked_back.png" id="4_ysjn6"]
+[ext_resource type="Texture2D" uid="uid://dngxmlawwlac4" path="res://textures/prison/welder_wood.png" id="5_o01hm"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5uc4m"]
+albedo_texture = ExtResource("1_rxwp0")
+uv1_scale = Vector3(2, 2, 2)
+texture_filter = 0
+
+[sub_resource type="BoxMesh" id="BoxMesh_gkh24"]
+material = SubResource("StandardMaterial3D_5uc4m")
+size = Vector3(0.15, 2, 0.15)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8g1gh"]
+transparency = 1
+albedo_texture = ExtResource("2_0ot8v")
+texture_filter = 0
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_6axi3"]
+material = SubResource("StandardMaterial3D_8g1gh")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_a77f2"]
+size = Vector3(0.6, 0.1, 2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ihs7q"]
+size = Vector3(2.16, 0.1, 0.475)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gfwl6"]
+transparency = 1
+albedo_texture = ExtResource("3_c537h")
+uv1_scale = Vector3(0.505, 0.73, 1.005)
+uv1_offset = Vector3(0.255, 0.265, 0)
+texture_filter = 0
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_ht8tj"]
+material = SubResource("StandardMaterial3D_gfwl6")
+size = Vector2(1.25, 1.01)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_rijd1"]
+size = Vector3(1.525, 0.015, 1.005)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e601a"]
+transparency = 1
+albedo_texture = ExtResource("4_ysjn6")
+uv1_scale = Vector3(0.505, 0.73, 1.005)
+uv1_offset = Vector3(0.255, 0.265, 0)
+texture_filter = 0
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_5b6la"]
+material = SubResource("StandardMaterial3D_e601a")
+size = Vector2(1.25, 1.01)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4f8ki"]
+albedo_texture = ExtResource("5_o01hm")
+texture_filter = 0
+
+[sub_resource type="BoxMesh" id="BoxMesh_aqpab"]
+material = SubResource("StandardMaterial3D_4f8ki")
+size = Vector3(0.13, 1.525, 0.1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qql8g"]
+albedo_texture = ExtResource("5_o01hm")
+uv1_scale = Vector3(0.805, 0.78, 1)
+texture_filter = 0
+
+[sub_resource type="BoxMesh" id="BoxMesh_paobi"]
+material = SubResource("StandardMaterial3D_qql8g")
+size = Vector3(0.13, 1.525, 0.1)
+
+[node name="WeatheredDoor" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="WelderStone5" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
+mesh = SubResource("BoxMesh_gkh24")
+skeleton = NodePath("../..")
+
+[node name="WelderStone6" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
+mesh = SubResource("BoxMesh_gkh24")
+skeleton = NodePath("../..")
+
+[node name="StoneBrickDoorwayOutside" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.37114e-08, 1, 0, 4.37114e-08, 1.91069e-15, -1, -1, -4.37114e-08, -4.37114e-08, 0, 0, 0)
+mesh = SubResource("PlaneMesh_6axi3")
+skeleton = NodePath("../..")
+
+[node name="StoneBrickDoorwayInside" type="MeshInstance3D" parent="."]
+transform = Transform3D(-5.96046e-08, -1, -3.55271e-15, 4.37114e-08, 1.91069e-15, -1, 1, -5.96046e-08, 4.37114e-08, 0, 0, 0)
+mesh = SubResource("PlaneMesh_6axi3")
+skeleton = NodePath("../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="StoneBrickDoorwayInside"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StoneBrickDoorwayInside/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, -4.87044e-21, 0, 9.52912e-21, 1, 0.77501, 0.00507736, -0.00132298)
+shape = SubResource("BoxShape3D_a77f2")
+
+[node name="StaticBody3D2" type="StaticBody3D" parent="StoneBrickDoorwayInside"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StoneBrickDoorwayInside/StaticBody3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, -4.87044e-21, 0, 1.03762e-20, 1, -0.80239, 0.00507736, -0.00132298)
+shape = SubResource("BoxShape3D_a77f2")
+
+[node name="StaticBody3D3" type="StaticBody3D" parent="StoneBrickDoorwayInside"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StoneBrickDoorwayInside/StaticBody3D3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 3.38813e-21, 1, 1.90735e-06, 0.00835943, -0.761754)
+shape = SubResource("BoxShape3D_ihs7q")
+
+[node name="Door" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.250617, 0)
+
+[node name="DoorOutside" type="MeshInstance3D" parent="Door"]
+transform = Transform3D(-3.0598e-08, 1, 0, 3.0598e-08, 1.91069e-15, -1.43874, -0.7, -4.37114e-08, -6.28894e-08, 0, 0.0156305, 2.38419e-07)
+mesh = SubResource("PlaneMesh_ht8tj")
+skeleton = NodePath("")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Door/DoorOutside"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Door/DoorOutside/StaticBody3D"]
+transform = Transform3D(1, -7.10543e-15, 0, 7.10543e-15, 1, 0, 0, 0, 1, 0, 0, 0)
+shape = SubResource("BoxShape3D_rijd1")
+disabled = true
+
+[node name="DoorInside" type="MeshInstance3D" parent="Door"]
+transform = Transform3D(4.47035e-08, -1, -5.32907e-15, 3.0598e-08, 2.7686e-15, -1.43874, 0.7, 4.47035e-08, 6.28894e-08, 0, 0.0156305, 2.38419e-07)
+mesh = SubResource("PlaneMesh_5b6la")
+skeleton = NodePath("")
+
+[node name="DoorWelderWoodSide" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.256857, 0.444196)
+mesh = SubResource("BoxMesh_aqpab")
+skeleton = NodePath("")
+
+[node name="DoorWelderWoodSide2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.26401, -0.480202)
+mesh = SubResource("BoxMesh_aqpab")
+skeleton = NodePath("")
+
+[node name="DoorWelderWoodSide3" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.11359, 0, 0, 0, -3.33206e-08, -1.00186, 0, 0.762287, -4.37928e-08, 0, 0.489349, -0.0247741)
+mesh = SubResource("BoxMesh_paobi")
+skeleton = NodePath("")

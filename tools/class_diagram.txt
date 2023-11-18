@@ -1,0 +1,238 @@
+Class camera (components/camera.gd)
+vars: _mouse_position, _total_pitch, _direction, _velocity, _acceleration, _deceleration, _vel_multiplier, _w, _s, _a, _d, _q, _e, _shift, _alt
+func:
+- _input
+- _process
+- _update_movement
+- _update_mouselook
+
+Class Camera extends Camera3D (components/Entities/player/Camera.gd)
+func:
+- _ready
+- _process
+
+Class MovementSounds extends Node (components/Entities/player/MovementSounds.gd)
+vars: footstep_sound_playing, footstep_sound_delay, walk_stone_sounds
+func:
+- play_movement_sound
+- _ready
+- _on_directional_movement_player_ground_movement
+
+Class FPSCounter extends Label (components/Entities/player/hud/FPSCounter.gd)
+func:
+- _ready
+- _process
+
+Class Camera extends Camera3D (components/Entities/player/scripts/Camera.gd)
+func:
+- _ready
+- _process
+
+Class DevModeMovement extends Node (components/Entities/player/scripts/DevModeMovement.gd)
+vars: dev_mode_active, player:, collider:, directional_movement_script
+func:
+- _ready
+- _process
+- check_for_dev_mode_toggle
+- handle_dev_mode_movement
+
+Class DirectionalMovement extends Node (components/Entities/player/scripts/DirectionalMovement.gd)
+vars: current_velocity:, current_gravity, was_on_floor_previously, can_jump
+func:
+- _process
+- move
+- is_sprinting
+- is_moving_backwards
+- capture_movement_input
+- handle_jumping
+- apply_gravity
+- try_emit_movement_signal
+
+Class FrontLight extends Node3D (components/Entities/player/scripts/FrontLight.gd)
+func:
+- _ready
+- _process
+
+Class InputManager extends Node (components/Entities/player/scripts/InputManager.gd)
+func:
+- _ready
+- _process
+
+Class MovementSounds extends Node (components/Entities/player/scripts/MovementSounds.gd)
+vars: footstep_sound_playing, footstep_sound_delay, walk_stone_sounds
+func:
+- play_movement_sound
+- _ready
+- _on_directional_movement_player_ground_movement
+
+Class MovementSystem extends CharacterBody3D (components/Entities/player/scripts/MovementSystem.gd)
+func:
+- _ready
+- _physics_process
+- get_movement_direction
+
+Class AlgorithmHelper extends Node (components/LevelGenV2/AlgorithmHelper.gd)
+func:
+- are_objs_adjacent
+- have_same_orientation
+- collides_with_another_room
+- print_debug_info
+- collides_with_another_room_old
+- collides_with_another_room_nodebug
+- align_transform
+- align_rotationally
+- remove_overlapping_welders
+- _find_welders
+- filter_array_by_key_value
+
+Class GenDebug extends Node (components/LevelGenV2/GenDebug.gd)
+func:
+- _ready
+- _process
+
+Class Generator extends Node (components/LevelGenV2/Generator.gd)
+vars: generation_fails_in_a_row
+func:
+- place_player
+- _ready
+- _process
+- _on_hallways_first_successful_placement
+- _on_hallways_first_finished_generation
+- _on_hallways_first_failed_placement
+
+Class HallwaysFirst - old extends Node (components/LevelGenV2/Algorithms/HallwaysFirst/HallwaysFirst - old.gd)
+vars: scene_data, hallway_data, placed_rooms
+func:
+- _ready
+- _process
+- add_data
+- append_placed_room
+- get_num_hallways
+- are_walls_adjacent
+- have_same_orientation
+- remove_walls_between_hallways
+- generate_next
+- _on_hallway_gen_placed_hallway
+
+Class HallwaysFirst extends "res://components/LevelGenV2/AlgorithmHelper.gd" (components/LevelGenV2/Algorithms/HallwaysFirst/HallwaysFirst.gd)
+vars: is_generating, scene_data, hallway_data, placed_rooms, hallway_direction, previous_hallway_coords, placements_without_turning
+func:
+- add_data
+- get_next_hallway_direction
+- get_next_hallway_position
+- build_hallway
+- append_placed_room
+- get_num_hallways
+- remove_walls_between_halls_and_rooms
+- remove_walls_between_hallways
+- get_instances_of_room_type
+- get_insufficiently_placed_room
+- get_random_connection_point
+- place_room
+- maybe_turn_hallway
+- place_hallway
+- finalize_generation
+- place_misc_room
+- generate_next
+
+Class enums extends Node (components/shared/scripts/autoload/enums.gd)
+
+Class generation_constants extends Node (components/shared/scripts/autoload/generation_constants.gd)
+vars: finished_step, failed_step, finished_generation
+
+Class player_data_extra extends Node (components/shared/scripts/autoload/player_data_extra.gd)
+vars: player_camera
+func:
+- set_camera
+
+Class BaseInventory extends Node (components/shared/scripts/containers/BaseInventory.gd)
+func:
+- _ready
+- populate_slots
+- get_next_free_slot
+- is_full
+- add_item
+- print_slots
+
+Class GearManager extends Node (components/shared/scripts/containers/GearManager.gd)
+vars: equipped_weapon, active_hotbar_slot
+func:
+- _ready
+- print_game_items
+- print_items
+- find_item_by_name
+- get_next_free_slot
+- spawn_item
+- is_equipment
+- get_equipment_type
+- equip_item
+
+Class HotbarManager extends "res://components/shared/scripts/containers/BaseInventory.gd" (components/shared/scripts/containers/HotbarManager.gd)
+vars: active_hotbar_slot
+func:
+- _ready
+- change_active_hotbar_slot
+- get_selected_hotbar_item
+- hold_item
+- let_go_of_item
+- refresh_held_item
+- add_item
+
+Class InventoryManager extends "res://components/shared/scripts/containers/BaseInventory.gd" (components/shared/scripts/containers/InventoryManager.gd)
+
+Class EquipmentHelper extends Node (components/shared/scripts/equipment/EquipmentHelper.gd)
+func:
+- _ready
+- _process
+
+Class EquipmentSlotHelper extends Node (components/shared/scripts/equipment/EquipmentSlotHelper.gd)
+func:
+- _ready
+- _process
+
+Class ControlScaleAdjuster extends Node (components/shared/scripts/items/ControlScaleAdjuster.gd)
+vars: BASE_RESOLUTION:, BASE_SCALE:
+func:
+- adjust_scale
+- _ready
+
+Class ItemHelper extends Node (components/shared/scripts/items/ItemHelper.gd)
+vars: equipment_type
+func:
+- activate_first_person_visuals
+- deactivate_first_person_visuals
+
+Class BaseItemEffect extends Node (components/shared/scripts/items/ItemEffects/BaseItemEffect.gd)
+vars: sprite, camera
+func:
+- can_animate
+- try_set_sprite
+- try_set_camera
+- _ready
+- _process
+- on_camera_ready
+
+Class FakePhysics extends "res://components/shared/scripts/items/ItemEffects/BaseItemEffect.gd" (components/shared/scripts/items/ItemEffects/FakePhysics.gd)
+vars: target_x_offset, last_yaw_rotation
+func:
+- _process
+- calculate_delta_rotation
+- handle_camera_look_side_to_side
+- handle_camera_look_up_down
+
+Class LightingAdjuster extends "res://components/shared/scripts/items/ItemEffects/BaseItemEffect.gd" (components/shared/scripts/items/ItemEffects/LightingAdjuster.gd)
+vars: prev_player_rotation, current_modulation_value, going_up, lighting_direction_change_chance
+func:
+- _ready
+- maybe_change_light_direction
+- _process
+
+Class UShapeAnimation extends "res://components/shared/scripts/items/ItemEffects/BaseItemEffect.gd" (components/shared/scripts/items/ItemEffects/UShapeAnimation.gd)
+vars: time_passed, original_offset, amplitude, frequency_multiplier, walk_velocity, run_velocity, phase, previous_position
+func:
+- _ready
+- _process
+
+Class Decorations extends Node3D (components/shared/scripts/levels/Decorations.gd)
+func:
+- _ready

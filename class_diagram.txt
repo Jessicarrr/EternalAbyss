@@ -1,0 +1,533 @@
+Class: camera
+Extends: 
+Vars:
+  - _mouse_position
+  - _total_pitch
+  - _direction
+  - _velocity
+  - _acceleration
+  - _deceleration
+  - _vel_multiplier
+  - _w
+  - _s
+  - _a
+  - _d
+  - _q
+  - _e
+  - _shift
+  - _alt
+  - offset
+  - speed_multi
+  - yaw
+  - pitch
+Funcs:
+  - _input
+  - _process
+  - _update_movement
+  - _update_mouselook
+
+
+Class: Camera
+Extends: Camera3D
+Vars:
+Funcs:
+  - _ready
+  - _process
+
+
+Class: MovementSounds
+Extends: Node
+Vars:
+  - footstep_sound_playing
+  - footstep_sound_delay
+  - walk_stone_sounds
+  - rando_sound_effect
+  - audio_stream_resource
+  - velocity_magnitude
+  - scaled_footstep_delay
+Funcs:
+  - play_movement_sound
+  - _ready
+  - _on_directional_movement_player_ground_movement
+
+
+Class: FPSCounter
+Extends: Label
+Vars:
+  - fps
+Funcs:
+  - _ready
+  - _process
+
+
+Class: Camera
+Extends: Camera3D
+Vars:
+Funcs:
+  - _ready
+  - _process
+
+
+Class: DevModeMovement
+Extends: Node
+Vars:
+  - dev_mode_active
+  - player:
+  - collider:
+  - directional_movement_script
+  - move_dir
+  - vertical_move
+  - camera_transform
+Funcs:
+  - _ready
+  - _process
+  - check_for_dev_mode_toggle
+  - handle_dev_mode_movement
+
+
+Class: DirectionalMovement
+Extends: Node
+Vars:
+  - current_velocity:
+  - current_gravity
+  - was_on_floor_previously
+  - can_jump
+  - captured_input
+  - movement_speed
+  - final_velocity:
+  - input:
+  - actual_velocity
+Funcs:
+  - _process
+  - move
+  - is_sprinting
+  - is_moving_backwards
+  - capture_movement_input
+  - handle_jumping
+  - apply_gravity
+  - try_emit_movement_signal
+
+
+Class: FrontLight
+Extends: Node3D
+Vars:
+Funcs:
+  - _ready
+  - _process
+
+
+Class: InputManager
+Extends: Node
+Vars:
+Funcs:
+  - _ready
+  - _process
+
+
+Class: MovementSounds
+Extends: Node
+Vars:
+  - footstep_sound_playing
+  - footstep_sound_delay
+  - walk_stone_sounds
+  - rando_sound_effect
+  - audio_stream_resource
+  - velocity_magnitude
+  - scaled_footstep_delay
+Funcs:
+  - play_movement_sound
+  - _ready
+  - _on_directional_movement_player_ground_movement
+
+
+Class: MovementSystem
+Extends: CharacterBody3D
+Vars:
+  - movement_direction
+  - direction
+Funcs:
+  - _ready
+  - _physics_process
+  - get_movement_direction
+
+
+Class: AlgorithmHelper
+Extends: Node
+Vars:
+  - pos1
+  - pos2
+  - tolerance
+  - rot1
+  - rot2
+  - new_room_center
+  - new_room_extents
+  - new_room_type
+  - room
+  - compared_room_type
+  - compared_room_center
+  - compared_room_extents
+  - extra_padding
+  - distance_between_rooms
+  - acceptable_distance_x
+  - acceptable_distance_y
+  - acceptable_distance_z
+  - delta
+  - delta_abs
+  - new_room_bounds
+  - new_room_extents
+  - isNewRoomAdmin
+  - room_type
+  - distance_between_rooms
+  - extra_padding
+  - dynamic_distance_threshold
+  - room
+  - room_bounds
+  - room_extents
+  - new_room_bounds
+  - new_room_extents
+  - room
+  - room_bounds
+  - room_extents
+  - new_connection_global_position
+  - old_connection_global_position
+  - translation_vector
+  - new_rotation
+  - old_rotation
+  - rotation_difference_y
+  - gt
+  - new_rotation_transform
+  - welders
+  - root_of_current_scene
+  - welder1
+  - welder2
+  - filtered_array
+Funcs:
+  - are_objs_adjacent
+  - have_same_orientation
+  - collides_with_another_room
+  - print_debug_info
+  - collides_with_another_room_old
+  - collides_with_another_room_nodebug
+  - align_transform
+  - align_rotationally
+  - remove_overlapping_welders
+  - _find_welders
+  - filter_array_by_key_value
+
+
+Class: GenDebug
+Extends: Node
+Vars:
+Funcs:
+  - _ready
+  - _process
+
+
+Class: Generator
+Extends: Node
+Vars:
+  - generation_fails_in_a_row
+  - player
+  - result
+Funcs:
+  - place_player
+  - _ready
+  - _process
+  - _on_hallways_first_successful_placement
+  - _on_hallways_first_finished_generation
+  - _on_hallways_first_failed_placement
+
+
+Class: HallwaysFirst - old
+Extends: Node
+Vars:
+  - scene_data
+  - hallway_data
+  - placed_rooms
+  - count
+  - pos1
+  - pos2
+  - tolerance
+  - rot1
+  - rot2
+  - hallway1
+  - instance1
+  - walls1
+  - hallway2
+  - instance2
+  - walls2
+Funcs:
+  - _ready
+  - _process
+  - add_data
+  - append_placed_room
+  - get_num_hallways
+  - are_walls_adjacent
+  - have_same_orientation
+  - remove_walls_between_hallways
+  - generate_next
+  - _on_hallway_gen_placed_hallway
+
+
+Class: HallwaysFirst
+Extends: "res://components/LevelGenV2/AlgorithmHelper.gd"
+Vars:
+  - is_generating
+  - scene_data
+  - hallway_data
+  - placed_rooms
+  - hallway_direction
+  - previous_hallway_coords
+  - placements_without_turning
+  - direction_map
+  - instanced_hallway
+  - next_hallway_position
+  - hallways
+  - rooms
+  - hall_instance
+  - walls1
+  - instance2
+  - walls2
+  - hallway1
+  - walls1
+  - hallway2
+  - walls2
+  - rooms
+  - scene_val
+  - num_required
+  - num_existing
+  - connection_points_node
+  - num_points
+  - random_index
+  - room_data
+  - loaded_room
+  - instanced_room
+  - all_hallways
+  - rando_hallway
+  - rando_hall_wall
+  - rando_room_wall
+  - hallway
+  - next_misc_room
+  - result
+Funcs:
+  - add_data
+  - get_next_hallway_direction
+  - get_next_hallway_position
+  - build_hallway
+  - append_placed_room
+  - get_num_hallways
+  - remove_walls_between_halls_and_rooms
+  - remove_walls_between_hallways
+  - get_instances_of_room_type
+  - get_insufficiently_placed_room
+  - get_random_connection_point
+  - place_room
+  - maybe_turn_hallway
+  - place_hallway
+  - finalize_generation
+  - place_misc_room
+  - generate_next
+
+
+Class: enums
+Extends: Node
+Vars:
+Funcs:
+
+
+Class: generation_constants
+Extends: Node
+Vars:
+  - finished_step
+  - failed_step
+  - finished_generation
+Funcs:
+
+
+Class: player_data_extra
+Extends: Node
+Vars:
+  - player_camera
+Funcs:
+  - set_camera
+
+
+Class: BaseInventory
+Extends: Node
+Vars:
+  - new_node
+  - slot
+Funcs:
+  - _ready
+  - populate_slots
+  - get_next_free_slot
+  - is_full
+  - add_item
+  - print_slots
+
+
+Class: GearManager
+Extends: Node
+Vars:
+  - equipped_weapon
+  - active_hotbar_slot
+  - result
+  - slot
+  - item
+  - slot_info
+  - slot
+  - container
+  - duplicate_item
+  - type
+  - parent
+Funcs:
+  - _ready
+  - print_game_items
+  - print_items
+  - find_item_by_name
+  - get_next_free_slot
+  - spawn_item
+  - is_equipment
+  - get_equipment_type
+  - equip_item
+
+
+Class: HotbarManager
+Extends: "res://components/shared/scripts/containers/BaseInventory.gd"
+Vars:
+  - active_hotbar_slot
+  - item
+  - item
+  - item
+  - result
+Funcs:
+  - _ready
+  - change_active_hotbar_slot
+  - get_selected_hotbar_item
+  - hold_item
+  - let_go_of_item
+  - refresh_held_item
+  - add_item
+
+
+Class: InventoryManager
+Extends: "res://components/shared/scripts/containers/BaseInventory.gd"
+Vars:
+Funcs:
+
+
+Class: EquipmentHelper
+Extends: Node
+Vars:
+Funcs:
+  - _ready
+  - _process
+
+
+Class: EquipmentSlotHelper
+Extends: Node
+Vars:
+Funcs:
+  - _ready
+  - _process
+
+
+Class: ControlScaleAdjuster
+Extends: Node
+Vars:
+  - BASE_RESOLUTION:
+  - BASE_SCALE:
+  - screen_size
+  - x_scale_factor
+  - y_scale_factor
+  - new_scale_x
+  - new_scale_y
+Funcs:
+  - adjust_scale
+  - _ready
+
+
+Class: ItemHelper
+Extends: Node
+Vars:
+  - equipment_type
+Funcs:
+  - activate_first_person_visuals
+  - deactivate_first_person_visuals
+
+
+Class: BaseItemEffect
+Extends: Node
+Vars:
+  - sprite
+  - camera
+Funcs:
+  - can_animate
+  - try_set_sprite
+  - try_set_camera
+  - _ready
+  - _process
+  - on_camera_ready
+
+
+Class: FakePhysics
+Extends: "res://components/shared/scripts/items/ItemEffects/BaseItemEffect.gd"
+Vars:
+  - target_x_offset
+  - last_yaw_rotation
+  - delta
+  - yaw_rotation
+  - delta_yaw
+  - pitch_rotation
+  - pitch_offset
+Funcs:
+  - _process
+  - calculate_delta_rotation
+  - handle_camera_look_side_to_side
+  - handle_camera_look_up_down
+
+
+Class: LightingAdjuster
+Extends: "res://components/shared/scripts/items/ItemEffects/BaseItemEffect.gd"
+Vars:
+  - prev_player_rotation
+  - current_modulation_value
+  - going_up
+  - lighting_direction_change_chance
+  - chance
+  - rotation_difference
+  - modulation_change
+Funcs:
+  - _ready
+  - maybe_change_light_direction
+  - _process
+
+
+Class: UShapeAnimation
+Extends: "res://components/shared/scripts/items/ItemEffects/BaseItemEffect.gd"
+Vars:
+  - time_passed
+  - original_offset
+  - amplitude
+  - frequency_multiplier
+  - walk_velocity
+  - run_velocity
+  - phase
+  - previous_position
+  - delta_position
+  - horizontal_velocity
+  - current_velocity
+  - scaled_frequency
+Funcs:
+  - _ready
+  - _process
+
+
+Class: Decorations
+Extends: Node3D
+Vars:
+  - rng
+  - chance
+Funcs:
+  - _ready
+

@@ -1,0 +1,55 @@
+[gd_scene load_steps=8 format=3 uid="uid://c8npgk35edn28"]
+
+[ext_resource type="Script" path="res://components/LevelGenV2/Generator.gd" id="1_6lqip"]
+[ext_resource type="Script" path="res://components/LevelGenV2/GenDebug.gd" id="2_3c8yl"]
+[ext_resource type="PackedScene" uid="uid://dcb260rwf1sj2" path="res://components/Entities/player/player.tscn" id="3_lhppr"]
+[ext_resource type="Script" path="res://components/LevelGenV2/Algorithms/HallwaysFirst/HallwaysFirst.gd" id="4_872w8"]
+[ext_resource type="Script" path="res://components/LevelGenV2/AlgorithmHelper.gd" id="4_bk2om"]
+[ext_resource type="Script" path="res://components/shared/scripts/levels/TextureVariations.gd" id="6_idu0r"]
+[ext_resource type="Script" path="res://components/LevelGenV2/EnemyAdder.gd" id="7_8njg0"]
+
+[node name="LevelGenV2" type="Node"]
+
+[node name="Layout" type="Node" parent="."]
+
+[node name="Actors" type="Node" parent="."]
+
+[node name="GenerationLogic" type="Node" parent="."]
+
+[node name="Generator" type="Node" parent="GenerationLogic" node_paths=PackedStringArray("algorithm", "algorithm_helper")]
+script = ExtResource("1_6lqip")
+algorithm = NodePath("../Algorithms/HallwaysFirst")
+algorithm_helper = NodePath("../Helpers/AlgorithmHelper")
+maximum_allowed_fails = 100
+player_scene = ExtResource("3_lhppr")
+metadata/LayoutPath = NodePath("../../Layout")
+metadata/RootPath = NodePath("../..")
+metadata/ActorsPath = NodePath("../../Actors")
+
+[node name="GenDebug" type="Node" parent="GenerationLogic/Generator"]
+script = ExtResource("2_3c8yl")
+
+[node name="Algorithms" type="Node" parent="GenerationLogic"]
+
+[node name="HallwaysFirst" type="Node" parent="GenerationLogic/Algorithms"]
+script = ExtResource("4_872w8")
+min_hallways_before_turn = 2
+percent_chance_of_hallway_turning = 50
+total_hallways_to_create = 100
+
+[node name="Helpers" type="Node" parent="GenerationLogic"]
+
+[node name="AlgorithmHelper" type="Node" parent="GenerationLogic/Helpers"]
+script = ExtResource("4_bk2om")
+
+[node name="TextureVariation" type="Node" parent="GenerationLogic/Helpers"]
+script = ExtResource("6_idu0r")
+metadata/LayoutPath = NodePath("../../../Layout")
+
+[node name="EnemyAdder" type="Node" parent="GenerationLogic/Helpers"]
+script = ExtResource("7_8njg0")
+metadata/LayoutsNodePath = NodePath("../../../Layout")
+metadata/ActorsNodePath = NodePath("../../../Actors")
+
+[connection signal="generation_finished" from="GenerationLogic/Generator" to="GenerationLogic/Helpers/TextureVariation" method="_on_generator_generation_finished"]
+[connection signal="generation_finished" from="GenerationLogic/Generator" to="GenerationLogic/Helpers/EnemyAdder" method="_on_generator_generation_finished"]

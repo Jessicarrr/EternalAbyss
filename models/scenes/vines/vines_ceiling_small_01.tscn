@@ -1,0 +1,32 @@
+[gd_scene load_steps=4 format=3 uid="uid://cuvl4ncxl738u"]
+
+[ext_resource type="Texture2D" uid="uid://b1d4fvp8qtr43" path="res://textures/vines/vines_ceiling_small_01.png" id="1_r5fku"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xc5n7"]
+transparency = 1
+albedo_texture = ExtResource("1_r5fku")
+uv1_scale = Vector3(0.45, 0.37, 1)
+uv1_offset = Vector3(0.245, 0, 0)
+texture_filter = 0
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_fgsir"]
+material = SubResource("StandardMaterial3D_xc5n7")
+size = Vector2(0.275, 0.75)
+
+[node name="vines_ceiling_small_01" type="Node3D"]
+
+[node name="vine_01" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.37114e-08, 1, 0, 4.37114e-08, 1.91069e-15, -1, -1, -4.37114e-08, -4.37114e-08, 0, -0.371247, 0)
+mesh = SubResource("PlaneMesh_fgsir")
+
+[node name="vine_02" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 5.96046e-08, 4.37114e-08, 4.37114e-08, 1.91069e-15, -1, -5.96046e-08, 1, -1.77636e-15, 0, -0.371247, 0)
+mesh = SubResource("PlaneMesh_fgsir")
+
+[node name="vine_03" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.58933e-08, -1, -1.34329e-16, 4.37114e-08, 1.91069e-15, -1, 1, 1.58933e-08, 4.37114e-08, 0, -0.371247, 0)
+mesh = SubResource("PlaneMesh_fgsir")
+
+[node name="vine_04" type="MeshInstance3D" parent="."]
+transform = Transform3D(-1, 2.78181e-08, -4.37114e-08, 4.37114e-08, 1.91069e-15, -1, -2.78181e-08, -1, -2.04501e-15, 0, -0.371247, 0)
+mesh = SubResource("PlaneMesh_fgsir")
