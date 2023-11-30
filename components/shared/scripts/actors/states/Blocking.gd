@@ -17,6 +17,11 @@ func _ready():
 func begin(_data = {}):
 	super.begin(_data)
 	
+	if _data.has("GoToState"):
+		Debug.msg(Debug.NPC_STATES, ["Blockin state going straight to block end because there's a GoToState"])
+		request_state_change.emit(self, Enums.ActorStates.BLOCK_END, _data)
+		return
+	
 	Debug.msg(Debug.NPC_STATES, ["Npc is in Blocking state"])
 	block_timer = Timer.new()  # Create a new Timer
 	block_timer.wait_time = npc.block_duration_base
@@ -40,7 +45,7 @@ func end():
 	super.end()
 	Debug.msg(Debug.NPC_STATES, ["Npc Blocking state ended."])
 
-func _on_npc_block_hitbox_on_hit(damage):
+func _on_hit(entity, weapon, damage):
 	#Debug.msg(Debug.NPC_STATES, ["blah."])
 	if active == false:
 		return
@@ -51,3 +56,13 @@ func _on_npc_block_hitbox_on_hit(damage):
 	merged_data.merge({"StaggerTime": stagger_time})
 	request_state_change.emit(self, Enums.ActorStates.BLOCK_STAGGER, merged_data)
 
+func _on_blocked_hit(entity, weapon, damage):
+	#Debug.msg(Debug.NPC_STATES, ["blah."])
+	if active == false:
+		return
+	
+	Debug.msg(Debug.NPC_STATES, ["Npc Blocking state going to block stagger state."])
+	var stagger_time = npc.calculate_stagger_time(damage)
+	var merged_data = data.duplicate()  # Duplicate to avoid modifying the original
+	merged_data.merge({"StaggerTime": stagger_time})
+	request_state_change.emit(self, Enums.ActorStates.BLOCK_STAGGER, merged_data)

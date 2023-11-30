@@ -5,9 +5,9 @@ extends "res://components/shared/scripts/actors/BaseState.gd"
 func begin(_data = {}):
 	super.begin(_data)
 	Debug.msg(Debug.PLAYER_STATES, ["Player is in recovery state w data: ", self.data])
-	var atk_data = _data["Attack"]
-	atk_data.recover()
-	await get_tree().create_timer(atk_data.recovery_time + 0.05).timeout
+	var weapon = _data["Weapon"]
+	weapon.sprite.recovery()
+	await get_tree().create_timer(weapon.recovery_time + 0.05).timeout
 	
 	go_to_idle_state()
 	

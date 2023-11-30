@@ -1,9 +1,12 @@
 extends "res://components/shared/scripts/actors/BaseState.gd"
 
 @onready var weapon_handler = $WeaponHandler
+@export var endurance_node_path : NodePath = ""
+var endurance
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	endurance = Helpers.try_load_node(self, endurance_node_path)
 	pass # Replace with function body.
 
 func begin(_data = {}):
@@ -23,16 +26,21 @@ func try_go_to_windup_state():
 		
 	var item = weapon_handler.hotbar_item
 	
-	var next_attack = item.attacks.get_next_attack()
+	if "stamina_cost" in item:
+		var required_stamina = item.stamina_cost
+		if endurance.current_stamina < item.stamina_cost:
+			return
 	
 	Debug.msg(Debug.PLAYER_STATES, ["Idle state requesting to go to windup state"])
 	request_state_change.emit(self, Enums.ActorStates.ATK_WINDUP,\
 	{
 		"Weapon" : item,
-		"Attack" : next_attack
 	})
 
 func _on_block():
+	if active == false:
+		return
+		
 	var item = weapon_handler.hotbar_item
 	
 	Debug.msg(Debug.PLAYER_STATES, ["Idle state requesting to go to block start state"])

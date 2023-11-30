@@ -9,23 +9,16 @@ var tick_time_ms = 100
 var last_tick = 0
 var npc_prev_position = Vector3.ZERO
 
-var walking_states = [
-	Enums.ActorStates.FOLLOW_PLAYER
-]
-
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	if not npc_node_path:
-		push_error(self, " no npc node path set. This node requires a npc node path")
-		return
-		
-	npc = get_node(npc_node_path)
+	npc = Helpers.try_load_node(self, npc_node_path)
 	npc_prev_position = npc.global_position
 
 
 
 func play(name):
 	if sprite.animation != name:
+		Debug.msg(Debug.SPRITE_ANIMATION, ["Playing sprite animation '", name, "'"])
 		sprite.play(name)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -83,18 +76,59 @@ func _process(delta):
 			frames.set_animation_speed("block_end", fps)
 			play("block_end")
 		Enums.ActorStates.BLOCKING:
-			play("block")
+			if npc.has_moved() == true:
+				play("block_walk")
+			else:
+				play("block")
 		Enums.ActorStates.BLOCK_STAGGER:
 			var frames = sprite.sprite_frames
 			var num_frames_in_stagger = frames.get_frame_count("block_stagger") # int frames in anim
 			var stagger_time = current_data["StaggerTime"] # stagger time in seconds
 			
 			# do math
-			var fps = floor(num_frames_in_stagger / stagger_time)
+			var fps = num_frames_in_stagger / stagger_time
 			
 			#set anim speed
 			frames.set_animation_speed("block_stagger", fps)
 			play("block_stagger")
+		Enums.ActorStates.ATK_WINDUP:
+			var frames = sprite.sprite_frames
+			var num_frames = frames.get_frame_count("attack_windup") # int frames in anim
+			var time = npc.windup_time
+			
+			# do math
+			var fps = (num_frames / time)
+			
+			#set anim speed
+			frames.set_animation_loop("attack_windup", false)
+			frames.set_animation_speed("attack_windup", fps)
+			play("attack_windup")
+			
+		Enums.ActorStates.ATK_SWING:
+			var frames = sprite.sprite_frames
+			var num_frames = frames.get_frame_count("attack_swing") # int frames in anim
+			var time = npc.swing_time
+			
+			# do math
+			var fps = num_frames / time
+			
+			#set anim speed
+			frames.set_animation_loop("attack_swing", false)
+			frames.set_animation_speed("attack_swing", fps)
+			play("attack_swing")
+			
+		Enums.ActorStates.ATK_RECOVERY:
+			var frames = sprite.sprite_frames
+			var num_frames_in_stagger = frames.get_frame_count("attack_recovery") # int frames in anim
+			var windup_time = npc.recovery_time
+			
+			# do math
+			var fps = num_frames_in_stagger / windup_time
+			
+			#set anim speed
+			frames.set_animation_loop("attack_recovery", false)
+			frames.set_animation_speed("attack_recovery", fps)
+			play("attack_recovery")
 		_:
 			play("idle")
 

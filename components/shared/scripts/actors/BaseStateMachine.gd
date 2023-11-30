@@ -1,6 +1,7 @@
 extends Node
 
 var current_state_node = null
+var current_state = null
 var default_state = Enums.ActorStates.IDLE
 
 var states_to_nodes = {}
@@ -9,7 +10,10 @@ var state_changing = false
 
 var dead = false
 
+@export var state_transition_delay = 0.01
+
 signal state_changed
+signal state_changed_to_dead
 
 func get_node_for_next_state(state):
 	if states_to_nodes.has(state):
@@ -20,6 +24,12 @@ func get_node_for_next_state(state):
 	push_error(self.get_path(), " tried to find state ", Helpers.state_name(state),\
 	 " but could not find it in its dictionary.")
 	return null
+	
+func _force_transition_to_state(state, data):
+	while state_changing == true:
+		await get_tree().create_timer(0.1).timeout
+
+	transition_to_state(state)
 	
 func transition_to_state(state, data = {}):
 	if state_changing == true:
@@ -37,11 +47,11 @@ func transition_to_state(state, data = {}):
 		current_state_node.end()
 		
 	current_state_node = get_node_for_next_state(state)
+	current_state = state
 	current_state_node.active = true
-	current_state_node.begin(data)
+	await get_tree().create_timer(state_transition_delay).timeout
 	state_changing = false
-	
-	
+	current_state_node.begin(data)
 	
 func transition_to_default_state():
 	transition_to_state(default_state)
@@ -88,8 +98,11 @@ func _on_request_state_change(state_node, state = null, data = {}):
 	transition_to_state(state, data)
 
 func _on_death():
-	transition_to_state(Enums.ActorStates.DEAD)
 	dead = true
+	_force_transition_to_state(Enums.ActorStates.DEAD, {})
+	state_changed_to_dead.emit()
+	#transition_to_state(Enums.ActorStates.DEAD)
+	
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

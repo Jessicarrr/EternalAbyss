@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://c8npgk35edn28"]
+[gd_scene load_steps=10 format=3 uid="uid://c8npgk35edn28"]
 
 [ext_resource type="Script" path="res://components/LevelGenV2/Generator.gd" id="1_6lqip"]
 [ext_resource type="Script" path="res://components/LevelGenV2/GenDebug.gd" id="2_3c8yl"]
@@ -7,6 +7,8 @@
 [ext_resource type="Script" path="res://components/LevelGenV2/AlgorithmHelper.gd" id="4_bk2om"]
 [ext_resource type="Script" path="res://components/shared/scripts/levels/TextureVariations.gd" id="6_idu0r"]
 [ext_resource type="Script" path="res://components/LevelGenV2/EnemyAdder.gd" id="7_8njg0"]
+[ext_resource type="Script" path="res://components/LevelGenV2/RemoveOverlappingWelders.gd" id="8_2cshk"]
+[ext_resource type="Script" path="res://components/LevelGenV2/ConvexWallWelderPlacer.gd" id="9_2e0l4"]
 
 [node name="LevelGenV2" type="Node"]
 
@@ -34,7 +36,7 @@ script = ExtResource("2_3c8yl")
 [node name="HallwaysFirst" type="Node" parent="GenerationLogic/Algorithms"]
 script = ExtResource("4_872w8")
 min_hallways_before_turn = 2
-percent_chance_of_hallway_turning = 50
+percent_chance_of_hallway_turning = 40
 total_hallways_to_create = 150
 
 [node name="Helpers" type="Node" parent="GenerationLogic"]
@@ -51,5 +53,14 @@ script = ExtResource("7_8njg0")
 metadata/LayoutsNodePath = NodePath("../../../Layout")
 metadata/ActorsNodePath = NodePath("../../../Actors")
 
+[node name="RemoveOverlappingWelders" type="Node" parent="GenerationLogic/Helpers"]
+script = ExtResource("8_2cshk")
+
+[node name="ConvexWallWelderPlacer" type="Node" parent="GenerationLogic/Helpers"]
+script = ExtResource("9_2e0l4")
+layout_node_path = NodePath("../../../Layout")
+
 [connection signal="generation_finished" from="GenerationLogic/Generator" to="GenerationLogic/Helpers/TextureVariation" method="_on_generator_generation_finished"]
 [connection signal="generation_finished" from="GenerationLogic/Generator" to="GenerationLogic/Helpers/EnemyAdder" method="_on_generator_generation_finished"]
+[connection signal="generation_finished" from="GenerationLogic/Generator" to="GenerationLogic/Helpers/RemoveOverlappingWelders" method="_on_generator_generation_finished"]
+[connection signal="generation_finished" from="GenerationLogic/Generator" to="GenerationLogic/Helpers/ConvexWallWelderPlacer" method="_on_generator_generation_finished"]

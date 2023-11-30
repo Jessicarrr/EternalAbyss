@@ -1,4 +1,4 @@
-[gd_scene load_steps=87 format=3 uid="uid://bowyrk73sc864"]
+[gd_scene load_steps=96 format=3 uid="uid://bowyrk73sc864"]
 
 [ext_resource type="Script" path="res://components/Entities/enemies/skeleton_sword_shield/scripts/SkeletonStateMachine.gd" id="1_88id4"]
 [ext_resource type="Script" path="res://components/Entities/enemies/skeleton_sword_shield/skeleton_sword_shield.gd" id="1_rtwge"]
@@ -17,6 +17,7 @@
 [ext_resource type="Texture2D" uid="uid://d5wgl1bawg2k" path="res://sprites/enemies/skeleton attack anim-Sheet fix.png" id="10_5628u"]
 [ext_resource type="Script" path="res://components/shared/scripts/actors/states/NpcFinishBlocking.gd" id="10_dco5p"]
 [ext_resource type="Script" path="res://components/shared/scripts/hitboxes/Hurtbox.gd" id="10_h0l05"]
+[ext_resource type="Script" path="res://components/shared/scripts/actors/states/functionality/AttackingDecision.gd" id="10_wsbk0"]
 [ext_resource type="Texture2D" uid="uid://bwmxr2vu6inbq" path="res://sprites/enemies/skeleton 1 dying animation -Sheet.png" id="11_clf1k"]
 [ext_resource type="Texture2D" uid="uid://cdoipa0mibb40" path="res://sprites/enemies/skeleton 1 walking animation walk-Sheet.png" id="11_l1bwu"]
 [ext_resource type="Script" path="res://components/shared/scripts/animations/NpcSprite3DAnimator.gd" id="11_we6oi"]
@@ -24,13 +25,19 @@
 [ext_resource type="Script" path="res://components/shared/scripts/actors/states/Blocking.gd" id="13_bd8kh"]
 [ext_resource type="Script" path="res://components/shared/scripts/sounds/DamageSounds.gd" id="13_kisgm"]
 [ext_resource type="Script" path="res://components/shared/scripts/actors/states/BlockStagger.gd" id="14_ekyqy"]
+[ext_resource type="Script" path="res://components/shared/scripts/actors/states/NpcAttackWindup.gd" id="15_1kbnf"]
+[ext_resource type="Script" path="res://components/shared/scripts/actors/states/NpcAttackSwing.gd" id="16_bov48"]
 [ext_resource type="Texture2D" uid="uid://lxm8tcnahu14" path="res://sprites/enemies/skeleton 1 blocking idle 2-Sheet.png" id="16_jvc1h"]
 [ext_resource type="Texture2D" uid="uid://brt1i0b0gvnmq" path="res://sprites/enemies/skeleton 1 blocking raise shield 2-Sheet.png" id="16_qsrmq"]
+[ext_resource type="Script" path="res://components/shared/scripts/actors/states/NpcAttackRecovery.gd" id="16_ynao2"]
 [ext_resource type="Texture2D" uid="uid://dcpbq40ehd0bn" path="res://sprites/enemies/skeleton 1 blocking raise shield 2 reversed-Sheet.png" id="17_37afq"]
 [ext_resource type="Script" path="res://components/shared/scripts/sounds/SpriteBasedMovementSound.gd" id="17_dmf0n"]
 [ext_resource type="Texture2D" uid="uid://nqvchf2xskm2" path="res://sprites/enemies/skeleton 1 blocking recieveing a hit-Sheet.png" id="19_py7xr"]
 [ext_resource type="Script" path="res://components/shared/scripts/sounds/BlockSounds.gd" id="28_1rj8p"]
 [ext_resource type="Script" path="res://components/shared/scripts/hitboxes/NpcBlockHitbox.gd" id="28_wbxbu"]
+[ext_resource type="Script" path="res://components/shared/scripts/hitboxes/NpcWeaponHitbox.gd" id="36_x0f5w"]
+[ext_resource type="Script" path="res://components/shared/scripts/animations/NpcMeleeHitboxAnim.gd" id="37_k2vgu"]
+[ext_resource type="Script" path="res://components/shared/scripts/hitboxes/ProjectileTypeHitboxAnim.gd" id="38_5f8xo"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_2njuu"]
 radius = 0.25
@@ -39,41 +46,41 @@ height = 1.25
 [sub_resource type="SphereShape3D" id="SphereShape3D_bwy57"]
 radius = 3.0
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_x6pf4"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_nmw38"]
 atlas = ExtResource("10_5628u")
-region = Rect2(0, 15, 116, 112)
+region = Rect2(928, 9, 116, 120)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_icuqd"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_ldejf"]
 atlas = ExtResource("10_5628u")
-region = Rect2(116, 15, 116, 112)
+region = Rect2(696, 9, 116, 120)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_8blaa"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_62wsv"]
 atlas = ExtResource("10_5628u")
-region = Rect2(232, 15, 116, 112)
+region = Rect2(812, 9, 116, 120)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_bdeft"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_o64x6"]
 atlas = ExtResource("10_5628u")
-region = Rect2(348, 15, 116, 112)
+region = Rect2(0, 15, 116, 114)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_32wcn"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_j6ako"]
 atlas = ExtResource("10_5628u")
-region = Rect2(464, 15, 116, 112)
+region = Rect2(116, 15, 116, 114)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_cs25p"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_38rft"]
 atlas = ExtResource("10_5628u")
-region = Rect2(580, 15, 116, 112)
+region = Rect2(232, 15, 116, 114)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_7y43t"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_ni1s6"]
 atlas = ExtResource("10_5628u")
-region = Rect2(696, 15, 116, 112)
+region = Rect2(348, 15, 116, 114)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_app8g"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_cf105"]
 atlas = ExtResource("10_5628u")
-region = Rect2(812, 15, 116, 112)
+region = Rect2(464, 15, 116, 114)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_hhjd8"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_mymiu"]
 atlas = ExtResource("10_5628u")
-region = Rect2(928, 15, 116, 112)
+region = Rect2(580, 15, 116, 114)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_bsi3n"]
 atlas = ExtResource("16_jvc1h")
@@ -239,35 +246,45 @@ region = Rect2(812, 15, 116, 112)
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_x6pf4")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_icuqd")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_8blaa")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_bdeft")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_32wcn")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_cs25p")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_7y43t")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_app8g")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_hhjd8")
+"texture": SubResource("AtlasTexture_nmw38")
 }],
-"loop": true,
-"name": &"attack1",
+"loop": false,
+"name": &"attack_recovery",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ldejf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_62wsv")
+}],
+"loop": false,
+"name": &"attack_swing",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o64x6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j6ako")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_38rft")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ni1s6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cf105")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mymiu")
+}],
+"loop": false,
+"name": &"attack_windup",
+"speed": 1.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -439,12 +456,23 @@ size = Vector3(0.6, 0.97, 0.6)
 [sub_resource type="BoxMesh" id="BoxMesh_lwqfl"]
 size = Vector3(0.625, 0.97, 0.735)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_gmrja"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_u143g"]
+
 [node name="skeleton_sword_shield" type="CharacterBody3D"]
 collision_layer = 8
 collision_mask = 41
 script = ExtResource("1_rtwge")
+damage_min = 8
+damage_max = 10
 base_stagger_time_s = 0.4
+block_transition_time = 0.07
 block_duration_base = 2.0
+windup_time = 0.75
+swing_time = 0.3
+recovery_time = 0.4
+chance_attack_after_block_stagger = 0.9
 metadata/WalkSpeed = 1.0
 
 [node name="SkeletonStateMachine" type="Node" parent="."]
@@ -480,6 +508,9 @@ script = ExtResource("8_dbsrh")
 [node name="TimedFunctionExecutor" type="Node" parent="SkeletonStateMachine/CombatFollow/BlockingDecision"]
 script = ExtResource("9_dmi5j")
 
+[node name="AttackingDecision" type="Node" parent="SkeletonStateMachine/CombatFollow"]
+script = ExtResource("10_wsbk0")
+
 [node name="Staggered" type="Node" parent="SkeletonStateMachine"]
 script = ExtResource("8_0mbqg")
 
@@ -487,9 +518,17 @@ script = ExtResource("8_0mbqg")
 script = ExtResource("9_4w3kd")
 npc_path = NodePath("../..")
 
+[node name="StaggerDetector" type="Node" parent="SkeletonStateMachine/StartBlocking"]
+script = ExtResource("4_frxp5")
+npc_path = NodePath("../../..")
+
 [node name="FinishBlocking" type="Node" parent="SkeletonStateMachine"]
 script = ExtResource("10_dco5p")
 npc_path = NodePath("../..")
+
+[node name="StaggerDetector" type="Node" parent="SkeletonStateMachine/FinishBlocking"]
+script = ExtResource("4_frxp5")
+npc_path = NodePath("../../..")
 
 [node name="Blocking" type="Node" parent="SkeletonStateMachine"]
 script = ExtResource("13_bd8kh")
@@ -497,6 +536,27 @@ npc_path = NodePath("../..")
 
 [node name="BlockStagger" type="Node" parent="SkeletonStateMachine"]
 script = ExtResource("14_ekyqy")
+npc_path = NodePath("../..")
+
+[node name="AttackWindup" type="Node" parent="SkeletonStateMachine"]
+script = ExtResource("15_1kbnf")
+npc_path = NodePath("../..")
+
+[node name="StaggerDetector" type="Node" parent="SkeletonStateMachine/AttackWindup"]
+script = ExtResource("4_frxp5")
+npc_path = NodePath("../../..")
+
+[node name="AttackSwing" type="Node" parent="SkeletonStateMachine"]
+script = ExtResource("16_bov48")
+npc_path = NodePath("../..")
+
+[node name="AttackRecovery" type="Node" parent="SkeletonStateMachine"]
+script = ExtResource("16_ynao2")
+npc_path = NodePath("../..")
+
+[node name="StaggerDetector" type="Node" parent="SkeletonStateMachine/AttackRecovery"]
+script = ExtResource("4_frxp5")
+npc_path = NodePath("../../..")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.573249, 0)
@@ -532,9 +592,7 @@ billboard = 2
 shaded = true
 texture_filter = 0
 sprite_frames = SubResource("SpriteFrames_37v2e")
-animation = &"block_stagger"
-frame = 2
-frame_progress = 1.0
+animation = &"attack_windup"
 
 [node name="NpcSpriteAnimator" type="Node" parent="AnimatedSprite3D"]
 script = ExtResource("11_we6oi")
@@ -615,10 +673,36 @@ visible = false
 mesh = SubResource("BoxMesh_lwqfl")
 skeleton = NodePath("")
 
+[node name="NpcMeleeHitbox" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.735135, 0.028191)
+collision_layer = 256
+collision_mask = 529
+script = ExtResource("36_x0f5w")
+npc_path = NodePath("..")
+parent_entity_path = NodePath("..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NpcMeleeHitbox"]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
+shape = SubResource("BoxShape3D_gmrja")
+
+[node name="NpcMeleeHitboxAnim" type="Node" parent="NpcMeleeHitbox"]
+script = ExtResource("37_k2vgu")
+
+[node name="ProjectileTypeHitboxAnim" type="Node" parent="NpcMeleeHitbox"]
+script = ExtResource("38_5f8xo")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NpcMeleeHitbox"]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
+visible = false
+mesh = SubResource("BoxMesh_u143g")
+
 [connection signal="state_changed" from="SkeletonStateMachine" to="AnimatedSprite3D/NpcSpriteAnimator" method="_on_skeleton_state_machine_state_changed"]
 [connection signal="state_changed" from="SkeletonStateMachine" to="Hurtbox" method="_on_state_changed"]
 [connection signal="state_changed" from="SkeletonStateMachine" to="NpcBlockHitbox" method="_on_state_changed"]
+[connection signal="state_changed" from="SkeletonStateMachine" to="NpcMeleeHitbox/NpcMeleeHitboxAnim" method="_on_state_change"]
 [connection signal="request_state_change" from="SkeletonStateMachine/Idle" to="SkeletonStateMachine" method="_on_request_state_change"]
+[connection signal="began" from="SkeletonStateMachine/CombatFollow" to="SkeletonStateMachine/CombatFollow/BlockingDecision" method="_on_combat_follow_began"]
+[connection signal="began" from="SkeletonStateMachine/CombatFollow" to="SkeletonStateMachine/CombatFollow/AttackingDecision" method="_on_combat_follow_began"]
 [connection signal="move_npc" from="SkeletonStateMachine/CombatFollow" to="MovementSystem" method="_on_set_movement_target"]
 [connection signal="request_state_change" from="SkeletonStateMachine/CombatFollow" to="SkeletonStateMachine" method="_on_request_state_change"]
 [connection signal="request_state_change" from="SkeletonStateMachine/Staggered" to="SkeletonStateMachine" method="_on_request_state_change"]
@@ -626,9 +710,14 @@ skeleton = NodePath("")
 [connection signal="request_state_change" from="SkeletonStateMachine/FinishBlocking" to="SkeletonStateMachine" method="_on_request_state_change"]
 [connection signal="request_state_change" from="SkeletonStateMachine/Blocking" to="SkeletonStateMachine" method="_on_request_state_change"]
 [connection signal="request_state_change" from="SkeletonStateMachine/BlockStagger" to="SkeletonStateMachine" method="_on_request_state_change"]
+[connection signal="request_state_change" from="SkeletonStateMachine/AttackWindup" to="SkeletonStateMachine" method="_on_request_state_change"]
+[connection signal="request_state_change" from="SkeletonStateMachine/AttackSwing" to="SkeletonStateMachine" method="_on_request_state_change"]
+[connection signal="request_state_change" from="SkeletonStateMachine/AttackRecovery" to="SkeletonStateMachine" method="_on_request_state_change"]
 [connection signal="reached_zero_hp" from="Skills/Health" to="SkeletonStateMachine" method="_on_death"]
-[connection signal="on_hit" from="Hurtbox" to="SkeletonStateMachine/Idle/StaggerDetector" method="_on_hit"]
 [connection signal="on_hit" from="Hurtbox" to="SkeletonStateMachine/CombatFollow/StaggerDetector" method="_on_hit"]
+[connection signal="on_hit" from="Hurtbox" to="SkeletonStateMachine/StartBlocking/StaggerDetector" method="_on_hit"]
+[connection signal="on_hit" from="Hurtbox" to="SkeletonStateMachine/FinishBlocking/StaggerDetector" method="_on_hit"]
+[connection signal="on_hit" from="Hurtbox" to="SkeletonStateMachine/AttackRecovery/StaggerDetector" method="_on_hit"]
 [connection signal="on_hit" from="Hurtbox" to="Sounds/DamageSounds" method="_on_hit"]
 [connection signal="on_hit" from="NpcBlockHitbox" to="SkeletonStateMachine/Blocking" method="_on_npc_block_hitbox_on_hit"]
 [connection signal="on_hit" from="NpcBlockHitbox" to="Sounds/BlockSounds" method="_on_npc_block_hitbox_on_hit"]

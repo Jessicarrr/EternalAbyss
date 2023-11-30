@@ -1,14 +1,16 @@
 extends Node
 class_name Item
 
-@onready var sprite := $FirstPersonControl/Sprite2D
-@onready var lighting_adjustments := $FirstPersonControl/Sprite2D/LightingAdjustments
-@onready var walking_animation := $FirstPersonControl/Sprite2D/WalkingAnimation
-@onready var fake_physics := $FirstPersonControl/Sprite2D/FakePhysics
+@export var sprite_path : NodePath = ""
+
+var sprite
 
 @export_category("Item Fluff")
 @export var item_name = "[Un-named Item]"
 @export var item_fluff_text = ""
+
+@export_category("Item Effects")
+@export var item_effect_node_paths = []
 
 @export_category("Item Data")
 @export var use_item_anim_path : NodePath
@@ -19,25 +21,30 @@ class_name Item
 var usage_anim_node : Node = null
 var currently_using_item = false
 
+var equipped = false
+
 signal use_item_started # now in the middle of using the item
+signal use_item_ending # beginning to stop using the item
 signal use_item_ended # finished using the item 
 signal item_destroyed
 
 func _ready():
 	if use_item_anim_path:
 		usage_anim_node = get_node(use_item_anim_path)
-
-func activate_first_person_visuals():
-	#print("53515activating animation on ", self)
-	sprite.visible = true
-	sprite.set_meta("ShouldAnimate", true)
+		
+	if sprite == null:
+		sprite = Helpers.try_load_node(self, sprite_path)
 	
-func deactivate_first_person_visuals():
-	#print("deactivating animation on ", self)
-	sprite.visible = false
-	sprite.set_meta("ShouldAnimate", false)
+func equip():
+	equipped = true
+	
+func unequip():
+	equipped = false
 	
 func is_equipped():
+	if sprite == null:
+		sprite = Helpers.try_load_node(self, sprite_path)
+	
 	return sprite.visible
 
 func apply_item_effect():
@@ -74,8 +81,13 @@ func stop_using_item():
 	if currently_using_item == false:
 		return
 	
-	await usage_anim_node.ending_anim(self.use_item_time)
+	use_item_ending.emit(self)
+	
+	#await usage_anim_node.ending_anim(self.use_item_time) # can introduce a bug?
+	usage_anim_node.ending_anim(self.use_item_time)
+	await get_tree().create_timer(self.use_item_time).timeout
 	use_item_ended.emit(self)
+	
 	stop_item_effect()
 	currently_using_item = false
 	

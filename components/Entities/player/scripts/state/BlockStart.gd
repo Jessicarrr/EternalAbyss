@@ -20,6 +20,14 @@ func begin(_data = {}):
 	weapon.use_item()
 	await weapon.use_item_started
 	
+	if Input.is_action_pressed("use_item") == false:
+		Debug.msg(Debug.PLAYER_STATES, ["Block start state requesting to go to block ending state"])
+		request_state_change.emit(self, Enums.ActorStates.BLOCK_END,\
+		{
+			"Weapon" : weapon,
+		})
+		return
+	
 	if let_go_of_block == true:
 		return
 	
@@ -40,6 +48,9 @@ func end():
 
 
 func _on_use_item_input_use_item_released():
+	if active == false:
+		return
+	
 	let_go_of_block = true
 	
 	Debug.msg(Debug.PLAYER_STATES, ["Block start state requesting to go to block ending state"])

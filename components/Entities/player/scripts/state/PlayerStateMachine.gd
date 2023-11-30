@@ -18,3 +18,10 @@ func _ready():
 	super._ready()
 	default_state = Enums.ActorStates.IDLE
 	transition_to_default_state()
+	self.state_changed.connect(_on_state_change)
+
+func _on_state_change(state, data):
+	Debug.msg(Debug.PLAYER_STATE_MACHINE, ["--- Player ---"])
+	Debug.msg(Debug.PLAYER_STATE_MACHINE, ["State: ", Helpers.state_name(state)])
+	Debug.msg(Debug.PLAYER_STATE_MACHINE, ["Data: ", data])
+	Debug.msg(Debug.PLAYER_STATE_MACHINE, ["----\n"])

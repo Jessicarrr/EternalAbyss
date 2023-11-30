@@ -227,7 +227,6 @@ func place_hallway():
 func finalize_generation():
 	print("Finished placing all rooms")
 	remove_walls_between_halls_and_rooms()
-	remove_overlapping_welders()
 
 func place_misc_room():
 	var next_misc_room = get_insufficiently_placed_room()

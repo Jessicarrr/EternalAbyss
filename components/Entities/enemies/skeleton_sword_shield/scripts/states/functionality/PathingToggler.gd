@@ -11,6 +11,9 @@ var check_threshold = 2000
 @onready var nav_agent : NavigationAgent3D = get_node(get_meta("NavigationAgent3D"))
 
 func maybe_change_path_type_to_target():
+	if parent.entity == null:
+		return
+	
 	var space_state = npc.get_world_3d().direct_space_state
 	var origin_position = raycast.global_transform.origin
 	var target_position = parent.entity.global_transform.origin

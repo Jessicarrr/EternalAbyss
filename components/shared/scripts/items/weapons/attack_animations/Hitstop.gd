@@ -1,6 +1,6 @@
 extends Node
 
-@export var hitstop_time = 0.075
+@export var hitstop_time = 0.1 #0.075
 var latest_animation_node = null
 
 func _on_swing_started(node, new_anim_data):
@@ -18,5 +18,5 @@ func _on_actor_hit():
 	latest_animation_node.tween.play()
 
 func _on_area_entered(area):
-	if area.get_collision_layer_value(4) == true:
+	if area.get_collision_layer_value(8) == true:
 		_on_actor_hit()

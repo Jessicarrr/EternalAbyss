@@ -30,7 +30,8 @@ enum ActorStates {
 
 enum ItemUsages {
 	NONE,
-	CONSUME,
+	EAT,
+	DRINK,
 	BLOCK
 }
 

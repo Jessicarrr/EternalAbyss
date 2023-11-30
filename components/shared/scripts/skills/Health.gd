@@ -12,6 +12,7 @@ var can_instant_heal = true
 var can_regenerate = true
 
 signal reached_zero_hp
+signal health_changed
 
 func is_dead():
 	if current_hitpoints <= 0:
@@ -33,6 +34,7 @@ func damage(number):
 		reached_zero_hp.emit()
 		Debug.msg(Debug.COMBAT, ["Thingy is now dead."])
 		
+	health_changed.emit(current_hitpoints, max_hitpoints)
 	
 		
 func _heal(heal_amount):
@@ -47,6 +49,7 @@ func instant_heal(heal_amount):
 		return
 		
 	_heal(heal_amount)
+	health_changed.emit(current_hitpoints, max_hitpoints)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

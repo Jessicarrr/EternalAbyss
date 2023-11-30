@@ -27,6 +27,10 @@ Helpers="*res://components/shared/scripts/autoload/helpers.gd"
 Debug="*res://components/shared/scripts/autoload/debug.gd"
 LevelData="*res://components/shared/scripts/autoload/level_data.gd"
 
+[debug]
+
+gdscript/warnings/unused_variable=0
+
 [display]
 
 window/size/viewport_width=1280
@@ -138,6 +142,8 @@ use_item={
 3d_physics/layer_6="Player"
 3d_physics/layer_7="DetectionSphere"
 3d_physics/layer_8="ActorHurtbox"
+3d_physics/layer_9="NpcMeleeHitboxes"
+3d_physics/layer_10="PlayerHurtbox"
 
 [physics]
 

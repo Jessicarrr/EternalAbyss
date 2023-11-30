@@ -10,7 +10,7 @@ var recoil_skew = deg_to_rad(58)
 var recoil_rotation = deg_to_rad(8)
 var recoil_scale = Vector2(1.5, 2)
 var recoil_position = Vector2(300, -55)
-var recoil_time = 0.25
+var recoil_time = 0.5
 
 # Swing positions
 var top_right_position = Vector2(200, -15)

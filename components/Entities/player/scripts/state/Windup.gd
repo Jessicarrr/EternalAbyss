@@ -7,9 +7,9 @@ var windup_timer = null
 func begin(_data = {}):
 	super.begin(_data)
 	Debug.msg(Debug.PLAYER_STATES, ["Player is in windup state w data: ", self.data])
-	var atk_data = self.data["Attack"]
-	atk_data.windup()
-	windup_timer = get_tree().create_timer(atk_data.windup_time + 0.05)
+	var weapon = self.data["Weapon"]
+	weapon.sprite.windup()
+	windup_timer = get_tree().create_timer(weapon.windup_time + 0.05)
 	windup_timer.connect("timeout", on_timer_timeout)
 	
 func end():

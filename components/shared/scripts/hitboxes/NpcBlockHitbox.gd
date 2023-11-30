@@ -36,7 +36,7 @@ func attacked_by_player(area, player, weapon):
 	on_hit.emit(rando_damage)
 
 func _on_area_entered(area):
-	print("blah blah blah")
+	#print("blah blah blah")
 	if area.parent_entity == PlayerDataExtra.player_instance:
 		var player = PlayerDataExtra.player_instance
 		var weapon = area.parent_item

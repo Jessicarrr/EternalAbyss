@@ -5,10 +5,28 @@ class_name Npc
 
 @onready var prev_pos = global_position
 
+@export_category("Damage")
+@export var damage_min = 2
+@export var damage_max = 4
+
+@export_category("Stagger")
 @export var base_stagger_time_s = 0.2
 @export var extra_time_per_damage = 0.01
+
+@export_category("Blocking")
 @export var block_transition_time = 0.2
 @export var block_duration_base = 1.0
+
+@export_category("Attacks")
+@export var windup_time = 0.4
+@export var swing_time = 0.2
+@export var recovery_time = 0.2
+
+@export_category("Behaviour Chances")
+@export var chance_attack_after_block_stagger = 0.2
+	
+func get_random_damage():
+	return randi_range(damage_min, damage_max)
 	
 func has_moved():
 	var cur_pos = self.global_position

@@ -19,12 +19,18 @@ func begin(_data = {}):
 		push_error(self, "Can't leave block ending state because vars in ", self, " are not set")
 		return
 	
+	weapon.use_item_ended.connect(_on_use_item_ended)
 	weapon.stop_using_item()
-	await weapon.use_item_ended
 	
+	#Debug.msg(Debug.PLAYER_STATES, ["Block ending state requesting to go to idle state."])
+	#request_state_change.emit(self, Enums.ActorStates.IDLE)
+
+func _on_use_item_ended(_thing):
 	Debug.msg(Debug.PLAYER_STATES, ["Block ending state requesting to go to idle state."])
+	weapon.use_item_ended.disconnect(_on_use_item_ended)
 	request_state_change.emit(self, Enums.ActorStates.IDLE)
 	
+
 func end():
 	super.end()
 	weapon = null

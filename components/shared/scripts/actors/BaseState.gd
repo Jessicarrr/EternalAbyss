@@ -13,6 +13,7 @@ func begin(_data = {}):
 		return
 		
 	self.data = _data
+	#await get_tree().create_timer(2).timeout
 	began.emit()
 	
 func end():

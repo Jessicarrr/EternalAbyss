@@ -5,7 +5,7 @@ class_name StaggerDetector
 @export var npc_path : NodePath = ""
 var npc = null
 
-func _on_hit(damage):
+func _on_hit(entity, weapon, damage):
 	if parent.active == false:
 		return
 	
@@ -16,7 +16,7 @@ func _on_hit(damage):
 	
 	parent.request_state_change.emit(parent, Enums.ActorStates.STAGGERED, {
 		"Damage" : damage,
-		"StaggerTime" : stagger_time
+		"StaggerTime" : stagger_time,
 	})
 
 func _ready():

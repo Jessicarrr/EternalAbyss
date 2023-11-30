@@ -19,12 +19,17 @@ var _game_levels = [
 				"NumRequired" : 10,
 				"Path" : "res://components/levels/Prison/PrisonCell.tscn",
 				"Weight" : 4
+			},
+			"Storage" : {
+				"NumRequired" : 3,
+				"Path" : "res://components/levels/prison/Storage.tscn",
+				"Weight" : 4
 			}
 		},
 		"Environment" : "res://components/levels/prison/EnvironmentalSettings.tscn",
 		"Enemies" : [
 			{
-				"Path" : "res://components/Entities/enemies/skeleton_sword_shield/skeleton_sword_shield.tscn",
+				"Path" : "res://components/Entities/enemies/skeleton_sword_shield_simple/skeleton_sword_shield_simple.tscn",
 				"NumRequired" : 6
 			}
 		],

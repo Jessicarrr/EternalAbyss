@@ -16,8 +16,8 @@ func begin(_data = {}):
 	Debug.msg(Debug.NPC_STATES, ["Npc is in staggered state, staggered for ", total_stagger_time, " seconds"])
 	await get_tree().create_timer(total_stagger_time).timeout
 	
-	Debug.msg(Debug.NPC_STATES, ["Npc stagger timer ended. Going to idle..."])
-	request_state_change.emit(self, Enums.ActorStates.IDLE, {})
+	_data.erase("StaggerTime")
+	request_state_change.emit(self, Enums.ActorStates.FOLLOW_PLAYER, _data)
 	
 func end():
 	super.end()

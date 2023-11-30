@@ -15,4 +15,7 @@ func _input(_event):
 	
 	if Input.is_action_just_released("use_item"):
 		use_item_released.emit()
-		
+
+func _on_idle_began():
+	if Input.is_action_pressed("use_item"):
+		use_item_pressed.emit()

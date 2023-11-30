@@ -1,4 +1,4 @@
-[gd_scene load_steps=50 format=3 uid="uid://cjbrvc38vhm6n"]
+[gd_scene load_steps=49 format=3 uid="uid://cjbrvc38vhm6n"]
 
 [ext_resource type="Script" path="res://components/shared/scripts/levels/Decorations.gd" id="1_8bjj4"]
 [ext_resource type="Texture2D" uid="uid://dkua1tjulngk3" path="res://textures/decals/Grime/dust_subtle_01.png" id="2_fk57i"]
@@ -14,7 +14,6 @@
 [ext_resource type="Texture2D" uid="uid://detbygbni8tu2" path="res://textures/decals/Vines/vines_decal_01.png" id="9_yox2n"]
 [ext_resource type="PackedScene" uid="uid://bn3rb164yx6kr" path="res://models/scenes/vines/vines_ceiling_02.tscn" id="10_65wyo"]
 [ext_resource type="Texture2D" uid="uid://csm3tmvrnb1of" path="res://textures/decals/Leaking/green_leakage_03.png" id="10_e3urc"]
-[ext_resource type="Texture2D" uid="uid://d6xn7pjgw2ha" path="res://textures/decals/Leaking/green_leakage_01.png" id="10_yb81n"]
 [ext_resource type="Texture2D" uid="uid://ny7yeuc5yi5k" path="res://textures/decals/Vines/wall_vines_02.png" id="11_3pjeo"]
 [ext_resource type="PackedScene" uid="uid://d0ijf62xi4ig" path="res://models/scenes/vines/vines_ceiling_03.tscn" id="11_4c0x3"]
 [ext_resource type="PackedScene" uid="uid://c6e4sueliundj" path="res://models/scenes/vines/vines_ceiling_04.tscn" id="12_a7ww7"]
@@ -29,7 +28,9 @@
 [ext_resource type="PackedScene" uid="uid://danqsjtcuxsxy" path="res://models/scenes/fungi/mush_cluster_01.tscn" id="21_0pkq4"]
 [ext_resource type="PackedScene" uid="uid://oep30dfsc0n0" path="res://models/scenes/fungi/mush_02.tscn" id="22_rkbsa"]
 [ext_resource type="Texture2D" uid="uid://s11r07hgjcu3" path="res://textures/prison/bricks_n.png" id="24_y3tro"]
+[ext_resource type="PackedScene" uid="uid://2vaa8kgvkawx" path="res://models/scenes/candle_01.tscn" id="30_e3343"]
 [ext_resource type="Texture2D" uid="uid://biyj82l1q7wdj" path="res://textures/particles/bit.png" id="30_pcwxr"]
+[ext_resource type="PackedScene" uid="uid://c41eu1m1g72vu" path="res://models/scenes/wall_torch.tscn" id="32_6tkxl"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8gr8k"]
 albedo_texture = ExtResource("7_qxboj")
@@ -51,16 +52,6 @@ texture_filter = 0
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_aoyd2"]
 material = SubResource("StandardMaterial3D_tl4re")
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lfu00"]
-albedo_texture = ExtResource("7_qxboj")
-normal_enabled = true
-normal_texture = ExtResource("24_y3tro")
-heightmap_enabled = true
-texture_filter = 0
-
-[sub_resource type="PlaneMesh" id="PlaneMesh_2p0td"]
-material = SubResource("StandardMaterial3D_lfu00")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_v2lp3"]
 albedo_texture = ExtResource("7_qxboj")
@@ -153,35 +144,35 @@ metadata/PercentChance = 30
 
 [node name="vines_ceiling_small_01" parent="Decorations" instance=ExtResource("5_esyiq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.419115, 1.99705, 0.0768701)
-metadata/PercentChance = 25
+metadata/PercentChance = 35
 
 [node name="vines_ceiling_small_02" parent="Decorations" instance=ExtResource("6_uhcr6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.258392, 1.99634, 0.490551)
-metadata/PercentChance = 25
+metadata/PercentChance = 35
 
 [node name="vines_ceiling_small_03" parent="Decorations" instance=ExtResource("7_eq47o")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.143733, 1.9991, -0.495721)
-metadata/PercentChance = 25
+metadata/PercentChance = 35
 
 [node name="vines_ceiling_small_04" parent="Decorations" instance=ExtResource("8_8dnvr")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.509229, 1.99988, -0.105263)
-metadata/PercentChance = 25
+metadata/PercentChance = 35
 
 [node name="vines_ceiling_01" parent="Decorations" instance=ExtResource("9_fdvn7")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.99527, 0)
-metadata/PercentChance = 25
+metadata/PercentChance = 35
 
 [node name="vines_ceiling_02" parent="Decorations" instance=ExtResource("10_65wyo")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.543834, 2.00835, 0.547652)
-metadata/PercentChance = 25
+metadata/PercentChance = 35
 
 [node name="vines_ceiling_03" parent="Decorations" instance=ExtResource("11_4c0x3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.515726, 1.99783, -0.594729)
-metadata/PercentChance = 25
+metadata/PercentChance = 35
 
 [node name="vines_ceiling_04" parent="Decorations" instance=ExtResource("12_a7ww7")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.734751, 2.0004, -0.771214)
-metadata/PercentChance = 25
+metadata/PercentChance = 35
 
 [node name="pebble_13" parent="Decorations" instance=ExtResource("13_877h7")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.81453, 0.0627781, 0)
@@ -282,34 +273,43 @@ shape = SubResource("BoxShape3D_ja4v3")
 
 [node name="ConnectionPoints" type="Node3D" parent="."]
 
-[node name="Wall1" type="MeshInstance3D" parent="ConnectionPoints"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 1, -1)
-mesh = SubResource("PlaneMesh_2p0td")
+[node name="Wall1" type="MeshInstance3D" parent="ConnectionPoints" groups=["WeldedWall"]]
+transform = Transform3D(1, 1.06581e-14, -4.65882e-22, 0, -4.37114e-08, -1, -1.06581e-14, 1, -4.37114e-08, 0, 1, -1)
+mesh = SubResource("PlaneMesh_xedni")
 skeleton = NodePath("../..")
 metadata/ConnectionPointUsed = false
 metadata/Variations = ["res://textures/prison/Walls/bricks_variation_01.png", "res://textures/prison/Walls/bricks_variation_02.png", "res://textures/prison/Walls/bricks_variation_03.png", "res://textures/prison/Walls/bricks_variation_04.png", "res://textures/prison/Walls/bricks_variation_05.png", "res://textures/prison/Walls/bricks_variation_06.png", "res://textures/prison/Walls/bricks_variation_07.png", "res://textures/prison/Walls/bricks_variation_08.png", "res://textures/prison/Walls/bricks_variation_09.png", "res://textures/prison/Walls/bricks_variation_10.png"]
 
 [node name="StaticBody3D" type="StaticBody3D" parent="ConnectionPoints/Wall1"]
+collision_mask = 5
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="ConnectionPoints/Wall1/StaticBody3D"]
 shape = SubResource("BoxShape3D_ja4v3")
 
-[node name="green_leakage_wall_01" type="Decal" parent="ConnectionPoints/Wall1"]
-transform = Transform3D(-1, -8.74228e-08, 0, 8.74228e-08, -1, 0, 0, 0, 1, -0.0184331, 0.547494, 0.00684655)
-size = Vector3(1.96, 1.645, 2)
-texture_albedo = ExtResource("10_yb81n")
+[node name="green_leakage_wall_02" type="Decal" parent="ConnectionPoints/Wall1"]
+transform = Transform3D(-0.999207, 0.0382742, -0.0109525, -0.0375174, -0.997339, -0.0625122, -0.013316, -0.0620516, 0.997984, 0.107099, 0.0994181, 0.0172912)
+size = Vector3(1.605, 0.905, 2)
+texture_albedo = ExtResource("8_lcwbx")
 metadata/PercentChance = 25
 
 [node name="wall_vines_01" type="Decal" parent="ConnectionPoints/Wall1"]
-transform = Transform3D(-1, 2.98e-08, 8.2187e-08, -3.11699e-08, -0.99986, -0.0167191, 8.16773e-08, -0.0167191, 0.99986, -0.0751103, -0.0211656, -0.11571)
-size = Vector3(1.75, 1, 1.75)
+transform = Transform3D(-0.999987, -0.00107073, -0.00496471, 0.00131446, -0.998781, -0.0493518, -0.00490581, -0.0493577, 0.998769, 0.173984, 0.0216195, -0.323227)
+size = Vector3(1.78, 1, 1.345)
 texture_albedo = ExtResource("9_yox2n")
-metadata/PercentChance = 5
+metadata/PercentChance = 10
 
 [node name="NavigationObstacle3D" type="NavigationObstacle3D" parent="ConnectionPoints/Wall1"]
 radius = 0.1
 
-[node name="Wall2" type="MeshInstance3D" parent="ConnectionPoints"]
+[node name="candle_01" parent="ConnectionPoints/Wall1" instance=ExtResource("30_e3343")]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0.204532, 0.125594, 1)
+metadata/PercentChance = 10
+
+[node name="wall_torch" parent="ConnectionPoints/Wall1" instance=ExtResource("32_6tkxl")]
+transform = Transform3D(-1, -8.74228e-08, 0, -3.55271e-15, 4.37114e-08, -1, 8.74228e-08, -1, -4.37114e-08, -2.19325e-08, 0.108684, -0.101463)
+metadata/PercentChance = 15
+
+[node name="Wall2" type="MeshInstance3D" parent="ConnectionPoints" groups=["WeldedWall"]]
 transform = Transform3D(-4.37114e-08, 1, -4.37114e-08, 0, -4.37114e-08, -1, -1, -4.37114e-08, 1.91069e-15, -1, 1, 0)
 mesh = SubResource("PlaneMesh_xedni")
 skeleton = NodePath("../..")
@@ -337,7 +337,15 @@ metadata/PercentChance = 10
 [node name="NavigationObstacle3D" type="NavigationObstacle3D" parent="ConnectionPoints/Wall2"]
 radius = 0.1
 
-[node name="Wall3" type="MeshInstance3D" parent="ConnectionPoints"]
+[node name="candle_01" parent="ConnectionPoints/Wall2" instance=ExtResource("30_e3343")]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0.204532, 0.125594, 1)
+metadata/PercentChance = 10
+
+[node name="wall_torch" parent="ConnectionPoints/Wall2" instance=ExtResource("32_6tkxl")]
+transform = Transform3D(-1, -8.74228e-08, 0, -3.55271e-15, 4.37114e-08, -1, 8.74228e-08, -1, -4.37114e-08, -2.19325e-08, 0.108684, -0.101463)
+metadata/PercentChance = 15
+
+[node name="Wall3" type="MeshInstance3D" parent="ConnectionPoints" groups=["WeldedWall"]]
 transform = Transform3D(-1, -3.82137e-15, 8.74228e-08, -8.74228e-08, 4.37114e-08, -1, 0, -1, -4.37114e-08, 0, 1, 1)
 mesh = SubResource("PlaneMesh_8pg0l")
 skeleton = NodePath("../..")
@@ -364,7 +372,15 @@ metadata/PercentChance = 10
 [node name="NavigationObstacle3D" type="NavigationObstacle3D" parent="ConnectionPoints/Wall3"]
 radius = 0.1
 
-[node name="Wall4" type="MeshInstance3D" parent="ConnectionPoints"]
+[node name="candle_01" parent="ConnectionPoints/Wall3" instance=ExtResource("30_e3343")]
+transform = Transform3D(1, -2.2215e-28, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0.0372444, 0.199391, 1)
+metadata/PercentChance = 10
+
+[node name="wall_torch" parent="ConnectionPoints/Wall3" instance=ExtResource("32_6tkxl")]
+transform = Transform3D(-1, -8.74228e-08, -2.5411e-21, -3.82137e-15, 4.37114e-08, -1, 8.74228e-08, -1, -4.37114e-08, -8.87012e-09, 0.108684, -0.101462)
+metadata/PercentChance = 15
+
+[node name="Wall4" type="MeshInstance3D" parent="ConnectionPoints" groups=["WeldedWall"]]
 transform = Transform3D(-5.96046e-08, -1, 0, -4.37114e-08, 2.6054e-15, -1, 1, -5.96046e-08, -4.37114e-08, 1, 1, 0)
 mesh = SubResource("PlaneMesh_rxjy6")
 skeleton = NodePath("../..")
@@ -391,6 +407,14 @@ metadata/PercentChance = 10
 [node name="NavigationObstacle3D" type="NavigationObstacle3D" parent="ConnectionPoints/Wall4"]
 radius = 0.1
 
+[node name="candle_01" parent="ConnectionPoints/Wall4" instance=ExtResource("30_e3343")]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -0.0710606, 0.162039, 1)
+metadata/PercentChance = 10
+
+[node name="wall_torch" parent="ConnectionPoints/Wall4" instance=ExtResource("32_6tkxl")]
+transform = Transform3D(-1, -8.74228e-08, 0, -3.55271e-15, 4.37114e-08, -1, 8.74228e-08, -1, -4.37114e-08, -1.54013e-08, 0.108684, -0.101462)
+metadata/PercentChance = 15
+
 [node name="Bounds" type="Area3D" parent="."]
 collision_layer = 2
 collision_mask = 2
@@ -413,7 +437,7 @@ mesh = SubResource("PlaneMesh_klk57")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 cast_shadow = 0
 visibility_range_end = 10.0
-amount = 3
+amount = 12
 lifetime = 9.29
 process_material = SubResource("ParticleProcessMaterial_bfctb")
 draw_pass_1 = SubResource("QuadMesh_g00xs")

@@ -7,6 +7,8 @@ func get_default_anim_data():
 	var default_anim_data = {
 		"start_position" : obj.position,
 		"end_position" : obj.position,
+		"start_global_position" : obj.global_position,
+		"end_global_position" : obj.global_position,
 		"start_rotation" : obj.rotation,
 		"end_rotation" : obj.rotation,
 		"start_global_rotation" : obj.global_rotation,
@@ -50,14 +52,19 @@ func play_animation(anim_data = {}):
 	
 	var time = anim_data["time_s"]
 	
-	var use_global_rotation
-	if anim_data["start_rotation"] != anim_data["end_rotation"]:
-		use_global_rotation = false
-	else:
+	var use_global_rotation = false
+	var use_global_position = false
+	
+	if anim_data["start_rotation"] == anim_data["end_rotation"]:
 		use_global_rotation = true
 	
+	if anim_data["start_global_position"] != anim_data["end_global_position"]:
+		use_global_position = true
 	
-	obj.position = anim_data["start_position"]
+	if use_global_position == false:
+		obj.position = anim_data["start_position"]
+	else:
+		obj.global_position = anim_data["start_global_position"]
 	
 	if use_global_rotation == false:
 		obj.rotation = anim_data["start_rotation"]
@@ -68,7 +75,10 @@ func play_animation(anim_data = {}):
 	
 	create_new_tween(anim_data["is_parallel"], anim_data["tween_type"])
 	
-	tween.tween_property(obj, "position", anim_data["end_position"], time)
+	if use_global_position == false:
+		tween.tween_property(obj, "position", anim_data["end_position"], time)
+	else:
+		tween.tween_property(obj, "global_position", anim_data["end_global_position"], time)
 	
 	if use_global_rotation == false:
 		tween.tween_property(obj, "rotation", anim_data["end_rotation"], time)

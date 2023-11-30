@@ -17,7 +17,43 @@ var current_gravity := 0.0  # Current gravity affecting the player
 var was_on_floor_previously := false  # Was the player on the floor in the last frame?
 var can_jump := true  # Can the player perform a jump?
 
+# New variables to track previous frame's status
+var was_moving_previously := false
+var was_sprinting_previously := false
+
+var current_stamina_movement_speed = 1.0
+
+@export var stamina_percent_to_movement_penalty = {
+	0.50 : 0.7, # 50% stamina, 90% movement speed (10% slower)
+	0.25 : 0.4, # 25% stamina, 70% movement speed (30% slower)
+	0.0 : 0.1 # 0% stamina, 40% movement speed (60% slower)
+}
+
+# New signals
+signal player_started_movement
+signal player_stopped_movement
+signal player_started_sprinting
+signal player_stopped_sprinting
+
 signal player_ground_movement #Emit a signal if the player is walking on the ground
+
+func get_movement_penalty_for_current_stamina(current_stamina, max_stamina) -> float:
+	print("!! cur stam = ", current_stamina, " and max is ", max_stamina)
+	var stamina_percentage = float(current_stamina) / max_stamina
+	print("!! stam percentage is ", stamina_percentage)
+	
+	var sorted_keys = stamina_percent_to_movement_penalty.keys()
+	sorted_keys.sort()
+
+	var penalty = 1.0  # Default to no penalty
+	for key in sorted_keys:
+		if stamina_percentage <= key:
+			penalty = stamina_percent_to_movement_penalty[key]
+			break
+
+	print("!! current stamina movement speed = ", penalty)
+	
+	return penalty
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -25,7 +61,25 @@ func _process(delta):
 	if $DevModeMovement.dev_mode_active:
 		return
 	
+	
+	
 	var captured_input = capture_movement_input()  # Capture the player's movement input
+	
+	# Emit signals for starting and stopping movement
+	var is_moving_now = captured_input.length_squared() > 0
+	if is_moving_now and !was_moving_previously:
+		player_started_movement.emit()
+	elif !is_moving_now and was_moving_previously:
+		player_stopped_movement.emit()
+	was_moving_previously = is_moving_now
+
+	# Emit signals for starting and stopping sprinting
+	var is_sprinting_now = is_sprinting()
+	if is_sprinting_now and !was_sprinting_previously:
+		player_started_sprinting.emit()
+	elif !is_sprinting_now and was_sprinting_previously:
+		player_stopped_sprinting.emit()
+	was_sprinting_previously = is_sprinting_now
 	
 	apply_gravity(delta)  # Apply gravity to the player
 	handle_jumping()
@@ -37,6 +91,8 @@ func _process(delta):
 		
 	if is_moving_backwards(captured_input):
 		movement_speed *= backwards_movement_multiplier
+	
+	movement_speed *= current_stamina_movement_speed
 	
 	move(captured_input, movement_speed, delta)
 
@@ -99,3 +155,8 @@ func try_emit_movement_signal():
 	if player.is_on_floor() and actual_velocity.length() > 0.1:
 		player_ground_movement.emit(actual_velocity)
 
+func _on_endurance_stamina_changed(current_stamina, max_stamina):
+	
+	current_stamina_movement_speed =\
+	 get_movement_penalty_for_current_stamina(current_stamina, max_stamina)
+	

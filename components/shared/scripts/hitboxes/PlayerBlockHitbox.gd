@@ -2,9 +2,11 @@ extends "res://components/shared/scripts/hitboxes/CombatHitbox.gd"
 class_name PlayerBlockHitbox
 
 @onready var camera = PlayerDataExtra.player_camera
-var distance_in_front = 0.17
+var distance_in_front = 0.35
 @export var parent_item_path : NodePath = ""
 var parent_item
+
+var blocking_active = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -15,8 +17,7 @@ func _ready():
 		return
 		
 	parent_item = get_node(parent_item_path)
-	
-	pass # Replace with function body.
+	place_hitbox_far_away()
 
 func place_hitbox_in_front_of_player():
 	self.global_position = camera.global_position
@@ -24,6 +25,9 @@ func place_hitbox_in_front_of_player():
 	var forward_dir = camera.global_transform.basis.z.normalized() * -1
 	var new_pos = self.global_position + forward_dir * distance_in_front
 	self.global_position = new_pos
+	
+func place_hitbox_far_away():
+	self.global_position = Vector3(-900, -850, -550)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -36,4 +40,12 @@ func _process(delta):
 	if parent_item.is_equipped() == false:
 		return	
 	
-	place_hitbox_in_front_of_player()
+	if blocking_active == true:
+		place_hitbox_in_front_of_player()
+
+func _on_use_item_started(_item):
+	blocking_active = true
+
+func _on_use_item_ended(_item):
+	blocking_active = false
+	place_hitbox_far_away()

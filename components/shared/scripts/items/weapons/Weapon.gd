@@ -8,6 +8,7 @@ class_name Weapon
 @export var damage_min = 1
 @export var damage_max = 2
 @export var material : Enums.Materials = Enums.Materials.NONE
+@export var range = 1.0
 
 @export_category("Nodes")
 @export var attacks_path : NodePath = ""
@@ -49,6 +50,9 @@ func has_block_hitbox():
 		return false
 		
 	return true
+	
+func get_block_hitbox():
+	return block_hitbox
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):

@@ -17,9 +17,7 @@ func _ready():
 	await get_tree().create_timer(2).timeout
 	print_game_items()
 	print_items()
-	spawn_item("Iron Sword")
-	spawn_item("Iron Sword")
-	spawn_item("Briggy brag brag")
+	spawn_item("3d Sword")
 	print_items()
 	print_game_items()
 	await get_tree().create_timer(1.0).timeout  # Wait for 1 second

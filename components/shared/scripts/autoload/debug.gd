@@ -11,6 +11,10 @@ const ANIMATION = 6
 const NPC_GENERATION = 8
 const AUDIO = 9
 const COLLISIONS = 10
+const NPC_STATE_MACHINE = 11
+const SPRITE_ANIMATION = 12
+const PLAYER_STATE_MACHINE = 13
+const WELDER_GEN = 14
 
 const SHOW_HITBOXES = false
 
@@ -18,14 +22,18 @@ var print_flags = {
 	COMBAT: false,
 	GENERAL_STATES: false,
 	PLAYER_STATES: false,
-	NPC_STATES: true,
+	PLAYER_STATE_MACHINE: false,
+	NPC_STATES: false,
+	NPC_STATE_MACHINE: false,
 	OBJECT_STATES: false,
 	GENERATION: false,
 	GENERATION_COLLISION: false,
 	ANIMATION: false,
+	SPRITE_ANIMATION: false,
 	NPC_GENERATION: false,
 	AUDIO : false,
-	COLLISIONS : false
+	COLLISIONS : false,
+	WELDER_GEN : true
 }
 
 func msg(type, args = []):
