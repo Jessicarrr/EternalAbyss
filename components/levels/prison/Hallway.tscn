@@ -1,4 +1,4 @@
-[gd_scene load_steps=49 format=3 uid="uid://cjbrvc38vhm6n"]
+[gd_scene load_steps=51 format=3 uid="uid://cjbrvc38vhm6n"]
 
 [ext_resource type="Script" path="res://components/shared/scripts/levels/Decorations.gd" id="1_8bjj4"]
 [ext_resource type="Texture2D" uid="uid://dkua1tjulngk3" path="res://textures/decals/Grime/dust_subtle_01.png" id="2_fk57i"]
@@ -27,15 +27,17 @@
 [ext_resource type="PackedScene" uid="uid://1trojicuae27" path="res://models/scenes/fungi/mush_01.tscn" id="20_d4m88"]
 [ext_resource type="PackedScene" uid="uid://danqsjtcuxsxy" path="res://models/scenes/fungi/mush_cluster_01.tscn" id="21_0pkq4"]
 [ext_resource type="PackedScene" uid="uid://oep30dfsc0n0" path="res://models/scenes/fungi/mush_02.tscn" id="22_rkbsa"]
+[ext_resource type="Texture2D" uid="uid://bkecu26i0uet4" path="res://textures/prison/Floor/floor 212.png" id="23_uc0yf"]
+[ext_resource type="Texture2D" uid="uid://lkrn3jeu5pd6" path="res://textures/prison/Floor/floor 212_n.png" id="24_2px42"]
 [ext_resource type="Texture2D" uid="uid://s11r07hgjcu3" path="res://textures/prison/bricks_n.png" id="24_y3tro"]
 [ext_resource type="PackedScene" uid="uid://2vaa8kgvkawx" path="res://models/scenes/candle_01.tscn" id="30_e3343"]
 [ext_resource type="Texture2D" uid="uid://biyj82l1q7wdj" path="res://textures/particles/bit.png" id="30_pcwxr"]
 [ext_resource type="PackedScene" uid="uid://c41eu1m1g72vu" path="res://models/scenes/wall_torch.tscn" id="32_6tkxl"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8gr8k"]
-albedo_texture = ExtResource("7_qxboj")
+albedo_texture = ExtResource("23_uc0yf")
 normal_enabled = true
-normal_texture = ExtResource("24_y3tro")
+normal_texture = ExtResource("24_2px42")
 texture_filter = 0
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_4jllp"]
@@ -278,7 +280,7 @@ transform = Transform3D(1, 1.06581e-14, -4.65882e-22, 0, -4.37114e-08, -1, -1.06
 mesh = SubResource("PlaneMesh_xedni")
 skeleton = NodePath("../..")
 metadata/ConnectionPointUsed = false
-metadata/Variations = ["res://textures/prison/Walls/bricks_variation_01.png", "res://textures/prison/Walls/bricks_variation_02.png", "res://textures/prison/Walls/bricks_variation_03.png", "res://textures/prison/Walls/bricks_variation_04.png", "res://textures/prison/Walls/bricks_variation_05.png", "res://textures/prison/Walls/bricks_variation_06.png", "res://textures/prison/Walls/bricks_variation_07.png", "res://textures/prison/Walls/bricks_variation_08.png", "res://textures/prison/Walls/bricks_variation_09.png", "res://textures/prison/Walls/bricks_variation_10.png"]
+metadata/Variations = ["res://textures/prison/Walls/bricks_variation_01.png", "res://textures/prison/Walls/bricks_variation_02.png", "res://textures/prison/Walls/bricks_variation_03.png", "res://textures/prison/Walls/bricks_variation_04.png", "res://textures/prison/Walls/bricks_variation_05.png", "res://textures/prison/Walls/bricks_variation_06.png", "res://textures/prison/Walls/bricks_variation_07.png", "res://textures/prison/Walls/bricks_variation_08.png"]
 
 [node name="StaticBody3D" type="StaticBody3D" parent="ConnectionPoints/Wall1"]
 collision_mask = 5
@@ -314,7 +316,7 @@ transform = Transform3D(-4.37114e-08, 1, -4.37114e-08, 0, -4.37114e-08, -1, -1, 
 mesh = SubResource("PlaneMesh_xedni")
 skeleton = NodePath("../..")
 metadata/ConnectionPointUsed = false
-metadata/Variations = ["res://textures/prison/Walls/bricks_variation_01.png", "res://textures/prison/Walls/bricks_variation_02.png", "res://textures/prison/Walls/bricks_variation_03.png", "res://textures/prison/Walls/bricks_variation_04.png", "res://textures/prison/Walls/bricks_variation_05.png", "res://textures/prison/Walls/bricks_variation_06.png", "res://textures/prison/Walls/bricks_variation_07.png", "res://textures/prison/Walls/bricks_variation_08.png", "res://textures/prison/Walls/bricks_variation_09.png", "res://textures/prison/Walls/bricks_variation_10.png"]
+metadata/Variations = ["res://textures/prison/Walls/bricks_variation_01.png", "res://textures/prison/Walls/bricks_variation_02.png", "res://textures/prison/Walls/bricks_variation_03.png", "res://textures/prison/Walls/bricks_variation_04.png", "res://textures/prison/Walls/bricks_variation_05.png", "res://textures/prison/Walls/bricks_variation_06.png", "res://textures/prison/Walls/bricks_variation_07.png", "res://textures/prison/Walls/bricks_variation_08.png"]
 
 [node name="StaticBody3D" type="StaticBody3D" parent="ConnectionPoints/Wall2"]
 collision_mask = 5

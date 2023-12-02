@@ -23,4 +23,4 @@ func iterate_over_nodes(cur_node : Node):
 
 func _on_generator_generation_finished(_data):
 	rng.randomize()
-	#iterate_over_nodes(layout_node)
+	iterate_over_nodes(layout_node)

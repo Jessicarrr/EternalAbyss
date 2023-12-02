@@ -43,14 +43,13 @@ size = Vector3(0.6, 1.2, 0.05)
 
 [node name="3dSword" type="Node" parent="." groups=["weapons"]]
 script = ExtResource("1_tdd22")
+windup_time = 0.5
+swing_time = 0.1
 recovery_time = 0.75
-damage_min = 6
-damage_max = 9
+damage_min = 9
+damage_max = 12
 material = 2
 sprite_path = NodePath("Sprite3D")
-lighting_adjustments_path = null
-walking_animation_path = null
-fake_physics_path = null
 item_name = "3d Sword"
 
 [node name="Sprite3D" type="Sprite3D" parent="3dSword"]
@@ -74,9 +73,6 @@ attacks_path = NodePath("FirstPersonControl/Sprite2D/AttackAnims")
 attack_hitbox_path = NodePath("PlayerWeaponHitbox")
 attack_hitbox_anim_path = NodePath("PlayerWeaponHitbox/SwordSlashAnim")
 block_hitbox_path = NodePath("PlayerBlockHitbox")
-lighting_adjustments_path = null
-walking_animation_path = null
-fake_physics_path = null
 item_name = "Iron Sword"
 use_item_anim_path = NodePath("FirstPersonControl/Sprite2D/MiscAnims/Block")
 use_item_time = 0.15

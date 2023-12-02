@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://dkqjgb8k75j0w"
-path="res://.godot/imported/shelf_storage.glb-d0170feca6e007b04677851da3085f54.scn"
+uid="uid://0g4mt0nae6s4"
+path="res://.godot/imported/barrel.glb-b03714e176b17cd434b7bd1d5adcf78c.scn"
 
 [deps]
 
-source_file="res://models/furniture/shelf_storage.glb"
-dest_files=["res://.godot/imported/shelf_storage.glb-d0170feca6e007b04677851da3085f54.scn"]
+source_file="res://models/furniture/barrel.glb"
+dest_files=["res://.godot/imported/barrel.glb-b03714e176b17cd434b7bd1d5adcf78c.scn"]
 
 [params]
 

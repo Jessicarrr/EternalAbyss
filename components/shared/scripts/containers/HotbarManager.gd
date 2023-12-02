@@ -42,8 +42,7 @@ func hold_item():
 	if item == null:
 		return
 		
-	item.activate_first_person_visuals()
-	pass
+	item.equip()
 	
 func let_go_of_item():
 	var item = get_selected_hotbar_item()
@@ -51,8 +50,7 @@ func let_go_of_item():
 	if item == null:
 		return
 		
-	item.deactivate_first_person_visuals()
-	pass
+	item.unequip()
 	
 func refresh_held_item():
 	let_go_of_item()

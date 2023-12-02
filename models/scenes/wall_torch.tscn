@@ -99,9 +99,9 @@ autoplay = "idle"
 frame_progress = 0.708427
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0207474, -0.147871)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0602398, -0.147871)
 light_color = Color(0.835294, 0.639216, 0.505882, 1)
-light_energy = 0.02
+light_energy = 0.04
 light_indirect_energy = 0.7
 light_specular = 0.878
 shadow_enabled = true

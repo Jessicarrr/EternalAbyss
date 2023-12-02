@@ -1,12 +1,29 @@
-[gd_scene load_steps=36 format=3 uid="uid://bug4m8f68fkbn"]
+[gd_scene load_steps=53 format=3 uid="uid://bug4m8f68fkbn"]
 
 [ext_resource type="Script" path="res://components/shared/scripts/levels/ReplaceWallWithDoor.gd" id="1_4di7a"]
 [ext_resource type="Script" path="res://components/shared/scripts/levels/Decorations.gd" id="1_p3ckr"]
 [ext_resource type="Texture2D" uid="uid://dscoavfvq5e6s" path="res://textures/prison/bricks.png" id="1_ur42q"]
 [ext_resource type="Texture2D" uid="uid://b1nmn3rorrdsk" path="res://textures/prison/welder_stone.png" id="2_7ubfa"]
+[ext_resource type="PackedScene" uid="uid://bmi1ca8oxx85n" path="res://models/scenes/pebbles/pebble_02.tscn" id="2_fjmym"]
+[ext_resource type="PackedScene" uid="uid://cuk4pl5jo1jw6" path="res://models/scenes/vines/vines_ceiling_01.tscn" id="2_kn3br"]
+[ext_resource type="PackedScene" uid="uid://bn3rb164yx6kr" path="res://models/scenes/vines/vines_ceiling_02.tscn" id="3_81d3l"]
+[ext_resource type="PackedScene" uid="uid://b83unikdug34" path="res://models/scenes/pebbles/pebble_03.tscn" id="3_k6vfn"]
 [ext_resource type="PackedScene" uid="uid://b6u3wrs6gna1b" path="res://components/levels/prison/WeatheredDoor.tscn" id="4_1ax4q"]
+[ext_resource type="PackedScene" uid="uid://d0ijf62xi4ig" path="res://models/scenes/vines/vines_ceiling_03.tscn" id="4_16px6"]
+[ext_resource type="PackedScene" uid="uid://dythur6bwyjt5" path="res://models/scenes/pebbles/pebble_04.tscn" id="4_hap6p"]
+[ext_resource type="PackedScene" uid="uid://drslnbqluoxiy" path="res://models/scenes/pebbles/pebble_05.tscn" id="5_5k2q2"]
 [ext_resource type="PackedScene" uid="uid://c41eu1m1g72vu" path="res://models/scenes/wall_torch.tscn" id="5_66x1n"]
+[ext_resource type="PackedScene" uid="uid://c6e4sueliundj" path="res://models/scenes/vines/vines_ceiling_04.tscn" id="5_hs26d"]
 [ext_resource type="PackedScene" uid="uid://c3u17majpvdaw" path="res://components/levels/prison/shelf_storage_prison_01.tscn" id="6_64dmo"]
+[ext_resource type="PackedScene" uid="uid://b5bdid3ka5xx5" path="res://models/scenes/pebbles/pebble_06.tscn" id="6_bi7g2"]
+[ext_resource type="PackedScene" uid="uid://cuvl4ncxl738u" path="res://models/scenes/vines/vines_ceiling_small_01.tscn" id="6_fjpuv"]
+[ext_resource type="PackedScene" uid="uid://c10mp77km6kgx" path="res://models/scenes/vines/vines_ceiling_small_02.tscn" id="7_1by6r"]
+[ext_resource type="PackedScene" uid="uid://dwssxgcd6pwki" path="res://models/scenes/pebbles/pebble_07.tscn" id="7_8h8f5"]
+[ext_resource type="PackedScene" uid="uid://0g4mt0nae6s4" path="res://models/furniture/barrel.glb" id="8_0c5c6"]
+[ext_resource type="PackedScene" uid="uid://cfu55xt5quu6a" path="res://models/scenes/vines/vines_ceiling_small_03.tscn" id="8_267v6"]
+[ext_resource type="PackedScene" uid="uid://hmqr7kiwjpg5" path="res://models/scenes/pebbles/pebble_08.tscn" id="8_c5r6x"]
+[ext_resource type="PackedScene" uid="uid://f5ycakm730an" path="res://models/scenes/vines/vines_ceiling_small_04.tscn" id="9_x8qsg"]
+[ext_resource type="Texture2D" uid="uid://s11r07hgjcu3" path="res://textures/prison/bricks_n.png" id="19_yiyyb"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lfu00"]
 albedo_texture = ExtResource("1_ur42q")
@@ -23,6 +40,8 @@ load_path = "res://.godot/imported/bricks.png-a1cbf4706eb1131ca478a6908aad6c45.b
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ncjx3"]
 albedo_texture = SubResource("CompressedTexture2D_p7hxc")
+normal_enabled = true
+normal_texture = ExtResource("19_yiyyb")
 uv1_scale = Vector3(2, 2, 2)
 texture_filter = 0
 
@@ -35,6 +54,8 @@ size = Vector3(4, 0.001, 4)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_v2lp3"]
 albedo_texture = ExtResource("1_ur42q")
+normal_enabled = true
+normal_texture = ExtResource("19_yiyyb")
 texture_filter = 0
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_xedni"]
@@ -45,6 +66,8 @@ load_path = "res://.godot/imported/bricks.png-a1cbf4706eb1131ca478a6908aad6c45.b
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wiroj"]
 albedo_texture = SubResource("CompressedTexture2D_j5brb")
+normal_enabled = true
+normal_texture = ExtResource("19_yiyyb")
 texture_filter = 0
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_8pg0l"]
@@ -52,6 +75,8 @@ material = SubResource("StandardMaterial3D_wiroj")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_buxl7"]
 albedo_texture = SubResource("CompressedTexture2D_j5brb")
+normal_enabled = true
+normal_texture = ExtResource("19_yiyyb")
 uv1_scale = Vector3(0.5, 1, 1)
 texture_filter = 0
 
@@ -87,6 +112,8 @@ load_path = "res://.godot/imported/bricks.png-a1cbf4706eb1131ca478a6908aad6c45.b
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qhn6v"]
 albedo_texture = SubResource("CompressedTexture2D_8wlws")
+normal_enabled = true
+normal_texture = ExtResource("19_yiyyb")
 uv1_scale = Vector3(2, 2, 2)
 texture_filter = 0
 
@@ -111,12 +138,133 @@ material = SubResource("StandardMaterial3D_3htdy")
 size = Vector3(0.2, 2, 0.2)
 
 [node name="Storage_01" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, -0.5)
 script = ExtResource("1_p3ckr")
 metadata/RoomType = "PrisonCell"
 metadata/AllowedConnections = {
 "Hallway": 1.0
 }
 metadata/StartingArea = true
+
+[node name="Pebbles" type="Node3D" parent="."]
+
+[node name="pebble_02" parent="Pebbles" instance=ExtResource("2_fjmym")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0656438, 0.982448)
+metadata/PercentChance = 50
+
+[node name="pebble_13" parent="Pebbles" instance=ExtResource("2_fjmym")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.32706, 0.0656438, -0.258114)
+metadata/PercentChance = 50
+
+[node name="pebble_03" parent="Pebbles" instance=ExtResource("3_k6vfn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.00631, 0.0656438, 1.42082)
+metadata/PercentChance = 50
+
+[node name="pebble_04" parent="Pebbles" instance=ExtResource("4_hap6p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.687145, 0.0656438, 2.27811)
+metadata/PercentChance = 50
+
+[node name="pebble_12" parent="Pebbles" instance=ExtResource("4_hap6p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.474964, 0.0656438, -0.234761)
+metadata/PercentChance = 50
+
+[node name="pebble_05" parent="Pebbles" instance=ExtResource("5_5k2q2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.47928, 0.0656438, 1.04828)
+metadata/PercentChance = 50
+
+[node name="pebble_06" parent="Pebbles" instance=ExtResource("6_bi7g2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0656438, 1.89418)
+metadata/PercentChance = 50
+
+[node name="pebble_07" parent="Pebbles" instance=ExtResource("7_8h8f5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0656438, 2.52672)
+metadata/PercentChance = 50
+
+[node name="pebble_11" parent="Pebbles" instance=ExtResource("7_8h8f5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.19717, 0.0656438, 0.290437)
+metadata/PercentChance = 50
+
+[node name="pebble_10" parent="Pebbles" instance=ExtResource("7_8h8f5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0656438, -0.656873)
+metadata/PercentChance = 50
+
+[node name="pebble_08" parent="Pebbles" instance=ExtResource("8_c5r6x")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.678313, 0.0656438, 1.6147)
+metadata/PercentChance = 50
+
+[node name="pebble_09" parent="Pebbles" instance=ExtResource("8_c5r6x")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.07673, 0.0656438, -0.690873)
+metadata/PercentChance = 50
+
+[node name="Vines" type="Node3D" parent="."]
+
+[node name="vines_ceiling_01" parent="Vines" instance=ExtResource("2_kn3br")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 2, 2.5)
+metadata/PercentChance = 70
+
+[node name="vines_ceiling_02" parent="Vines" instance=ExtResource("3_81d3l")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 2, 2.5)
+metadata/PercentChance = 65
+
+[node name="vines_ceiling_03" parent="Vines" instance=ExtResource("4_16px6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 2, 1.44498)
+metadata/PercentChance = 65
+
+[node name="vines_ceiling_07" parent="Vines" instance=ExtResource("4_16px6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.05752, 2, 1.44498)
+metadata/PercentChance = 65
+
+[node name="vines_ceiling_05" parent="Vines" instance=ExtResource("4_16px6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.568262, 2, 2.19828)
+metadata/PercentChance = 65
+
+[node name="vines_ceiling_04" parent="Vines" instance=ExtResource("5_hs26d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 2)
+metadata/PercentChance = 65
+
+[node name="vines_ceiling_06" parent="Vines" instance=ExtResource("5_hs26d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.618254, 2, 0.27473)
+metadata/PercentChance = 65
+
+[node name="vines_ceiling_small_01" parent="Vines" instance=ExtResource("6_fjpuv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 2, 1)
+metadata/PercentChance = 65
+
+[node name="vines_ceiling_small_10" parent="Vines" instance=ExtResource("6_fjpuv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.08577, 2, 1.97134)
+metadata/PercentChance = 65
+
+[node name="vines_ceiling_small_05" parent="Vines" instance=ExtResource("6_fjpuv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.63225, 2, 2.33562)
+metadata/PercentChance = 65
+
+[node name="vines_ceiling_small_02" parent="Vines" instance=ExtResource("7_1by6r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+metadata/PercentChance = 65
+
+[node name="vines_ceiling_small_09" parent="Vines" instance=ExtResource("7_1by6r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.05172, 2, 2.62827)
+metadata/PercentChance = 65
+
+[node name="vines_ceiling_small_06" parent="Vines" instance=ExtResource("7_1by6r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.18754, 2, -0.513187)
+metadata/PercentChance = 65
+
+[node name="vines_ceiling_small_03" parent="Vines" instance=ExtResource("8_267v6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 2, 0)
+metadata/PercentChance = 65
+
+[node name="vines_ceiling_small_04" parent="Vines" instance=ExtResource("9_x8qsg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 2, 0)
+metadata/PercentChance = 65
+
+[node name="vines_ceiling_small_07" parent="Vines" instance=ExtResource("9_x8qsg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.03037, 2, 2.1737)
+metadata/PercentChance = 65
+
+[node name="vines_ceiling_small_08" parent="Vines" instance=ExtResource("9_x8qsg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.65898, 2, 0.643282)
+metadata/PercentChance = 65
 
 [node name="ReplaceWallWithDoor" type="Node" parent="."]
 script = ExtResource("1_4di7a")
@@ -292,11 +440,15 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.62784, 1, 0)
 
 [node name="wall_torch" parent="." instance=ExtResource("5_66x1n")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 1.8999, 1, 1)
-metadata/PercentChance = 15
+metadata/PercentChance = 85
 
 [node name="wall_torch2" parent="." instance=ExtResource("5_66x1n")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -1.88109, 1, 1)
-metadata/PercentChance = 15
+metadata/PercentChance = 85
+
+[node name="wall_torch3" parent="." instance=ExtResource("5_66x1n")]
+transform = Transform3D(1, 0, -1.06581e-14, 0, 1, 0, 1.06581e-14, 0, 1, 0.11891, 1, 2.89422)
+metadata/PercentChance = 85
 
 [node name="Shelf_Storage_Prison_01" parent="." instance=ExtResource("6_64dmo")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 1.62252, 0, 0)
@@ -309,3 +461,12 @@ transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -1.377
 
 [node name="Shelf_Storage_Prison_04" parent="." instance=ExtResource("6_64dmo")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -1.37748, 0, 0)
+
+[node name="barrel" parent="." instance=ExtResource("8_0c5c6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0, 2.5)
+
+[node name="barrel2" parent="." instance=ExtResource("8_0c5c6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.978364, 0, 2.62934)
+
+[node name="barrel3" parent="." instance=ExtResource("8_0c5c6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.74139, 0, 1.18394)

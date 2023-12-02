@@ -320,6 +320,7 @@ light_color = Color(0.839216, 0.513726, 0.321569, 1)
 light_energy = 1.099
 shadow_enabled = true
 spot_range = 0.0
+spot_attenuation = 0.5
 spot_angle = 80.0
 
 [node name="Collider" type="CollisionShape3D" parent="."]
