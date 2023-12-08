@@ -12,7 +12,10 @@ func _on_sprite_3d_on_swing_start():
 	
 	var entity_seen = PlayerDataExtra.player_instance.get_thing_im_looking_at()
 	
-	Debug.msg(Debug.COLLISIONS, ["Player damaging thing, looking at ", entity_seen.get_name(), entity_seen.get_parent().get_name()])
+	if entity_seen == null:
+		return
+	
+	Debug.msg(Debug.COLLISIONS, ["Player damaging thing, looking at ", entity_seen.get_name()])
 	
 	if entity_seen.has_method("hit") == false:
 		return

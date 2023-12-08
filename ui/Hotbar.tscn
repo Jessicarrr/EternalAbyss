@@ -1,0 +1,64 @@
+[gd_scene load_steps=3 format=3 uid="uid://c8n87amvgaik6"]
+
+[ext_resource type="Script" path="res://ui/Hotbar.gd" id="1_gfa32"]
+[ext_resource type="Script" path="res://ui/MakeChildrenSquare.gd" id="2_p0kpc"]
+
+[node name="Hotbar" type="Control"]
+layout_direction = 1
+layout_mode = 3
+anchor_left = 0.101
+anchor_top = 0.904
+anchor_right = 0.904
+anchor_bottom = 0.986
+offset_left = -0.279999
+offset_top = 0.119995
+offset_right = -0.120117
+offset_bottom = 0.0799561
+grow_horizontal = 2
+grow_vertical = 0
+script = ExtResource("1_gfa32")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_direction = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.288
+anchor_right = 1.0
+anchor_bottom = 0.932
+offset_top = 0.00799942
+offset_right = -1.0
+offset_bottom = 0.0119972
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+script = ExtResource("2_p0kpc")
+
+[node name="SampleColorRect" type="ColorRect" parent="."]
+visible = false
+custom_minimum_size = Vector2(70, 70)
+layout_mode = 2
+offset_left = 488.0
+offset_top = 11.0
+offset_right = 558.0
+offset_bottom = 81.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.462745)
+
+[node name="ColorRectBorder" type="ColorRect" parent="SampleColorRect"]
+visible = false
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 75.0
+offset_top = 75.0
+offset_right = 25.0
+offset_bottom = 25.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.05, 1.05)
+pivot_offset = Vector2(16, 16)
+mouse_filter = 2
+color = Color(0.435294, 0.435294, 0.435294, 0.964706)

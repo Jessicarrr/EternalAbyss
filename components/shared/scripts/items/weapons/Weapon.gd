@@ -21,8 +21,6 @@ var attack_hitbox
 var attack_hitbox_anim
 var block_hitbox
 
-var equipment_type = Enums.EquipmentType.MAIN_HAND
-
 func get_random_damage():
 	return randi_range(damage_min, damage_max)
 

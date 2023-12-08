@@ -1,10 +1,18 @@
 extends Node
 
 enum EquipmentType { 
-	OFF_HAND = 0,
- 	MAIN_HAND = 1,
-	TORSO = 2 
+	HELMET = 0,
+	AMULET = 1,
+	BACK = 2,
+	TORSO = 3,
+	OFF_HAND = 4,
+	LEGS = 5,
+	BELT = 6,
+	FEET = 7,
+	NONE = 8,
+	MAIN_HAND = 9
 }
+
 enum ContainerStates { 
 	FULL,
 	EMPTY,

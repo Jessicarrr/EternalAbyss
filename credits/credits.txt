@@ -1,0 +1,3 @@
+Food items
+EternalAbyss\sprites\food
+https://soda-1.itch.io/realistic-rpg-maker-32x32-icon-set

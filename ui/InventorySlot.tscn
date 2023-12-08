@@ -1,0 +1,25 @@
+[gd_scene load_steps=2 format=3 uid="uid://dxie5lrflt7kv"]
+
+[ext_resource type="Texture2D" uid="uid://dwblci623dgke" path="res://sprites/weapons/testsword.png" id="1_tvgsv"]
+
+[node name="GearMenu" type="Node"]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = -1
+anchor_right = 0.031
+anchor_bottom = 0.056
+offset_top = 2.0
+offset_right = 0.32
+offset_bottom = 1.68
+color = Color(0, 0, 0, 0.631373)
+
+[node name="Sprite2D" type="Sprite2D" parent="ColorRect"]
+position = Vector2(20, 20)
+rotation = -0.755728
+texture = ExtResource("1_tvgsv")
+
+[node name="Hotbar" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0

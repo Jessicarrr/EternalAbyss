@@ -1,0 +1,518 @@
+[gd_scene load_steps=3 format=3 uid="uid://cmgmkj2ulllge"]
+
+[ext_resource type="Script" path="res://ui/Inventory.gd" id="1_7aywv"]
+[ext_resource type="Script" path="res://ui/InventorySlot.gd" id="2_k5ip4"]
+
+[node name="Inventory" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_7aywv")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.4
+anchor_top = 0.2
+anchor_right = 0.85
+anchor_bottom = 0.8
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2
+alignment = 1
+
+[node name="TopRow" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+alignment = 1
+
+[node name="MiddleRow" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+alignment = 1
+
+[node name="SampleColorRect" type="ColorRect" parent="VBoxContainer/MiddleRow"]
+custom_minimum_size = Vector2(70, 70)
+layout_mode = 2
+tooltip_text = "test test"
+color = Color(0, 0, 0, 0.462745)
+script = ExtResource("2_k5ip4")
+
+[node name="ColorRectBorder" type="ColorRect" parent="VBoxContainer/MiddleRow/SampleColorRect"]
+visible = false
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 75.0
+offset_top = 75.0
+offset_right = 25.0
+offset_bottom = 25.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.05, 1.05)
+pivot_offset = Vector2(16, 16)
+mouse_filter = 2
+color = Color(0.435294, 0.435294, 0.435294, 0.964706)
+
+[node name="SampleColorRect2" type="ColorRect" parent="VBoxContainer/MiddleRow"]
+custom_minimum_size = Vector2(70, 70)
+layout_mode = 2
+tooltip_text = "test test"
+color = Color(0, 0, 0, 0.462745)
+script = ExtResource("2_k5ip4")
+
+[node name="ColorRectBorder" type="ColorRect" parent="VBoxContainer/MiddleRow/SampleColorRect2"]
+visible = false
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 75.0
+offset_top = 75.0
+offset_right = 25.0
+offset_bottom = 25.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.05, 1.05)
+pivot_offset = Vector2(16, 16)
+mouse_filter = 2
+color = Color(0.435294, 0.435294, 0.435294, 0.964706)
+
+[node name="SampleColorRect3" type="ColorRect" parent="VBoxContainer/MiddleRow"]
+custom_minimum_size = Vector2(70, 70)
+layout_mode = 2
+tooltip_text = "test test"
+color = Color(0, 0, 0, 0.462745)
+script = ExtResource("2_k5ip4")
+
+[node name="ColorRectBorder" type="ColorRect" parent="VBoxContainer/MiddleRow/SampleColorRect3"]
+visible = false
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 75.0
+offset_top = 75.0
+offset_right = 25.0
+offset_bottom = 25.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.05, 1.05)
+pivot_offset = Vector2(16, 16)
+mouse_filter = 2
+color = Color(0.435294, 0.435294, 0.435294, 0.964706)
+
+[node name="SampleColorRect4" type="ColorRect" parent="VBoxContainer/MiddleRow"]
+custom_minimum_size = Vector2(70, 70)
+layout_mode = 2
+tooltip_text = "test test"
+color = Color(0, 0, 0, 0.462745)
+script = ExtResource("2_k5ip4")
+
+[node name="ColorRectBorder" type="ColorRect" parent="VBoxContainer/MiddleRow/SampleColorRect4"]
+visible = false
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 75.0
+offset_top = 75.0
+offset_right = 25.0
+offset_bottom = 25.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.05, 1.05)
+pivot_offset = Vector2(16, 16)
+mouse_filter = 2
+color = Color(0.435294, 0.435294, 0.435294, 0.964706)
+
+[node name="SampleColorRect5" type="ColorRect" parent="VBoxContainer/MiddleRow"]
+custom_minimum_size = Vector2(70, 70)
+layout_mode = 2
+tooltip_text = "test test"
+color = Color(0, 0, 0, 0.462745)
+script = ExtResource("2_k5ip4")
+
+[node name="ColorRectBorder" type="ColorRect" parent="VBoxContainer/MiddleRow/SampleColorRect5"]
+visible = false
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 75.0
+offset_top = 75.0
+offset_right = 25.0
+offset_bottom = 25.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.05, 1.05)
+pivot_offset = Vector2(16, 16)
+mouse_filter = 2
+color = Color(0.435294, 0.435294, 0.435294, 0.964706)
+
+[node name="SampleColorRect6" type="ColorRect" parent="VBoxContainer/MiddleRow"]
+custom_minimum_size = Vector2(70, 70)
+layout_mode = 2
+tooltip_text = "test test"
+color = Color(0, 0, 0, 0.462745)
+script = ExtResource("2_k5ip4")
+
+[node name="ColorRectBorder" type="ColorRect" parent="VBoxContainer/MiddleRow/SampleColorRect6"]
+visible = false
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 75.0
+offset_top = 75.0
+offset_right = 25.0
+offset_bottom = 25.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.05, 1.05)
+pivot_offset = Vector2(16, 16)
+mouse_filter = 2
+color = Color(0.435294, 0.435294, 0.435294, 0.964706)
+
+[node name="SampleColorRect7" type="ColorRect" parent="VBoxContainer/MiddleRow"]
+custom_minimum_size = Vector2(70, 70)
+layout_mode = 2
+tooltip_text = "test test"
+color = Color(0, 0, 0, 0.462745)
+script = ExtResource("2_k5ip4")
+
+[node name="ColorRectBorder" type="ColorRect" parent="VBoxContainer/MiddleRow/SampleColorRect7"]
+visible = false
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 75.0
+offset_top = 75.0
+offset_right = 25.0
+offset_bottom = 25.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.05, 1.05)
+pivot_offset = Vector2(16, 16)
+mouse_filter = 2
+color = Color(0.435294, 0.435294, 0.435294, 0.964706)
+
+[node name="SampleColorRect8" type="ColorRect" parent="VBoxContainer/MiddleRow"]
+custom_minimum_size = Vector2(70, 70)
+layout_mode = 2
+tooltip_text = "test test"
+color = Color(0, 0, 0, 0.462745)
+script = ExtResource("2_k5ip4")
+
+[node name="ColorRectBorder" type="ColorRect" parent="VBoxContainer/MiddleRow/SampleColorRect8"]
+visible = false
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 75.0
+offset_top = 75.0
+offset_right = 25.0
+offset_bottom = 25.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.05, 1.05)
+pivot_offset = Vector2(16, 16)
+mouse_filter = 2
+color = Color(0.435294, 0.435294, 0.435294, 0.964706)
+
+[node name="BottomRow" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+alignment = 1
+
+[node name="Hotbar" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.1
+anchor_top = 0.85
+anchor_right = 0.9
+anchor_bottom = 0.95
+offset_top = -0.320068
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 0
+alignment = 1
+
+[node name="SampleColorRect" type="ColorRect" parent="."]
+visible = false
+custom_minimum_size = Vector2(70, 70)
+layout_mode = 0
+tooltip_text = "test test"
+color = Color(0, 0, 0, 0.462745)
+script = ExtResource("2_k5ip4")
+
+[node name="ColorRectBorder" type="ColorRect" parent="SampleColorRect"]
+visible = false
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 75.0
+offset_top = 75.0
+offset_right = 25.0
+offset_bottom = 25.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.05, 1.05)
+pivot_offset = Vector2(16, 16)
+mouse_filter = 2
+color = Color(0.435294, 0.435294, 0.435294, 0.964706)
+
+[node name="EquipmentVBox" type="VBoxContainer" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.23
+anchor_top = 0.167
+anchor_right = 0.344
+anchor_bottom = 0.8
+offset_right = 70.0
+offset_bottom = 70.0
+alignment = 1
+
+[node name="Helmet" type="HBoxContainer" parent="EquipmentVBox"]
+layout_mode = 2
+alignment = 1
+
+[node name="HelmetSlot" type="ColorRect" parent="EquipmentVBox/Helmet"]
+custom_minimum_size = Vector2(70, 70)
+layout_mode = 2
+tooltip_text = "test test"
+color = Color(0, 0, 0, 0.462745)
+script = ExtResource("2_k5ip4")
+equipment_type = 0
+
+[node name="ColorRectBorder" type="ColorRect" parent="EquipmentVBox/Helmet/HelmetSlot"]
+visible = false
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 75.0
+offset_top = 75.0
+offset_right = 25.0
+offset_bottom = 25.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.05, 1.05)
+pivot_offset = Vector2(16, 16)
+mouse_filter = 2
+color = Color(0.435294, 0.435294, 0.435294, 0.964706)
+
+[node name="AmuletBack" type="HBoxContainer" parent="EquipmentVBox"]
+layout_mode = 2
+
+[node name="SampleColorRect" type="ColorRect" parent="EquipmentVBox/AmuletBack"]
+custom_minimum_size = Vector2(70, 70)
+layout_mode = 2
+tooltip_text = "test test"
+color = Color(0, 0, 0, 0.462745)
+script = ExtResource("2_k5ip4")
+equipment_type = 2
+
+[node name="ColorRectBorder" type="ColorRect" parent="EquipmentVBox/AmuletBack/SampleColorRect"]
+visible = false
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 75.0
+offset_top = 75.0
+offset_right = 25.0
+offset_bottom = 25.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.05, 1.05)
+pivot_offset = Vector2(16, 16)
+mouse_filter = 2
+color = Color(0.435294, 0.435294, 0.435294, 0.964706)
+
+[node name="SampleColorRect2" type="ColorRect" parent="EquipmentVBox/AmuletBack"]
+custom_minimum_size = Vector2(70, 70)
+layout_mode = 2
+tooltip_text = "test test"
+color = Color(0, 0, 0, 0.462745)
+script = ExtResource("2_k5ip4")
+equipment_type = 1
+
+[node name="ColorRectBorder" type="ColorRect" parent="EquipmentVBox/AmuletBack/SampleColorRect2"]
+visible = false
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 75.0
+offset_top = 75.0
+offset_right = 25.0
+offset_bottom = 25.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.05, 1.05)
+pivot_offset = Vector2(16, 16)
+mouse_filter = 2
+color = Color(0.435294, 0.435294, 0.435294, 0.964706)
+
+[node name="TorsoOffHand" type="HBoxContainer" parent="EquipmentVBox"]
+layout_mode = 2
+
+[node name="TorsoSlot" type="ColorRect" parent="EquipmentVBox/TorsoOffHand"]
+custom_minimum_size = Vector2(70, 70)
+layout_mode = 2
+tooltip_text = "test test"
+color = Color(0, 0, 0, 0.462745)
+script = ExtResource("2_k5ip4")
+equipment_type = 4
+
+[node name="ColorRectBorder" type="ColorRect" parent="EquipmentVBox/TorsoOffHand/TorsoSlot"]
+visible = false
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 75.0
+offset_top = 75.0
+offset_right = 25.0
+offset_bottom = 25.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.05, 1.05)
+pivot_offset = Vector2(16, 16)
+mouse_filter = 2
+color = Color(0.435294, 0.435294, 0.435294, 0.964706)
+
+[node name="OffhandSlot" type="ColorRect" parent="EquipmentVBox/TorsoOffHand"]
+custom_minimum_size = Vector2(70, 70)
+layout_mode = 2
+tooltip_text = "test test"
+color = Color(0, 0, 0, 0.462745)
+script = ExtResource("2_k5ip4")
+equipment_type = 3
+
+[node name="ColorRectBorder" type="ColorRect" parent="EquipmentVBox/TorsoOffHand/OffhandSlot"]
+visible = false
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 75.0
+offset_top = 75.0
+offset_right = 25.0
+offset_bottom = 25.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.05, 1.05)
+pivot_offset = Vector2(16, 16)
+mouse_filter = 2
+color = Color(0.435294, 0.435294, 0.435294, 0.964706)
+
+[node name="LegsBelt" type="HBoxContainer" parent="EquipmentVBox"]
+layout_mode = 2
+
+[node name="LegsSlot" type="ColorRect" parent="EquipmentVBox/LegsBelt"]
+custom_minimum_size = Vector2(70, 70)
+layout_mode = 2
+tooltip_text = "test test"
+color = Color(0, 0, 0, 0.462745)
+script = ExtResource("2_k5ip4")
+equipment_type = 6
+
+[node name="ColorRectBorder" type="ColorRect" parent="EquipmentVBox/LegsBelt/LegsSlot"]
+visible = false
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 75.0
+offset_top = 75.0
+offset_right = 25.0
+offset_bottom = 25.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.05, 1.05)
+pivot_offset = Vector2(16, 16)
+mouse_filter = 2
+color = Color(0.435294, 0.435294, 0.435294, 0.964706)
+
+[node name="BeltSlot" type="ColorRect" parent="EquipmentVBox/LegsBelt"]
+custom_minimum_size = Vector2(70, 70)
+layout_mode = 2
+tooltip_text = "test test"
+color = Color(0, 0, 0, 0.462745)
+script = ExtResource("2_k5ip4")
+equipment_type = 5
+
+[node name="ColorRectBorder" type="ColorRect" parent="EquipmentVBox/LegsBelt/BeltSlot"]
+visible = false
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 75.0
+offset_top = 75.0
+offset_right = 25.0
+offset_bottom = 25.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.05, 1.05)
+pivot_offset = Vector2(16, 16)
+mouse_filter = 2
+color = Color(0.435294, 0.435294, 0.435294, 0.964706)
+
+[node name="Feet" type="HBoxContainer" parent="EquipmentVBox"]
+layout_mode = 2
+alignment = 1
+
+[node name="FeetSlot" type="ColorRect" parent="EquipmentVBox/Feet"]
+custom_minimum_size = Vector2(70, 70)
+layout_mode = 2
+tooltip_text = "test test"
+color = Color(0, 0, 0, 0.462745)
+script = ExtResource("2_k5ip4")
+equipment_type = 7
+
+[node name="ColorRectBorder" type="ColorRect" parent="EquipmentVBox/Feet/FeetSlot"]
+visible = false
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 75.0
+offset_top = 75.0
+offset_right = 25.0
+offset_bottom = 25.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.05, 1.05)
+pivot_offset = Vector2(16, 16)
+mouse_filter = 2
+color = Color(0.435294, 0.435294, 0.435294, 0.964706)

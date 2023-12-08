@@ -4,6 +4,7 @@ class_name Item
 @export var sprite_path : NodePath = ""
 
 var sprite
+@onready var inventory_icon = $InventoryIcon
 
 @export_category("Item Fluff")
 @export var item_name = "[Un-named Item]"
@@ -17,11 +18,14 @@ var sprite
 @export var use_item_time = 1.0
 @export var usage_type = Enums.ItemUsages.NONE
 @export var destroy_on_use = false
+@export var equipment_type = Enums.EquipmentType.NONE
 
 var usage_anim_node : Node = null
 var currently_using_item = false
 
 var equipped = false
+
+
 
 signal use_item_started # now in the middle of using the item
 signal use_item_ending # beginning to stop using the item
@@ -38,8 +42,16 @@ func _ready():
 func equip():
 	equipped = true
 	
+	if sprite == null:
+		sprite = Helpers.try_load_node(self, sprite_path)
+	sprite.visible = true
+	
 func unequip():
 	equipped = false
+	
+	if sprite == null:
+		sprite = Helpers.try_load_node(self, sprite_path)
+	sprite.visible = false
 	
 func is_equipped():
 	if sprite == null:

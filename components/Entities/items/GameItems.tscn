@@ -43,17 +43,18 @@ size = Vector3(0.6, 1.2, 0.05)
 
 [node name="3dSword" type="Node" parent="." groups=["weapons"]]
 script = ExtResource("1_tdd22")
-windup_time = 0.5
-swing_time = 0.1
-recovery_time = 0.75
+windup_time = 0.3
+recovery_time = 0.4
 damage_min = 9
 damage_max = 12
 material = 2
 sprite_path = NodePath("Sprite3D")
-item_name = "3d Sword"
+item_name = "Corroded Estoc"
+item_fluff_text = "A remnant of a bygone era, this blade has tasted the despair of time."
 
 [node name="Sprite3D" type="Sprite3D" parent="3dSword"]
 transform = Transform3D(0.278559, 0.449307, -0.848839, 0.940576, 0.0511051, 0.335715, 0.194219, -0.891915, -0.408372, 0, 0, 0)
+visible = false
 material_override = SubResource("StandardMaterial3D_a3qxk")
 flip_h = true
 pixel_size = 0.005
@@ -63,6 +64,11 @@ default_position_offset = Vector3(0.19, 0.04, 0)
 
 [node name="DamageOther" type="Node" parent="3dSword"]
 script = ExtResource("4_jpt4m")
+
+[node name="InventoryIcon" type="Sprite2D" parent="3dSword"]
+rotation = -0.785398
+scale = Vector2(1.53812, 0.495429)
+texture = ExtResource("18_h6861")
 
 [node name="IronSword" type="Node" parent="." groups=["weapons"]]
 script = ExtResource("1_r62y3")
@@ -243,10 +249,6 @@ metadata/SpritePath = NodePath("../../../../../IronSword/FirstPersonControl/Spri
 script = ExtResource("6_mkpoa")
 
 [connection signal="on_swing_start" from="3dSword/Sprite3D" to="3dSword/DamageOther" method="_on_sprite_3d_on_swing_start"]
-[connection signal="use_item_ended" from="IronSword" to="IronSword/Sounds/BlockSounds" method="_on_use_item_ended"]
-[connection signal="use_item_ending" from="IronSword" to="IronSword/PlayerBlockHitbox" method="_on_use_item_ended"]
-[connection signal="use_item_started" from="IronSword" to="IronSword/PlayerBlockHitbox" method="_on_use_item_started"]
-[connection signal="use_item_started" from="IronSword" to="IronSword/Sounds/BlockSounds" method="_on_use_item_started"]
 [connection signal="swing_started" from="IronSword/FirstPersonControl/Sprite2D/AttackAnims/1hSwordSlash1" to="IronSword/FirstPersonControl/Sprite2D/MiscAnims/Hitstop" method="_on_swing_started"]
 [connection signal="swing_started" from="IronSword/FirstPersonControl/Sprite2D/AttackAnims/1hSwordSlash1" to="IronSword/PlayerWeaponHitbox/SwordSlashAnim" method="_on_swing"]
 [connection signal="swing_started" from="IronSword/FirstPersonControl/Sprite2D/AttackAnims/1hSwordSlash2" to="IronSword/FirstPersonControl/Sprite2D/MiscAnims/Hitstop" method="_on_swing_started"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=52 format=3 uid="uid://dcb260rwf1sj2"]
+[gd_scene load_steps=53 format=3 uid="uid://dcb260rwf1sj2"]
 
 [ext_resource type="Script" path="res://components/Entities/player/scripts/state/PlayerStateMachine.gd" id="1_1nv86"]
 [ext_resource type="Script" path="res://components/Entities/player/scripts/state/Idle.gd" id="2_re5th"]
@@ -40,6 +40,7 @@
 [ext_resource type="Shader" path="res://shaders/DamageVignette.gdshader" id="36_4om1m"]
 [ext_resource type="Script" path="res://shaders/DamageVignette.gd" id="36_grhc5"]
 [ext_resource type="Shader" path="res://shaders/red_overlay.gdshader" id="36_n0daj"]
+[ext_resource type="PackedScene" uid="uid://cmgmkj2ulllge" path="res://ui/Inventory.tscn" id="36_vaw5u"]
 [ext_resource type="Script" path="res://shaders/RedOverlay.gd" id="37_tp44i"]
 
 [sub_resource type="GDScript" id="GDScript_xn7no"]
@@ -221,7 +222,7 @@ metadata/GameItems = ExtResource("5_ht5ei")
 script = ExtResource("6_jyb60")
 
 [node name="Slots" type="Node" parent="Gear/Inventory"]
-metadata/NumSlots = 10
+metadata/NumSlots = 20
 
 [node name="Equipment" type="Node" parent="Gear"]
 
@@ -281,6 +282,7 @@ metadata/CameraPath = NodePath("../../Head/Camera")
 script = ExtResource("27_kdx5s")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Sounds/GettingDamagedSounds"]
+volume_db = -8.23
 
 [node name="Skills" type="Node" parent="."]
 
@@ -371,6 +373,7 @@ layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
+mouse_filter = 2
 
 [node name="CanvasLayer" type="CanvasLayer" parent="HUD"]
 
@@ -406,6 +409,9 @@ grow_vertical = 0
 script = SubResource("GDScript_niybc")
 stamina_node_path = NodePath("../../../Skills/Endurance")
 
+[node name="Inventory" parent="HUD/CanvasLayer" instance=ExtResource("36_vaw5u")]
+gear_path = NodePath("../../../Gear")
+
 [node name="Vignette" type="CanvasLayer" parent="HUD"]
 follow_viewport_scale = 0.001
 
@@ -416,6 +422,7 @@ anchor_right = 0.996
 anchor_bottom = 0.994
 offset_right = 0.119873
 offset_bottom = 0.320007
+mouse_filter = 2
 script = ExtResource("35_lsj3u")
 
 [node name="DamageVignette" type="ColorRect" parent="HUD/Vignette"]
@@ -425,6 +432,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 offset_right = -0.440063
 offset_bottom = 0.159973
+mouse_filter = 2
 script = ExtResource("36_grhc5")
 
 [node name="RedOverlay" type="CanvasLayer" parent="HUD"]
@@ -436,6 +444,7 @@ anchor_right = 0.998
 anchor_bottom = 0.999
 offset_right = 0.559937
 offset_bottom = -0.280029
+mouse_filter = 2
 script = ExtResource("37_tp44i")
 
 [node name="PhysicalCollider" type="Area3D" parent="." groups=["PlayerDetection"]]
@@ -481,3 +490,4 @@ shape = SubResource("BoxShape3D_6gqle")
 [connection signal="health_changed" from="Skills/Health" to="HUD/RedOverlay/ColorRect" method="_on_health_health_changed"]
 [connection signal="stamina_changed" from="Skills/Endurance" to="MovementSystem/DirectionalMovement" method="_on_endurance_stamina_changed"]
 [connection signal="stamina_changed" from="Skills/Endurance" to="HUD/CanvasLayer/StaminaBar" method="_on_endurance_stamina_changed"]
+[connection signal="request_inv_and_hb_update" from="HUD/CanvasLayer/Inventory" to="Gear" method="_on_request_inv_and_hb_update"]
