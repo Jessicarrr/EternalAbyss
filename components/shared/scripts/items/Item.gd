@@ -1,4 +1,4 @@
-extends Node
+extends CharacterBody3D
 class_name Item
 
 @export var sprite_path : NodePath = ""

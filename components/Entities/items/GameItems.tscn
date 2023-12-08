@@ -1,25 +1,8 @@
-[gd_scene load_steps=27 format=3 uid="uid://blfvfc7exomsg"]
+[gd_scene load_steps=7 format=3 uid="uid://blfvfc7exomsg"]
 
-[ext_resource type="Script" path="res://components/shared/scripts/items/weapons/Sword.gd" id="1_r62y3"]
 [ext_resource type="Script" path="res://components/shared/scripts/items/weapons/Sword3D.gd" id="1_tdd22"]
-[ext_resource type="Script" path="res://components/shared/scripts/items/Item.gd" id="1_ymkjo"]
-[ext_resource type="Texture2D" uid="uid://d4efd0v68trub" path="res://textures/items/weapons/sword.png" id="2_js802"]
-[ext_resource type="Script" path="res://components/shared/scripts/items/ItemEffects/LightingAdjuster.gd" id="3_88pg8"]
 [ext_resource type="Script" path="res://components/shared/scripts/items/weapons/StabSwordSprite3D.gd" id="3_foeda"]
-[ext_resource type="Script" path="res://components/shared/scripts/items/ItemEffects/UShapeAnimation.gd" id="4_4b220"]
 [ext_resource type="Script" path="res://components/shared/scripts/items/weapons/DamageOther.gd" id="4_jpt4m"]
-[ext_resource type="Script" path="res://components/shared/scripts/items/ItemEffects/FakePhysics.gd" id="5_inhxm"]
-[ext_resource type="Script" path="res://components/shared/scripts/items/weapons/attack_animations/AttackAnimManager.gd" id="6_ar5rg"]
-[ext_resource type="Script" path="res://components/shared/scripts/items/ControlScaleAdjuster.gd" id="6_mkpoa"]
-[ext_resource type="Script" path="res://components/shared/scripts/items/weapons/attack_animations/swords/1hSwordSlash1.gd" id="7_5mpr4"]
-[ext_resource type="Script" path="res://components/shared/scripts/items/weapons/attack_animations/swords/1hSwordSlash2.gd" id="8_3cpi0"]
-[ext_resource type="Script" path="res://components/Entities/items/WeaponBlockAnim.gd" id="9_pddqm"]
-[ext_resource type="Script" path="res://components/shared/scripts/items/weapons/attack_animations/Hitstop.gd" id="10_1nk7l"]
-[ext_resource type="Script" path="res://components/shared/scripts/items/weapons/attack_animations/swords/hitbox/1hSwordSlashAnim.gd" id="10_fm1qy"]
-[ext_resource type="Script" path="res://components/shared/scripts/hitboxes/PlayerWeaponHitbox.gd" id="11_m21h3"]
-[ext_resource type="Script" path="res://components/shared/scripts/items/weapons/block_animations/sword/BlockHit.gd" id="11_t0n81"]
-[ext_resource type="Script" path="res://components/shared/scripts/hitboxes/PlayerBlockHitbox.gd" id="14_yu7f1"]
-[ext_resource type="Script" path="res://components/Entities/items/SwordBlockSounds.gd" id="15_f2dol"]
 [ext_resource type="Texture2D" uid="uid://dwblci623dgke" path="res://sprites/weapons/testsword.png" id="18_h6861"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a3qxk"]
@@ -27,21 +10,13 @@ transparency = 1
 albedo_texture = ExtResource("18_h6861")
 texture_filter = 0
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_l7cib"]
-size = Vector3(0, 0.06, 0.915)
-
-[sub_resource type="BoxMesh" id="BoxMesh_huqc3"]
-size = Vector3(0.075, 0.06, 0.915)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_1rpsp"]
-size = Vector3(0.6, 1.2, 0.05)
-
-[sub_resource type="BoxMesh" id="BoxMesh_8fcds"]
-size = Vector3(0.6, 1.2, 0.05)
+[sub_resource type="BoxShape3D" id="BoxShape3D_2sapx"]
+size = Vector3(0.2, 0.2, 0.2)
 
 [node name="GameItems" type="Node"]
 
-[node name="3dSword" type="Node" parent="." groups=["weapons"]]
+[node name="CorrodedEstoc" type="CharacterBody3D" parent="." groups=["weapons"]]
+collision_layer = 1024
 script = ExtResource("1_tdd22")
 windup_time = 0.3
 recovery_time = 0.4
@@ -52,7 +27,7 @@ sprite_path = NodePath("Sprite3D")
 item_name = "Corroded Estoc"
 item_fluff_text = "A remnant of a bygone era, this blade has tasted the despair of time."
 
-[node name="Sprite3D" type="Sprite3D" parent="3dSword"]
+[node name="Sprite3D" type="Sprite3D" parent="CorrodedEstoc"]
 transform = Transform3D(0.278559, 0.449307, -0.848839, 0.940576, 0.0511051, 0.335715, 0.194219, -0.891915, -0.408372, 0, 0, 0)
 visible = false
 material_override = SubResource("StandardMaterial3D_a3qxk")
@@ -62,199 +37,16 @@ texture = ExtResource("18_h6861")
 script = ExtResource("3_foeda")
 default_position_offset = Vector3(0.19, 0.04, 0)
 
-[node name="DamageOther" type="Node" parent="3dSword"]
+[node name="DamageOther" type="Node" parent="CorrodedEstoc"]
 script = ExtResource("4_jpt4m")
 
-[node name="InventoryIcon" type="Sprite2D" parent="3dSword"]
+[node name="InventoryIcon" type="Sprite2D" parent="CorrodedEstoc"]
 rotation = -0.785398
 scale = Vector2(1.53812, 0.495429)
 texture = ExtResource("18_h6861")
 
-[node name="IronSword" type="Node" parent="." groups=["weapons"]]
-script = ExtResource("1_r62y3")
-damage_min = 5
-damage_max = 6
-material = 2
-attacks_path = NodePath("FirstPersonControl/Sprite2D/AttackAnims")
-attack_hitbox_path = NodePath("PlayerWeaponHitbox")
-attack_hitbox_anim_path = NodePath("PlayerWeaponHitbox/SwordSlashAnim")
-block_hitbox_path = NodePath("PlayerBlockHitbox")
-item_name = "Iron Sword"
-use_item_anim_path = NodePath("FirstPersonControl/Sprite2D/MiscAnims/Block")
-use_item_time = 0.15
-usage_type = 2
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CorrodedEstoc"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0961603, 0)
+shape = SubResource("BoxShape3D_2sapx")
 
-[node name="FirstPersonControl" type="Control" parent="IronSword"]
-layout_mode = 3
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 0
-grow_vertical = 0
-scale = Vector2(6, 6)
-pivot_offset = Vector2(50, 75)
-
-[node name="Sprite2D" type="Sprite2D" parent="IronSword/FirstPersonControl"]
-visible = false
-modulate = Color(0.545098, 0.545098, 0.545098, 1)
-position = Vector2(0, -30)
-texture = ExtResource("2_js802")
-centered = false
-metadata/ShouldAnimate = false
-
-[node name="LightingAdjustments" type="Node" parent="IronSword/FirstPersonControl/Sprite2D"]
-script = ExtResource("3_88pg8")
-max_modulation = 65
-modulation_mult = 0.25
-
-[node name="WalkingAnimation" type="Node" parent="IronSword/FirstPersonControl/Sprite2D"]
-script = ExtResource("4_4b220")
-
-[node name="FakePhysics" type="Node" parent="IronSword/FirstPersonControl/Sprite2D"]
-script = ExtResource("5_inhxm")
-pitch_offset_multiplier = 1.0
-yaw_offset_multiplier = 0.4
-
-[node name="AttackAnims" type="Node" parent="IronSword/FirstPersonControl/Sprite2D"]
-script = ExtResource("6_ar5rg")
-metadata/SpritePath = NodePath("..")
-
-[node name="1hSwordSlash1" type="Node" parent="IronSword/FirstPersonControl/Sprite2D/AttackAnims"]
-script = ExtResource("7_5mpr4")
-windup_time = 0.4
-swing_time = 0.2
-SpritePath = NodePath("../..")
-metadata/SpritePath = NodePath("../..")
-
-[node name="1hSwordSlash2" type="Node" parent="IronSword/FirstPersonControl/Sprite2D/AttackAnims"]
-script = ExtResource("8_3cpi0")
-windup_time = 0.4
-swing_time = 0.2
-SpritePath = NodePath("../..")
-metadata/SpritePath = NodePath("../..")
-
-[node name="MiscAnims" type="Node" parent="IronSword/FirstPersonControl/Sprite2D"]
-
-[node name="Block" type="Node" parent="IronSword/FirstPersonControl/Sprite2D/MiscAnims"]
-script = ExtResource("9_pddqm")
-SpritePath = NodePath("../..")
-metadata/SpritePath = NodePath("../..")
-
-[node name="Hitstop" type="Node" parent="IronSword/FirstPersonControl/Sprite2D/MiscAnims"]
-script = ExtResource("10_1nk7l")
-
-[node name="BlockHit" type="Node" parent="IronSword/FirstPersonControl/Sprite2D/MiscAnims"]
-script = ExtResource("11_t0n81")
-SpritePath = NodePath("../..")
-
-[node name="AdjustScale" type="Node" parent="IronSword/FirstPersonControl"]
-script = ExtResource("6_mkpoa")
-
-[node name="PlayerWeaponHitbox" type="Area3D" parent="IronSword"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-collision_layer = 4
-collision_mask = 145
-script = ExtResource("11_m21h3")
-parent_item_path = NodePath("..")
-auto_disable_layers = [1, 5]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="IronSword/PlayerWeaponHitbox"]
-transform = Transform3D(0.555, 0, 0, 0, 0.555, 0, 0, 0, 0.555, 0, 0, -0.248758)
-shape = SubResource("BoxShape3D_l7cib")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="IronSword/PlayerWeaponHitbox"]
-transform = Transform3D(0.555, 0, 0, 0, 0.555, 0, 0, 0, 0.555, 0, 0, -0.248758)
-visible = false
-mesh = SubResource("BoxMesh_huqc3")
-skeleton = NodePath("../CollisionShape3D")
-
-[node name="SwordSlashAnim" type="Node" parent="IronSword/PlayerWeaponHitbox"]
-script = ExtResource("10_fm1qy")
-
-[node name="PlayerBlockHitbox" type="Area3D" parent="IronSword"]
-collision_layer = 16
-collision_mask = 256
-script = ExtResource("14_yu7f1")
-parent_item_path = NodePath("..")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="IronSword/PlayerBlockHitbox"]
-shape = SubResource("BoxShape3D_1rpsp")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="IronSword/PlayerBlockHitbox"]
-visible = false
-mesh = SubResource("BoxMesh_8fcds")
-
-[node name="Sounds" type="Node" parent="IronSword"]
-
-[node name="BlockSounds" type="Node" parent="IronSword/Sounds"]
-script = ExtResource("15_f2dol")
-audio_path = NodePath("../../SoundStreams/BlockSounds")
-block_sounds = ["res://sounds/weapons/sword/block/METLImpt_Impact Metal Light 01_DDUMAIS_NONE.wav", "res://sounds/weapons/sword/block/METLImpt_Impact Metal Light 02_DDUMAIS_NONE.wav", "res://sounds/weapons/sword/block/METLImpt_Impact Metal Light 03_DDUMAIS_NONE.wav", "res://sounds/weapons/sword/block/METLImpt_Impact Metal Light 04_DDUMAIS_NONE.wav", "res://sounds/weapons/sword/block/METLImpt_Impact Metal Light 05_DDUMAIS_NONE.wav", "res://sounds/weapons/sword/block/METLImpt_Impact Metal Light 06_DDUMAIS_NONE.wav"]
-
-[node name="SoundStreams" type="Node" parent="IronSword"]
-
-[node name="BlockSounds" type="AudioStreamPlayer" parent="IronSword/SoundStreams"]
-
-[node name="IronSword2" type="Node" parent="." groups=["weapons"]]
-script = ExtResource("1_ymkjo")
-metadata/Name = "Iron Sword"
-metadata/FluffText = "A simple sword."
-
-[node name="FirstPersonControl" type="Control" parent="IronSword2"]
-visible = false
-layout_mode = 3
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 0
-grow_vertical = 0
-scale = Vector2(6, 6)
-pivot_offset = Vector2(50, 75)
-
-[node name="Sprite2D" type="Sprite2D" parent="IronSword2/FirstPersonControl"]
-visible = false
-modulate = Color(0.545098, 0.545098, 0.545098, 1)
-position = Vector2(-126.974, 13.4007)
-rotation = -1.45037
-scale = Vector2(2.26826, 0.958708)
-texture = ExtResource("2_js802")
-centered = false
-metadata/ShouldAnimate = false
-
-[node name="LightingAdjustments" type="Node" parent="IronSword2/FirstPersonControl/Sprite2D"]
-script = ExtResource("3_88pg8")
-
-[node name="WalkingAnimation" type="Node" parent="IronSword2/FirstPersonControl/Sprite2D"]
-script = ExtResource("4_4b220")
-
-[node name="FakePhysics" type="Node" parent="IronSword2/FirstPersonControl/Sprite2D"]
-script = ExtResource("5_inhxm")
-pitch_offset_multiplier = 1.0
-yaw_offset_multiplier = 0.1
-
-[node name="AttackAnims" type="Node" parent="IronSword2/FirstPersonControl/Sprite2D"]
-script = ExtResource("6_ar5rg")
-metadata/SpritePath = NodePath("..")
-
-[node name="1hSwordSlash1" type="Node" parent="IronSword2/FirstPersonControl/Sprite2D/AttackAnims"]
-script = ExtResource("7_5mpr4")
-SpritePath = NodePath("../..")
-metadata/SpritePath = NodePath("../../../../../IronSword/FirstPersonControl/Sprite2D")
-
-[node name="AdjustScale" type="Node" parent="IronSword2/FirstPersonControl"]
-script = ExtResource("6_mkpoa")
-
-[connection signal="on_swing_start" from="3dSword/Sprite3D" to="3dSword/DamageOther" method="_on_sprite_3d_on_swing_start"]
-[connection signal="swing_started" from="IronSword/FirstPersonControl/Sprite2D/AttackAnims/1hSwordSlash1" to="IronSword/FirstPersonControl/Sprite2D/MiscAnims/Hitstop" method="_on_swing_started"]
-[connection signal="swing_started" from="IronSword/FirstPersonControl/Sprite2D/AttackAnims/1hSwordSlash1" to="IronSword/PlayerWeaponHitbox/SwordSlashAnim" method="_on_swing"]
-[connection signal="swing_started" from="IronSword/FirstPersonControl/Sprite2D/AttackAnims/1hSwordSlash2" to="IronSword/FirstPersonControl/Sprite2D/MiscAnims/Hitstop" method="_on_swing_started"]
-[connection signal="swing_started" from="IronSword/FirstPersonControl/Sprite2D/AttackAnims/1hSwordSlash2" to="IronSword/PlayerWeaponHitbox/SwordSlashAnim" method="_on_swing"]
-[connection signal="anim_ended" from="IronSword/FirstPersonControl/Sprite2D/MiscAnims/BlockHit" to="IronSword" method="_on_block_hit_anim_ended"]
-[connection signal="anim_started" from="IronSword/FirstPersonControl/Sprite2D/MiscAnims/BlockHit" to="IronSword" method="_on_block_hit_anim_started"]
-[connection signal="area_entered" from="IronSword/PlayerWeaponHitbox" to="IronSword/FirstPersonControl/Sprite2D/MiscAnims/Hitstop" method="_on_area_entered"]
-[connection signal="area_entered" from="IronSword/PlayerBlockHitbox" to="IronSword/FirstPersonControl/Sprite2D/MiscAnims/BlockHit" method="_on_player_block_hitbox_area_entered"]
-[connection signal="area_entered" from="IronSword/PlayerBlockHitbox" to="IronSword/Sounds/BlockSounds" method="_on_player_block_hitbox_area_entered"]
+[connection signal="on_swing_start" from="CorrodedEstoc/Sprite3D" to="CorrodedEstoc/DamageOther" method="_on_sprite_3d_on_swing_start"]

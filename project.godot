@@ -155,6 +155,7 @@ open_player_menu={
 3d_physics/layer_8="ActorHurtbox"
 3d_physics/layer_9="NpcMeleeHitboxes"
 3d_physics/layer_10="PlayerHurtbox"
+3d_physics/layer_11="Items"
 
 [physics]
 
