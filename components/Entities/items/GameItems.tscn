@@ -1,10 +1,12 @@
-[gd_scene load_steps=10 format=3 uid="uid://blfvfc7exomsg"]
+[gd_scene load_steps=12 format=3 uid="uid://blfvfc7exomsg"]
 
 [ext_resource type="Script" path="res://components/shared/scripts/items/weapons/Sword3D.gd" id="1_tdd22"]
 [ext_resource type="Script" path="res://components/shared/scripts/items/weapons/StabSwordSprite3D.gd" id="3_foeda"]
 [ext_resource type="Script" path="res://components/shared/scripts/items/weapons/DamageOther.gd" id="4_jpt4m"]
 [ext_resource type="Texture2D" uid="uid://bpvpqx0yt7gg8" path="res://sprites/weapons/testsword-ground.png" id="5_ouer7"]
 [ext_resource type="Script" path="res://components/shared/scripts/items/Food.gd" id="6_8ho5e"]
+[ext_resource type="Texture2D" uid="uid://b5u5ueclkqrja" path="res://sprites/food/salted_dried_fish.png" id="7_p1jcq"]
+[ext_resource type="Script" path="res://components/shared/scripts/items/HeldItemSprite3D.gd" id="8_qmnqt"]
 [ext_resource type="Texture2D" uid="uid://dwblci623dgke" path="res://sprites/weapons/testsword.png" id="18_h6861"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a3qxk"]
@@ -46,6 +48,7 @@ default_position_offset = Vector3(0.19, 0.04, 0)
 script = ExtResource("4_jpt4m")
 
 [node name="InventoryIcon" type="Sprite2D" parent="CorrodedEstoc"]
+visible = false
 scale = Vector2(0.8, 0.8)
 texture = ExtResource("5_ouer7")
 
@@ -63,12 +66,38 @@ shaded = true
 texture_filter = 0
 texture = ExtResource("5_ouer7")
 
-[node name="CharacterBody3D" type="CharacterBody3D" parent="."]
+[node name="SaltedDriedFish" type="CharacterBody3D" parent="." groups=["food", "items"]]
+collision_layer = 1024
 script = ExtResource("6_8ho5e")
+sprite_path = NodePath("HeldItemSprite3D")
+item_name = "Salted Dried Fish"
+item_fluff_text = "Fish that has been salted and dried for preservation."
+usage_type = 1
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.372615, 0)
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SaltedDriedFish"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.375, 0)
 shape = SubResource("BoxShape3D_kp3iu")
 disabled = true
+
+[node name="InventoryIcon" type="Sprite2D" parent="SaltedDriedFish"]
+visible = false
+scale = Vector2(1.3, 1.3)
+texture = ExtResource("7_p1jcq")
+
+[node name="GroundSprite" type="Sprite3D" parent="SaltedDriedFish"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.108152, 0)
+visible = false
+billboard = 2
+shaded = true
+texture_filter = 0
+texture = ExtResource("7_p1jcq")
+
+[node name="HeldItemSprite3D" type="Sprite3D" parent="SaltedDriedFish"]
+visible = false
+pixel_size = 0.015
+shaded = true
+texture_filter = 0
+texture = ExtResource("7_p1jcq")
+script = ExtResource("8_qmnqt")
 
 [connection signal="on_swing_start" from="CorrodedEstoc/Sprite3D" to="CorrodedEstoc/DamageOther" method="_on_sprite_3d_on_swing_start"]

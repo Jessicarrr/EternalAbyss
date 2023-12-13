@@ -22,7 +22,10 @@ func _ready():
 	
 	for i in range(0, 5):
 		spawn_item("Corroded Estoc")
-		await get_tree().create_timer(1.0).timeout 
+		await get_tree().create_timer(0.2).timeout 
+		
+	spawn_item("Salted Dried Fish")
+	spawn_item("Salted Dried Fish")
 		
 	await get_tree().create_timer(1.0).timeout  # Wait for 1 second
 	print("Active hotbar slot children: ", hotbar.active_hotbar_slot.get_children())
