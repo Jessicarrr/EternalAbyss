@@ -16,7 +16,7 @@ func print_all_children_check_in_tree(node, indentation = ""):
 	for child in node.get_children():
 		print_all_children_check_in_tree(child, indentation + "-")
 
-func generate_item_text(item):
+func generate_item_text(item, fluff = true):
 	var text = ""
 	
 	if "item_name" in item:
@@ -30,7 +30,7 @@ func generate_item_text(item):
 			
 		text += "\n"
 		
-	if "item_fluff_text" in item:
+	if fluff == true and "item_fluff_text" in item:
 		text += item.item_fluff_text
 		
 	return text

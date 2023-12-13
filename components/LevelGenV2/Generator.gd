@@ -32,6 +32,7 @@ func place_player():
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	randomize()
+	WorldData.layout_node = layout_node
 	await algorithm.ready
 	algorithm.add_data(current_level_data["Rooms"])
 	algorithm.set_path(layout_node)

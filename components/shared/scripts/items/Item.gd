@@ -5,13 +5,15 @@ class_name Item
 
 var sprite
 @onready var inventory_icon = $InventoryIcon
+@onready var ground_sprite = $GroundSprite
+@onready var collision_shape = $CollisionShape3D
 
 @export_category("Item Fluff")
 @export var item_name = "[Un-named Item]"
 @export var item_fluff_text = ""
 
 @export_category("Item Effects")
-@export var item_effect_node_paths = []
+@export var item_effect_node_path : NodePath = ""
 
 @export_category("Item Data")
 @export var use_item_anim_path : NodePath
@@ -25,12 +27,59 @@ var currently_using_item = false
 
 var equipped = false
 
+var gravity = -9.8
 
+var knockback_velocity = Vector3.ZERO
+var knockback_duration = 0.3 # Duration of the knockback in seconds
+var knockback_timer = 0.0
+var friction = 0.1
 
 signal use_item_started # now in the middle of using the item
 signal use_item_ending # beginning to stop using the item
 signal use_item_ended # finished using the item 
 signal item_destroyed
+signal item_dropped
+signal item_picked_up
+
+func should_do_physics():
+	if WorldData.layout_node.is_ancestor_of(self):
+		return true
+		
+	return false
+
+func _physics_process(delta):
+	if should_do_physics() == false:
+		return
+	
+	# Apply gravity
+	if not is_on_floor() or knockback_timer > 0:
+		velocity.y += gravity * delta
+		
+	if is_on_floor() == true:
+		velocity.x = lerp(velocity.x, 0.0, friction)
+		velocity.z = lerp(velocity.z, 0.0, friction)
+		
+	# Move the item
+	move_and_slide()
+
+func impulse_towards(direction):
+	# Modify the upward force for a more natural arc
+	var upward_force = Vector3(0, 1, 0) 
+	var knockback_upward_strength = 0.1 # Reduced for a more natural arc
+
+	# Combine the backward and upward directions
+	var knockback_direction = direction + upward_force * knockback_upward_strength
+	knockback_direction = knockback_direction.normalized()
+
+	# Define the knockback strength
+	var knockback_strength = 3.0
+
+	# Apply the knockback as an initial impulse
+	knockback_velocity = knockback_direction * knockback_strength
+
+	velocity.x = knockback_velocity.x
+	velocity.z = knockback_velocity.z
+	velocity.y = knockback_velocity.y
 
 func _ready():
 	if use_item_anim_path:
@@ -70,6 +119,25 @@ func can_use_item():
 		return false
 		
 	return true
+
+func drop(source_entity = null):
+	if source_entity == null:
+		source_entity = PlayerDataExtra.player_camera
+		
+	self.unequip()
+		
+	collision_shape.set_deferred("disabled", false)
+	ground_sprite.visible = true
+	#self.reparent(WorldData.layout_node)
+	WorldData.layout_node.add_child(self)
+	self.global_position = source_entity.global_position
+	impulse_towards(-source_entity.global_transform.basis.z.normalized())
+	item_dropped.emit()
+	
+func prepare_for_pickup():
+	collision_shape.set_deferred("disabled", true)
+	ground_sprite.visible = false
+	item_picked_up.emit()
 
 func use_item():
 	if can_use_item() == false:

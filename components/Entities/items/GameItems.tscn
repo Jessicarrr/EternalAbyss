@@ -1,8 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://blfvfc7exomsg"]
+[gd_scene load_steps=10 format=3 uid="uid://blfvfc7exomsg"]
 
 [ext_resource type="Script" path="res://components/shared/scripts/items/weapons/Sword3D.gd" id="1_tdd22"]
 [ext_resource type="Script" path="res://components/shared/scripts/items/weapons/StabSwordSprite3D.gd" id="3_foeda"]
 [ext_resource type="Script" path="res://components/shared/scripts/items/weapons/DamageOther.gd" id="4_jpt4m"]
+[ext_resource type="Texture2D" uid="uid://bpvpqx0yt7gg8" path="res://sprites/weapons/testsword-ground.png" id="5_ouer7"]
+[ext_resource type="Script" path="res://components/shared/scripts/items/Food.gd" id="6_8ho5e"]
 [ext_resource type="Texture2D" uid="uid://dwblci623dgke" path="res://sprites/weapons/testsword.png" id="18_h6861"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a3qxk"]
@@ -11,11 +13,14 @@ albedo_texture = ExtResource("18_h6861")
 texture_filter = 0
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_2sapx"]
-size = Vector3(0.2, 0.2, 0.2)
+size = Vector3(0.35, 0.75, 0.35)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_kp3iu"]
+size = Vector3(0.35, 0.75, 0.35)
 
 [node name="GameItems" type="Node"]
 
-[node name="CorrodedEstoc" type="CharacterBody3D" parent="." groups=["weapons"]]
+[node name="CorrodedEstoc" type="CharacterBody3D" parent="." groups=["items", "weapons"]]
 collision_layer = 1024
 script = ExtResource("1_tdd22")
 windup_time = 0.3
@@ -28,7 +33,7 @@ item_name = "Corroded Estoc"
 item_fluff_text = "A remnant of a bygone era, this blade has tasted the despair of time."
 
 [node name="Sprite3D" type="Sprite3D" parent="CorrodedEstoc"]
-transform = Transform3D(0.278559, 0.449307, -0.848839, 0.940576, 0.0511051, 0.335715, 0.194219, -0.891915, -0.408372, 0, 0, 0)
+transform = Transform3D(-0.068085, 0, -0.997679, -0.982583, 0.173304, 0.0670547, 0.172902, 0.984869, -0.0117994, 0, 0.0609407, 0)
 visible = false
 material_override = SubResource("StandardMaterial3D_a3qxk")
 flip_h = true
@@ -41,12 +46,29 @@ default_position_offset = Vector3(0.19, 0.04, 0)
 script = ExtResource("4_jpt4m")
 
 [node name="InventoryIcon" type="Sprite2D" parent="CorrodedEstoc"]
-rotation = -0.785398
-scale = Vector2(1.53812, 0.495429)
-texture = ExtResource("18_h6861")
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("5_ouer7")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="CorrodedEstoc"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0961603, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.374591, 0)
 shape = SubResource("BoxShape3D_2sapx")
+disabled = true
+
+[node name="GroundSprite" type="Sprite3D" parent="CorrodedEstoc"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.24494, 0)
+visible = false
+pixel_size = 0.0075
+billboard = 2
+shaded = true
+texture_filter = 0
+texture = ExtResource("5_ouer7")
+
+[node name="CharacterBody3D" type="CharacterBody3D" parent="."]
+script = ExtResource("6_8ho5e")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.372615, 0)
+shape = SubResource("BoxShape3D_kp3iu")
+disabled = true
 
 [connection signal="on_swing_start" from="CorrodedEstoc/Sprite3D" to="CorrodedEstoc/DamageOther" method="_on_sprite_3d_on_swing_start"]

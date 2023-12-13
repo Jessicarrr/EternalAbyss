@@ -6,6 +6,7 @@ extends Control
 @onready var vbox = $VBoxContainer
 @onready var hotbar_ui = $Hotbar
 @onready var equipment_box = $EquipmentVBox
+@onready var drop_item_rect_1 = $DropItemRect
 
 @export var gear_path : NodePath = ""
 var gear
@@ -51,6 +52,21 @@ func _ready():
 
 	gear.inventory_updated.connect(_on_inventory_update)
 	gear.hotbar_updated.connect(_on_hotbar_update)
+	connect_drop_item_rects()
+	
+func connect_drop_item_rects():
+	drop_item_rect_1.mouse_clicked.connect(_drop_item_rect_clicked)
+	return
+	
+func _drop_item_rect_clicked(_node):
+	if currently_dragged_item.item == null:
+		return
+		
+	currently_dragged_item.item.drop()
+	currently_dragged_item.sprite2d.queue_free()
+	currently_dragged_item.sprite2d = null
+	currently_dragged_item.item = null
+	
 
 func add_listeners_to_hotbar_ui():
 	for slot in hotbar_ui.get_children():
@@ -87,6 +103,7 @@ func _on_mouse_click_ui_slot(the_slot):
 		if sprite != null:
 			var duped_sprite = sprite.duplicate()
 			currently_dragged_item.sprite2d = duped_sprite
+			currently_dragged_item.sprite2d.visible = true
 			add_child(duped_sprite)
 		the_slot.remove_item()
 		
@@ -109,6 +126,7 @@ func _on_mouse_click_ui_slot(the_slot):
 				add_child(duped_sprite)
 				var path = duped_sprite.get_path()
 				currently_dragged_item.sprite2d = duped_sprite
+				currently_dragged_item.sprite2d.visible = true
 		
 	print("Before update: ", str(the_slot.item_ref))
 	
@@ -329,9 +347,11 @@ func _input(_event):
 		if vbox.visible == false:
 			equipment_box.visible = true
 			vbox.visible = true
+			drop_item_rect_1.visible = true
 			Input.mouse_mode = Input.MouseMode.MOUSE_MODE_VISIBLE
 			return
 			
 		vbox.visible = false
 		equipment_box.visible = false
+		drop_item_rect_1.visible = false
 		Input.mouse_mode = Input.MouseMode.MOUSE_MODE_CAPTURED

@@ -45,6 +45,13 @@ func remove_item():
 	
 	return the_item
 
+func manipulate_icon_size(icon):
+	var texture_size = icon.texture.get_size()
+	var scale_factor_x = self.size.x / texture_size.x
+	var scale_factor_y = self.size.y / texture_size.y
+	var scale_factor = min(scale_factor_x, scale_factor_y) # To maintain aspect ratio
+	icon.scale = Vector2(scale_factor, scale_factor)
+
 func put_item(item):
 	if item_ref == item:
 		return false
@@ -62,11 +69,7 @@ func put_item(item):
 		return false
 		
 	# Calculate the scale factor needed to fit the icon within the new_box
-	var texture_size = icon.texture.get_size()
-	var scale_factor_x = self.size.x / texture_size.x
-	var scale_factor_y = self.size.y / texture_size.y
-	var scale_factor = min(scale_factor_x, scale_factor_y) # To maintain aspect ratio
-	icon.scale = Vector2(scale_factor, scale_factor)
+	#manipulate_icon_size(icon)
 	
 	var new_icon = icon.duplicate()
 	self.add_child(new_icon)
