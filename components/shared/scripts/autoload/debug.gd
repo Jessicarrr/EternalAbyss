@@ -48,5 +48,3 @@ func msg(type, args = []):
 		for arg in args:
 			message += str(arg)
 		print(message)
-
-	
