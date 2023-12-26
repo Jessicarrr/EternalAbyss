@@ -35,9 +35,9 @@ script = ExtResource("2_3c8yl")
 
 [node name="HallwaysFirst" type="Node" parent="GenerationLogic/Algorithms"]
 script = ExtResource("4_872w8")
-min_hallways_before_turn = 2
-percent_chance_of_hallway_turning = 40
-total_hallways_to_create = 150
+min_hallways_before_turn = 3
+percent_chance_of_hallway_turning = 70
+total_hallways_to_create = 200
 
 [node name="Helpers" type="Node" parent="GenerationLogic"]
 
