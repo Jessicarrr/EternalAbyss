@@ -24,6 +24,7 @@ var sprite
 
 var usage_anim_node : Node = null
 var currently_using_item = false
+var item_effects = null
 
 var equipped = false
 
@@ -42,7 +43,10 @@ signal item_dropped
 signal item_picked_up
 
 func should_do_physics():
-	if WorldData.layout_node.is_ancestor_of(self):
+	if WorldData.layout_node == null:
+		return false
+		
+	if  WorldData.layout_node.is_ancestor_of(self):
 		return true
 		
 	return false
@@ -87,6 +91,9 @@ func _ready():
 		
 	if sprite == null:
 		sprite = Helpers.try_load_node(self, sprite_path)
+		
+	if item_effect_node_path:
+		item_effects = Helpers.try_load_node(self, item_effect_node_path)
 	
 func equip():
 	equipped = true
@@ -114,7 +121,7 @@ func apply_item_effect():
 func stop_item_effect():
 	pass
 
-func can_use_item():
+func item_has_animation():
 	if not use_item_anim_path or usage_anim_node == null:
 		return false
 		
@@ -140,14 +147,22 @@ func prepare_for_pickup():
 	item_picked_up.emit()
 
 func use_item():
-	if can_use_item() == false:
-		return
+	#if can_use_item() == false:
+	#	return
 		
 	if currently_using_item == true:
 		return
 		
 	currently_using_item = true
-	await usage_anim_node.starting_anim(self.use_item_time)
+	
+	if usage_anim_node != null:
+		await usage_anim_node.starting_anim(self.use_item_time)
+	else:
+		await get_tree().create_timer(use_item_time).timeout
+		
+	if currently_using_item == false:
+		return
+		
 	use_item_started.emit(self)
 	apply_item_effect()
 	
@@ -155,24 +170,28 @@ func use_item():
 		_destroy_item()
 		
 func stop_using_item():
-	if can_use_item() == false:
-		return
+	#if can_use_item() == false:
+	#	return
 		
 	if currently_using_item == false:
 		return
 	
+	
+	
 	use_item_ending.emit(self)
 	
 	#await usage_anim_node.ending_anim(self.use_item_time) # can introduce a bug?
-	usage_anim_node.ending_anim(self.use_item_time)
+	if usage_anim_node:
+		usage_anim_node.ending_anim(self.use_item_time)
+		
+	currently_using_item = false
+		
 	await get_tree().create_timer(self.use_item_time).timeout
 	use_item_ended.emit(self)
 	
 	stop_item_effect()
 	currently_using_item = false
-	
-	if destroy_on_use:  # Check if the item should be destroyed after use
-		_destroy_item()
+
 		
 func _destroy_item():
 	# Add the logic to destroy the item here

@@ -12,7 +12,8 @@ func _ready():
 		Enums.ActorStates.ATK_RECOIL : $AttackRecoil,
 		Enums.ActorStates.BLOCK_START : $BlockStart,
 		Enums.ActorStates.BLOCKING : $Blocking,
-		Enums.ActorStates.BLOCK_END : $BlockEnding
+		Enums.ActorStates.BLOCK_END : $BlockEnding,
+		Enums.ActorStates.EATING : $Eating
 	}
 	
 	super._ready()

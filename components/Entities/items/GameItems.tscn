@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://blfvfc7exomsg"]
+[gd_scene load_steps=13 format=3 uid="uid://blfvfc7exomsg"]
 
 [ext_resource type="Script" path="res://components/shared/scripts/items/weapons/Sword3D.gd" id="1_tdd22"]
 [ext_resource type="Script" path="res://components/shared/scripts/items/weapons/StabSwordSprite3D.gd" id="3_foeda"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" path="res://components/shared/scripts/items/Food.gd" id="6_8ho5e"]
 [ext_resource type="Texture2D" uid="uid://b5u5ueclkqrja" path="res://sprites/food/salted_dried_fish.png" id="7_p1jcq"]
 [ext_resource type="Script" path="res://components/shared/scripts/items/HeldItemSprite3D.gd" id="8_qmnqt"]
+[ext_resource type="Script" path="res://components/shared/scripts/effects/HealthRegen.gd" id="9_xar34"]
 [ext_resource type="Texture2D" uid="uid://dwblci623dgke" path="res://sprites/weapons/testsword.png" id="18_h6861"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a3qxk"]
@@ -72,7 +73,9 @@ script = ExtResource("6_8ho5e")
 sprite_path = NodePath("HeldItemSprite3D")
 item_name = "Salted Dried Fish"
 item_fluff_text = "Fish that has been salted and dried for preservation."
+item_effect_node_path = NodePath("Effects")
 usage_type = 1
+destroy_on_use = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="SaltedDriedFish"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.375, 0)
@@ -81,8 +84,10 @@ disabled = true
 
 [node name="InventoryIcon" type="Sprite2D" parent="SaltedDriedFish"]
 visible = false
-scale = Vector2(1.3, 1.3)
+modulate = Color(0.733333, 0.733333, 0.733333, 1)
+scale = Vector2(1.9, 1.9)
 texture = ExtResource("7_p1jcq")
+offset = Vector2(0, 2)
 
 [node name="GroundSprite" type="Sprite3D" parent="SaltedDriedFish"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.108152, 0)
@@ -99,5 +104,14 @@ shaded = true
 texture_filter = 0
 texture = ExtResource("7_p1jcq")
 script = ExtResource("8_qmnqt")
+distance_in_front = 0.25
+default_rotation = Vector3(-0.195, -1.907, 0.562)
+default_position_offset = Vector3(0.2, -0.17, 0)
+
+[node name="Effects" type="Node" parent="SaltedDriedFish"]
+
+[node name="HealthRegen" type="Node" parent="SaltedDriedFish/Effects"]
+script = ExtResource("9_xar34")
+effect_type = 1
 
 [connection signal="on_swing_start" from="CorrodedEstoc/Sprite3D" to="CorrodedEstoc/DamageOther" method="_on_sprite_3d_on_swing_start"]

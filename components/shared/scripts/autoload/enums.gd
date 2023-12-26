@@ -33,7 +33,8 @@ enum ActorStates {
 	BLOCK_START,
 	BLOCKING,
 	BLOCK_END,
-	BLOCK_STAGGER
+	BLOCK_STAGGER,
+	EATING
 }
 
 enum ItemUsages {
@@ -48,6 +49,11 @@ enum Materials {
 	WOOD,
 	IRON,
 	SILVER
+}
+
+enum Effects { 
+	NONE,
+	HEALTH_REGEN
 }
 
 func is_material_metallic(material):

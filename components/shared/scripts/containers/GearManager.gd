@@ -76,6 +76,11 @@ func has_free_slot():
 		
 	return true
 
+func _on_item_destroyed():
+	
+	inventory_updated.emit(get_inventory_slots())
+	hotbar_updated.emit(get_hotbar_slots())
+
 func add_item_to_inventory(item):
 	var slot_info = get_next_free_slot()
 	var slot = slot_info.slot
@@ -92,6 +97,8 @@ func add_item_to_inventory(item):
 		
 	if container == inventory:
 		inventory_updated.emit(get_inventory_slots())
+		
+	item.tree_exited.connect(_on_item_destroyed)
 		
 	return true
 
