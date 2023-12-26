@@ -1,4 +1,4 @@
-extends ProgressBar
+extends TextureProgressBar
 
 @export var health_node_path : NodePath = ""
 var health_node = null
