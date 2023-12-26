@@ -1,7 +1,7 @@
 extends Control
 
-@onready var row_1 = $VBoxContainer/TopRow
-@onready var row_2 = $VBoxContainer/MiddleRow
+@onready var row_2 = $VBoxContainer/TopRow
+@onready var row_1 = $VBoxContainer/MiddleRow
 @onready var row_3 = $VBoxContainer/BottomRow
 @onready var vbox = $VBoxContainer
 @onready var hotbar_ui = $Hotbar
