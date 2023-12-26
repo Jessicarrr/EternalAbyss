@@ -18,14 +18,17 @@ var print_flags = {
 	COMBAT: false,
 	GENERAL_STATES: false,
 	PLAYER_STATES: false,
-	NPC_STATES: true,
+	PLAYER_STATE_MACHINE: false,
+	NPC_STATES: false,
+	NPC_STATE_MACHINE: false,
 	OBJECT_STATES: false,
 	GENERATION: false,
 	GENERATION_COLLISION: false,
 	ANIMATION: false,
 	NPC_GENERATION: false,
-	AUDIO : false,
-	COLLISIONS : false
+	AUDIO: false,
+	COLLISIONS: false,
+	WELDER_GEN: false
 }
 
 func msg(type, args = []):
@@ -38,5 +41,3 @@ func msg(type, args = []):
 		for arg in args:
 			message += str(arg)
 		print(message)
-
-	
