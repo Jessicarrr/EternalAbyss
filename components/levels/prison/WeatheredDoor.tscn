@@ -23,6 +23,8 @@ size = Vector3(2.16, 0.1, 0.475)
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gfwl6"]
 transparency = 1
 albedo_texture = ExtResource("4_v3lk2")
+uv1_scale = Vector3(0.505, 0.73, 1.005)
+uv1_offset = Vector3(0.255, 0.265, 0)
 texture_filter = 0
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_ht8tj"]
@@ -35,6 +37,8 @@ size = Vector3(1.525, 0.015, 1.005)
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e601a"]
 transparency = 1
 albedo_texture = ExtResource("3_f7nif")
+uv1_scale = Vector3(0.505, 0.73, 1.005)
+uv1_offset = Vector3(0.255, 0.265, 0)
 texture_filter = 0
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_5b6la"]
