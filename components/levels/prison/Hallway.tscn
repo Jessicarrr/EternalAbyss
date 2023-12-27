@@ -44,7 +44,7 @@
 [ext_resource type="Texture2D" uid="uid://0u7jc2wmm65b" path="res://textures/prison/Floor/floor_tile_v2_sz.png" id="23_5p6e6"]
 [ext_resource type="Texture2D" uid="uid://b0md4ujat6kpv" path="res://textures/prison/Floor/floor_tile_v2_sz_n.png" id="24_i70i0"]
 [ext_resource type="Texture2D" uid="uid://s11r07hgjcu3" path="res://textures/prison/bricks_n.png" id="24_y3tro"]
-[ext_resource type="PackedScene" path="res://models/scenes/candle_01.tscn" id="30_e3343"]
+[ext_resource type="PackedScene" uid="uid://2vaa8kgvkawx" path="res://models/scenes/candle_01.tscn" id="30_e3343"]
 [ext_resource type="Texture2D" uid="uid://biyj82l1q7wdj" path="res://textures/particles/bit.png" id="30_pcwxr"]
 [ext_resource type="PackedScene" uid="uid://c41eu1m1g72vu" path="res://models/scenes/wall_torch.tscn" id="32_6tkxl"]
 [ext_resource type="Texture2D" uid="uid://c505tlwtju57x" path="res://textures/bones/bone femur.png" id="44_42qca"]
@@ -123,12 +123,12 @@ initial_velocity_min = 0.1
 initial_velocity_max = 0.1
 color = Color(0.666667, 0.666667, 0.666667, 1)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_d6pn5"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_b4scq"]
 albedo_texture = ExtResource("30_pcwxr")
 billboard_mode = 2
 
 [sub_resource type="QuadMesh" id="QuadMesh_g00xs"]
-material = SubResource("StandardMaterial3D_d6pn5")
+material = SubResource("StandardMaterial3D_b4scq")
 size = Vector2(0.015, 0.015)
 
 [node name="Hallway" type="Node3D"]

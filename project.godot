@@ -162,6 +162,7 @@ interact={
 3d_physics/layer_9="NpcMeleeHitboxes"
 3d_physics/layer_10="PlayerHurtbox"
 3d_physics/layer_11="Items"
+3d_physics/layer_12="Ghosts"
 
 [physics]
 

@@ -43,13 +43,7 @@ func can_see_player():
 		Debug.msg(Debug.NPC_STATES, ["Can't see player but can see ", collider, collider_parent])
 		return false
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	if Helpers.has_enough_time_passed(time_between_checks, last_check_time) == false:
-		return
-		
-	last_check_time = Time.get_ticks_msec()
-	
+func emit_whether_i_can_see_player():
 	if player == null:
 		player = PlayerDataExtra.player_instance
 		print("player was null")
@@ -77,6 +71,15 @@ func _process(delta):
 		lost_player_visibility.emit()
 		could_previously_see_player = false
 		return
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	if Helpers.has_enough_time_passed(time_between_checks, last_check_time) == false:
+		return
+		
+	last_check_time = Time.get_ticks_msec()
+	
+	emit_whether_i_can_see_player()
 		
 	
 	
