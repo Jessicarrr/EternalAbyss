@@ -11,7 +11,7 @@ extends Node
 @export var backwards_movement_multiplier = 0.55
 @export var jump_force = 4  # Jump strength
 @export var gravity_power = 20
-@export var crouch_speed_multiplier = 0.67
+@export var crouch_speed_multiplier = 0.6
 
 var current_velocity: Vector3  # Current velocity of the player
 var current_gravity := 0.0  # Current gravity affecting the player
