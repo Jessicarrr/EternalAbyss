@@ -440,5 +440,6 @@ shape = SubResource("BoxShape3D_qcmu2")
 [connection signal="player_ground_movement" from="MovementSystem/DirectionalMovement" to="MovementSystem/MovementSounds" method="_on_directional_movement_player_ground_movement"]
 [connection signal="health_changed" from="Skills/Health" to="HUD/ShaderStuff/LowHealthRedOverlay" method="_on_health_health_changed"]
 [connection signal="health_changed" from="Skills/Health" to="HUD/ShaderStuff/BlackVignette" method="_on_health_health_changed"]
+[connection signal="request_inv_and_hb_update" from="HUD/CanvasLayer/Inventory" to="Gear" method="_on_request_inv_and_hb_update"]
 
 [editable path="HUD/CanvasLayer/StatusBarsVBox"]
