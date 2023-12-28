@@ -57,8 +57,23 @@ class_name Actor
 
 @onready var raycast : RayCast3D = $Head/Camera/RayCast
 
+var crouching = false:
+	set(val):
+		if val == false:
+			crouch_ended.emit()
+		
+		elif val == true:
+			crouch_started.emit()
+			
+		crouching = val
+	get:
+		return crouching
+
 signal on_hit
 signal on_blocked_hit
+
+signal crouch_started
+signal crouch_ended
 
 func _ready():
 	PlayerDataExtra.set_player(self)
