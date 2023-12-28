@@ -60,6 +60,8 @@ class_name Actor
 
 @onready var raycast : RayCast3D = $Head/Camera/RayCast
 
+@export var crouch_transition_time = 0.3
+
 var crouching = false:
 	set(val):
 		if val == false:
