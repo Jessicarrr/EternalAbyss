@@ -11,6 +11,7 @@ extends Node
 @export var backwards_movement_multiplier = 0.55
 @export var jump_force = 4  # Jump strength
 @export var gravity_power = 20
+@export var crouch_speed_multiplier = 0.67
 
 var current_velocity: Vector3  # Current velocity of the player
 var current_gravity := 0.0  # Current gravity affecting the player
@@ -22,6 +23,8 @@ var was_moving_previously := false
 var was_sprinting_previously := false
 
 var current_stamina_movement_speed = 1.0
+
+var crouching = false
 
 @export var stamina_percent_to_movement_penalty = {
 	0.50 : 0.7, # 50% stamina, 90% movement speed (10% slower)
@@ -37,10 +40,20 @@ signal player_stopped_sprinting
 
 signal player_ground_movement #Emit a signal if the player is walking on the ground
 
+func _ready():
+	player.crouch_started.connect(_on_crouch_started)
+	player.crouch_ended.connect(_on_crouch_ended)
+	
+func _on_crouch_started():
+	crouching = true
+	
+func _on_crouch_ended():
+	crouching = false
+
 func get_movement_penalty_for_current_stamina(current_stamina, max_stamina) -> float:
-	print("!! cur stam = ", current_stamina, " and max is ", max_stamina)
+	#print("!! cur stam = ", current_stamina, " and max is ", max_stamina)
 	var stamina_percentage = float(current_stamina) / max_stamina
-	print("!! stam percentage is ", stamina_percentage)
+	#print("!! stam percentage is ", stamina_percentage)
 	
 	var sorted_keys = stamina_percent_to_movement_penalty.keys()
 	sorted_keys.sort()
@@ -51,7 +64,7 @@ func get_movement_penalty_for_current_stamina(current_stamina, max_stamina) -> f
 			penalty = stamina_percent_to_movement_penalty[key]
 			break
 
-	print("!! current stamina movement speed = ", penalty)
+	#print("!! current stamina movement speed = ", penalty)
 	
 	return penalty
 
@@ -93,6 +106,9 @@ func _process(delta):
 		movement_speed *= backwards_movement_multiplier
 	
 	movement_speed *= current_stamina_movement_speed
+	
+	if crouching == true:
+		movement_speed *= crouch_speed_multiplier
 	
 	move(captured_input, movement_speed, delta)
 
