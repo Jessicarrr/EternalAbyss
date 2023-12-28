@@ -1,0 +1,53 @@
+Ghost Enemy Design Summary:
+
+1. Appearance and Presence:
+
+    Invisible or barely visible under normal conditions.
+    Subtle visual cues when near, like a faint shimmer or distortion in the air.
+    Occasionally interacts with the environment (e.g., objects move slightly, temperature drops).
+
+2. Detection Mechanism:
+
+    Senses based on noise and proximity.
+    Reacts to disturbances in the environment (e.g., running, knocking over objects).
+    Provides subtle audio-visual feedback when players are close to alerting it.
+
+3. Behavior:
+
+    Generally passive until provoked by close proximity or loud noises.
+    Once alerted, it becomes more visible and aggressive.
+    May have patterns or patrol areas where it's more sensitive to disturbances.
+
+4. Attack and Interaction:
+
+    Attacks can vary from physical manifestations to inducing fear or confusion in the player (e.g., blurring vision, creating illusions).
+    Contact with the ghost might drain player resources like health or stamina.
+
+5. Weaknesses and Countermeasures:
+
+    Certain items or light sources may repel or reveal the ghost temporarily.
+    Could be vulnerable to specific types of attacks or magic.
+
+6. Special Abilities:
+
+    Phasing through walls or appearing suddenly to surprise the player.
+    Possibly affecting the player's sanity or perception.
+
+7. Defeat and Rewards:
+
+    Upon defeat, it might provide resources, lore, or access to previously blocked areas.
+    The method of defeat might require more than simple combat, involving puzzles or special items.
+
+8. Variations:
+
+    Different types of ghosts with varying levels of aggression, speed, and detection abilities.
+    Some might mimic voices, create cold spots, or have other unique haunting characteristics.
+
+9. Narrative and Lore:
+
+    Backstory explaining the ghost's presence and nature.
+    Might be tied to specific locations or events within the game's story.
+
+10. Player Strategy:
+- Encourage cautious, observant gameplay.
+- Reward players for learning and adapting to the ghost's behavior patterns.
