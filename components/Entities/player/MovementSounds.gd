@@ -16,6 +16,7 @@ var walk_stone_sounds = [
 ]
 
 var sound_pool = []
+signal sound_made
 
 func grab_sound_from_sound_pool():
 	if sound_pool.size() <= 0:
@@ -41,9 +42,11 @@ func play_movement_sound(velocity):
 		audio_stream.bus = "ReverbBus"
 		
 		audio_stream.play()
+		sound_made.emit()
 		
 		var velocity_magnitude = velocity.length()
 		var scaled_footstep_delay = footstep_sound_delay / max(velocity_magnitude, 1) * 1.7
+		
 		
 		await get_tree().create_timer(scaled_footstep_delay).timeout
 		footstep_sound_playing = false

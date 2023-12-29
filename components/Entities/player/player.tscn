@@ -1,4 +1,4 @@
-[gd_scene load_steps=55 format=3 uid="uid://dcb260rwf1sj2"]
+[gd_scene load_steps=56 format=3 uid="uid://dcb260rwf1sj2"]
 
 [ext_resource type="Script" path="res://components/Entities/player/scripts/state/PlayerStateMachine.gd" id="1_1nv86"]
 [ext_resource type="Script" path="res://components/Entities/player/scripts/state/Idle.gd" id="2_re5th"]
@@ -35,6 +35,7 @@
 [ext_resource type="Script" path="res://components/Entities/player/scripts/CrouchInput.gd" id="26_d22uf"]
 [ext_resource type="Script" path="res://components/shared/scripts/sounds/GetDamagedSounds.gd" id="28_u2q57"]
 [ext_resource type="Script" path="res://components/shared/scripts/skills/Endurance.gd" id="29_smdva"]
+[ext_resource type="Script" path="res://components/Entities/player/Stealth.gd" id="32_ikuon"]
 [ext_resource type="Script" path="res://components/Entities/player/scripts/ColliderFunctionality.gd" id="32_w7w6s"]
 [ext_resource type="Script" path="res://components/Entities/player/scripts/HeadScript.gd" id="33_cl8aj"]
 [ext_resource type="PackedScene" uid="uid://csgf4qcsol5ih" path="res://ui/look_at_text.tscn" id="34_a5qka"]
@@ -54,11 +55,14 @@ class_name Actor
 
 # Functions
 @onready var health = $Skills/Health
+@onready var stealth = $Skills/Stealth
 
 @onready var state_machine = $PlayerStateMachine
 @onready var hotbar = $Gear/Hotbar
 
 @onready var raycast : RayCast3D = $Head/Camera/RayCast
+
+@onready var movement_sounds = $MovementSystem/MovementSounds
 
 @export var crouch_transition_time = 0.3
 
@@ -83,11 +87,26 @@ signal crouch_started
 signal crouch_ended
 signal crouch_toggled
 
+signal footstep_sound_made
+
 func _ready():
 	PlayerDataExtra.set_player(self)
 	
+	movement_sounds.sound_made.connect(_process_footstep_sound)
+	
 func _process(_delta):
 	pass
+	
+func _process_footstep_sound():
+	var stealth_level = stealth.level
+	var stealth_reduction_per_level = stealth.percent_reduction_per_level
+	var percent_volume_reduction = stealth_level * stealth_reduction_per_level
+	var base_volume = 50
+	
+	#Final_Volume=Volume_Base×(1−(Sneak_Skill_Level×Reduction_Per_Level))
+	
+	var final_volume = base_volume * (1 - (percent_volume_reduction))
+	footstep_sound_made.emit(final_volume)
 	
 func get_equipped_weapon():
 	var item = hotbar.get_selected_hotbar_item()
@@ -286,6 +305,11 @@ description = "Represents your overall wellbeing. Increases your hitpoints, i.e.
 [node name="Endurance" type="Node" parent="Skills"]
 script = ExtResource("29_smdva")
 level = 5
+
+[node name="Stealth" type="Node" parent="Skills"]
+script = ExtResource("32_ikuon")
+level = 5
+skill_name = "Stealth"
 
 [node name="ActiveEffects" type="Node" parent="."]
 
