@@ -906,7 +906,6 @@ script = ExtResource("16_51thv")
 
 [node name="Reanimate" type="Node" parent="StateMachine"]
 script = ExtResource("16_i884d")
-npc_path = NodePath("../..")
 
 [node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.736539, 0)
@@ -1045,7 +1044,6 @@ possible_sounds = ["res://sounds/enemies/skeleton/death/Hurt2.wav", "res://sound
 [connection signal="request_state_change" from="StateMachine/BlockStagger" to="StateMachine" method="_on_request_state_change"]
 [connection signal="request_state_change" from="StateMachine/Dormant" to="StateMachine" method="_on_request_state_change"]
 [connection signal="request_state_change" from="StateMachine/Reanimate" to="StateMachine" method="_on_request_state_change"]
-[connection signal="disable_toggled" from="CollisionShape3D" to="PhysicsMovement" method="_on_collision_shape_3d_disable_toggled"]
 [connection signal="gained_player_visibility" from="EnemyRayCast3D" to="StateMachine/Idle/DetectAndFollowPlayer" method="_on_enemy_ray_cast_3d_gained_player_visibility"]
 [connection signal="gained_player_visibility" from="EnemyRayCast3D" to="StateMachine/FollowPlayer/PathingToggler" method="_on_enemy_ray_cast_3d_gained_player_visibility"]
 [connection signal="lost_player_visibility" from="EnemyRayCast3D" to="StateMachine/FollowPlayer/PathingToggler" method="_on_enemy_ray_cast_3d_lost_player_visibility"]

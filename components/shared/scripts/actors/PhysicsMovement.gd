@@ -15,13 +15,14 @@ var knockback_duration = 0.3 # Duration of the knockback in seconds
 var knockback_timer = 0.0
 
 var dead = false
+var do_physics_process = true
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	nav_agent = Helpers.try_load_node(self, nav_agent_path)
 
 func _physics_process(delta):
-	if dead == true:
+	if do_physics_process == false:
 		return
 		
 	# Apply gravity
@@ -89,6 +90,8 @@ func _on_state_machine_state_changed(state, data):
 		Enums.ActorStates.DEAD:
 			dead = true
 			move_speed_mult = 0.0
+		Enums.ActorStates.DORMANT:
+			move_speed_mult = npc.dormant_mult
 		Enums.ActorStates.BLOCK_STAGGER:
 			move_speed_mult = 0.0
 		_:
@@ -135,3 +138,14 @@ func _on_blocked_hit(entity, weapon, damage):
 
 	# Reset the knockback timer
 	knockback_timer = knockback_duration
+
+
+func _on_collision_shape_3d_disable_toggled(is_disabled):
+	if is_disabled == true:
+		do_physics_process = false
+		return
+		
+	if is_disabled == false:
+		await get_tree().process_frame
+		do_physics_process = true
+		return
