@@ -27,9 +27,9 @@ var current_stamina_movement_speed = 1.0
 var crouching = false
 
 @export var stamina_percent_to_movement_penalty = {
-	0.50 : 0.7, # 50% stamina, 90% movement speed (10% slower)
-	0.25 : 0.4, # 25% stamina, 70% movement speed (30% slower)
-	0.0 : 0.1 # 0% stamina, 40% movement speed (60% slower)
+	0.50 : 0.85, # 50% stamina, 85% movement speed (10% slower)
+	0.25 : 0.5, # 25% stamina, 50% movement speed (30% slower)
+	0.0 : 0.2 # 0% stamina, 20% movement speed (60% slower)
 }
 
 # New signals

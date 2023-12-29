@@ -1,4 +1,4 @@
-[gd_resource type="AudioBusLayout" load_steps=4 format=3 uid="uid://b5ciroxfqnlac"]
+[gd_resource type="AudioBusLayout" load_steps=6 format=3 uid="uid://b5ciroxfqnlac"]
 
 [sub_resource type="AudioEffectReverb" id="AudioEffectReverb_5s1ic"]
 resource_name = "Reverb"
@@ -19,6 +19,19 @@ band_db/1000_hz = -2.2
 band_db/3200_hz = -13.0
 band_db/10000_hz = -22.7
 
+[sub_resource type="AudioEffectEQ" id="AudioEffectEQ_g7r6w"]
+resource_name = "EQ"
+band_db/32_hz = -8.0
+band_db/100_hz = -22.8
+band_db/320_hz = -34.5
+band_db/1000_hz = -48.2
+band_db/3200_hz = -54.3
+band_db/10000_hz = -60.0
+
+[sub_resource type="AudioEffectAmplify" id="AudioEffectAmplify_o0gmc"]
+resource_name = "Amplify"
+volume_db = -10.25
+
 [resource]
 bus/1/name = &"ReverbBus"
 bus/1/solo = false
@@ -38,3 +51,13 @@ bus/2/effect/0/effect = SubResource("AudioEffectReverb_5ivm3")
 bus/2/effect/0/enabled = true
 bus/2/effect/1/effect = SubResource("AudioEffectEQ_7lhm8")
 bus/2/effect/1/enabled = true
+bus/3/name = &"SneakyBus"
+bus/3/solo = false
+bus/3/mute = false
+bus/3/bypass_fx = false
+bus/3/volume_db = 0.0
+bus/3/send = &"Master"
+bus/3/effect/0/effect = SubResource("AudioEffectEQ_g7r6w")
+bus/3/effect/0/enabled = true
+bus/3/effect/1/effect = SubResource("AudioEffectAmplify_o0gmc")
+bus/3/effect/1/enabled = true

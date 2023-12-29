@@ -1,5 +1,6 @@
 extends Node
 
+@onready var player = get_parent().get_parent()
 var footstep_sound_playing = false
 var footstep_sound_delay = 0.55
 @export var audio_stream: AudioStreamPlayer
@@ -48,8 +49,15 @@ func play_movement_sound(velocity):
 		footstep_sound_playing = false
 		
 func _ready():
-	pass
+	player.crouch_toggled.connect(_on_crouch_toggled)
 
+func _on_crouch_toggled(crouching):
+	if crouching == true:
+		audio_stream.bus = "SneakyBus"
+		audio_stream.pitch_scale = 0.85
+	else:
+		audio_stream.bus = "ReverbBus"
+		audio_stream.pitch_scale = 1.0
 
 func _on_directional_movement_player_ground_movement(velocity):
 	play_movement_sound(velocity)

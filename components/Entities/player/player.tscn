@@ -66,9 +66,11 @@ var crouching = false:
 	set(val):
 		if val == false:
 			crouch_ended.emit()
+			crouch_toggled.emit(val)
 	
 		elif val == true:
 			crouch_started.emit()
+			crouch_toggled.emit(val)
 			
 		crouching = val
 	get:
@@ -79,6 +81,7 @@ signal on_blocked_hit
 
 signal crouch_started
 signal crouch_ended
+signal crouch_toggled
 
 func _ready():
 	PlayerDataExtra.set_player(self)
