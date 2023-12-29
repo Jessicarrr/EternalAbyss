@@ -65,6 +65,8 @@ class_name Actor
 @onready var movement_sounds = $MovementSystem/MovementSounds
 
 @export var crouch_transition_time = 0.3
+@export var base_noise_level = 50
+@export var not_crouching_noise_modifier = 50
 
 var crouching = false:
 	set(val):
@@ -101,11 +103,14 @@ func _process_footstep_sound():
 	var stealth_level = stealth.level
 	var stealth_reduction_per_level = stealth.percent_reduction_per_level
 	var percent_volume_reduction = stealth_level * stealth_reduction_per_level
-	var base_volume = 50
-	
+		
 	#Final_Volume=Volume_Base×(1−(Sneak_Skill_Level×Reduction_Per_Level))
 	
-	var final_volume = base_volume * (1 - (percent_volume_reduction))
+	var final_volume = base_noise_level * (1 - (percent_volume_reduction))
+	
+	if crouching == false:
+		final_volume += not_crouching_noise_modifier
+	
 	footstep_sound_made.emit(final_volume)
 	
 func get_equipped_weapon():
