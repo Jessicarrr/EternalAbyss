@@ -34,7 +34,9 @@ enum ActorStates {
 	BLOCKING,
 	BLOCK_END,
 	BLOCK_STAGGER,
-	EATING
+	EATING,
+	DORMANT,
+	REANIMATING,
 }
 
 enum ItemUsages {

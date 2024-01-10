@@ -1,0 +1,29 @@
+# Skeleton Enemy Design Document
+
+## Overview
+The skeleton enemy will add a layer of tension and strategy to the game by introducing a dormant state where they appear as harmless piles of bones. Players can choose to sneak past, risking waking them, or confront them directly. This mechanic encourages careful observation and decision-making.
+
+## To-Do List
+1. **Implement Crouching Mechanism:** Allow players to crouch, reducing their movement speed and noise.
+2. **Emit Footstep Signals:** Each player step emits a signal with volume; crouching reduces volume.
+3. **Add Dormant State to Skeletons:** Skeletons start as piles of bones, indistinguishable from other bone piles.
+4. **Add Waking Up State to Skeletons:** Develop animations and state changes for skeletons transitioning from dormant to active.
+5. **Implement Animations for All States:** Include transitions between idle, waking, active, scared, and reanimated states.
+6. **Connect Dormant State to Footstep Signals:** Skeletons awaken based on the noise and proximity of the player.
+7. **Develop Wake-Up Algorithm:** Create a system that determines the chance of a skeleton waking up based on noise and distance.
+8. **Post-Wake Behavior:** Once awakened, skeletons actively pursue and attack the player.
+9. **Optional Return to Dormancy:** Allow skeletons to return to a dormant state if the player escapes and maintains distance.
+10. **Art Variations for Dormant State:** Commission 5 variations of the dormant state sprite to add visual unpredictability.
+11. **Create 'Scared' State:** Introduce a 'scared' state where skeletons might cower or act erratically.
+12. **Reanimation Mechanism:** Implement a system where defeated skeletons have a chance to be reanimated by a new soul.
+13. **Currency Mechanics:** Decide when the player receives currency: after the skeleton's first defeat, or only after it's permanently defeated.
+14. **Lore for Reanimation:** Develop the backstory explaining the wandering souls and their search for a physical vessel.
+
+## Additional Considerations
+- **Reanimation Triggers:** Define specific conditions under which reanimation occurs, such as time elapsed, player distance, or magical areas in the dungeon.
+- **Distinguish Reanimated Skeletons:** Visually and behaviorally differentiate reanimated skeletons, perhaps with a different color glow or more aggressive behavior.
+- **Balance Reanimation Frequency:** Ensure reanimation is frequent enough to add tension but not so common that it becomes predictable or overly frustrating.
+- **Audio Cues for Reanimation:** Create distinct sounds for the reanimation process to alert players of the rising threat.
+- **Incorporate Player Strategy:** Allow players to use certain items or abilities to prevent or delay reanimation, adding a layer of strategy.
+
+This document provides a structured approach to integrating the new skeleton mechanics, with a focus on the reanimation feature. Continuous playtesting and iteration will be key to balancing these mechanics and ensuring they enhance the game's horror and strategic elements.
