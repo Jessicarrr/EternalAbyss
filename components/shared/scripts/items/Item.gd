@@ -41,6 +41,8 @@ signal use_item_ended # finished using the item
 signal item_destroyed
 signal item_dropped
 signal item_picked_up
+signal on_equipped
+signal on_unequipped
 
 func should_do_physics():
 	if WorldData.layout_node == null:
@@ -101,6 +103,7 @@ func equip():
 	if sprite == null:
 		sprite = Helpers.try_load_node(self, sprite_path)
 	sprite.visible = true
+	on_equipped.emit()
 	
 func unequip():
 	equipped = false
@@ -108,6 +111,7 @@ func unequip():
 	if sprite == null:
 		sprite = Helpers.try_load_node(self, sprite_path)
 	sprite.visible = false
+	on_unequipped.emit()
 	
 func is_equipped():
 	if sprite == null:

@@ -119,6 +119,13 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	if Helpers.has_enough_time_passed(process_update_time, last_process) == false:
+		return
+	
+	last_process = Time.get_ticks_msec()
+		
+	if self.global_position.y < -15:
+		push_warning(self.get_path(), \" is at a weird height, which is \", self.global_position.y, \" with relative position at \" , self.position.y)
 	pass
 
 "
@@ -668,6 +675,7 @@ height = 1.2
 collision_layer = 8
 collision_mask = 41
 script = SubResource("GDScript_k8muu")
+chance_dormant_on_spawn = 0.85
 windup_time = 0.5
 recovery_time = 0.6
 attack_chance = 0.9
