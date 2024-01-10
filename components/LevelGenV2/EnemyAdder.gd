@@ -23,10 +23,13 @@ func add_enemies(enemy_data):
 					break  # Break out if there are no available spawn points
 
 				var enemy_instance = enemy_scene.instantiate()
-				var random_index = randi() % spawn_nodes.size()
 				var random_spawn_point = spawn_nodes.pick_random()
-				enemy_instance.position = random_spawn_point.global_position
 				actors_node.add_child(enemy_instance)
+				enemy_instance.global_position = random_spawn_point.global_position
+				var gposition = enemy_instance.global_position
+				var thing = ""
+				
+				
 
 				# Mark this spawn point as used
 				random_spawn_point.free()

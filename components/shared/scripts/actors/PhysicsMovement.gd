@@ -4,6 +4,7 @@ extends Node
 var nav_agent
 
 @onready var npc : CharacterBody3D = get_parent()
+@onready var collision : CollisionShape3D = npc.get_node("CollisionShape3D")
 
 var gravity = -9.8  # Strength of gravity
 var current_gravity = gravity
@@ -15,14 +16,13 @@ var knockback_duration = 0.3 # Duration of the knockback in seconds
 var knockback_timer = 0.0
 
 var dead = false
-var do_physics_process = true
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	nav_agent = Helpers.try_load_node(self, nav_agent_path)
 
 func _physics_process(delta):
-	if do_physics_process == false:
+	if collision.disabled == true:
 		return
 		
 	# Apply gravity
@@ -138,14 +138,3 @@ func _on_blocked_hit(entity, weapon, damage):
 
 	# Reset the knockback timer
 	knockback_timer = knockback_duration
-
-
-func _on_collision_shape_3d_disable_toggled(is_disabled):
-	if is_disabled == true:
-		do_physics_process = false
-		return
-		
-	if is_disabled == false:
-		await get_tree().process_frame
-		do_physics_process = true
-		return

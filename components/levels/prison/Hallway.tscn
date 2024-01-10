@@ -1204,6 +1204,7 @@ visible = false
 mesh = SubResource("PlaneMesh_klk57")
 
 [node name="EnemySpawnPoint" type="Node3D" parent="." groups=["EnemySpawnPoint"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.002, 0)
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)

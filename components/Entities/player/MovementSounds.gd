@@ -39,8 +39,6 @@ func play_movement_sound(velocity):
 		# Set the stream to the loaded AudioStream
 		audio_stream.stream = audio_stream_resource
 		
-		audio_stream.bus = "ReverbBus"
-		
 		audio_stream.play()
 		sound_made.emit()
 		
@@ -53,11 +51,12 @@ func play_movement_sound(velocity):
 		
 func _ready():
 	player.crouch_toggled.connect(_on_crouch_toggled)
+	audio_stream.bus = "ReverbBus"
 
 func _on_crouch_toggled(crouching):
 	if crouching == true:
 		audio_stream.bus = "SneakyBus"
-		audio_stream.pitch_scale = 0.85
+		audio_stream.pitch_scale = 0.7
 	else:
 		audio_stream.bus = "ReverbBus"
 		audio_stream.pitch_scale = 1.0

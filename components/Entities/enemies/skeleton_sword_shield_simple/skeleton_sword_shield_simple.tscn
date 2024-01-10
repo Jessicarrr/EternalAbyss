@@ -49,7 +49,7 @@ class_name SimpleEnemy
 @onready var state_machine = $StateMachine
 
 @export_category(\"States\")
-@export var chance_dormant_on_spawn = 0.95
+@export var chance_dormant_on_spawn = 0.1
 
 @export_category(\"Attacks\")
 @export var windup_time = 0.6
@@ -97,6 +97,9 @@ class_name SimpleEnemy
 @export var hearing_distance_falloff = 1
 @export var minimum_hearing_volume = 30
 
+var process_update_time = 5000
+@onready var last_process = Time.get_ticks_msec()
+
 #@export_category(\"Physics\")
 #@export var knockback_strength = 2.0
 
@@ -130,9 +133,15 @@ func calculate_stagger_time(damage):
 func _ready():
 	pass # Replace with function body.
 
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	if Helpers.has_enough_time_passed(process_update_time, last_process) == false:
+		return
+	
+	last_process = Time.get_ticks_msec()
+		
+	if self.global_position.y < 15:
+		push_warning(self.get_path(), \" is at a weird height, which is \", self.global_position.y, \" with relative position at \" , self.position.y)
 	pass
 
 "
@@ -161,13 +170,13 @@ func _ready():
 	
 	super._ready()
 	default_state = Enums.ActorStates.IDLE
+	self.state_changed.connect(_on_state_change)
 	
 	if \"chance_dormant_on_spawn\" in npc and states_to_nodes.has(Enums.ActorStates.DORMANT):
 		if Helpers.should_chance_succeed(npc.chance_dormant_on_spawn):
 			transition_to_state(Enums.ActorStates.DORMANT, {})
 		else:
 			transition_to_default_state()
-	self.state_changed.connect(_on_state_change)
 	
 func _on_state_change(state, data):
 	Debug.msg(Debug.NPC_STATE_MACHINE, [\"NPC: \", get_parent().get_name()])
@@ -798,6 +807,7 @@ height = 1.2
 collision_layer = 8
 collision_mask = 41
 script = SubResource("GDScript_k8muu")
+chance_dormant_on_spawn = 0.5
 windup_time = 0.5
 recovery_time = 0.6
 attack_chance = 0.9

@@ -26,7 +26,7 @@ var print_flags = {
 	PLAYER_STATES: false,
 	PLAYER_STATE_MACHINE: false,
 	NPC_STATES: false,
-	NPC_STATE_MACHINE: false,
+	NPC_STATE_MACHINE: true,
 	OBJECT_STATES: false,
 	GENERATION: false,
 	GENERATION_COLLISION: false,

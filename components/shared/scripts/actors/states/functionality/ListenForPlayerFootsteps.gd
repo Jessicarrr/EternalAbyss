@@ -18,6 +18,9 @@ func wait_for_player_ready():
 	player.footstep_sound_made.connect(_on_player_footstep)
 
 func _on_player_footstep(volume):
+	if parent.active == false:
+		return
+		
 	var distance_to_player = npc.global_position.distance_to(player.global_position)
 	var effective_volume = calculate_effective_volume(volume, distance_to_player)
 	
