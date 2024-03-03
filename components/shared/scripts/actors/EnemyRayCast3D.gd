@@ -24,6 +24,9 @@ func _ready():
 		minimum_distance_to_raycast = npc.visibility_range
 
 func can_see_player():
+	if player == null:
+		return false
+		
 	var space_state = player.get_world_3d().direct_space_state
 	var origin_position = self.global_transform.origin
 	var target_position = player.global_transform.origin

@@ -11,10 +11,10 @@ func _ready():
 	if "equipped_in_offhand_slot" in item:
 		item.equipped_in_offhand_slot.connect(_on_item_equipped)
 		
-	if "unequipped" in item:
+	if "on_unequipped" in item:
 		item.on_unequipped.connect(_on_item_unequipped)
 		
-	if "equipped" in item:
+	if "on_equipped" in item:
 		item.on_equipped.connect(_on_item_equipped)
 		
 	if "unequipped_in_offhand_slot" in item:

@@ -5,6 +5,8 @@ class_name ListenForPlayerFootsteps
 var player
 var npc
 
+signal alerted
+
 func wait_for_player_ready():
 	while PlayerDataExtra.player_instance == null:
 		await get_tree().create_timer(0.2).timeout
@@ -25,10 +27,17 @@ func _on_player_footstep(volume):
 	var effective_volume = calculate_effective_volume(volume, distance_to_player)
 	
 	if distance_to_player < 4:
-		Debug.msg(Debug.NPC_HEARING, ["Hearing player at volume ", effective_volume, " with hearing threshold at ", npc.minimum_hearing_volume])
+		Debug.msg(Debug.NPC_HEARING, ["Hearing player at volume ", effective_volume, " with hearing threshold at ", npc.minimum_hearing_volume, " and distance ", distance_to_player])
 		
 	if effective_volume >= npc.minimum_hearing_volume:
 		Debug.msg(Debug.NPC_HEARING, ["Heard player"])
+		alerted.emit()
+		return
+		
+	if distance_to_player <= npc.touching_detection_distance:
+		Debug.msg(Debug.NPC_HEARING, ["Touched player"])
+		alerted.emit()
+		return
 
 func calculate_effective_volume(emitted_volume, distance):
 	# Adjust how quickly the sound diminishes with distance (sound attenuation).

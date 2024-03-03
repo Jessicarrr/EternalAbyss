@@ -15,8 +15,10 @@ func _on_state_changed_to_dead():
 
 
 func _on_state_changed(state, _data):
-	if state == Enums.ActorStates.DEAD or state == Enums.ActorStates.DORMANT:
-		self.set_deferred("disabled", true)
-	else:
-		self.set_deferred("disabled", false)
-		#disable_toggled.emit(false)
+	match state:
+		Enums.ActorStates.DEAD,\
+		Enums.ActorStates.DORMANT,\
+		Enums.ActorStates.REANIMATING:
+			self.set_deferred("disabled", true)
+		_:
+			self.set_deferred("disabled", false)

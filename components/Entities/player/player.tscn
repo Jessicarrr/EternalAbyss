@@ -41,7 +41,7 @@
 [ext_resource type="PackedScene" uid="uid://csgf4qcsol5ih" path="res://ui/look_at_text.tscn" id="34_a5qka"]
 [ext_resource type="PackedScene" uid="uid://ctqtltwdstq8w" path="res://ui/Inventory.tscn" id="35_36exr"]
 [ext_resource type="Shader" path="res://shaders/DamageVignette.gdshader" id="36_1ahqv"]
-[ext_resource type="PackedScene" path="res://ui/StatusBars.tscn" id="36_54iry"]
+[ext_resource type="PackedScene" uid="uid://db1md1x1bc2h4" path="res://ui/StatusBars.tscn" id="36_54iry"]
 [ext_resource type="Script" path="res://shaders/DamageVignette.gd" id="37_wyik8"]
 [ext_resource type="Shader" path="res://shaders/red_overlay.gdshader" id="38_62aiw"]
 [ext_resource type="Script" path="res://shaders/RedOverlay.gd" id="39_24o3p"]
@@ -110,6 +110,9 @@ func _process_footstep_sound():
 	
 	if crouching == false:
 		final_volume += not_crouching_noise_modifier
+		
+	# Ensure final volume is not negative
+	final_volume = max(final_volume, 0)
 	
 	footstep_sound_made.emit(final_volume)
 	

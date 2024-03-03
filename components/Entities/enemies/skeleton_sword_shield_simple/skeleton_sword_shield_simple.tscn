@@ -1,4 +1,4 @@
-[gd_scene load_steps=118 format=3 uid="uid://vw0633l67whr"]
+[gd_scene load_steps=119 format=3 uid="uid://vw0633l67whr"]
 
 [ext_resource type="Texture2D" uid="uid://d5wgl1bawg2k" path="res://sprites/enemies/skeleton attack anim-Sheet fix.png" id="2_dgvlb"]
 [ext_resource type="Texture2D" uid="uid://lxm8tcnahu14" path="res://sprites/enemies/skeleton 1 blocking idle 2-Sheet.png" id="3_neo8k"]
@@ -40,6 +40,7 @@
 [ext_resource type="Script" path="res://components/shared/scripts/sounds/NpcFootstepPlayer3D.gd" id="35_1dbe7"]
 [ext_resource type="Script" path="res://components/shared/scripts/sounds/NpcIdleSoundPlayer3D.gd" id="36_1p0ts"]
 [ext_resource type="Script" path="res://components/shared/scripts/sounds/DeathSoundPlayer3D.gd" id="37_jj73t"]
+[ext_resource type="Script" path="res://components/shared/scripts/sounds/ReanimateSoundPlayer3D.gd" id="41_vhdih"]
 
 [sub_resource type="GDScript" id="GDScript_k8muu"]
 script/source = "extends CharacterBody3D
@@ -50,6 +51,7 @@ class_name SimpleEnemy
 
 @export_category(\"States\")
 @export var chance_dormant_on_spawn = 0.1
+@export var touching_detection_distance = 0.7
 
 @export_category(\"Attacks\")
 @export var windup_time = 0.6
@@ -166,6 +168,7 @@ func _ready():
 		Enums.ActorStates.ATK_SWING : $NpcAttackSwing,
 		Enums.ActorStates.ATK_RECOVERY : $NpcAttackRecovery,
 		Enums.ActorStates.DORMANT : $Dormant,
+		Enums.ActorStates.REANIMATING : $Reanimate
 	}
 	
 	super._ready()
@@ -188,13 +191,23 @@ func _on_state_change(state, data):
 [sub_resource type="GDScript" id="GDScript_cunci"]
 script/source = "extends \"res://components/shared/scripts/actors/BaseState.gd\"
 
+@export var enemy_raycast_path : NodePath = \"\"
+var raycast
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	raycast = Helpers.try_load_node(self, enemy_raycast_path)
 	pass # Replace with function body.
 
 func begin(_data = {}):
 	super.begin(_data)
 	Debug.msg(Debug.NPC_STATES, [\"Npc is in idle state\"])
+	
+	if raycast == null:
+		return
+		
+	if raycast.can_see_player():
+		request_state_change.emit(self, Enums.ActorStates.FOLLOW_PLAYER, {})
 	
 func end():
 	Debug.msg(Debug.NPC_STATES, [\"Npc idle state ended.\"])
@@ -807,7 +820,7 @@ height = 1.2
 collision_layer = 8
 collision_mask = 41
 script = SubResource("GDScript_k8muu")
-chance_dormant_on_spawn = 0.85
+chance_dormant_on_spawn = 1.0
 windup_time = 0.5
 recovery_time = 0.6
 attack_chance = 0.9
@@ -823,12 +836,15 @@ visibility_range = 7
 walk_speed = 1.35
 block_mult = 0.85
 windup_mult = 0.4
+reanimation_time = 2.0
+minimum_hearing_volume = 18
 
 [node name="StateMachine" type="Node" parent="."]
 script = SubResource("GDScript_d8yvr")
 
 [node name="Idle" type="Node" parent="StateMachine"]
 script = SubResource("GDScript_cunci")
+enemy_raycast_path = NodePath("../../EnemyRayCast3D")
 metadata/DetectionSphere = NodePath("../../DetectionSphere")
 
 [node name="DetectAndFollowPlayer" type="Node" parent="StateMachine/Idle"]
@@ -1024,6 +1040,11 @@ bus = &"ReverbBus"
 script = ExtResource("37_jj73t")
 possible_sounds = ["res://sounds/enemies/skeleton/death/Hurt2.wav", "res://sounds/enemies/skeleton/death/Hurt.wav"]
 
+[node name="ReanimateSoundPlayer3D" type="AudioStreamPlayer3D" parent="."]
+max_distance = 8.0
+script = ExtResource("41_vhdih")
+possible_sounds = ["res://sounds/enemies/skeleton/reanimate/reanimate_01.wav", "res://sounds/enemies/skeleton/reanimate/reanimate_02.wav", "res://sounds/enemies/skeleton/reanimate/reanimate_03.wav"]
+
 [connection signal="on_blocked_hit" from="." to="StateMachine/NpcBlocking" method="_on_blocked_hit"]
 [connection signal="on_blocked_hit" from="." to="PhysicsMovement" method="_on_blocked_hit"]
 [connection signal="on_blocked_hit" from="." to="NpcBlockDmgPlayer3D" method="_on_blocked_hit"]
@@ -1038,6 +1059,7 @@ possible_sounds = ["res://sounds/enemies/skeleton/death/Hurt2.wav", "res://sound
 [connection signal="state_changed" from="StateMachine" to="PhysicsMovement" method="_on_state_machine_state_changed"]
 [connection signal="state_changed" from="StateMachine" to="DamagePlayer" method="_on_state_changed"]
 [connection signal="state_changed" from="StateMachine" to="NpcAttackPlayer3D" method="_on_state_machine_state_changed"]
+[connection signal="state_changed" from="StateMachine" to="ReanimateSoundPlayer3D" method="_on_state_changed"]
 [connection signal="state_changed_to_dead" from="StateMachine" to="CollisionShape3D" method="_on_state_changed_to_dead"]
 [connection signal="state_changed_to_dead" from="StateMachine" to="NpcIdleSoundPlayer3D" method="_on_state_machine_state_changed_to_dead"]
 [connection signal="state_changed_to_dead" from="StateMachine" to="DeathSoundPlayer3D" method="_on_state_machine_state_changed_to_dead"]
