@@ -1,10 +1,10 @@
 # Godot 4+ specific ignores
 .godot/
-textures/
-sounds/
-sprites/
-screenshots/
-legal/
-fonts/
-models/
-images/
+/textures/
+/sounds/
+/sprites/
+/screenshots/
+/legal/
+/fonts/
+/models/
+/images/
