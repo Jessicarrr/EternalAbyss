@@ -33,15 +33,16 @@ func remove_item():
 	
 	item_ref = null
 	
-	if get_child_count() > 1:
+	if get_child_count() >= 1:
+		var relevant_children = []
 		var relevant_child = null
 		
 		for child in get_children():
 			if child is Sprite2D:
-				relevant_child = child
+				relevant_children.append(child)
 				
-		if relevant_child != null:
-			relevant_child.queue_free()
+		for child in relevant_children:
+			child.queue_free()
 	
 	return the_item
 
