@@ -833,7 +833,7 @@ damage_max = 18
 block_transition_time = 0.3
 block_duration_base = 1.5
 visibility_range = 7
-walk_speed = 1.35
+walk_speed = 1.3
 block_mult = 0.85
 windup_mult = 0.4
 reanimation_time = 2.0
@@ -969,7 +969,7 @@ npc_path = NodePath("..")
 
 [node name="Health" type="Node" parent="Skills"]
 script = ExtResource("24_ftyo4")
-level = 4
+level = 3
 skill_name = "Health"
 
 [node name="PhysicsMovement" type="Node" parent="."]
