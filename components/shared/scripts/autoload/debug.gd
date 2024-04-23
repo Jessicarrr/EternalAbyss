@@ -15,6 +15,8 @@ const NPC_STATE_MACHINE = 11
 const SPRITE_ANIMATION = 12
 const PLAYER_STATE_MACHINE = 13
 const WELDER_GEN = 14
+const INVENTORY_UI = 15
+const NPC_HEARING = 16
 
 const SHOW_HITBOXES = false
 
@@ -24,7 +26,7 @@ var print_flags = {
 	PLAYER_STATES: false,
 	PLAYER_STATE_MACHINE: false,
 	NPC_STATES: false,
-	NPC_STATE_MACHINE: false,
+	NPC_STATE_MACHINE: true,
 	OBJECT_STATES: false,
 	GENERATION: false,
 	GENERATION_COLLISION: false,
@@ -33,7 +35,9 @@ var print_flags = {
 	NPC_GENERATION: false,
 	AUDIO : false,
 	COLLISIONS : false,
-	WELDER_GEN : true
+	WELDER_GEN : false,
+	INVENTORY_UI : false,
+	NPC_HEARING : true
 }
 
 func msg(type, args = []):
@@ -46,5 +50,3 @@ func msg(type, args = []):
 		for arg in args:
 			message += str(arg)
 		print(message)
-
-	

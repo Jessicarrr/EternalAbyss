@@ -16,6 +16,25 @@ func print_all_children_check_in_tree(node, indentation = ""):
 	for child in node.get_children():
 		print_all_children_check_in_tree(child, indentation + "-")
 
+func generate_item_text(item, fluff = true):
+	var text = ""
+	
+	if "item_name" in item:
+		text += item.item_name + "\n"
+		
+	if "damage_min" in item:
+		text += "Damage: " + str(item.damage_min)
+		
+		if "damage_max" in item:
+			text += " to " + str(item.damage_max)
+			
+		text += "\n"
+		
+	if fluff == true and "item_fluff_text" in item:
+		text += item.item_fluff_text
+		
+	return text
+
 func state_name(state_value: int) -> String:
 	# Iterate through the keys and values of the enum
 	for key in Enums.ActorStates.keys():
@@ -51,3 +70,12 @@ func try_load_node(origin : Node, node_path : NodePath):
 		push_error(origin.get_path(), " node path doesn't lead to a node.")
 	
 	return node
+	
+func object_has_signal( object: Object, signal_name: String ) -> bool:
+	var list = object.get_signal_list()
+	
+	for signal_entry in list:
+		if signal_entry["name"] == signal_name:
+			return true
+		
+	return false

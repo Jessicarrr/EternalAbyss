@@ -26,6 +26,7 @@ PlayerDataExtra="*res://components/shared/scripts/autoload/player_data_extra.gd"
 Helpers="*res://components/shared/scripts/autoload/helpers.gd"
 Debug="*res://components/shared/scripts/autoload/debug.gd"
 LevelData="*res://components/shared/scripts/autoload/level_data.gd"
+WorldData="*res://components/shared/scripts/autoload/world_data.gd"
 
 [debug]
 
@@ -37,6 +38,12 @@ window/size/viewport_width=1280
 window/size/viewport_height=720
 window/size/initial_position_type=0
 window/size/initial_position=Vector2i(500, 0)
+
+[gui]
+
+theme/custom_font="res://fonts/fancy_font_inventory_size.tres"
+theme/default_font_antialiasing=2
+timers/tooltip_delay_sec=0.04
 
 [input]
 
@@ -131,6 +138,21 @@ use_item={
 "events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":0,"position":Vector2(0, 0),"global_position":Vector2(0, 0),"factor":1.0,"button_index":2,"canceled":false,"pressed":false,"double_click":false,"script":null)
 ]
 }
+open_player_menu={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194306,"key_label":0,"unicode":0,"echo":false,"script":null)
+]
+}
+interact={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":69,"key_label":0,"unicode":101,"echo":false,"script":null)
+]
+}
+crouch={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194326,"key_label":0,"unicode":0,"echo":false,"script":null)
+]
+}
 
 [layer_names]
 
@@ -144,6 +166,8 @@ use_item={
 3d_physics/layer_8="ActorHurtbox"
 3d_physics/layer_9="NpcMeleeHitboxes"
 3d_physics/layer_10="PlayerHurtbox"
+3d_physics/layer_11="Items"
+3d_physics/layer_12="Ghosts"
 
 [physics]
 

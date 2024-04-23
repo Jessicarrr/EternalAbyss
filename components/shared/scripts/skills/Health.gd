@@ -50,6 +50,13 @@ func instant_heal(heal_amount):
 		
 	_heal(heal_amount)
 	health_changed.emit(current_hitpoints, max_hitpoints)
+	
+func regenerate(heal_amount):
+	if can_regenerate == false:
+		return
+		
+	_heal(heal_amount)
+	health_changed.emit(current_hitpoints, max_hitpoints)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

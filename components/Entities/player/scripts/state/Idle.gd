@@ -1,6 +1,6 @@
 extends "res://components/shared/scripts/actors/BaseState.gd"
 
-@onready var weapon_handler = $WeaponHandler
+@onready var weapon_handler = $UseItemInput/ItemHandler
 @export var endurance_node_path : NodePath = ""
 var endurance
 

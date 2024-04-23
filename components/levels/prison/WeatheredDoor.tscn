@@ -1,23 +1,14 @@
-[gd_scene load_steps=21 format=3 uid="uid://b6u3wrs6gna1b"]
+[gd_scene load_steps=15 format=3 uid="uid://b6u3wrs6gna1b"]
 
-[ext_resource type="Texture2D" uid="uid://b1nmn3rorrdsk" path="res://textures/prison/welder_stone.png" id="1_rxwp0"]
-[ext_resource type="Texture2D" uid="uid://cklv83hp3804y" path="res://textures/prison/bricks64x_doorway.png" id="2_0ot8v"]
-[ext_resource type="Texture2D" uid="uid://crsn8sxon2b7d" path="res://textures/prison/Doors/bricks64x_door_wrecked.png" id="3_c537h"]
-[ext_resource type="Texture2D" uid="uid://da0hvlopehc4d" path="res://textures/prison/Doors/bricks64x_door_wrecked_back.png" id="4_ysjn6"]
-[ext_resource type="Texture2D" uid="uid://dngxmlawwlac4" path="res://textures/prison/welder_wood.png" id="5_o01hm"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5uc4m"]
-albedo_texture = ExtResource("1_rxwp0")
-uv1_scale = Vector3(2, 2, 2)
-texture_filter = 0
-
-[sub_resource type="BoxMesh" id="BoxMesh_gkh24"]
-material = SubResource("StandardMaterial3D_5uc4m")
-size = Vector3(0.15, 2, 0.15)
+[ext_resource type="Texture2D" uid="uid://cxdrpbkdhlshm" path="res://textures/prison/Doors/bricks_doorway.png" id="2_8q10l"]
+[ext_resource type="Texture2D" uid="uid://bhdi0hpe024b6" path="res://textures/doors/door wooden shed door old damaged.png" id="3_f7nif"]
+[ext_resource type="Texture2D" uid="uid://guq31rcaaw7k" path="res://textures/doors/door wooden shed door old damaged flipped.png" id="4_v3lk2"]
+[ext_resource type="PackedScene" uid="uid://wqb5src5s3br" path="res://models/furniture/welder_wood_pale.glb" id="5_6o2o1"]
+[ext_resource type="PackedScene" uid="uid://c6rmildyw8vh2" path="res://models/furniture/welder_stone.glb" id="5_e6ou1"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8g1gh"]
 transparency = 1
-albedo_texture = ExtResource("2_0ot8v")
+albedo_texture = ExtResource("2_8q10l")
 texture_filter = 0
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_6axi3"]
@@ -31,7 +22,7 @@ size = Vector3(2.16, 0.1, 0.475)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gfwl6"]
 transparency = 1
-albedo_texture = ExtResource("3_c537h")
+albedo_texture = ExtResource("4_v3lk2")
 uv1_scale = Vector3(0.505, 0.73, 1.005)
 uv1_offset = Vector3(0.255, 0.265, 0)
 texture_filter = 0
@@ -45,7 +36,7 @@ size = Vector3(1.525, 0.015, 1.005)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e601a"]
 transparency = 1
-albedo_texture = ExtResource("4_ysjn6")
+albedo_texture = ExtResource("3_f7nif")
 uv1_scale = Vector3(0.505, 0.73, 1.005)
 uv1_offset = Vector3(0.255, 0.265, 0)
 texture_filter = 0
@@ -54,35 +45,8 @@ texture_filter = 0
 material = SubResource("StandardMaterial3D_e601a")
 size = Vector2(1.25, 1.01)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4f8ki"]
-albedo_texture = ExtResource("5_o01hm")
-texture_filter = 0
-
-[sub_resource type="BoxMesh" id="BoxMesh_aqpab"]
-material = SubResource("StandardMaterial3D_4f8ki")
-size = Vector3(0.13, 1.525, 0.1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qql8g"]
-albedo_texture = ExtResource("5_o01hm")
-uv1_scale = Vector3(0.805, 0.78, 1)
-texture_filter = 0
-
-[sub_resource type="BoxMesh" id="BoxMesh_paobi"]
-material = SubResource("StandardMaterial3D_qql8g")
-size = Vector3(0.13, 1.525, 0.1)
-
 [node name="WeatheredDoor" type="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-
-[node name="WelderStone5" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
-mesh = SubResource("BoxMesh_gkh24")
-skeleton = NodePath("../..")
-
-[node name="WelderStone6" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
-mesh = SubResource("BoxMesh_gkh24")
-skeleton = NodePath("../..")
 
 [node name="StoneBrickDoorwayOutside" type="MeshInstance3D" parent="."]
 transform = Transform3D(-4.37114e-08, 1, 0, 4.37114e-08, 1.91069e-15, -1, -1, -4.37114e-08, -4.37114e-08, 0, 0, 0)
@@ -113,10 +77,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 3.38813e-21, 1, 1.90735e-06, 0.0083
 shape = SubResource("BoxShape3D_ihs7q")
 
 [node name="Door" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.250617, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.341651, 0)
 
 [node name="DoorOutside" type="MeshInstance3D" parent="Door"]
-transform = Transform3D(-3.0598e-08, 1, 0, 3.0598e-08, 1.91069e-15, -1.43874, -0.7, -4.37114e-08, -6.28894e-08, 0, 0.0156305, 2.38419e-07)
+transform = Transform3D(-3.05933e-08, 0.999848, 0, 3.05933e-08, 1.9104e-15, -1.28331, -0.699894, -4.37047e-08, -5.60955e-08, 0, -0.014924, 2.38419e-07)
 mesh = SubResource("PlaneMesh_ht8tj")
 skeleton = NodePath("")
 
@@ -128,21 +92,21 @@ shape = SubResource("BoxShape3D_rijd1")
 disabled = true
 
 [node name="DoorInside" type="MeshInstance3D" parent="Door"]
-transform = Transform3D(4.47035e-08, -1, -5.32907e-15, 3.0598e-08, 2.7686e-15, -1.43874, 0.7, 4.47035e-08, 6.28894e-08, 0, 0.0156305, 2.38419e-07)
+transform = Transform3D(4.50804e-08, -1.00843, -4.74042e-15, 3.0856e-08, 2.79194e-15, -1.27982, 0.705902, 4.50804e-08, 5.59426e-08, 0, -0.0234102, 2.38419e-07)
 mesh = SubResource("PlaneMesh_5b6la")
 skeleton = NodePath("")
 
-[node name="DoorWelderWoodSide" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.256857, 0.444196)
-mesh = SubResource("BoxMesh_aqpab")
-skeleton = NodePath("")
+[node name="welder_stone" parent="." instance=ExtResource("5_e6ou1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.01597, -1)
 
-[node name="DoorWelderWoodSide2" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.26401, -0.480202)
-mesh = SubResource("BoxMesh_aqpab")
-skeleton = NodePath("")
+[node name="welder_stone2" parent="." instance=ExtResource("5_e6ou1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.01597, 1)
 
-[node name="DoorWelderWoodSide3" type="MeshInstance3D" parent="."]
-transform = Transform3D(1.11359, 0, 0, 0, -3.33206e-08, -1.00186, 0, 0.762287, -4.37928e-08, 0, 0.489349, -0.0247741)
-mesh = SubResource("BoxMesh_paobi")
-skeleton = NodePath("")
+[node name="welder_wood_pale" parent="." instance=ExtResource("5_6o2o1")]
+transform = Transform3D(0.9, 0, 0, 0, 0.713168, 0, 0, 0, 0.9, 0, -1, -0.513026)
+
+[node name="welder_wood_pale3" parent="." instance=ExtResource("5_6o2o1")]
+transform = Transform3D(1.04368, 0, 0, 0, -3.12562e-08, -0.902386, 0, 0.715059, -3.94445e-08, 0, 0.340533, -0.741403)
+
+[node name="welder_wood_pale2" parent="." instance=ExtResource("5_6o2o1")]
+transform = Transform3D(0.9, 0, 0, 0, 0.713168, 0, 0, 0, 0.9, 0, -1, 0.501909)

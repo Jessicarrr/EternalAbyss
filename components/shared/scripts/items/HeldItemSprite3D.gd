@@ -5,11 +5,11 @@ class_name HeldItemSprite3D
 
 @export var distance_in_front = 0.18
 
-var default_rotation = Vector3(deg_to_rad(-11.2), deg_to_rad(-113), deg_to_rad(32.2))
-var current_rotation = default_rotation
+@export var default_rotation = Vector3(deg_to_rad(-11.2), deg_to_rad(-113), deg_to_rad(32.2))
+@onready var current_rotation = default_rotation
 
 @export var default_position_offset = Vector3(0.2, -0.01, 0) # right, down, forward offsets
-var position_offset = default_position_offset
+@onready var position_offset = default_position_offset
 
 var tween : Tween
 

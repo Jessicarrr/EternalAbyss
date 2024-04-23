@@ -13,6 +13,7 @@ extends Node
 @onready var layout_node = get_node(self.get_meta("LayoutPath"))
 @onready var root_node = get_node(self.get_meta("RootPath"))
 @onready var actors_node = get_node(self.get_meta("ActorsPath"))
+@onready var events_node = get_node(self.get_meta("EventsPath"))
 @onready var current_level_data = LevelData.get_current_level()
 
 var generation_fails_in_a_row = 0
@@ -32,6 +33,8 @@ func place_player():
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	randomize()
+	WorldData.layout_node = layout_node
+	WorldData.events = events_node
 	await algorithm.ready
 	algorithm.add_data(current_level_data["Rooms"])
 	algorithm.set_path(layout_node)

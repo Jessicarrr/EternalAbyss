@@ -1,6 +1,7 @@
-[gd_scene load_steps=10 format=3 uid="uid://c8npgk35edn28"]
+[gd_scene load_steps=11 format=3 uid="uid://c8npgk35edn28"]
 
 [ext_resource type="Script" path="res://components/LevelGenV2/Generator.gd" id="1_6lqip"]
+[ext_resource type="Script" path="res://components/LevelGenV2/WorldEvents.gd" id="1_r3xsx"]
 [ext_resource type="Script" path="res://components/LevelGenV2/GenDebug.gd" id="2_3c8yl"]
 [ext_resource type="PackedScene" uid="uid://dcb260rwf1sj2" path="res://components/Entities/player/player.tscn" id="3_lhppr"]
 [ext_resource type="Script" path="res://components/LevelGenV2/Algorithms/HallwaysFirst/HallwaysFirst.gd" id="4_872w8"]
@@ -11,6 +12,9 @@
 [ext_resource type="Script" path="res://components/LevelGenV2/ConvexWallWelderPlacer.gd" id="9_2e0l4"]
 
 [node name="LevelGenV2" type="Node"]
+
+[node name="WorldEvents" type="Node" parent="."]
+script = ExtResource("1_r3xsx")
 
 [node name="Layout" type="Node" parent="."]
 
@@ -27,6 +31,7 @@ player_scene = ExtResource("3_lhppr")
 metadata/LayoutPath = NodePath("../../Layout")
 metadata/RootPath = NodePath("../..")
 metadata/ActorsPath = NodePath("../../Actors")
+metadata/EventsPath = NodePath("../../WorldEvents")
 
 [node name="GenDebug" type="Node" parent="GenerationLogic/Generator"]
 script = ExtResource("2_3c8yl")
@@ -35,9 +40,9 @@ script = ExtResource("2_3c8yl")
 
 [node name="HallwaysFirst" type="Node" parent="GenerationLogic/Algorithms"]
 script = ExtResource("4_872w8")
-min_hallways_before_turn = 2
-percent_chance_of_hallway_turning = 40
-total_hallways_to_create = 150
+min_hallways_before_turn = 3
+percent_chance_of_hallway_turning = 70
+total_hallways_to_create = 200
 
 [node name="Helpers" type="Node" parent="GenerationLogic"]
 

@@ -24,6 +24,9 @@ func _ready():
 		minimum_distance_to_raycast = npc.visibility_range
 
 func can_see_player():
+	if player == null:
+		return false
+		
 	var space_state = player.get_world_3d().direct_space_state
 	var origin_position = self.global_transform.origin
 	var target_position = player.global_transform.origin
@@ -43,13 +46,7 @@ func can_see_player():
 		Debug.msg(Debug.NPC_STATES, ["Can't see player but can see ", collider, collider_parent])
 		return false
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	if Helpers.has_enough_time_passed(time_between_checks, last_check_time) == false:
-		return
-		
-	last_check_time = Time.get_ticks_msec()
-	
+func emit_whether_i_can_see_player():
 	if player == null:
 		player = PlayerDataExtra.player_instance
 		print("player was null")
@@ -77,6 +74,15 @@ func _process(delta):
 		lost_player_visibility.emit()
 		could_previously_see_player = false
 		return
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	if Helpers.has_enough_time_passed(time_between_checks, last_check_time) == false:
+		return
+		
+	last_check_time = Time.get_ticks_msec()
+	
+	emit_whether_i_can_see_player()
 		
 	
 	

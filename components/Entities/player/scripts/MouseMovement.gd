@@ -4,7 +4,6 @@ extends Node
 @onready var player = get_node(get_meta("Player"))
 
 var mouse_sensitivity = 700
-var mouse_captured := true
 
 var rotation_target: Vector3
 var input_mouse: Vector2
@@ -15,7 +14,6 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	handle_controls(delta)
 	
 	# Rotation
 	camera.rotation.x = lerp_angle(camera.rotation.x, rotation_target.x, delta * 25)
@@ -23,18 +21,13 @@ func _process(delta):
 
 
 func _input(event):
-	if event is InputEventMouseMotion and mouse_captured:
-		input_mouse = event.relative / mouse_sensitivity
-		rotation_target.y -= event.relative.x / mouse_sensitivity
-		rotation_target.x -= event.relative.y / mouse_sensitivity
-
-func handle_controls(_delta):
-	# Mouse capture
-	if Input.is_action_just_pressed("mouse_capture"):
-		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-		mouse_captured = true
-	
-	if Input.is_action_just_pressed("mouse_capture_exit"):
-		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-		mouse_captured = false
-		input_mouse = Vector2.ZERO
+	if event is InputEventMouseMotion:
+		# Process mouse motion for camera and player rotation
+		if Input.mouse_mode == Input.MouseMode.MOUSE_MODE_CAPTURED:
+			input_mouse = event.relative / mouse_sensitivity
+			rotation_target.y -= event.relative.x / mouse_sensitivity
+			rotation_target.x -= event.relative.y / mouse_sensitivity
+		
+		# Pass the event to the GUI, allowing for tooltips, etc.
+		#get_tree().input_event(event)
+		#Input.parse_input_event(event)

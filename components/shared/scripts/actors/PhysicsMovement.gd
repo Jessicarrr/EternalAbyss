@@ -4,6 +4,7 @@ extends Node
 var nav_agent
 
 @onready var npc : CharacterBody3D = get_parent()
+@onready var collision : CollisionShape3D = npc.get_node("CollisionShape3D")
 
 var gravity = -9.8  # Strength of gravity
 var current_gravity = gravity
@@ -21,7 +22,7 @@ func _ready():
 	nav_agent = Helpers.try_load_node(self, nav_agent_path)
 
 func _physics_process(delta):
-	if dead == true:
+	if collision.disabled == true:
 		return
 		
 	# Apply gravity
@@ -89,6 +90,8 @@ func _on_state_machine_state_changed(state, data):
 		Enums.ActorStates.DEAD:
 			dead = true
 			move_speed_mult = 0.0
+		Enums.ActorStates.DORMANT:
+			move_speed_mult = npc.dormant_mult
 		Enums.ActorStates.BLOCK_STAGGER:
 			move_speed_mult = 0.0
 		_:

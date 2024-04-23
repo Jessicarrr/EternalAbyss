@@ -1,4 +1,4 @@
-[gd_scene load_steps=97 format=3 uid="uid://vw0633l67whr"]
+[gd_scene load_steps=119 format=3 uid="uid://vw0633l67whr"]
 
 [ext_resource type="Texture2D" uid="uid://d5wgl1bawg2k" path="res://sprites/enemies/skeleton attack anim-Sheet fix.png" id="2_dgvlb"]
 [ext_resource type="Texture2D" uid="uid://lxm8tcnahu14" path="res://sprites/enemies/skeleton 1 blocking idle 2-Sheet.png" id="3_neo8k"]
@@ -25,6 +25,9 @@
 [ext_resource type="Script" path="res://components/shared/scripts/actors/EnemyRayCast3D.gd" id="12_m4a5c"]
 [ext_resource type="Script" path="res://components/shared/scripts/actors/states/Staggered.gd" id="13_spfbc"]
 [ext_resource type="Script" path="res://components/shared/scripts/actors/states/BlockStagger.gd" id="14_j7wip"]
+[ext_resource type="Script" path="res://components/shared/scripts/actors/states/Dormant.gd" id="15_e0wwc"]
+[ext_resource type="Script" path="res://components/shared/scripts/actors/states/functionality/ListenForPlayerFootsteps.gd" id="16_51thv"]
+[ext_resource type="Script" path="res://components/shared/scripts/actors/states/Reanimate.gd" id="16_i884d"]
 [ext_resource type="Texture2D" uid="uid://dtodycbwecgag" path="res://sprites/enemies/skeleton 1 blocking walking-Sheet.png" id="20_rcea2"]
 [ext_resource type="Script" path="res://components/shared/scripts/skills/Health.gd" id="24_ftyo4"]
 [ext_resource type="Script" path="res://components/shared/scripts/actors/RemoveOnDeathCollisionShape3D.gd" id="26_gam0e"]
@@ -33,6 +36,11 @@
 [ext_resource type="Script" path="res://components/shared/scripts/sounds/RandomStreamPlayer3D.gd" id="30_li7cr"]
 [ext_resource type="Script" path="res://components/shared/scripts/sounds/NpcDamageStreamPlayer3D.gd" id="31_lkceg"]
 [ext_resource type="Script" path="res://components/shared/scripts/sounds/NpcBlockDmgPlayer3D.gd" id="32_klkji"]
+[ext_resource type="Script" path="res://components/shared/scripts/sounds/NpcAttackPlayer3D.gd" id="34_kwd0c"]
+[ext_resource type="Script" path="res://components/shared/scripts/sounds/NpcFootstepPlayer3D.gd" id="35_1dbe7"]
+[ext_resource type="Script" path="res://components/shared/scripts/sounds/NpcIdleSoundPlayer3D.gd" id="36_1p0ts"]
+[ext_resource type="Script" path="res://components/shared/scripts/sounds/DeathSoundPlayer3D.gd" id="37_jj73t"]
+[ext_resource type="Script" path="res://components/shared/scripts/sounds/ReanimateSoundPlayer3D.gd" id="41_vhdih"]
 
 [sub_resource type="GDScript" id="GDScript_k8muu"]
 script/source = "extends CharacterBody3D
@@ -40,6 +48,10 @@ class_name SimpleEnemy
 
 @onready var health = $Skills/Health
 @onready var state_machine = $StateMachine
+
+@export_category(\"States\")
+@export var chance_dormant_on_spawn = 0.1
+@export var touching_detection_distance = 0.7
 
 @export_category(\"Attacks\")
 @export var windup_time = 0.6
@@ -78,9 +90,20 @@ class_name SimpleEnemy
 @export var windup_mult = 0.1
 @export var swing_mult = 0.0
 @export var recovery_mult = 0.2
+@export var dormant_mult = 0.0
 
-@export_category(\"Physics\")
-@export var knockback_strength = 2.0
+@export_category(\"Other Timings\")
+@export var reanimation_time = 0.5
+
+@export_category(\"Hearing\")
+@export var hearing_distance_falloff = 1
+@export var minimum_hearing_volume = 30
+
+var process_update_time = 5000
+@onready var last_process = Time.get_ticks_msec()
+
+#@export_category(\"Physics\")
+#@export var knockback_strength = 2.0
 
 signal on_hit
 signal on_blocked_hit
@@ -112,9 +135,15 @@ func calculate_stagger_time(damage):
 func _ready():
 	pass # Replace with function body.
 
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	if Helpers.has_enough_time_passed(process_update_time, last_process) == false:
+		return
+	
+	last_process = Time.get_ticks_msec()
+		
+	if self.global_position.y < -15:
+		push_warning(self.get_path(), \" is at a weird height, which is \", self.global_position.y, \" with relative position at \" , self.position.y)
 	pass
 
 "
@@ -122,6 +151,8 @@ func _process(delta):
 [sub_resource type="GDScript" id="GDScript_d8yvr"]
 script/source = "extends \"res://components/shared/scripts/actors/BaseStateMachine.gd\"
 class_name EnemyStateMachine
+
+@onready var npc = get_parent()
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -135,13 +166,20 @@ func _ready():
 		Enums.ActorStates.BLOCK_STAGGER : $BlockStagger,
 		Enums.ActorStates.ATK_WINDUP : $NpcAttackWindup,
 		Enums.ActorStates.ATK_SWING : $NpcAttackSwing,
-		Enums.ActorStates.ATK_RECOVERY : $NpcAttackRecovery
+		Enums.ActorStates.ATK_RECOVERY : $NpcAttackRecovery,
+		Enums.ActorStates.DORMANT : $Dormant,
+		Enums.ActorStates.REANIMATING : $Reanimate
 	}
 	
 	super._ready()
 	default_state = Enums.ActorStates.IDLE
-	transition_to_default_state()
 	self.state_changed.connect(_on_state_change)
+	
+	if \"chance_dormant_on_spawn\" in npc and states_to_nodes.has(Enums.ActorStates.DORMANT):
+		if Helpers.should_chance_succeed(npc.chance_dormant_on_spawn):
+			transition_to_state(Enums.ActorStates.DORMANT, {})
+		else:
+			transition_to_default_state()
 	
 func _on_state_change(state, data):
 	Debug.msg(Debug.NPC_STATE_MACHINE, [\"NPC: \", get_parent().get_name()])
@@ -153,13 +191,23 @@ func _on_state_change(state, data):
 [sub_resource type="GDScript" id="GDScript_cunci"]
 script/source = "extends \"res://components/shared/scripts/actors/BaseState.gd\"
 
+@export var enemy_raycast_path : NodePath = \"\"
+var raycast
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	raycast = Helpers.try_load_node(self, enemy_raycast_path)
 	pass # Replace with function body.
 
 func begin(_data = {}):
 	super.begin(_data)
 	Debug.msg(Debug.NPC_STATES, [\"Npc is in idle state\"])
+	
+	if raycast == null:
+		return
+		
+	if raycast.can_see_player():
+		request_state_change.emit(self, Enums.ActorStates.FOLLOW_PLAYER, {})
 	
 func end():
 	Debug.msg(Debug.NPC_STATES, [\"Npc idle state ended.\"])
@@ -366,6 +414,10 @@ region = Rect2(1276, 13, 116, 112)
 atlas = ExtResource("7_hlf6k")
 region = Rect2(1392, 13, 116, 112)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_teht5"]
+atlas = ExtResource("7_hlf6k")
+region = Rect2(1392, 13, 116, 112)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_73gec"]
 atlas = ExtResource("8_0qo52")
 region = Rect2(0, 15, 116, 112)
@@ -373,6 +425,58 @@ region = Rect2(0, 15, 116, 112)
 [sub_resource type="AtlasTexture" id="AtlasTexture_fa5y6"]
 atlas = ExtResource("8_0qo52")
 region = Rect2(116, 15, 116, 112)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8cql7"]
+atlas = ExtResource("7_hlf6k")
+region = Rect2(1392, 13, 116, 112)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sy6cp"]
+atlas = ExtResource("7_hlf6k")
+region = Rect2(1276, 13, 116, 112)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qayqj"]
+atlas = ExtResource("7_hlf6k")
+region = Rect2(1160, 13, 116, 112)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mt0op"]
+atlas = ExtResource("7_hlf6k")
+region = Rect2(1044, 13, 116, 112)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e0c7d"]
+atlas = ExtResource("7_hlf6k")
+region = Rect2(928, 13, 116, 112)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3stim"]
+atlas = ExtResource("7_hlf6k")
+region = Rect2(812, 13, 116, 112)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jgxwt"]
+atlas = ExtResource("7_hlf6k")
+region = Rect2(696, 13, 116, 112)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3wpve"]
+atlas = ExtResource("7_hlf6k")
+region = Rect2(580, 13, 116, 112)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8h2sq"]
+atlas = ExtResource("7_hlf6k")
+region = Rect2(464, 13, 116, 112)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mrlgp"]
+atlas = ExtResource("7_hlf6k")
+region = Rect2(348, 13, 116, 112)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7tydp"]
+atlas = ExtResource("7_hlf6k")
+region = Rect2(232, 13, 116, 112)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_usj7j"]
+atlas = ExtResource("7_hlf6k")
+region = Rect2(116, 13, 116, 112)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kql77"]
+atlas = ExtResource("7_hlf6k")
+region = Rect2(0, 13, 116, 112)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4cw84"]
 atlas = ExtResource("9_4pjxj")
@@ -596,7 +700,15 @@ animations = [{
 }],
 "loop": false,
 "name": &"death",
-"speed": 10.0
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_teht5")
+}],
+"loop": true,
+"name": &"dormant",
+"speed": 5.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -608,6 +720,50 @@ animations = [{
 "loop": true,
 "name": &"idle",
 "speed": 0.5
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8cql7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sy6cp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qayqj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mt0op")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e0c7d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3stim")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jgxwt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3wpve")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8h2sq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mrlgp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7tydp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_usj7j")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kql77")
+}],
+"loop": true,
+"name": &"reanimate",
+"speed": 5.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -664,28 +820,31 @@ height = 1.2
 collision_layer = 8
 collision_mask = 41
 script = SubResource("GDScript_k8muu")
-windup_time = 0.7
-recovery_time = 0.4
+chance_dormant_on_spawn = 1.0
+windup_time = 0.5
+recovery_time = 0.6
 attack_chance = 0.9
 attack_chance_interval = 100
-attack_min_distance = 1.2
+attack_min_distance = 1.25
+attack_range = 1.1
 min_time_between_attacks = 2.0
-damage_min = 5
-damage_max = 7
-block_chance = 0.4
+damage_min = 15
+damage_max = 18
 block_transition_time = 0.3
 block_duration_base = 1.5
 visibility_range = 7
-walk_speed = 1.2
-block_mult = 0.75
-windup_mult = 0.55
-knockback_strength = 6.0
+walk_speed = 1.3
+block_mult = 0.85
+windup_mult = 0.4
+reanimation_time = 2.0
+minimum_hearing_volume = 18
 
 [node name="StateMachine" type="Node" parent="."]
 script = SubResource("GDScript_d8yvr")
 
 [node name="Idle" type="Node" parent="StateMachine"]
 script = SubResource("GDScript_cunci")
+enemy_raycast_path = NodePath("../../EnemyRayCast3D")
 metadata/DetectionSphere = NodePath("../../DetectionSphere")
 
 [node name="DetectAndFollowPlayer" type="Node" parent="StateMachine/Idle"]
@@ -764,15 +923,27 @@ script = ExtResource("13_spfbc")
 script = ExtResource("14_j7wip")
 npc_path = NodePath("../..")
 
+[node name="Dormant" type="Node" parent="StateMachine"]
+script = ExtResource("15_e0wwc")
+npc_path = NodePath("../..")
+
+[node name="ListenForPlayerFootsteps" type="Node" parent="StateMachine/Dormant"]
+script = ExtResource("16_51thv")
+npc_path = NodePath("../../..")
+
+[node name="Reanimate" type="Node" parent="StateMachine"]
+script = ExtResource("16_i884d")
+npc_path = NodePath("../..")
+
 [node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.736539, 0)
-modulate = Color(0.976471, 0.976471, 0.976471, 1)
+modulate = Color(0.572549, 0.572549, 0.572549, 1)
 pixel_size = 0.0134
 billboard = 2
 shaded = true
 texture_filter = 0
 sprite_frames = SubResource("SpriteFrames_guxdr")
-animation = &"block_walk"
+animation = &"dormant"
 
 [node name="NpcSpriteAnimator" type="Node" parent="AnimatedSprite3D"]
 script = ExtResource("11_36y4s")
@@ -799,7 +970,7 @@ npc_path = NodePath("..")
 
 [node name="Health" type="Node" parent="Skills"]
 script = ExtResource("24_ftyo4")
-level = 5
+level = 3
 skill_name = "Health"
 
 [node name="PhysicsMovement" type="Node" parent="."]
@@ -828,6 +999,53 @@ bus = &"ReverbBus"
 script = ExtResource("32_klkji")
 possible_sounds = ["res://sounds/shields/metal/METLImpt_Impact Metal Blunt 02_DDUMAIS_NONE.wav", "res://sounds/shields/metal/METLImpt_Impact Metal Blunt 04_DDUMAIS_NONE.wav", "res://sounds/shields/metal/METLImpt_Impact Metal Blunt 05_DDUMAIS_NONE.wav", "res://sounds/shields/metal/METLImpt_Impact Metal Blunt 10_DDUMAIS_NONE.wav"]
 
+[node name="NpcAttackPlayer3D" type="AudioStreamPlayer3D" parent="."]
+volume_db = -8.421
+script = ExtResource("34_kwd0c")
+possible_sounds = ["res://sounds/weapons/sword/SWSH_Swing 2 Normal 01_DDUMAIS_NONE.wav", "res://sounds/weapons/sword/SWSH_Swing 2 Normal 02_DDUMAIS_NONE.wav", "res://sounds/weapons/sword/SWSH_Swing 2 Normal 03_DDUMAIS_NONE.wav", "res://sounds/weapons/sword/SWSH_Swing 2 Normal 04_DDUMAIS_NONE.wav", "res://sounds/weapons/sword/SWSH_Swing 2 Normal 05_DDUMAIS_NONE.wav", "res://sounds/weapons/sword/SWSH_Swing 2 Normal 06_DDUMAIS_NONE.wav", "res://sounds/weapons/sword/SWSH_Swing 2 Normal 07_DDUMAIS_NONE.wav", "res://sounds/weapons/sword/SWSH_Swing 2 Normal 08_DDUMAIS_NONE.wav", "res://sounds/weapons/sword/SWSH_Swing 2 Normal 09_DDUMAIS_NONE.wav"]
+
+[node name="NpcFootstepPlayer3D" type="AudioStreamPlayer3D" parent="."]
+volume_db = -20.0
+script = ExtResource("35_1dbe7")
+animation_name = "block_walk"
+animation_frames = [3, 7]
+animated_sprite_path = NodePath("../AnimatedSprite3D")
+possible_sounds = ["res://sounds/enemies/skeleton/footsteps/FEETHmn_Footstep Stone Explorer Run Fast Dirt Outside 03_ESM_DGF.wav", "res://sounds/enemies/skeleton/footsteps/FEETHmn_Footstep Stone Explorer Run Fast Dirt Outside 06_ESM_DGF.wav", "res://sounds/enemies/skeleton/footsteps/FEETHmn_Footstep Stone Explorer Walk Faster Dirt Outside 05_ESM_DGF.wav", "res://sounds/enemies/skeleton/footsteps/FEETHmn_Footstep Stone Explorer Walk Faster Dirt Outside 07_ESM_DGF.wav"]
+
+[node name="NpcFootstepPlayer3D2" type="AudioStreamPlayer3D" parent="."]
+volume_db = -20.0
+script = ExtResource("35_1dbe7")
+animation_name = "walk"
+animation_frames = [2, 6]
+animated_sprite_path = NodePath("../AnimatedSprite3D")
+possible_sounds = ["res://sounds/enemies/skeleton/footsteps/FEETHmn_Footstep Stone Explorer Run Fast Dirt Outside 03_ESM_DGF.wav", "res://sounds/enemies/skeleton/footsteps/FEETHmn_Footstep Stone Explorer Run Fast Dirt Outside 06_ESM_DGF.wav", "res://sounds/enemies/skeleton/footsteps/FEETHmn_Footstep Stone Explorer Walk Faster Dirt Outside 05_ESM_DGF.wav", "res://sounds/enemies/skeleton/footsteps/FEETHmn_Footstep Stone Explorer Walk Faster Dirt Outside 07_ESM_DGF.wav"]
+
+[node name="NpcIdleSoundPlayer3D" type="AudioStreamPlayer3D" parent="."]
+attenuation_model = 1
+volume_db = -40.421
+unit_size = 8.0
+max_distance = 8.0
+panning_strength = 2.0
+bus = &"ReverbBus"
+script = ExtResource("36_1p0ts")
+min_delay_between_sounds = 3.0
+possible_sounds = ["res://sounds/enemies/skeleton/idle/GHOSTS Breath Cavernous.LR.wav", "res://sounds/enemies/skeleton/idle/GHOSTS Breath Hollow Spirit.LR.wav"]
+
+[node name="DeathSoundPlayer3D" type="AudioStreamPlayer3D" parent="."]
+volume_db = -12.0
+unit_size = 8.0
+pitch_scale = 0.88
+max_distance = 8.0
+panning_strength = 2.5
+bus = &"ReverbBus"
+script = ExtResource("37_jj73t")
+possible_sounds = ["res://sounds/enemies/skeleton/death/Hurt2.wav", "res://sounds/enemies/skeleton/death/Hurt.wav"]
+
+[node name="ReanimateSoundPlayer3D" type="AudioStreamPlayer3D" parent="."]
+max_distance = 8.0
+script = ExtResource("41_vhdih")
+possible_sounds = ["res://sounds/enemies/skeleton/reanimate/reanimate_01.wav", "res://sounds/enemies/skeleton/reanimate/reanimate_02.wav", "res://sounds/enemies/skeleton/reanimate/reanimate_03.wav"]
+
 [connection signal="on_blocked_hit" from="." to="StateMachine/NpcBlocking" method="_on_blocked_hit"]
 [connection signal="on_blocked_hit" from="." to="PhysicsMovement" method="_on_blocked_hit"]
 [connection signal="on_blocked_hit" from="." to="NpcBlockDmgPlayer3D" method="_on_blocked_hit"]
@@ -838,9 +1056,14 @@ possible_sounds = ["res://sounds/shields/metal/METLImpt_Impact Metal Blunt 02_DD
 [connection signal="on_hit" from="." to="PhysicsMovement" method="_on_hit"]
 [connection signal="on_hit" from="." to="DamageStreamPlayer3D" method="_on_hit"]
 [connection signal="state_changed" from="StateMachine" to="AnimatedSprite3D/NpcSpriteAnimator" method="_on_skeleton_state_machine_state_changed"]
+[connection signal="state_changed" from="StateMachine" to="CollisionShape3D" method="_on_state_changed"]
 [connection signal="state_changed" from="StateMachine" to="PhysicsMovement" method="_on_state_machine_state_changed"]
 [connection signal="state_changed" from="StateMachine" to="DamagePlayer" method="_on_state_changed"]
+[connection signal="state_changed" from="StateMachine" to="NpcAttackPlayer3D" method="_on_state_machine_state_changed"]
+[connection signal="state_changed" from="StateMachine" to="NpcIdleSoundPlayer3D" method="_on_state_changed"]
+[connection signal="state_changed" from="StateMachine" to="ReanimateSoundPlayer3D" method="_on_state_changed"]
 [connection signal="state_changed_to_dead" from="StateMachine" to="CollisionShape3D" method="_on_state_changed_to_dead"]
+[connection signal="state_changed_to_dead" from="StateMachine" to="DeathSoundPlayer3D" method="_on_state_machine_state_changed_to_dead"]
 [connection signal="request_state_change" from="StateMachine/Idle" to="StateMachine" method="_on_request_state_change"]
 [connection signal="began" from="StateMachine/FollowPlayer" to="StateMachine/FollowPlayer/BlockingDecision" method="_on_combat_follow_began"]
 [connection signal="ended" from="StateMachine/FollowPlayer" to="StateMachine/FollowPlayer/BlockingDecision" method="_on_follow_player_ended"]
@@ -853,6 +1076,9 @@ possible_sounds = ["res://sounds/shields/metal/METLImpt_Impact Metal Blunt 02_DD
 [connection signal="request_state_change" from="StateMachine/NpcAttackRecovery" to="StateMachine" method="_on_request_state_change"]
 [connection signal="request_state_change" from="StateMachine/Staggered" to="StateMachine" method="_on_request_state_change"]
 [connection signal="request_state_change" from="StateMachine/BlockStagger" to="StateMachine" method="_on_request_state_change"]
+[connection signal="request_state_change" from="StateMachine/Dormant" to="StateMachine" method="_on_request_state_change"]
+[connection signal="request_state_change" from="StateMachine/Reanimate" to="StateMachine" method="_on_request_state_change"]
+[connection signal="disable_toggled" from="CollisionShape3D" to="PhysicsMovement" method="_on_collision_shape_3d_disable_toggled"]
 [connection signal="gained_player_visibility" from="EnemyRayCast3D" to="StateMachine/Idle/DetectAndFollowPlayer" method="_on_enemy_ray_cast_3d_gained_player_visibility"]
 [connection signal="gained_player_visibility" from="EnemyRayCast3D" to="StateMachine/FollowPlayer/PathingToggler" method="_on_enemy_ray_cast_3d_gained_player_visibility"]
 [connection signal="lost_player_visibility" from="EnemyRayCast3D" to="StateMachine/FollowPlayer/PathingToggler" method="_on_enemy_ray_cast_3d_lost_player_visibility"]
