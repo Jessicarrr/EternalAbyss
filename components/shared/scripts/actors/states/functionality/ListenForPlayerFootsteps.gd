@@ -4,30 +4,33 @@ class_name ListenForPlayerFootsteps
 @onready var parent = get_parent()
 var player
 var npc
+@export var npc_path :NodePath = ""
 
 signal alerted
 
-func wait_for_player_ready():
-	while PlayerDataExtra.player_instance == null:
-		await get_tree().create_timer(0.2).timeout
-		continue
-		
-	player = PlayerDataExtra.player_instance
-	
-	if player.is_node_ready() == false:
-		await player.ready
-		
-	player.footstep_sound_made.connect(_on_player_footstep)
+@export var alert_categories : Array[Enums.SoundSources] = [
+	Enums.SoundSources.PLAYER_FOOTSTEP,
+	Enums.SoundSources.NON_PLAYER_FOOTSTEP
+]
 
-func _on_player_footstep(volume):
+func wait_for_world_events_ready():
+	while WorldData.events == null:
+		await get_tree().create_timer(0.5).timeout
+		
+	WorldData.events.sound_event.connect(_on_sound_played)
+
+func _on_sound_played(source, volume, sound_global_position):
 	if parent.active == false:
 		return
 		
-	var distance_to_player = npc.global_position.distance_to(player.global_position)
+	if source not in alert_categories:
+		return
+		
+	var distance_to_player = npc.global_position.distance_to(sound_global_position)
 	var effective_volume = calculate_effective_volume(volume, distance_to_player)
 	
 	if distance_to_player < 4:
-		Debug.msg(Debug.NPC_HEARING, ["Hearing player at volume ", effective_volume, " with hearing threshold at ", npc.minimum_hearing_volume, " and distance ", distance_to_player])
+		Debug.msg(Debug.NPC_HEARING, ["Hearing player at volume ", effective_volume, ", will hear player at: ", npc.minimum_hearing_volume, ". Distance to player: ", distance_to_player])
 		
 	if effective_volume >= npc.minimum_hearing_volume:
 		Debug.msg(Debug.NPC_HEARING, ["Heard player"])
@@ -47,8 +50,9 @@ func calculate_effective_volume(emitted_volume, distance):
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	await wait_for_player_ready()
-	npc = parent.npc
+	npc = Helpers.try_load_node(self, npc_path)
+	await wait_for_world_events_ready()
+	
 	pass # Replace with function body.
 
 

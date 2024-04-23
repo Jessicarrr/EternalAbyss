@@ -20,6 +20,12 @@ enum ContainerStates {
 	FAILED 
 }
 
+enum SoundSources {
+	PLAYER_FOOTSTEP,
+	NON_PLAYER_FOOTSTEP,
+	WEAPON_HIT
+}
+
 enum ActorStates {
 	DEAD,
 	IDLE,

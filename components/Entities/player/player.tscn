@@ -89,14 +89,15 @@ signal crouch_started
 signal crouch_ended
 signal crouch_toggled
 
-signal footstep_sound_made
-
 func _ready():
 	PlayerDataExtra.set_player(self)
 	
 	movement_sounds.sound_made.connect(_process_footstep_sound)
 	
 func _process(_delta):
+	pass
+	
+func _process_sound(source):
 	pass
 	
 func _process_footstep_sound():
@@ -114,7 +115,8 @@ func _process_footstep_sound():
 	# Ensure final volume is not negative
 	final_volume = max(final_volume, 0)
 	
-	footstep_sound_made.emit(final_volume)
+	#footstep_sound_made.emit(final_volume)
+	WorldData.events.do_sound_event(Enums.SoundSources.PLAYER_FOOTSTEP, final_volume, self.global_position)
 	
 func get_equipped_weapon():
 	var item = hotbar.get_selected_hotbar_item()
