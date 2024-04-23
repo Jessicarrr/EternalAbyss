@@ -929,6 +929,7 @@ npc_path = NodePath("../..")
 
 [node name="ListenForPlayerFootsteps" type="Node" parent="StateMachine/Dormant"]
 script = ExtResource("16_51thv")
+npc_path = NodePath("../../..")
 
 [node name="Reanimate" type="Node" parent="StateMachine"]
 script = ExtResource("16_i884d")
@@ -936,7 +937,7 @@ npc_path = NodePath("../..")
 
 [node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.736539, 0)
-modulate = Color(0.976471, 0.976471, 0.976471, 1)
+modulate = Color(0.572549, 0.572549, 0.572549, 1)
 pixel_size = 0.0134
 billboard = 2
 shaded = true
