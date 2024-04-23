@@ -129,21 +129,8 @@ func _process(delta):
 			frames.set_animation_loop("attack_recovery", false)
 			frames.set_animation_speed("attack_recovery", fps)
 			play("attack_recovery")
-		Enums.ActorStates.DORMANT:
-			play("dormant")
-		Enums.ActorStates.REANIMATING:
-			var frames = sprite.sprite_frames
-			var num_frames_in_reanimate_anim = frames.get_frame_count("reanimate")
-			var reanimation_time = npc.reanimation_time
-			
-			var fps = num_frames_in_reanimate_anim / reanimation_time
-			
-			frames.set_animation_loop("reanimate", false)
-			frames.set_animation_speed("reanimate", fps)
-			play("reanimate")
 		_:
 			play("idle")
-			
 
 
 func _on_skeleton_state_machine_state_changed(state, data):

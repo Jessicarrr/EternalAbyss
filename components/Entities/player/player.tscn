@@ -1,11 +1,10 @@
-[gd_scene load_steps=56 format=3 uid="uid://dcb260rwf1sj2"]
+[gd_scene load_steps=52 format=3 uid="uid://dcb260rwf1sj2"]
 
 [ext_resource type="Script" path="res://components/Entities/player/scripts/state/PlayerStateMachine.gd" id="1_1nv86"]
 [ext_resource type="Script" path="res://components/Entities/player/scripts/state/Idle.gd" id="2_re5th"]
 [ext_resource type="Script" path="res://components/Entities/player/scripts/state/functionality/IdleAttackInput.gd" id="3_y7it2"]
 [ext_resource type="Script" path="res://components/Entities/player/scripts/state/functionality/IdleWeaponHandler.gd" id="4_7naah"]
 [ext_resource type="Script" path="res://components/shared/scripts/containers/GearManager.gd" id="4_ieury"]
-[ext_resource type="Script" path="res://components/Entities/player/scripts/state/Eating.gd" id="4_sgf1j"]
 [ext_resource type="Script" path="res://components/Entities/player/scripts/state/Windup.gd" id="5_8si8d"]
 [ext_resource type="Script" path="res://components/Entities/player/scripts/state/functionality/UseItemInput.gd" id="5_41g28"]
 [ext_resource type="PackedScene" uid="uid://blfvfc7exomsg" path="res://components/Entities/items/GameItems.tscn" id="5_ht5ei"]
@@ -32,22 +31,16 @@
 [ext_resource type="Script" path="res://components/Entities/player/scripts/sounds/AttackSounds.gd" id="19_mgc05"]
 [ext_resource type="Script" path="res://components/Entities/player/scripts/sounds/RandomAmbientSounds.gd" id="21_63v10"]
 [ext_resource type="Script" path="res://components/shared/scripts/skills/Health.gd" id="22_bgx6x"]
-[ext_resource type="Script" path="res://components/Entities/player/scripts/CrouchInput.gd" id="26_d22uf"]
-[ext_resource type="Script" path="res://components/shared/scripts/sounds/GetDamagedSounds.gd" id="28_u2q57"]
+[ext_resource type="Script" path="res://components/Entities/player/scripts/sounds/GettingDamagedSounds.gd" id="27_kdx5s"]
 [ext_resource type="Script" path="res://components/shared/scripts/skills/Endurance.gd" id="29_smdva"]
-[ext_resource type="Script" path="res://components/Entities/player/Stealth.gd" id="32_ikuon"]
-[ext_resource type="Script" path="res://components/Entities/player/scripts/ColliderFunctionality.gd" id="32_w7w6s"]
-[ext_resource type="Script" path="res://components/Entities/player/scripts/HeadScript.gd" id="33_cl8aj"]
-[ext_resource type="PackedScene" uid="uid://csgf4qcsol5ih" path="res://ui/look_at_text.tscn" id="34_a5qka"]
-[ext_resource type="PackedScene" uid="uid://ctqtltwdstq8w" path="res://ui/Inventory.tscn" id="35_36exr"]
-[ext_resource type="Shader" path="res://shaders/DamageVignette.gdshader" id="36_1ahqv"]
-[ext_resource type="PackedScene" uid="uid://db1md1x1bc2h4" path="res://ui/StatusBars.tscn" id="36_54iry"]
-[ext_resource type="Script" path="res://shaders/DamageVignette.gd" id="37_wyik8"]
-[ext_resource type="Shader" path="res://shaders/red_overlay.gdshader" id="38_62aiw"]
-[ext_resource type="Script" path="res://shaders/RedOverlay.gd" id="39_24o3p"]
-[ext_resource type="Shader" path="res://shaders/vignette.gdshader" id="40_6mr1p"]
-[ext_resource type="Script" path="res://shaders/VignetteHealth.gd" id="41_22i2c"]
-[ext_resource type="Shader" path="res://shaders/PixelShader.gdshader" id="42_qnj6d"]
+[ext_resource type="Script" path="res://components/shared/scripts/hitboxes/Hurtbox.gd" id="32_1i1mi"]
+[ext_resource type="Script" path="res://components/Entities/player/hud/HealthBar.gd" id="32_bty55"]
+[ext_resource type="Shader" path="res://shaders/vignette.gdshader" id="34_8ypyg"]
+[ext_resource type="Script" path="res://shaders/VignetteHealth.gd" id="35_lsj3u"]
+[ext_resource type="Shader" path="res://shaders/DamageVignette.gdshader" id="36_4om1m"]
+[ext_resource type="Script" path="res://shaders/DamageVignette.gd" id="36_grhc5"]
+[ext_resource type="Shader" path="res://shaders/red_overlay.gdshader" id="36_n0daj"]
+[ext_resource type="Script" path="res://shaders/RedOverlay.gd" id="37_tp44i"]
 
 [sub_resource type="GDScript" id="GDScript_xn7no"]
 script/source = "extends CharacterBody3D
@@ -55,68 +48,20 @@ class_name Actor
 
 # Functions
 @onready var health = $Skills/Health
-@onready var stealth = $Skills/Stealth
 
 @onready var state_machine = $PlayerStateMachine
 @onready var hotbar = $Gear/Hotbar
 
 @onready var raycast : RayCast3D = $Head/Camera/RayCast
 
-@onready var movement_sounds = $MovementSystem/MovementSounds
-
-@export var crouch_transition_time = 0.3
-@export var base_noise_level = 50.0
-@export var not_crouching_noise_modifier = 50.0
-
-var crouching = false:
-	set(val):
-		if val == false:
-			crouch_ended.emit()
-			crouch_toggled.emit(val)
-	
-		elif val == true:
-			crouch_started.emit()
-			crouch_toggled.emit(val)
-			
-		crouching = val
-	get:
-		return crouching
-
 signal on_hit
 signal on_blocked_hit
-
-signal crouch_started
-signal crouch_ended
-signal crouch_toggled
 
 func _ready():
 	PlayerDataExtra.set_player(self)
 	
-	movement_sounds.sound_made.connect(_process_footstep_sound)
-	
 func _process(_delta):
 	pass
-	
-func _process_sound(source):
-	pass
-	
-func _process_footstep_sound():
-	var stealth_level = stealth.level
-	var stealth_reduction_per_level = stealth.percent_reduction_per_level
-	var percent_volume_reduction = stealth_level * stealth_reduction_per_level
-		
-	#Final_Volume=Volume_Base×(1−(Sneak_Skill_Level×Reduction_Per_Level))
-	
-	var final_volume = base_noise_level * (1 - (percent_volume_reduction))
-	
-	if crouching == false:
-		final_volume += not_crouching_noise_modifier
-		
-	# Ensure final volume is not negative
-	final_volume = max(final_volume, 0)
-	
-	#footstep_sound_made.emit(final_volume)
-	WorldData.events.do_sound_event(Enums.SoundSources.PLAYER_FOOTSTEP, final_volume, self.global_position)
 	
 func get_equipped_weapon():
 	var item = hotbar.get_selected_hotbar_item()
@@ -148,31 +93,63 @@ func hit(entity, damage):
 "
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_gdq8c"]
-radius = 0.2
-height = 1.2
+radius = 0.3
+height = 1.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_a810w"]
-shader = ExtResource("36_1ahqv")
-shader_parameter/vignette_intensity = 3.0
+[sub_resource type="Animation" id="Animation_cu02h"]
+resource_name = "damage"
+step = 0.05
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array()
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8pyxu"]
+_data = {
+"damage": SubResource("Animation_cu02h")
+}
+
+[sub_resource type="GDScript" id="GDScript_niybc"]
+script/source = "extends ProgressBar
+
+@export var stamina_node_path : NodePath = \"\"
+var stamina_node = null
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	stamina_node = Helpers.try_load_node(self, stamina_node_path)
+	self.value = stamina_node.current_stamina
+	self.max_value = stamina_node.max_stamina
+
+func _on_endurance_stamina_changed(stamina, max_stamina):
+	self.value = stamina
+	self.max_value = max_stamina
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_unuw1"]
+shader = ExtResource("34_8ypyg")
+shader_parameter/vignette_intensity = 0.4
+shader_parameter/vignette_opacity = 0.5
+shader_parameter/vignette_rgb = Color(0, 0, 0, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fmx0u"]
+shader = ExtResource("36_4om1m")
+shader_parameter/vignette_intensity = 0.15
 shader_parameter/vignette_opacity = 0.0
 shader_parameter/vignette_rgb = Color(1, 0, 0, 1)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_iueqj"]
-shader = ExtResource("38_62aiw")
-shader_parameter/opacity = 0.0
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_t873o"]
-shader = ExtResource("40_6mr1p")
-shader_parameter/vignette_intensity = 0.15
-shader_parameter/vignette_opacity = 0.0
-shader_parameter/vignette_rgb = Color(0, 0, 0, 1)
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_656pa"]
-shader = ExtResource("42_qnj6d")
-shader_parameter/pixelation_level = 92.0
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_j5jth"]
+shader = ExtResource("36_n0daj")
+shader_parameter/opacity = 1.0
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_qcmu2"]
 size = Vector3(1, 2, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_6gqle"]
+size = Vector3(0.3, 1, 0.3)
 
 [node name="Player" type="CharacterBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3, 1)
@@ -193,11 +170,11 @@ endurance_node_path = NodePath("../../Skills/Endurance")
 [node name="AttackInput" type="Node" parent="PlayerStateMachine/Idle"]
 script = ExtResource("3_y7it2")
 
+[node name="WeaponHandler" type="Node" parent="PlayerStateMachine/Idle"]
+script = ExtResource("4_7naah")
+
 [node name="UseItemInput" type="Node" parent="PlayerStateMachine/Idle"]
 script = ExtResource("5_41g28")
-
-[node name="ItemHandler" type="Node" parent="PlayerStateMachine/Idle/UseItemInput"]
-script = ExtResource("4_7naah")
 
 [node name="AttackWindup" type="Node" parent="PlayerStateMachine"]
 script = ExtResource("5_8si8d")
@@ -207,6 +184,10 @@ script = ExtResource("7_la0f7")
 
 [node name="AttackSwing" type="Node" parent="PlayerStateMachine"]
 script = ExtResource("6_lp4ar")
+endurance_node_path = NodePath("../../Skills/Endurance")
+
+[node name="AttackInput" type="Node" parent="PlayerStateMachine/AttackSwing"]
+script = ExtResource("3_y7it2")
 
 [node name="AttackRecovery" type="Node" parent="PlayerStateMachine"]
 script = ExtResource("7_bf8en")
@@ -220,14 +201,17 @@ script = ExtResource("10_tt7v8")
 [node name="BlockStart" type="Node" parent="PlayerStateMachine"]
 script = ExtResource("12_kptwu")
 
+[node name="UseItemInput" type="Node" parent="PlayerStateMachine/BlockStart"]
+script = ExtResource("5_41g28")
+
 [node name="Blocking" type="Node" parent="PlayerStateMachine"]
 script = ExtResource("13_yx2o4")
 
+[node name="UseItemInput" type="Node" parent="PlayerStateMachine/Blocking"]
+script = ExtResource("5_41g28")
+
 [node name="BlockEnding" type="Node" parent="PlayerStateMachine"]
 script = ExtResource("14_y68tw")
-
-[node name="Eating" type="Node" parent="PlayerStateMachine"]
-script = ExtResource("4_sgf1j")
 
 [node name="Gear" type="Node" parent="."]
 script = ExtResource("4_ieury")
@@ -276,9 +260,6 @@ script = ExtResource("8_khi54")
 script = ExtResource("12_ft81l")
 audio_stream = NodePath("../../FootstepSoundPlayer")
 
-[node name="CrouchInput" type="Node" parent="MovementSystem"]
-script = ExtResource("26_d22uf")
-
 [node name="Sounds" type="Node" parent="."]
 
 [node name="Attacks" type="Node" parent="Sounds"]
@@ -296,13 +277,10 @@ volume_db = -6.592
 script = ExtResource("21_63v10")
 metadata/CameraPath = NodePath("../../Head/Camera")
 
-[node name="GetDamagedSounds" type="AudioStreamPlayer" parent="Sounds" node_paths=PackedStringArray("thing_to_track")]
-bus = &"ReverbBus"
-script = ExtResource("28_u2q57")
-thing_to_track = NodePath("../..")
-possible_sounds = ["res://sounds/player/receive_damage/GOREStab_Designed Slash Gore 03_DDUMAIS_NONE.wav", "res://sounds/player/receive_damage/GOREStab_Designed Slash Gore 04_DDUMAIS_NONE.wav", "res://sounds/player/receive_damage/GOREStab_Designed Slash Gore 05_DDUMAIS_NONE.wav", "res://sounds/player/receive_damage/GOREStab_Designed Slash Gore 06_DDUMAIS_NONE.wav", "res://sounds/player/receive_damage/GOREStab_Designed Slash Gore 07_DDUMAIS_NONE.wav", "res://sounds/player/receive_damage/GOREStab_Designed Slash Gore 09_DDUMAIS_NONE.wav", "res://sounds/player/receive_damage/GOREStab_Designed Slash Gore 11_DDUMAIS_NONE.wav"]
-pitch_min = 0.5
-pitch_max = 0.7
+[node name="GettingDamagedSounds" type="Node" parent="Sounds"]
+script = ExtResource("27_kdx5s")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Sounds/GettingDamagedSounds"]
 
 [node name="Skills" type="Node" parent="."]
 
@@ -314,23 +292,48 @@ description = "Represents your overall wellbeing. Increases your hitpoints, i.e.
 
 [node name="Endurance" type="Node" parent="Skills"]
 script = ExtResource("29_smdva")
-level = 5
-
-[node name="Stealth" type="Node" parent="Skills"]
-script = ExtResource("32_ikuon")
-level = 5
-skill_name = "Stealth"
+level = 9
+skill_name = "Endurance"
+description = "Governs how much stamina you have, and how much stamina you regenerate."
 
 [node name="ActiveEffects" type="Node" parent="."]
 
+[node name="Lamp" type="Node3D" parent="."]
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Lamp"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.644183, 0)
+light_color = Color(0.839216, 0.513726, 0.321569, 1)
+light_energy = 0.642
+light_cull_mask = 4294967294
+shadow_enabled = true
+omni_range = 4.0
+omni_attenuation = 0.707106
+
+[node name="FrontLight" type="Node3D" parent="Lamp" node_paths=PackedStringArray("camera")]
+transform = Transform3D(1, 0, 0, 0, 0.99996, -0.00895342, 0, 0.00895342, 0.99996, 0, 0, 0)
+script = ExtResource("11_65oqg")
+camera = NodePath("../../Head/Camera")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Lamp/FrontLight"]
+transform = Transform3D(1, 0, 0, 0, 1, 6.51926e-09, 0, -6.51926e-09, 1, 0, 0.916717, -0.0082081)
+light_color = Color(0.839216, 0.513726, 0.321569, 1)
+light_energy = 1.099
+shadow_enabled = true
+spot_range = 0.0
+spot_attenuation = 0.5
+spot_angle = 80.0
+
 [node name="Collider" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0705414, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
 shape = SubResource("CapsuleShape3D_gdq8c")
-script = ExtResource("32_w7w6s")
+
+[node name="Collider2" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0317593, 0)
+shape = SubResource("CapsuleShape3D_gdq8c")
+disabled = true
 
 [node name="Head" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.436481, 0)
-script = ExtResource("33_cl8aj")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)
 
 [node name="Camera" type="Camera3D" parent="Head"]
 cull_mask = 1048573
@@ -339,35 +342,13 @@ fov = 80.0
 script = ExtResource("14_qb0xk")
 
 [node name="RayCast" type="RayCast3D" parent="Head/Camera"]
-exclude_parent = false
 target_position = Vector3(0, 0, -10)
-collision_mask = 3081
-collide_with_areas = true
+collision_mask = 9
 
-[node name="Lamp" type="Node3D" parent="Head"]
-
-[node name="OmniLight3D" type="OmniLight3D" parent="Head/Lamp"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.644183, 0)
-light_color = Color(0.839216, 0.513726, 0.321569, 1)
-light_energy = 0.642
-shadow_enabled = true
-omni_range = 0.0
-omni_attenuation = 0.707106
-
-[node name="FrontLight" type="Node3D" parent="Head/Lamp" node_paths=PackedStringArray("camera")]
-transform = Transform3D(1, 0, 0, 0, 0.99996, -0.00895342, 0, 0.00895342, 0.99996, 0, 0, 0)
-script = ExtResource("11_65oqg")
-camera = NodePath("../../Camera")
-
-[node name="SpotLight3D" type="SpotLight3D" parent="Head/Lamp/FrontLight"]
-transform = Transform3D(1, 0, 0, 0, 1, 6.51926e-09, 0, -6.51926e-09, 1, 0, 0.916717, -0.0082081)
-light_color = Color(0.603922, 0.611765, 0.572549, 1)
-light_energy = 0.05
-light_specular = 0.0
-shadow_enabled = true
-spot_range = 4.0
-spot_attenuation = 0.5
-spot_angle = 80.0
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Head"]
+libraries = {
+"": SubResource("AnimationLibrary_8pyxu")
+}
 
 [node name="Cooldown" type="Timer" parent="."]
 one_shot = true
@@ -398,72 +379,90 @@ offset_right = 40.0
 offset_bottom = 23.0
 script = ExtResource("18_0i3d2")
 
-[node name="LookAtText" parent="HUD/CanvasLayer" instance=ExtResource("34_a5qka")]
+[node name="HealthBar" type="ProgressBar" parent="HUD/CanvasLayer"]
+anchors_preset = -1
+anchor_left = 0.041
+anchor_top = 0.903
+anchor_right = 0.25
+anchor_bottom = 0.94
+offset_left = -5.48
+offset_top = -0.160034
+offset_bottom = 0.199951
+grow_vertical = 0
+script = ExtResource("32_bty55")
+health_node_path = NodePath("../../../Skills/Health")
 
-[node name="Inventory" parent="HUD/CanvasLayer" instance=ExtResource("35_36exr")]
-gear_path = NodePath("../../../Gear")
+[node name="StaminaBar" type="ProgressBar" parent="HUD/CanvasLayer"]
+anchors_preset = -1
+anchor_left = 0.041
+anchor_top = 0.942
+anchor_right = 0.249
+anchor_bottom = 0.979
+offset_left = -5.48
+offset_top = -0.240051
+offset_right = 1.27997
+offset_bottom = 0.119995
+grow_vertical = 0
+script = SubResource("GDScript_niybc")
+stamina_node_path = NodePath("../../../Skills/Endurance")
 
-[node name="StatusBarsVBox" parent="HUD/CanvasLayer" instance=ExtResource("36_54iry")]
+[node name="Vignette" type="CanvasLayer" parent="HUD"]
+follow_viewport_scale = 0.001
 
-[node name="HealthBar" parent="HUD/CanvasLayer/StatusBarsVBox" index="0"]
-health_node_path = NodePath("../../../../Skills/Health")
+[node name="ColorRect" type="ColorRect" parent="HUD/Vignette"]
+material = SubResource("ShaderMaterial_unuw1")
+anchors_preset = -1
+anchor_right = 0.996
+anchor_bottom = 0.994
+offset_right = 0.119873
+offset_bottom = 0.320007
+script = ExtResource("35_lsj3u")
 
-[node name="StaminaBar" parent="HUD/CanvasLayer/StatusBarsVBox" index="1"]
-endurance_node_path = NodePath("../../../../Skills/Endurance")
-
-[node name="ShaderStuff" type="CanvasLayer" parent="HUD"]
-
-[node name="DamageVignette" type="ColorRect" parent="HUD/ShaderStuff"]
-material = SubResource("ShaderMaterial_a810w")
+[node name="DamageVignette" type="ColorRect" parent="HUD/Vignette"]
+material = SubResource("ShaderMaterial_fmx0u")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-script = ExtResource("37_wyik8")
+offset_right = -0.440063
+offset_bottom = 0.159973
+script = ExtResource("36_grhc5")
 
-[node name="LowHealthRedOverlay" type="ColorRect" parent="HUD/ShaderStuff"]
-material = SubResource("ShaderMaterial_iueqj")
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-script = ExtResource("39_24o3p")
+[node name="RedOverlay" type="CanvasLayer" parent="HUD"]
 
-[node name="BlackVignette" type="ColorRect" parent="HUD/ShaderStuff"]
-material = SubResource("ShaderMaterial_t873o")
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-script = ExtResource("41_22i2c")
+[node name="ColorRect" type="ColorRect" parent="HUD/RedOverlay"]
+material = SubResource("ShaderMaterial_j5jth")
+anchors_preset = -1
+anchor_right = 0.998
+anchor_bottom = 0.999
+offset_right = 0.559937
+offset_bottom = -0.280029
+script = ExtResource("37_tp44i")
 
-[node name="FunPixelShader" type="ColorRect" parent="HUD/ShaderStuff"]
-show_behind_parent = true
-z_index = -1
-material = SubResource("ShaderMaterial_656pa")
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
+[node name="PhysicalCollider" type="Area3D" parent="." groups=["PlayerDetection"]]
+collision_layer = 32
 
-[node name="Area3D" type="Area3D" parent="." groups=["PlayerDetection"]]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PhysicalCollider"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.555356, 0)
 shape = SubResource("BoxShape3D_qcmu2")
 
-[connection signal="on_hit" from="." to="HUD/ShaderStuff/DamageVignette" method="_on_hit"]
+[node name="Hurtbox" type="Area3D" parent="."]
+collision_layer = 512
+collision_mask = 256
+script = ExtResource("32_1i1mi")
+health_node_path = NodePath("../Skills/Health")
+parent_entity_path = NodePath("..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hurtbox"]
+shape = SubResource("BoxShape3D_6gqle")
+
+[connection signal="on_hit" from="." to="Sounds/GettingDamagedSounds" method="_on_hit"]
+[connection signal="on_hit" from="." to="HUD/Vignette/DamageVignette" method="_on_hit"]
 [connection signal="state_changed" from="PlayerStateMachine" to="Sounds/Attacks" method="_on_player_state_machine_state_changed"]
+[connection signal="began" from="PlayerStateMachine/Idle" to="PlayerStateMachine/Idle/UseItemInput" method="_on_idle_began"]
 [connection signal="request_state_change" from="PlayerStateMachine/Idle" to="PlayerStateMachine" method="_on_request_state_change"]
 [connection signal="attack_clicked" from="PlayerStateMachine/Idle/AttackInput" to="PlayerStateMachine/Idle" method="_on_attack_input_attack_clicked"]
+[connection signal="attack_held" from="PlayerStateMachine/Idle/AttackInput" to="PlayerStateMachine/Idle" method="_on_attack_input_attack_held"]
+[connection signal="use_item_pressed" from="PlayerStateMachine/Idle/UseItemInput" to="PlayerStateMachine/Idle" method="_on_item_used"]
 [connection signal="request_state_change" from="PlayerStateMachine/AttackWindup" to="PlayerStateMachine" method="_on_request_state_change"]
 [connection signal="attack_cancelled" from="PlayerStateMachine/AttackWindup/InputAttackCancel" to="PlayerStateMachine/AttackWindup" method="_on_input_attack_cancelled"]
 [connection signal="request_state_change" from="PlayerStateMachine/AttackSwing" to="PlayerStateMachine" method="_on_request_state_change"]
@@ -471,12 +470,14 @@ shape = SubResource("BoxShape3D_qcmu2")
 [connection signal="request_state_change" from="PlayerStateMachine/AttackCancel" to="PlayerStateMachine" method="_on_request_state_change"]
 [connection signal="request_state_change" from="PlayerStateMachine/AttackRecoil" to="PlayerStateMachine" method="_on_request_state_change"]
 [connection signal="request_state_change" from="PlayerStateMachine/BlockStart" to="PlayerStateMachine" method="_on_request_state_change"]
+[connection signal="use_item_released" from="PlayerStateMachine/BlockStart/UseItemInput" to="PlayerStateMachine/BlockStart" method="_on_use_item_input_use_item_released"]
 [connection signal="request_state_change" from="PlayerStateMachine/Blocking" to="PlayerStateMachine" method="_on_request_state_change"]
+[connection signal="use_item_released" from="PlayerStateMachine/Blocking/UseItemInput" to="PlayerStateMachine/Blocking" method="_on_use_item_input_use_item_released"]
 [connection signal="request_state_change" from="PlayerStateMachine/BlockEnding" to="PlayerStateMachine" method="_on_request_state_change"]
-[connection signal="hotbar_item_changed" from="Gear/Hotbar" to="PlayerStateMachine/Idle/UseItemInput/ItemHandler" method="_on_hotbar_item_changed"]
+[connection signal="hotbar_item_changed" from="Gear/Hotbar" to="PlayerStateMachine/Idle/WeaponHandler" method="_on_hotbar_item_changed"]
 [connection signal="player_ground_movement" from="MovementSystem/DirectionalMovement" to="MovementSystem/MovementSounds" method="_on_directional_movement_player_ground_movement"]
-[connection signal="health_changed" from="Skills/Health" to="HUD/ShaderStuff/LowHealthRedOverlay" method="_on_health_health_changed"]
-[connection signal="health_changed" from="Skills/Health" to="HUD/ShaderStuff/BlackVignette" method="_on_health_health_changed"]
-[connection signal="request_inv_and_hb_update" from="HUD/CanvasLayer/Inventory" to="Gear" method="_on_request_inv_and_hb_update"]
-
-[editable path="HUD/CanvasLayer/StatusBarsVBox"]
+[connection signal="health_changed" from="Skills/Health" to="HUD/CanvasLayer/HealthBar" method="_on_health_health_changed"]
+[connection signal="health_changed" from="Skills/Health" to="HUD/Vignette/ColorRect" method="_on_health_health_changed"]
+[connection signal="health_changed" from="Skills/Health" to="HUD/RedOverlay/ColorRect" method="_on_health_health_changed"]
+[connection signal="stamina_changed" from="Skills/Endurance" to="MovementSystem/DirectionalMovement" method="_on_endurance_stamina_changed"]
+[connection signal="stamina_changed" from="Skills/Endurance" to="HUD/CanvasLayer/StaminaBar" method="_on_endurance_stamina_changed"]

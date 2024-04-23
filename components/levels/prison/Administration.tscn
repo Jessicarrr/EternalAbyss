@@ -1,8 +1,8 @@
-[gd_scene load_steps=38 format=3 uid="uid://dcu02eeh3wjrw"]
+[gd_scene load_steps=40 format=3 uid="uid://dcu02eeh3wjrw"]
 
 [ext_resource type="Texture2D" uid="uid://dscoavfvq5e6s" path="res://textures/prison/bricks.png" id="1_17bs6"]
 [ext_resource type="PackedScene" uid="uid://b6u3wrs6gna1b" path="res://components/levels/prison/WeatheredDoor.tscn" id="2_ifruw"]
-[ext_resource type="PackedScene" uid="uid://c6rmildyw8vh2" path="res://models/furniture/welder_stone.glb" id="4_2hd4w"]
+[ext_resource type="Texture2D" uid="uid://b1nmn3rorrdsk" path="res://textures/prison/welder_stone.png" id="3_eccpd"]
 [ext_resource type="PackedScene" uid="uid://jd3raqi1sd88" path="res://models/furniture/bookshelf_wood.glb" id="4_5xyee"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6ai6o"]
@@ -133,6 +133,15 @@ size = Vector3(4, 0.001, 4)
 [sub_resource type="BoxShape3D" id="BoxShape3D_lyx64"]
 size = Vector3(7.9, 1.9, 3.9)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kwgsr"]
+albedo_texture = ExtResource("3_eccpd")
+uv1_scale = Vector3(2, 2, 1)
+texture_filter = 0
+
+[sub_resource type="BoxMesh" id="BoxMesh_7jivm"]
+material = SubResource("StandardMaterial3D_kwgsr")
+size = Vector3(0.15, 2, 0.15)
+
 [node name="Administration" type="Node3D"]
 metadata/RoomType = "Administration"
 metadata/AllowedConnections = {
@@ -256,14 +265,18 @@ collision_mask = 2
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("BoxShape3D_lyx64")
 
+[node name="WelderStone5" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 1, -2)
+mesh = SubResource("BoxMesh_7jivm")
+skeleton = NodePath("../..")
+
+[node name="WelderStone6" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 1, 0)
+mesh = SubResource("BoxMesh_7jivm")
+skeleton = NodePath("../..")
+
 [node name="bookshelf_wood" parent="." instance=ExtResource("4_5xyee")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 2)
 
 [node name="bookshelf_wood2" parent="." instance=ExtResource("4_5xyee")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 2)
-
-[node name="welder_stone" parent="." instance=ExtResource("4_2hd4w")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 0)
-
-[node name="welder_stone2" parent="." instance=ExtResource("4_2hd4w")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -2)

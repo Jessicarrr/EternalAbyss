@@ -37,8 +37,8 @@ func _process(delta):
 	pass
 	
 func use_item():
-	#if can_use_item() == false:
-	#	return
+	if can_use_item() == false:
+		return
 		
 	if currently_using_item == true:
 		return
@@ -52,8 +52,8 @@ func use_item():
 		_destroy_item()
 		
 func stop_using_item():
-	#if can_use_item() == false:
-	#	return
+	if can_use_item() == false:
+		return
 		
 	if currently_using_item == false:
 		return

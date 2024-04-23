@@ -56,36 +56,6 @@ func refresh_held_item():
 	let_go_of_item()
 	hold_item()
 	
-func update_from_ui(data):
-	var slots = get_slots()
-	
-	# Ensure data length matches slots count
-	if data.size() != slots.size():
-		print("Data size and slots count mismatch.")
-		return
-
-	for i in range(slots.size()):
-		var ui_item = data[i]
-		var slot = slots[i]
-
-		# Clear the current slot
-		if slot.get_child_count() > 0:
-			var current_item = slot.get_child(0)
-			
-			if slot == active_hotbar_slot:
-				let_go_of_item()
-			
-			slot.remove_child(current_item)  # Removing the item without deleting it
-
-		# Assign new item from UI data to slot
-		if ui_item != null:
-			slot.add_child(ui_item)
-			
-			if slot == active_hotbar_slot:
-				hold_item()
-				
-	hotbar_item_changed.emit(get_selected_hotbar_item())
-	
 #func remove_first_person_item():
 #	if active_hotbar_slot == null:
 #		print("Couldnt deactivate hotbar slot coz slot is null")

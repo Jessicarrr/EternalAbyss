@@ -16,7 +16,7 @@ func _ready():
 
 func _input(_event):
 	# Check for the "attack" action
-	if Input.is_action_pressed("attack") and Input.mouse_mode == Input.MouseMode.MOUSE_MODE_CAPTURED:
+	if Input.is_action_pressed("attack"):
 		if attack_pressed_time == null:  # This prevents the timestamp from continuously updating while the button is held down
 			attack_pressed_time = Time.get_ticks_msec()
 	else:

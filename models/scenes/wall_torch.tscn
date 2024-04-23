@@ -1,10 +1,7 @@
-[gd_scene load_steps=24 format=3 uid="uid://c41eu1m1g72vu"]
+[gd_scene load_steps=14 format=3 uid="uid://c41eu1m1g72vu"]
 
 [ext_resource type="Texture2D" uid="uid://bpmwae860ltaf" path="res://sprites/lights/vfx_fire_vol_3-Sheet.png" id="1_bmndl"]
-[ext_resource type="Texture2D" uid="uid://61etdc56mvdn" path="res://sprites/lights/p_torch/glow.png" id="2_nwgn0"]
-[ext_resource type="Texture2D" uid="uid://bwioq7yn4hw4r" path="res://sprites/lights/p_torch/torch sprite fire fix-Sheet.png" id="3_r83ng"]
-[ext_resource type="Texture2D" uid="uid://dmnur78unpi8j" path="res://sprites/lights/p_torch/torch sprite stone fix 1.png" id="3_xpt4r"]
-[ext_resource type="Texture2D" uid="uid://dv82sapsh2wl7" path="res://sprites/lights/p_torch/torch sprite brace fix 1.png" id="5_jkk44"]
+[ext_resource type="Texture2D" uid="uid://61etdc56mvdn" path="res://sprites/lights/glow.png" id="2_8b8t4"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_eyg58"]
 atlas = ExtResource("1_bmndl")
@@ -89,61 +86,10 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_w4xb8"]
-atlas = ExtResource("3_r83ng")
-region = Rect2(0, 3, 23, 23)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_we37o"]
-atlas = ExtResource("3_r83ng")
-region = Rect2(23, 3, 23, 23)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_m4wlb"]
-atlas = ExtResource("3_r83ng")
-region = Rect2(46, 3, 23, 23)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ukgsd"]
-atlas = ExtResource("3_r83ng")
-region = Rect2(69, 3, 23, 23)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_hqkac"]
-atlas = ExtResource("3_r83ng")
-region = Rect2(92, 3, 23, 23)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_kj7ci"]
-atlas = ExtResource("3_r83ng")
-region = Rect2(115, 3, 23, 23)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_vxn8x"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_w4xb8")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_we37o")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_m4wlb")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ukgsd")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_hqkac")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_kj7ci")
-}],
-"loop": true,
-"name": &"default",
-"speed": 5.0
-}]
-
 [node name="wall_torch" type="Node3D"]
 
 [node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.0848272)
-visible = false
 modulate = Color(0.631373, 0.443137, 0.364706, 1)
 billboard = 2
 texture_filter = 0
@@ -162,36 +108,12 @@ shadow_enabled = true
 omni_range = 2.0
 omni_attenuation = 0.5
 
-[node name="Glow" type="Sprite3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.0348543)
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.0547736)
 transparency = 0.99
 cast_shadow = 0
 modulate = Color(0.882353, 0.87451, 0.882353, 1)
 pixel_size = 0.04
 billboard = 2
 texture_filter = 0
-texture = ExtResource("2_nwgn0")
-
-[node name="Torch" type="Sprite3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0602458, 0)
-billboard = 2
-shaded = true
-texture_filter = 0
-texture = ExtResource("3_xpt4r")
-
-[node name="Fire" type="AnimatedSprite3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.150402, 0)
-billboard = 2
-texture_filter = 0
-sprite_frames = SubResource("SpriteFrames_vxn8x")
-autoplay = "default"
-frame = 4
-frame_progress = 0.826013
-
-[node name="Brace" type="Sprite3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0982171, 0)
-billboard = 2
-shaded = true
-texture_filter = 0
-render_priority = 1
-texture = ExtResource("5_jkk44")
+texture = ExtResource("2_8b8t4")

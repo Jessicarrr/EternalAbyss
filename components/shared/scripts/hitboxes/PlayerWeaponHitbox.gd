@@ -10,9 +10,6 @@ var parent_item = null
 @onready var initial_position = self.position
 @onready var player = PlayerDataExtra.player_instance
 
-var disabled_position = Vector3(-1000, -1000, -1000)
-var disabled_scale = Vector3(0.001, 0.001, 0.001)
-
 var check_collisions = true
 
 signal hitbox_disabled_by_collision
@@ -47,8 +44,8 @@ func is_enabled():
 func disable():
 	check_collisions = false
 	disable_mesh()
-	self.scale = disabled_scale
-	self.position = disabled_position
+	self.scale = Vector3.ZERO
+	self.position = initial_position
 	
 func enable():
 	check_collisions = true	
