@@ -3,8 +3,8 @@
 [ext_resource type="Texture2D" uid="uid://cxdrpbkdhlshm" path="res://textures/prison/Doors/bricks_doorway.png" id="2_8q10l"]
 [ext_resource type="Texture2D" uid="uid://bhdi0hpe024b6" path="res://textures/doors/door wooden shed door old damaged.png" id="3_f7nif"]
 [ext_resource type="Texture2D" uid="uid://guq31rcaaw7k" path="res://textures/doors/door wooden shed door old damaged flipped.png" id="4_v3lk2"]
-[ext_resource type="PackedScene" uid="uid://wqb5src5s3br" path="res://models/furniture/welder_wood_pale.glb" id="5_6o2o1"]
-[ext_resource type="PackedScene" uid="uid://c6rmildyw8vh2" path="res://models/furniture/welder_stone.glb" id="5_e6ou1"]
+[ext_resource type="PackedScene" path="res://models/furniture/welder_wood.glb" id="5_6o2o1"]
+[ext_resource type="PackedScene" path="res://models/furniture/welder_stone.glb" id="5_e6ou1"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8g1gh"]
 transparency = 1
