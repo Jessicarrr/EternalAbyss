@@ -41,7 +41,7 @@ window/size/initial_position=Vector2i(500, 0)
 
 [gui]
 
-theme/custom_font="res://fonts/fancy_font_inventory_size.tres"
+theme/custom_font="res://fonts/DuolosSILR/font_theme.tres"
 theme/default_font_antialiasing=2
 timers/tooltip_delay_sec=0.04
 

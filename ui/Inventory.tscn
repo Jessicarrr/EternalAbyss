@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://ctqtltwdstq8w"]
+[gd_scene load_steps=5 format=3 uid="uid://ctqtltwdstq8w"]
 
 [ext_resource type="Script" path="res://ui/Inventory.gd" id="1_7aywv"]
 [ext_resource type="Script" path="res://ui/InventorySlot.gd" id="2_k5ip4"]
 [ext_resource type="Script" path="res://ui/DropItemRect.gd" id="3_4cc56"]
+[ext_resource type="Theme" uid="uid://1vnan1fwnevo" path="res://fonts/DuolosSILR/font_theme.tres" id="3_ciwp2"]
 
 [node name="Inventory" type="Control"]
 layout_mode = 3
@@ -37,206 +38,6 @@ layout_mode = 2
 mouse_filter = 2
 alignment = 1
 
-[node name="SampleColorRect" type="ColorRect" parent="VBoxContainer/MiddleRow"]
-custom_minimum_size = Vector2(70, 70)
-layout_mode = 2
-tooltip_text = "test test"
-color = Color(0, 0, 0, 0.462745)
-script = ExtResource("2_k5ip4")
-
-[node name="ColorRectBorder" type="ColorRect" parent="VBoxContainer/MiddleRow/SampleColorRect"]
-visible = false
-show_behind_parent = true
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 75.0
-offset_top = 75.0
-offset_right = 25.0
-offset_bottom = 25.0
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(1.05, 1.05)
-pivot_offset = Vector2(16, 16)
-mouse_filter = 2
-color = Color(0.435294, 0.435294, 0.435294, 0.964706)
-
-[node name="SampleColorRect2" type="ColorRect" parent="VBoxContainer/MiddleRow"]
-custom_minimum_size = Vector2(70, 70)
-layout_mode = 2
-tooltip_text = "test test"
-color = Color(0, 0, 0, 0.462745)
-script = ExtResource("2_k5ip4")
-
-[node name="ColorRectBorder" type="ColorRect" parent="VBoxContainer/MiddleRow/SampleColorRect2"]
-visible = false
-show_behind_parent = true
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 75.0
-offset_top = 75.0
-offset_right = 25.0
-offset_bottom = 25.0
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(1.05, 1.05)
-pivot_offset = Vector2(16, 16)
-mouse_filter = 2
-color = Color(0.435294, 0.435294, 0.435294, 0.964706)
-
-[node name="SampleColorRect3" type="ColorRect" parent="VBoxContainer/MiddleRow"]
-custom_minimum_size = Vector2(70, 70)
-layout_mode = 2
-tooltip_text = "test test"
-color = Color(0, 0, 0, 0.462745)
-script = ExtResource("2_k5ip4")
-
-[node name="ColorRectBorder" type="ColorRect" parent="VBoxContainer/MiddleRow/SampleColorRect3"]
-visible = false
-show_behind_parent = true
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 75.0
-offset_top = 75.0
-offset_right = 25.0
-offset_bottom = 25.0
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(1.05, 1.05)
-pivot_offset = Vector2(16, 16)
-mouse_filter = 2
-color = Color(0.435294, 0.435294, 0.435294, 0.964706)
-
-[node name="SampleColorRect4" type="ColorRect" parent="VBoxContainer/MiddleRow"]
-custom_minimum_size = Vector2(70, 70)
-layout_mode = 2
-tooltip_text = "test test"
-color = Color(0, 0, 0, 0.462745)
-script = ExtResource("2_k5ip4")
-
-[node name="ColorRectBorder" type="ColorRect" parent="VBoxContainer/MiddleRow/SampleColorRect4"]
-visible = false
-show_behind_parent = true
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 75.0
-offset_top = 75.0
-offset_right = 25.0
-offset_bottom = 25.0
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(1.05, 1.05)
-pivot_offset = Vector2(16, 16)
-mouse_filter = 2
-color = Color(0.435294, 0.435294, 0.435294, 0.964706)
-
-[node name="SampleColorRect5" type="ColorRect" parent="VBoxContainer/MiddleRow"]
-custom_minimum_size = Vector2(70, 70)
-layout_mode = 2
-tooltip_text = "test test"
-color = Color(0, 0, 0, 0.462745)
-script = ExtResource("2_k5ip4")
-
-[node name="ColorRectBorder" type="ColorRect" parent="VBoxContainer/MiddleRow/SampleColorRect5"]
-visible = false
-show_behind_parent = true
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 75.0
-offset_top = 75.0
-offset_right = 25.0
-offset_bottom = 25.0
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(1.05, 1.05)
-pivot_offset = Vector2(16, 16)
-mouse_filter = 2
-color = Color(0.435294, 0.435294, 0.435294, 0.964706)
-
-[node name="SampleColorRect6" type="ColorRect" parent="VBoxContainer/MiddleRow"]
-custom_minimum_size = Vector2(70, 70)
-layout_mode = 2
-tooltip_text = "test test"
-color = Color(0, 0, 0, 0.462745)
-script = ExtResource("2_k5ip4")
-
-[node name="ColorRectBorder" type="ColorRect" parent="VBoxContainer/MiddleRow/SampleColorRect6"]
-visible = false
-show_behind_parent = true
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 75.0
-offset_top = 75.0
-offset_right = 25.0
-offset_bottom = 25.0
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(1.05, 1.05)
-pivot_offset = Vector2(16, 16)
-mouse_filter = 2
-color = Color(0.435294, 0.435294, 0.435294, 0.964706)
-
-[node name="SampleColorRect7" type="ColorRect" parent="VBoxContainer/MiddleRow"]
-custom_minimum_size = Vector2(70, 70)
-layout_mode = 2
-tooltip_text = "test test"
-color = Color(0, 0, 0, 0.462745)
-script = ExtResource("2_k5ip4")
-
-[node name="ColorRectBorder" type="ColorRect" parent="VBoxContainer/MiddleRow/SampleColorRect7"]
-visible = false
-show_behind_parent = true
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 75.0
-offset_top = 75.0
-offset_right = 25.0
-offset_bottom = 25.0
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(1.05, 1.05)
-pivot_offset = Vector2(16, 16)
-mouse_filter = 2
-color = Color(0.435294, 0.435294, 0.435294, 0.964706)
-
-[node name="SampleColorRect8" type="ColorRect" parent="VBoxContainer/MiddleRow"]
-custom_minimum_size = Vector2(70, 70)
-layout_mode = 2
-tooltip_text = "test test"
-color = Color(0, 0, 0, 0.462745)
-script = ExtResource("2_k5ip4")
-
-[node name="ColorRectBorder" type="ColorRect" parent="VBoxContainer/MiddleRow/SampleColorRect8"]
-visible = false
-show_behind_parent = true
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 75.0
-offset_top = 75.0
-offset_right = 25.0
-offset_bottom = 25.0
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(1.05, 1.05)
-pivot_offset = Vector2(16, 16)
-mouse_filter = 2
-color = Color(0.435294, 0.435294, 0.435294, 0.964706)
-
 [node name="BottomRow" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
 mouse_filter = 2
@@ -262,6 +63,7 @@ visible = false
 custom_minimum_size = Vector2(70, 70)
 layout_mode = 0
 tooltip_text = "test test"
+theme = ExtResource("3_ciwp2")
 color = Color(0, 0, 0, 0.462745)
 script = ExtResource("2_k5ip4")
 

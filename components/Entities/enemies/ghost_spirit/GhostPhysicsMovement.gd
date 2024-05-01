@@ -13,13 +13,13 @@ var friction_amount = 2.0
 
 var ground_level_at_spawn = 0.0
 
-@export var raycast_node_path : NodePath = ""
-var raycast
+#@export var raycast_node_path : NodePath = ""
+#var raycast
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	nav_agent = Helpers.try_load_node(self, nav_agent_path)
-	raycast = Helpers.try_load_node(self, raycast_node_path)
+	#raycast = Helpers.try_load_node(self, raycast_node_path)
 	
 	
 	npc.on_hit.connect(_on_hit)

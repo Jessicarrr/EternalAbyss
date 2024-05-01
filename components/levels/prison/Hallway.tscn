@@ -1,17 +1,18 @@
-[gd_scene load_steps=73 format=3 uid="uid://cjbrvc38vhm6n"]
+[gd_scene load_steps=74 format=3 uid="uid://cjbrvc38vhm6n"]
 
 [ext_resource type="Script" path="res://components/shared/scripts/levels/Decorations.gd" id="1_8bjj4"]
 [ext_resource type="Texture2D" uid="uid://d1w5pj63bspp4" path="res://textures/puddles/puddle 1.png" id="2_4b7qx"]
-[ext_resource type="PackedScene" uid="uid://bopo8pbnk5ujr" path="res://models/scenes/gore_bones/gore_bones_01.tscn" id="2_6ptx4"]
+[ext_resource type="PackedScene" uid="uid://gnbfqvrb7ouh" path="res://models/scenes/gore_bones/gore_bones_01.tscn" id="2_6ptx4"]
 [ext_resource type="Texture2D" uid="uid://dkua1tjulngk3" path="res://textures/decals/Grime/dust_subtle_01.png" id="2_fk57i"]
 [ext_resource type="Texture2D" uid="uid://dw2elmhu1bkbw" path="res://textures/bloodstains/bloodstain big 1 48.png" id="2_kslan"]
 [ext_resource type="Texture2D" uid="uid://by48uqd3yhp71" path="res://textures/grasses/grasses 1.png" id="2_mykxa"]
 [ext_resource type="Script" path="res://components/shared/scripts/levels/BillboardVariator.gd" id="3_d4p7b"]
 [ext_resource type="Texture2D" uid="uid://c6cwq3q5geskx" path="res://textures/decals/Cracks/crack_01.png" id="3_f3hkx"]
-[ext_resource type="PackedScene" uid="uid://cpkumq3mc1iih" path="res://models/scenes/gore_bones/gore_bones_02.tscn" id="3_k77g7"]
+[ext_resource type="PackedScene" uid="uid://ta85cw1riwb7" path="res://models/scenes/gore_bones/gore_bones_02.tscn" id="3_k77g7"]
 [ext_resource type="Texture2D" uid="uid://ce1s8jjrj1xl5" path="res://textures/grasses/grasses 2.png" id="3_xa5r4"]
 [ext_resource type="Texture2D" uid="uid://ca8phwjy0s15y" path="res://textures/grasses/grasses 3.png" id="4_06me6"]
 [ext_resource type="Texture2D" uid="uid://c3jidqc6d51o0" path="res://textures/bloodstains/bloodstain big 3 48.png" id="4_dpt5v"]
+[ext_resource type="PackedScene" uid="uid://dan4mtakje34t" path="res://models/scenes/gore_bones/gore_bones_03.tscn" id="4_fmhl7"]
 [ext_resource type="Texture2D" uid="uid://dhi5i7vm3500i" path="res://textures/decals/Cracks/crack_03.png" id="4_gg8gg"]
 [ext_resource type="Texture2D" uid="uid://coi351i55frje" path="res://textures/puddles/puddle 2.png" id="4_jkg7o"]
 [ext_resource type="PackedScene" uid="uid://cuvl4ncxl738u" path="res://models/scenes/vines/vines_ceiling_small_01.tscn" id="5_esyiq"]
@@ -140,15 +141,19 @@ metadata/AllowedConnections = {
 "PrisonCell": 3.0
 }
 
-[node name="GoreBones" type="Sprite3D" parent="."]
+[node name="GoreBones" type="Node3D" parent="."]
 
 [node name="gore_bones_01" parent="GoreBones" instance=ExtResource("2_6ptx4")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.465288, 0, 0.525827)
-metadata/PercentChance = 1
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.199189, 0, 0.658332)
+metadata/PercentChance = 2
 
 [node name="gore_bones_02" parent="GoreBones" instance=ExtResource("3_k77g7")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.187953, 0, -0.674413)
-metadata/PercentChance = 1
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.621998, 0, -0.786219)
+metadata/PercentChance = 2
+
+[node name="gore_bones_03" parent="GoreBones" instance=ExtResource("4_fmhl7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.611261, 0, -0.650256)
+metadata/PercentChance = 2
 
 [node name="BloodstainsFloor" type="Node3D" parent="."]
 script = ExtResource("3_d4p7b")
