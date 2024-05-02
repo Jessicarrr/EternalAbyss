@@ -30,7 +30,7 @@ var _game_levels = [
 		"Enemies" : [
 			{
 				"Path" : "res://components/Entities/enemies/skeleton_sword_shield_simple/skeleton_sword_shield_simple.tscn",
-				"NumRequired" : 10,
+				"NumRequired" : 0,
 				"SpawnPoints" : [
 					"EnemySpawnPoint"
 				]

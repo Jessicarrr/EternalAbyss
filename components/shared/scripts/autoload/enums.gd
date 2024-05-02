@@ -66,6 +66,11 @@ enum Effects {
 	HEALTH_REGEN
 }
 
+enum ControllerTypes {
+	GAMEPAD,
+	KEYBOARD
+}
+
 func is_material_metallic(material):
 	match self.Materials:
 		Materials.IRON, Materials.SILVER:

@@ -1,7 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://csgf4qcsol5ih"]
+[gd_scene load_steps=4 format=3 uid="uid://csgf4qcsol5ih"]
 
 [ext_resource type="Script" path="res://ui/look_at_text.gd" id="1_pdxg2"]
-[ext_resource type="Theme" uid="uid://1vnan1fwnevo" path="res://fonts/DuolosSILR/font_theme.tres" id="2_220e6"]
+[ext_resource type="FontFile" uid="uid://diym884fjdvn5" path="res://fonts/DuolosSILR/DoulosSILR.ttf" id="2_54f6l"]
+
+[sub_resource type="Theme" id="Theme_2qh75"]
+default_font = ExtResource("2_54f6l")
+default_font_size = 24
 
 [node name="LookAtText" type="VBoxContainer"]
 anchors_preset = -1
@@ -20,5 +24,6 @@ script = ExtResource("1_pdxg2")
 
 [node name="Text" type="Label" parent="."]
 layout_mode = 2
-theme = ExtResource("2_220e6")
+theme = SubResource("Theme_2qh75")
+theme_type_variation = &"HeaderLarge"
 horizontal_alignment = 1

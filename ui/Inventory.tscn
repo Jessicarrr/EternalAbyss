@@ -1,9 +1,13 @@
-[gd_scene load_steps=5 format=3 uid="uid://ctqtltwdstq8w"]
+[gd_scene load_steps=6 format=3 uid="uid://ctqtltwdstq8w"]
 
 [ext_resource type="Script" path="res://ui/Inventory.gd" id="1_7aywv"]
+[ext_resource type="FontFile" uid="uid://diym884fjdvn5" path="res://fonts/DuolosSILR/DoulosSILR.ttf" id="2_4vp2y"]
 [ext_resource type="Script" path="res://ui/InventorySlot.gd" id="2_k5ip4"]
 [ext_resource type="Script" path="res://ui/DropItemRect.gd" id="3_4cc56"]
-[ext_resource type="Theme" uid="uid://1vnan1fwnevo" path="res://fonts/DuolosSILR/font_theme.tres" id="3_ciwp2"]
+
+[sub_resource type="Theme" id="Theme_k7maa"]
+default_font = ExtResource("2_4vp2y")
+default_font_size = 18
 
 [node name="Inventory" type="Control"]
 layout_mode = 3
@@ -63,7 +67,7 @@ visible = false
 custom_minimum_size = Vector2(70, 70)
 layout_mode = 0
 tooltip_text = "test test"
-theme = ExtResource("3_ciwp2")
+theme = SubResource("Theme_k7maa")
 color = Color(0, 0, 0, 0.462745)
 script = ExtResource("2_k5ip4")
 
