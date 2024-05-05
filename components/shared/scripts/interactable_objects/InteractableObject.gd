@@ -1,4 +1,4 @@
-extends Node
+extends Node3D
 class_name InteractableObject
 
 # Called when the node enters the scene tree for the first time.
@@ -10,7 +10,7 @@ func _ready():
 func _process(delta):
 	pass
 
-func interact():
+func interact(interactor_entity):
 	pass
 
 func get_lookat_text():

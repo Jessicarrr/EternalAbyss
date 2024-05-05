@@ -4,7 +4,7 @@ var raycast_check_delay = 50 #ms
 var last_ray_check = Time.get_ticks_msec()
 
 @onready var label = $Text
-@export var minimum_distance = 0.6
+var player = PlayerDataExtra.player_instance
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -15,20 +15,28 @@ func _process(delta):
 		return
 		
 	last_ray_check = Time.get_ticks_msec()
+
+	if player == null:
+		if PlayerDataExtra.player_instance == null:
+			label.text = ""
+			return
+			
+		player = PlayerDataExtra.player_instance
 	
-	if PlayerDataExtra.player_instance == null:
-		return
-	
-	var entity_seen = PlayerDataExtra.player_instance.get_thing_im_looking_at()
+	var entity_seen = player.get_thing_im_looking_at()
 	
 	if entity_seen == null:
+		label.text = ""
 		return
 		
 	var entity_parent = entity_seen.get_parent()
 	
-	if entity_seen.global_position.distance_to(PlayerDataExtra.player_instance.global_position) > minimum_distance:
-		label.text = ""
-		return
+	
+	
+#	if entity_seen.global_position.distance_to(player.global_position) > player.interaction_distance:
+#		print(entity_seen.global_position.distance_to(player.global_position))
+#		label.text = ""
+#		return
 		
 	if entity_seen.is_in_group("items") == true:
 		label.text = Helpers.generate_item_text(entity_seen, false)
@@ -47,3 +55,4 @@ func _process(delta):
 			return
 		
 	label.text = ""
+	#label.text = entity_parent.get_name() + "/" + entity_seen.get_name()

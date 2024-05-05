@@ -17,6 +17,7 @@ const PLAYER_STATE_MACHINE = 13
 const WELDER_GEN = 14
 const INVENTORY_UI = 15
 const NPC_HEARING = 16
+const INTERACT_WITH_OBJECTS = 17
 
 const SHOW_HITBOXES = false
 
@@ -37,7 +38,8 @@ var print_flags = {
 	COLLISIONS : false,
 	WELDER_GEN : false,
 	INVENTORY_UI : false,
-	NPC_HEARING : true
+	NPC_HEARING : false,
+	INTERACT_WITH_OBJECTS : true
 }
 
 func msg(type, args = []):

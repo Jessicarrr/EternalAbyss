@@ -424,16 +424,6 @@ transform = Transform3D(-1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, -1.894
 mesh = SubResource("BoxMesh_cxl1i")
 skeleton = NodePath("../..")
 
-[node name="WelderStone7" type="MeshInstance3D" parent="."]
-transform = Transform3D(-1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, 1, 1, -1)
-mesh = SubResource("BoxMesh_cxl1i")
-skeleton = NodePath("../..")
-
-[node name="WelderStone8" type="MeshInstance3D" parent="."]
-transform = Transform3D(-1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, -1, 1, -1)
-mesh = SubResource("BoxMesh_cxl1i")
-skeleton = NodePath("../..")
-
 [node name="WeatheredDoor" parent="." instance=ExtResource("4_1ax4q")]
 process_mode = 3
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.62784, 1, 0)
