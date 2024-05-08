@@ -20,12 +20,6 @@ enum ContainerStates {
 	FAILED 
 }
 
-enum SoundSources {
-	PLAYER_FOOTSTEP,
-	NON_PLAYER_FOOTSTEP,
-	WEAPON_HIT
-}
-
 enum ActorStates {
 	DEAD,
 	IDLE,
@@ -69,6 +63,23 @@ enum Effects {
 enum ControllerTypes {
 	GAMEPAD,
 	KEYBOARD
+}
+
+enum SoundDescriptions {
+	NONE,
+	AMBIENCE,
+	ACTION,
+	COMBAT
+}
+
+enum SoundVolumes {
+	SILENT = 0,
+	QUIET = 50, # sneaking footstep sound, door opening
+	AVERAGE = 100, #normal footstep sound, door closing
+	SEMI_LOUD = 135, #running footstep?
+	LOUD = 180, # 
+	VERY_LOUD = 280, #gun shots or something?
+	DEAFENING = 400 # explosions?
 }
 
 func is_material_metallic(material):

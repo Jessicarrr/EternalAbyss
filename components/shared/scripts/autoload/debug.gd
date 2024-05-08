@@ -18,6 +18,7 @@ const WELDER_GEN = 14
 const INVENTORY_UI = 15
 const NPC_HEARING = 16
 const INTERACT_WITH_OBJECTS = 17
+const EVENTS = 18
 
 const SHOW_HITBOXES = false
 
@@ -39,7 +40,8 @@ var print_flags = {
 	WELDER_GEN : false,
 	INVENTORY_UI : false,
 	NPC_HEARING : false,
-	INTERACT_WITH_OBJECTS : true
+	INTERACT_WITH_OBJECTS : false,
+	EVENTS : false
 }
 
 func msg(type, args = []):

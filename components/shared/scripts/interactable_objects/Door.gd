@@ -32,6 +32,8 @@ signal started_moving
 signal ended_moving
 signal started_opening
 signal started_closing
+signal ended_closing
+signal ended_opening
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -103,6 +105,8 @@ func open_instant(interactor_entity):
 		door_node.rotate_y(deg_to_rad(open_rotation_opened_from_front))
 	
 	is_door_open = true
+	ended_opening.emit(interactor_entity)
+	ended_moving.emit(interactor_entity)
 	
 func open(interactor_entity):
 	if is_moving == true:
@@ -131,10 +135,11 @@ func open(interactor_entity):
 	
 	tween.play()
 	is_door_open = true	
-	started_opening.emit()
-	do_moving_state(time_to_open_s)
+	started_opening.emit(interactor_entity)
+	await do_moving_state(time_to_open_s, interactor_entity)
+	ended_opening.emit(interactor_entity)
 
-func close():
+func close(interactor_entity):
 	if is_moving == true:
 		return
 	
@@ -142,23 +147,24 @@ func close():
 	tween.tween_property(door_node, "rotation", starting_rotation_door, time_to_open_s)
 	tween.play()
 	is_door_open = false
-	started_closing.emit()
-	do_moving_state(time_to_open_s)
+	started_closing.emit(interactor_entity)
+	await do_moving_state(time_to_open_s, interactor_entity)
+	ended_closing.emit(interactor_entity)
 	
-	
-func close_instant():
+func close_instant(interactor_entity):
 	print("Closing door...")
 	# Close the door by resetting to the starting rotation
 	door_node.rotation = starting_rotation_door
 	is_door_open = false
+	ended_closing.emit(interactor_entity)
 	pass
 	
-func do_moving_state(time_s):
-	started_moving.emit()
+func do_moving_state(time_s, interactor_entity):
+	started_moving.emit(interactor_entity)
 	is_moving = true
 	
 	await get_tree().create_timer(time_s).timeout
-	ended_moving.emit()
+	ended_moving.emit(interactor_entity)
 	is_moving = false
 
 func interact(interactor_entity):
@@ -168,16 +174,8 @@ func interact(interactor_entity):
 		
 	if is_moving == true:
 		return
-		
-	print("Initial door rotation: ", door_node.global_rotation)
-	
-	print("Door default rotation, as set in ready(): ", starting_rotation_door)
 	
 	if is_door_open:
-		close()
+		close(interactor_entity)
 	else:
 		open(interactor_entity)
-		
-	# After applying rotations
-	print("Updated door rotation: ", door_node.global_rotation)
-	print("---")

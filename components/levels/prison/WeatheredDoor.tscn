@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://b6u3wrs6gna1b"]
+[gd_scene load_steps=20 format=3 uid="uid://b6u3wrs6gna1b"]
 
 [ext_resource type="Script" path="res://components/shared/scripts/interactable_objects/DestroyableDoor.gd" id="1_l3o5k"]
 [ext_resource type="Texture2D" uid="uid://cxdrpbkdhlshm" path="res://textures/prison/Doors/bricks_doorway.png" id="2_8q10l"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://c0dxexhhsvvcv" path="res://models/furniture/welder_wood.glb" id="5_6o2o1"]
 [ext_resource type="PackedScene" uid="uid://b6pniiar5v3gr" path="res://models/furniture/welder_stone.glb" id="5_e6ou1"]
 [ext_resource type="Script" path="res://components/shared/scripts/sounds/RandomStreamPlayer3D.gd" id="7_rmkid"]
+[ext_resource type="Script" path="res://components/shared/scripts/sounds/SoundEventOnSignal.gd" id="8_4a0tx"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8g1gh"]
 transparency = 1
@@ -153,5 +154,15 @@ script = ExtResource("7_rmkid")
 possible_sounds = ["res://sounds/doors/wood_door_open_01.wav", "res://sounds/doors/wood_door_open_02.wav", "res://sounds/doors/wood_door_open_03.wav"]
 bus_name_string = "ReverbBus"
 
+[node name="DoorCloseSoundEvent" type="Node" parent="."]
+script = ExtResource("8_4a0tx")
+
+[node name="DoorOpenSoundEvent" type="Node" parent="."]
+script = ExtResource("8_4a0tx")
+sound_volume = 50
+sound_description = 2
+
+[connection signal="ended_closing" from="Door" to="DoorCloseSoundEvent" method="receive_signal"]
 [connection signal="started_closing" from="Door" to="DoorCloseSounds" method="play_random"]
 [connection signal="started_opening" from="Door" to="DoorOpenSounds" method="play_random"]
+[connection signal="started_opening" from="Door" to="DoorOpenSoundEvent" method="receive_signal"]

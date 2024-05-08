@@ -16,7 +16,7 @@ func _ready():
 	if bus_name_string != "":
 		self.bus = bus_name_string
 
-func play_random():
+func play_random(data = null):
 	var random_sound = loaded_sounds.pick_random()
 	self.stream = random_sound
 	self.play()

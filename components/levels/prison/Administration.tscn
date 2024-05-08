@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://dscoavfvq5e6s" path="res://textures/prison/bricks.png" id="1_17bs6"]
 [ext_resource type="PackedScene" uid="uid://b6u3wrs6gna1b" path="res://components/levels/prison/WeatheredDoor.tscn" id="2_ifruw"]
-[ext_resource type="PackedScene" uid="uid://c6rmildyw8vh2" path="res://models/furniture/welder_stone.glb" id="4_2hd4w"]
+[ext_resource type="PackedScene" uid="uid://b6pniiar5v3gr" path="res://models/furniture/welder_stone.glb" id="4_2hd4w"]
 [ext_resource type="PackedScene" uid="uid://jd3raqi1sd88" path="res://models/furniture/bookshelf_wood.glb" id="4_5xyee"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6ai6o"]
