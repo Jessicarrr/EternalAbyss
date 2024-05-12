@@ -210,6 +210,7 @@ script = ExtResource("7_la0f7")
 
 [node name="AttackSwing" type="Node" parent="PlayerStateMachine"]
 script = ExtResource("6_lp4ar")
+endurance_node_path = NodePath("../../Skills/Endurance")
 
 [node name="AttackRecovery" type="Node" parent="PlayerStateMachine"]
 script = ExtResource("7_bf8en")
@@ -486,6 +487,7 @@ script = ExtResource("49_8gqy0")
 [connection signal="player_ground_movement" from="MovementSystem/DirectionalMovement" to="MovementSystem/MovementSounds" method="_on_directional_movement_player_ground_movement"]
 [connection signal="health_changed" from="Skills/Health" to="HUD/ShaderStuff/LowHealthRedOverlay" method="_on_health_health_changed"]
 [connection signal="health_changed" from="Skills/Health" to="HUD/ShaderStuff/BlackVignette" method="_on_health_health_changed"]
+[connection signal="stamina_changed" from="Skills/Endurance" to="MovementSystem/DirectionalMovement" method="_on_endurance_stamina_changed"]
 [connection signal="request_inv_and_hb_update" from="HUD/CanvasLayer/Inventory" to="Gear" method="_on_request_inv_and_hb_update"]
 
 [editable path="HUD/CanvasLayer/StatusBarsVBox"]
