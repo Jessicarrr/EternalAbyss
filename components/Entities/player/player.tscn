@@ -199,7 +199,7 @@ script = ExtResource("3_y7it2")
 [node name="UseItemInput" type="Node" parent="PlayerStateMachine/Idle"]
 script = ExtResource("5_41g28")
 
-[node name="ItemHandler" type="Node" parent="PlayerStateMachine/Idle/UseItemInput"]
+[node name="ItemHandler" type="Node" parent="PlayerStateMachine/Idle"]
 script = ExtResource("4_7naah")
 
 [node name="AttackWindup" type="Node" parent="PlayerStateMachine"]
@@ -232,6 +232,9 @@ script = ExtResource("14_y68tw")
 [node name="Eating" type="Node" parent="PlayerStateMachine"]
 script = ExtResource("4_sgf1j")
 
+[node name="UseItemInput" type="Node" parent="PlayerStateMachine/Eating"]
+script = ExtResource("5_41g28")
+
 [node name="Gear" type="Node" parent="."]
 script = ExtResource("4_ieury")
 metadata/GameItems = ExtResource("5_ht5ei")
@@ -253,6 +256,7 @@ script = ExtResource("7_juny0")
 script = ExtResource("8_yp7wi")
 equipment_helper = NodePath("../EquipmentHelper")
 camera = NodePath("../../Head/Camera")
+state_machine_node_path = NodePath("../../PlayerStateMachine")
 
 [node name="Slots" type="Node" parent="Gear/Hotbar"]
 metadata/NumSlots = 3
@@ -478,7 +482,7 @@ script = ExtResource("49_8gqy0")
 [connection signal="request_state_change" from="PlayerStateMachine/BlockStart" to="PlayerStateMachine" method="_on_request_state_change"]
 [connection signal="request_state_change" from="PlayerStateMachine/Blocking" to="PlayerStateMachine" method="_on_request_state_change"]
 [connection signal="request_state_change" from="PlayerStateMachine/BlockEnding" to="PlayerStateMachine" method="_on_request_state_change"]
-[connection signal="hotbar_item_changed" from="Gear/Hotbar" to="PlayerStateMachine/Idle/UseItemInput/ItemHandler" method="_on_hotbar_item_changed"]
+[connection signal="hotbar_item_changed" from="Gear/Hotbar" to="PlayerStateMachine/Idle/ItemHandler" method="_on_hotbar_item_changed"]
 [connection signal="player_ground_movement" from="MovementSystem/DirectionalMovement" to="MovementSystem/MovementSounds" method="_on_directional_movement_player_ground_movement"]
 [connection signal="health_changed" from="Skills/Health" to="HUD/ShaderStuff/LowHealthRedOverlay" method="_on_health_health_changed"]
 [connection signal="health_changed" from="Skills/Health" to="HUD/ShaderStuff/BlackVignette" method="_on_health_health_changed"]

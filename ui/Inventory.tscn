@@ -68,26 +68,9 @@ custom_minimum_size = Vector2(70, 70)
 layout_mode = 0
 tooltip_text = "test test"
 theme = SubResource("Theme_k7maa")
-color = Color(0, 0, 0, 0.462745)
+color = Color(0, 0, 0, 0.639216)
 script = ExtResource("2_k5ip4")
-
-[node name="ColorRectBorder" type="ColorRect" parent="SampleColorRect"]
-visible = false
-show_behind_parent = true
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 75.0
-offset_top = 75.0
-offset_right = 25.0
-offset_bottom = 25.0
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(1.05, 1.05)
-pivot_offset = Vector2(16, 16)
-mouse_filter = 2
-color = Color(0.435294, 0.435294, 0.435294, 0.964706)
+off_color = Color(0, 0, 0, 0.701961)
 
 [node name="EquipmentVBox" type="VBoxContainer" parent="."]
 visible = false

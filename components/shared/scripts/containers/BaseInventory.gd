@@ -1,6 +1,7 @@
 extends Node
 
 @onready var slots_node = $Slots
+const metadata_name_slot_number = "SlotNumber"
 	
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -10,6 +11,7 @@ func populate_slots():
 	for i in range(0, slots_node.get_meta("NumSlots")):
 		var new_node = Node.new()
 		new_node.name = str(i)
+		new_node.set_meta(metadata_name_slot_number, i)
 		slots_node.add_child(new_node)
 
 func get_next_free_slot():
@@ -76,7 +78,30 @@ func update_from_ui(data):
 		if ui_item != null:
 			slot.add_child(ui_item)
 
+func get_num_slots():
+	return slots_node.get_children().size()
 	
+func get_first_slot():
+	return slots_node.get_child(0)
+	
+func get_last_slot():
+	var num_slots = get_num_slots()
+	var final_index = num_slots - 1
+	return slots_node.get_child(final_index)
+	
+func get_slot(slot_number):
+	for slot in slots_node.get_children():
+		if slot.get_meta(metadata_name_slot_number) == slot_number:
+			return slot
+			
+	return null
+	
+func slot_exists(slot_number):
+	if get_slot(slot_number) != null:
+		return true
+		
+	return false
+
 func get_slots():
 	var slots = []
 	for slot in slots_node.get_children():

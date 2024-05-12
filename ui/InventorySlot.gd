@@ -8,6 +8,9 @@ signal mouse_clicked
 
 @export var equipment_type = Enums.EquipmentType.NONE
 
+@export var on_color = Color(0.15, 0.15, 0.15, 0.6)
+@export var off_color = Color(0, 0, 0, 0.6)
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.

@@ -94,7 +94,7 @@ func get_relative_position_of_interactor(interactor):
 	return RelativePosition.NONE
 
 func open_instant(interactor_entity):
-	print("Opening door...")
+	#print("Opening door...")
 	var relative_position = get_relative_position_of_interactor(interactor_entity)
 	
 	if relative_position == RelativePosition.FRONT:
@@ -112,7 +112,7 @@ func open(interactor_entity):
 	if is_moving == true:
 		return
 	
-	print("Opening door...")
+	#print("Opening door...")
 	var relative_position = get_relative_position_of_interactor(interactor_entity)
 	create_new_tween()
 	
@@ -152,7 +152,7 @@ func close(interactor_entity):
 	ended_closing.emit(interactor_entity)
 	
 func close_instant(interactor_entity):
-	print("Closing door...")
+	#print("Closing door...")
 	# Close the door by resetting to the starting rotation
 	door_node.rotation = starting_rotation_door
 	is_door_open = false

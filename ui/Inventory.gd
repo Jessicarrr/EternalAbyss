@@ -17,6 +17,8 @@ var gear
 
 signal request_inv_and_hb_update
 
+var active_hotbar_slot = null
+
 var currently_dragged_item = {
 	"item" : null,
 	"sprite2d" : null,
@@ -54,6 +56,51 @@ func _ready():
 	gear.hotbar_updated.connect(_on_hotbar_update)
 	connect_drop_item_rects()
 	
+	var active_ui_slot = await get_active_ui_slot()
+	highlight_active_slot(active_ui_slot)
+	active_hotbar_slot = active_ui_slot
+	
+	gear.hotbar.active_slot_changed.connect(_on_active_hotbar_slot_changed)
+
+func get_active_ui_slot(index = -1):
+	if gear.hotbar.is_node_ready() == false:
+		await gear.hotbar.ready
+		
+	var slot_number = -1
+		
+	if index == -1:
+		slot_number = gear.hotbar.active_hotbar_slot_number
+	else:
+		slot_number = index
+		
+	var slot_ui = get_hotbar_slot_by_index(slot_number)
+	return slot_ui
+
+func highlight_active_slot(slot_ui):
+	slot_ui.color = slot_ui.on_color
+	
+func remove_highlight_from_frontend_slot(slot):
+	if active_hotbar_slot == null:
+		return
+		
+	active_hotbar_slot.color = active_hotbar_slot.off_color
+
+func update_slot_highlight(new_slot_number):
+	var newly_active_ui_slot = await get_active_ui_slot(new_slot_number)
+	
+	if newly_active_ui_slot == null:
+		push_warning("Could not find a ui hotbar slot for the corresponding index", new_slot_number)
+		return
+		
+	highlight_active_slot(newly_active_ui_slot)
+	remove_highlight_from_frontend_slot(active_hotbar_slot)
+	
+	active_hotbar_slot = newly_active_ui_slot
+	
+
+func _on_active_hotbar_slot_changed(slot_number):
+	update_slot_highlight(slot_number)
+
 func connect_drop_item_rects():
 	drop_item_rect_1.mouse_clicked.connect(_drop_item_rect_clicked)
 	return

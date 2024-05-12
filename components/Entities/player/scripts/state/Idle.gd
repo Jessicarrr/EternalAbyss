@@ -1,12 +1,14 @@
 extends "res://components/shared/scripts/actors/BaseState.gd"
 
-@onready var weapon_handler = $UseItemInput/ItemHandler
+@onready var item_handler = $ItemHandler
+@onready var use_item_input = $UseItemInput
 @export var endurance_node_path : NodePath = ""
 var endurance
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	endurance = Helpers.try_load_node(self, endurance_node_path)
+	use_item_input.use_button_pressed.connect(_on_item_used)
 	pass # Replace with function body.
 
 func begin(_data = {}):
@@ -21,10 +23,10 @@ func try_go_to_windup_state():
 	if active == false:
 		return
 		
-	if weapon_handler.is_hotbar_item_a_weapon() == false:
+	if item_handler.is_hotbar_item_a_weapon() == false:
 		return
 		
-	var item = weapon_handler.hotbar_item
+	var item = item_handler.hotbar_item
 	
 	if "stamina_cost" in item:
 		var required_stamina = item.stamina_cost
@@ -41,7 +43,7 @@ func _on_block():
 	if active == false:
 		return
 		
-	var item = weapon_handler.hotbar_item
+	var item = item_handler.hotbar_item
 	
 	Debug.msg(Debug.PLAYER_STATES, ["Idle state requesting to go to block start state"])
 	request_state_change.emit(self, Enums.ActorStates.BLOCK_START,\
@@ -54,7 +56,7 @@ func _process(delta):
 	super._process(delta)
 
 func _on_item_used():
-	var item = weapon_handler.hotbar_item
+	var item = item_handler.hotbar_item
 	
 	if item.can_use_item() == false:
 		Debug.msg(Debug.PLAYER_STATES, ["Idle state tried to use an item but it can't be used due to missing var assignments"])
@@ -62,6 +64,13 @@ func _on_item_used():
 	
 	if item.usage_type == Enums.ItemUsages.BLOCK:
 		_on_block()
+		return
+		
+	if item_handler.is_hotbar_item_food() == true:
+		request_state_change.emit(self, Enums.ActorStates.EATING, {
+			"item" : item_handler.hotbar_item
+		})
+		return
 
 func _on_attack_input_attack_clicked():
 	try_go_to_windup_state()
