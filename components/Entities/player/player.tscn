@@ -65,6 +65,8 @@ class_name Player
 
 @onready var movement_sounds = $MovementSystem/MovementSounds
 
+@onready var gear = $Gear
+
 @export var crouch_transition_time = 0.3
 @export var base_noise_level = 50.0
 @export var not_crouching_noise_modifier = 50.0

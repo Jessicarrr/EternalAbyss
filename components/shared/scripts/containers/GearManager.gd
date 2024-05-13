@@ -1,7 +1,6 @@
 extends Node
 
 @export var equipment_visuals : CanvasLayer
-@onready var items_list = self.get_meta("GameItems").instantiate().get_children()
 @onready var inventory = $Inventory
 @onready var equipment = $Equipment
 @onready var hotbar = $Hotbar
@@ -22,18 +21,12 @@ func _ready():
 	
 	spawn_item("Corroded Estoc")
 		
-	spawn_item("Salted Dried Fish")
-	spawn_item("Salted Dried Fish")
+	#spawn_item("Salted Dried Fish")
+	#spawn_item("Salted Dried Fish")
 	spawn_item("Torch")
 		
-	await get_tree().create_timer(1.0).timeout  # Wait for 1 second
-	print("Active hotbar slot children: ", hotbar.active_hotbar_slot.get_children())
-	pass # Replace with function body.
-	
-func print_game_items():
-	print("Game items:")
-	for item in items_list:
-		print("- ", item)
+	#await get_tree().create_timer(1.0).timeout  # Wait for 1 second
+	#print("Active hotbar slot children: ", hotbar.active_hotbar_slot.get_children())
 
 func print_items():
 	print("Inventory:")
@@ -41,12 +34,6 @@ func print_items():
 	#print_items_for_container("Equipment", equipment_slots)
 	print("Hotbar:")
 	hotbar.print_slots()
-
-func find_item_by_name(item_name: String) -> Node:
-	for item in items_list:
-		if item.item_name.to_lower() == item_name.to_lower():
-			return item
-	return null
 
 func get_next_free_slot() -> Dictionary:
 	var result = {"slot": null, "container": null}
@@ -108,7 +95,7 @@ func get_inventory_slots():
 	return inventory.get_slots()
 
 func spawn_item(item_name: String) -> Node:
-	var item = find_item_by_name(item_name)
+	var item = Helpers.find_item_by_name(item_name)
 	
 	if not item:
 		print("Could not find the item called '%s'." % item_name)

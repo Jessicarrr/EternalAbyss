@@ -35,6 +35,8 @@ var knockback_duration = 0.3 # Duration of the knockback in seconds
 var knockback_timer = 0.0
 var friction = 0.1
 
+var physics_enabled = false
+
 signal use_item_started # now in the middle of using the item
 signal use_item_ending # beginning to stop using the item
 signal use_item_ended # finished using the item 
@@ -46,6 +48,9 @@ signal on_unequipped
 
 func should_do_physics():
 	if WorldData.layout_node == null:
+		return false
+	
+	if physics_enabled == false:
 		return false
 		
 	if  WorldData.layout_node.is_ancestor_of(self):
@@ -131,16 +136,51 @@ func item_has_animation():
 		
 	return true
 
+func is_in_3d_world():
+	if collision_shape != null and collision_shape.disabled == false and ground_sprite.visible == true:
+		return true
+		
+	return false
+
+func remove_from_3d_world(source_entity = null):
+	if source_entity == null:
+		source_entity = PlayerDataExtra.player_camera
+		
+	physics_enabled = false
+	
+	collision_shape.set_deferred("disabled", true)
+	ground_sprite.visible = false
+	
+	self.global_position = source_entity.global_position
+	WorldData.layout_node.remove_child(self)
+	
+
+func put_in_3d_world():
+	WorldData.layout_node.add_child(self)
+	
+	while collision_shape == null:
+		await get_tree().create_timer(0.2).timeout
+	
+	if collision_shape.is_node_ready() == false:
+		await collision_shape.ready
+	
+	collision_shape.set_deferred("disabled", false)
+	await get_tree().process_frame
+	await get_tree().process_frame
+	await get_tree().process_frame
+	
+	ground_sprite.visible = true
+	physics_enabled = true
+	
+
 func drop(source_entity = null):
 	if source_entity == null:
 		source_entity = PlayerDataExtra.player_camera
 		
 	self.unequip()
 		
-	collision_shape.set_deferred("disabled", false)
-	ground_sprite.visible = true
-	#self.reparent(WorldData.layout_node)
-	WorldData.layout_node.add_child(self)
+	put_in_3d_world()
+		
 	self.global_position = source_entity.global_position
 	impulse_towards(-source_entity.global_transform.basis.z.normalized())
 	item_dropped.emit()

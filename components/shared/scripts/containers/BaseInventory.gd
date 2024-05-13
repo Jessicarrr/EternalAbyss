@@ -47,6 +47,9 @@ func add_item(item):
 	if item.get_parent() != null:
 		item.get_parent().remove_child(item)
 		
+	if item.is_in_3d_world():
+		item.remove_from_3d_world()
+		
 	slot.add_child(item)
 	
 	#print("Item added to the inventory. is it in the tree? hmm... ", item.is_inside_tree())

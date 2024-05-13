@@ -1,5 +1,19 @@
 extends Node
 
+var items_scene = "res://components/Entities/items/GameItems.tscn"
+@onready var items_list = load(items_scene).instantiate().get_children()
+
+func print_game_items():
+	print("Game items:")
+	for item in items_list:
+		print("- ", item)
+		
+func find_item_by_name(item_name: String) -> Node:
+	for item in items_list:
+		if item.item_name.to_lower() == item_name.to_lower():
+			return item
+	return null
+
 func print_all_children(node, indentation = ""):
 	# Print information about the current node
 	print("%sNode: %s, Type: %s" % [indentation, node.name, node.get_class()])

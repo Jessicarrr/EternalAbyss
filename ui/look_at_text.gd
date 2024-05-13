@@ -38,20 +38,20 @@ func _process(delta):
 #		label.text = ""
 #		return
 		
-	if entity_seen.is_in_group("items") == true:
-		label.text = Helpers.generate_item_text(entity_seen, false)
+	var interaction_button_string = InputDescriptor.get_button_string_for_action("interact")
+		
+	if entity_seen is Item == true:
+		label.text = "( " + interaction_button_string + " ) Pick Up\n" +Helpers.generate_item_text(entity_seen, false)
 		return
 		
 	if entity_seen is InteractableObject == true\
 	or entity_parent is InteractableObject == true:
-		var interaction_button_string = InputDescriptor.get_button_string_for_action("interact")
-		
 		if entity_seen.has_method("get_lookat_text"):
-			label.text = "[ " + interaction_button_string + " ] " + entity_seen.get_lookat_text()
+			label.text = "( " + interaction_button_string + " ) " + entity_seen.get_lookat_text()
 			return
 			
 		if entity_parent.has_method("get_lookat_text"):
-			label.text = "[ " + interaction_button_string + " ] " + entity_parent.get_lookat_text()
+			label.text = "( " + interaction_button_string + " ) " + entity_parent.get_lookat_text()
 			return
 		
 	label.text = ""

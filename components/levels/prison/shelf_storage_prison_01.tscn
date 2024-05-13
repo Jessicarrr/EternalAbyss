@@ -1,13 +1,11 @@
 [gd_scene load_steps=4 format=3 uid="uid://c3u17majpvdaw"]
 
 [ext_resource type="Script" path="res://components/shared/scripts/levels/Decorations.gd" id="1_j5qw2"]
-[ext_resource type="PackedScene" uid="uid://dkqjgb8k75j0w" path="res://models/furniture/shelf_storage.glb" id="2_y8hnc"]
+[ext_resource type="PackedScene" uid="uid://c4u3ulga1rw6x" path="res://models/scenes/furniture/shelf_storage.tscn" id="3_381ks"]
 [ext_resource type="PackedScene" uid="uid://2vaa8kgvkawx" path="res://models/scenes/candle_01.tscn" id="3_utcs8"]
 
 [node name="Shelf_Storage_Prison_01" type="Node3D"]
 script = ExtResource("1_j5qw2")
-
-[node name="shelf_storage" parent="." instance=ExtResource("2_y8hnc")]
 
 [node name="candle_01" parent="." instance=ExtResource("3_utcs8")]
 transform = Transform3D(0.65, 0, 0, 0, 0.65, 0, 0, 0, 0.65, -0.346098, 0.348869, -0.0991012)
@@ -28,3 +26,5 @@ metadata/PercentChance = 15
 [node name="candle_05" parent="." instance=ExtResource("3_utcs8")]
 transform = Transform3D(0.65, 0, 0, 0, 0.65, 0, 0, 0, 0.65, 0.264044, 1.07587, -0.0353126)
 metadata/PercentChance = 15
+
+[node name="shelf_storage" parent="." instance=ExtResource("3_381ks")]

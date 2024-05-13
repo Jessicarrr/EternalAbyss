@@ -1,6 +1,7 @@
 extends Node
 
 signal sound_event
+signal world_gen_complete
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -20,3 +21,6 @@ func do_sound_event(source, volume : float, sound_global_position : Vector3, des
 			description_name = key
 	
 	Debug.msg(Debug.EVENTS, ["Sound event emitted. Source: ", source.get_name(), " volume: ", volume, " pos: ", sound_global_position, ". description: " + description_name])
+
+func do_world_gen_complete_event():
+	world_gen_complete.emit()

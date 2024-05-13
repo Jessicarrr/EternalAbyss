@@ -59,6 +59,7 @@ func _ready():
 
 	print("Generation loop broken")
 	generation_finished.emit(current_level_data)
+	WorldData.events.do_world_gen_complete_event()
 	place_environment()
 	place_player()
 
