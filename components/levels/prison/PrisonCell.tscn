@@ -9,7 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://bil762wvjywyo" path="res://models/blender/prison_bed.glb" id="5_ygo2m"]
 [ext_resource type="Texture2D" uid="uid://do2pa64mo5ok5" path="res://textures/decals/Grime/dust_01.png" id="7_cnbe2"]
 [ext_resource type="PackedScene" uid="uid://1trojicuae27" path="res://models/scenes/fungi/mush_01.tscn" id="9_vktry"]
-[ext_resource type="PackedScene" uid="uid://c6rmildyw8vh2" path="res://models/furniture/welder_stone.glb" id="11_tmt1p"]
+[ext_resource type="PackedScene" uid="uid://b6pniiar5v3gr" path="res://models/furniture/welder_stone.glb" id="11_tmt1p"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lfu00"]
 albedo_texture = ExtResource("1_ur42q")
@@ -76,7 +76,7 @@ connection_points_node = NodePath("../ConnectionPoints")
 [node name="BedOnSide" type="Node3D" parent="FurnitureVariations"]
 
 [node name="prison_bed" parent="FurnitureVariations/BedOnSide" instance=ExtResource("5_ygo2m")]
-transform = Transform3D(7.54979e-08, 0, -1, 0, 1, 0, 1, 0, 7.54979e-08, 0.500955, 0, 0.268219)
+transform = Transform3D(-0.999644, 0, -0.0266655, 0, 1, 0, 0.0266655, 0, -0.999644, -0.168896, 0, 0.529152)
 
 [node name="crack decal" type="Decal" parent="FurnitureVariations/BedOnSide"]
 transform = Transform3D(-0.41245, -0.892921, -0.180492, -0.790624, 0.252437, 0.557843, -0.452547, 0.372783, -0.810083, 1.0314, 1.23537, 0.345982)
@@ -98,7 +98,7 @@ size = Vector3(0.5, 0.5, 0.5)
 texture_albedo = ExtResource("5_qrrew")
 
 [node name="mush_01" parent="FurnitureVariations/BedOnSide" instance=ExtResource("9_vktry")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.695391, 0.000500023, 0.817408)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.261658, 0.000500023, 0.111487)
 
 [node name="dirt_wall_a_lot" type="Decal" parent="FurnitureVariations/BedOnSide"]
 transform = Transform3D(1.17368, 0, 0, 0, -0.011103, 0.905507, 0, -0.125745, -0.0799542, 0, 1.02871, 1.02608)

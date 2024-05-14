@@ -18,7 +18,7 @@ func _on_health_health_changed(hitpoints, max_hitpoints):
 	# Calculate intensity based on health percentage
 	var intensity = 0.0
 	var max_intensity = 0.3  # The highest possible opacity
-	if player_health_percentage <= 0.5:
+	if player_health_percentage <= 0.70:
 		# Scale intensity from 0 to max_intensity as health goes from 50% to 0%
 		intensity = (0.5 - player_health_percentage) * 2.0 * max_intensity
 

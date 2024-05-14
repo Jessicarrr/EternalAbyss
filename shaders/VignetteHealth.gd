@@ -16,7 +16,7 @@ func invert(number):
 
 func _on_health_health_changed(hitpoints, max_hitpoints):
 	var player_health_percentage = float(hitpoints) / float(max_hitpoints)
-	print("Math: ", hitpoints, " / ", max_hitpoints, " = ", player_health_percentage)
+	#print("Math: ", hitpoints, " / ", max_hitpoints, " = ", player_health_percentage)
 	
 	# Calculate intensity based on health percentage
 	var intensity = default_vignette_opacity
@@ -26,7 +26,7 @@ func _on_health_health_changed(hitpoints, max_hitpoints):
 		# Add the default vignette opacity to the calculated intensity
 		intensity += default_vignette_opacity
 		# Clamp the intensity to ensure it's between default_vignette_opacity and 1.0
-		intensity = clamp(intensity, default_vignette_opacity, 1.0)
+		intensity = clamp(intensity, default_vignette_opacity, 2.0)
 
 
 	# Update shader parameters

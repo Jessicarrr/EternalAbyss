@@ -1,9 +1,8 @@
-[gd_scene load_steps=54 format=3 uid="uid://bug4m8f68fkbn"]
+[gd_scene load_steps=52 format=3 uid="uid://bug4m8f68fkbn"]
 
 [ext_resource type="Script" path="res://components/shared/scripts/levels/ReplaceWallWithDoor.gd" id="1_4di7a"]
 [ext_resource type="Script" path="res://components/shared/scripts/levels/Decorations.gd" id="1_p3ckr"]
 [ext_resource type="Texture2D" uid="uid://dscoavfvq5e6s" path="res://textures/prison/bricks.png" id="1_ur42q"]
-[ext_resource type="Texture2D" uid="uid://b1nmn3rorrdsk" path="res://textures/prison/welder_stone.png" id="2_7ubfa"]
 [ext_resource type="PackedScene" uid="uid://bmi1ca8oxx85n" path="res://models/scenes/pebbles/pebble_02.tscn" id="2_fjmym"]
 [ext_resource type="PackedScene" uid="uid://cuk4pl5jo1jw6" path="res://models/scenes/vines/vines_ceiling_01.tscn" id="2_kn3br"]
 [ext_resource type="PackedScene" uid="uid://bn3rb164yx6kr" path="res://models/scenes/vines/vines_ceiling_02.tscn" id="3_81d3l"]
@@ -25,6 +24,7 @@
 [ext_resource type="PackedScene" uid="uid://f5ycakm730an" path="res://models/scenes/vines/vines_ceiling_small_04.tscn" id="9_x8qsg"]
 [ext_resource type="Texture2D" uid="uid://s11r07hgjcu3" path="res://textures/prison/bricks_n.png" id="19_yiyyb"]
 [ext_resource type="PackedScene" uid="uid://dbt4kud7pj44s" path="res://components/Entities/items/ItemSpawners/ItemSpawner.tscn" id="25_5er6i"]
+[ext_resource type="PackedScene" uid="uid://b6pniiar5v3gr" path="res://models/furniture/welder_stone.glb" id="26_or6ch"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lfu00"]
 albedo_texture = ExtResource("1_ur42q")
@@ -127,16 +127,6 @@ size = Vector3(4, 0.001, 4)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_nv1d3"]
 size = Vector3(3.95, 1.9, 3.95)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3htdy"]
-albedo_texture = ExtResource("2_7ubfa")
-uv1_scale = Vector3(2, 2, 2)
-uv1_offset = Vector3(0, 0.008, 0)
-texture_filter = 0
-
-[sub_resource type="BoxMesh" id="BoxMesh_cxl1i"]
-material = SubResource("StandardMaterial3D_3htdy")
-size = Vector3(0.2, 2, 0.2)
 
 [node name="Storage_01" type="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, -0.5)
@@ -405,26 +395,6 @@ collision_mask = 2
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1)
 shape = SubResource("BoxShape3D_nv1d3")
 
-[node name="WelderStone5" type="MeshInstance3D" parent="."]
-transform = Transform3D(-1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, -2, 1, 3)
-mesh = SubResource("BoxMesh_cxl1i")
-skeleton = NodePath("../..")
-
-[node name="WelderStone6" type="MeshInstance3D" parent="."]
-transform = Transform3D(-1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, 2, 1, 3)
-mesh = SubResource("BoxMesh_cxl1i")
-skeleton = NodePath("../..")
-
-[node name="WelderStone9" type="MeshInstance3D" parent="."]
-transform = Transform3D(-1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, 1.8927, 1, -0.892644)
-mesh = SubResource("BoxMesh_cxl1i")
-skeleton = NodePath("../..")
-
-[node name="WelderStone10" type="MeshInstance3D" parent="."]
-transform = Transform3D(-1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, -1.89467, 1, -0.892644)
-mesh = SubResource("BoxMesh_cxl1i")
-skeleton = NodePath("../..")
-
 [node name="WeatheredDoor" parent="." instance=ExtResource("4_1ax4q")]
 process_mode = 3
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.62784, 1, 0)
@@ -469,3 +439,15 @@ possible_items_names = Array[String](["Salted Dried Fish"])
 [node name="ItemSpawner2" parent="." instance=ExtResource("25_5er6i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.58716, 0.364936, 2.10048)
 possible_items_names = Array[String](["Salted Dried Fish"])
+
+[node name="welder_stone" parent="." instance=ExtResource("26_or6ch")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.915, 0, -0.915)
+
+[node name="welder_stone2" parent="." instance=ExtResource("26_or6ch")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.915, 0, 2.915)
+
+[node name="welder_stone3" parent="." instance=ExtResource("26_or6ch")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.915, 0, 2.915)
+
+[node name="welder_stone4" parent="." instance=ExtResource("26_or6ch")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.915, 0, -0.915)

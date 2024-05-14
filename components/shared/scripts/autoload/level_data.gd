@@ -37,7 +37,7 @@ var _game_levels = [
 			},
 			{
 				"Path" : "res://components/Entities/enemies/ghost_spirit/ghost_spirit.tscn",
-				"NumRequired" : 5,
+				"NumRequired" : 0,
 				"SpawnPoints" : [
 					"GhostSpawnPoint"
 				]

@@ -44,11 +44,12 @@ func add_item(item):
 		else:
 			return Enums.ContainerStates.FAILED
 	
-	if item.get_parent() != null:
-		item.get_parent().remove_child(item)
-		
 	if item.is_in_3d_world():
 		item.remove_from_3d_world()
+	
+	if item.get_parent() != null:
+		item.get_parent().remove_child(item)
+
 		
 	slot.add_child(item)
 	
