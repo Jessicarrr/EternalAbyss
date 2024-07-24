@@ -1,13 +1,27 @@
 extends Node
 
 var dev_mode_active = false
-@export var dev_speed = 250
+var dev_speed = 200
+@export var dev_lowest_speed = 10
+@export var dev_highest_speed = 250
 
 var player: CharacterBody3D  # Reference to the player
 var collider: CollisionShape3D  # Reference to the collider
 
 # Reference to the parent script
 var directional_movement_script
+
+func _input(event):
+	if Input.is_action_just_pressed("dev_speed_up"):
+		dev_speed += 10
+	if Input.is_action_just_pressed("dev_slow_down"):
+		dev_speed -= 10
+		
+	if dev_speed < 10:
+		dev_speed = dev_lowest_speed
+	if dev_speed > dev_highest_speed:
+		dev_speed = dev_highest_speed
+	
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
