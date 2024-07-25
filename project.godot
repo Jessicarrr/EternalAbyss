@@ -44,6 +44,15 @@ window/size/initial_position=Vector2i(500, 0)
 
 project/assembly_name="Eternal Abyss"
 
+[file_customization]
+
+folder_colors={
+"res://entities/": "yellow",
+"res://items/": "yellow",
+"res://level-gen-v2/": "yellow",
+"res://world/": "yellow"
+}
+
 [gui]
 
 theme/custom_font="res://fonts/DuolosSILR/font_theme.tres"

@@ -23,7 +23,7 @@
 [ext_resource type="PackedScene" uid="uid://hmqr7kiwjpg5" path="res://models/scenes/pebbles/pebble_08.tscn" id="8_c5r6x"]
 [ext_resource type="PackedScene" uid="uid://f5ycakm730an" path="res://models/scenes/vines/vines_ceiling_small_04.tscn" id="9_x8qsg"]
 [ext_resource type="Texture2D" uid="uid://s11r07hgjcu3" path="res://textures/prison/bricks_n.png" id="19_yiyyb"]
-[ext_resource type="PackedScene" uid="uid://dbt4kud7pj44s" path="res://components/Entities/items/ItemSpawners/ItemSpawner.tscn" id="25_5er6i"]
+[ext_resource type="PackedScene" uid="uid://dbt4kud7pj44s" path="res://world/shared/scenes/item-spawners/ItemSpawner.tscn" id="25_5er6i"]
 [ext_resource type="PackedScene" uid="uid://b6pniiar5v3gr" path="res://models/furniture/welder_stone.glb" id="26_or6ch"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lfu00"]

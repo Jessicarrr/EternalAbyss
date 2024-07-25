@@ -1,6 +1,6 @@
 extends Node
 
-var items_scene = "res://components/Entities/items/GameItems.tscn"
+var items_scene = "res://items/shared/scenes/GameItems.tscn"
 @onready var items_list = load(items_scene).instantiate().get_children()
 
 func print_game_items():

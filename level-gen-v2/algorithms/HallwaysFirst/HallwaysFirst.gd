@@ -1,4 +1,4 @@
-extends "res://components/LevelGenV2/AlgorithmHelper.gd"
+extends "res://level-gen-v2/AlgorithmHelper.gd"
 
 var is_generating = false
 
