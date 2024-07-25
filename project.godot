@@ -40,6 +40,10 @@ window/size/viewport_height=720
 window/size/initial_position_type=0
 window/size/initial_position=Vector2i(500, 0)
 
+[dotnet]
+
+project/assembly_name="Eternal Abyss"
+
 [gui]
 
 theme/custom_font="res://fonts/DuolosSILR/font_theme.tres"
