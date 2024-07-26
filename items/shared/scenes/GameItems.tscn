@@ -208,6 +208,7 @@ frame_progress = 0.338455
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.17458, 0.0645317)
 light_color = Color(0.572549, 0.368627, 0.141176, 1)
 light_energy = 0.3
+shadow_enabled = true
 omni_attenuation = 0.5
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer3D" parent="FireTorch/OffHandItemSprite3D"]

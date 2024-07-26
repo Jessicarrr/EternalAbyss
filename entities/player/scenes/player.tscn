@@ -1,45 +1,46 @@
 [gd_scene load_steps=57 format=3 uid="uid://dcb260rwf1sj2"]
 
-[ext_resource type="Script" path="res://components/Entities/player/scripts/state/PlayerStateMachine.gd" id="1_1nv86"]
-[ext_resource type="Script" path="res://components/Entities/player/scripts/state/Idle.gd" id="2_re5th"]
-[ext_resource type="Script" path="res://components/Entities/player/scripts/state/functionality/IdleAttackInput.gd" id="3_y7it2"]
-[ext_resource type="Script" path="res://components/Entities/player/scripts/state/functionality/IdleWeaponHandler.gd" id="4_7naah"]
+[ext_resource type="Script" path="res://entities/player/scripts/player.gd" id="1_6mp8f"]
+[ext_resource type="Script" path="res://entities/player/scripts/state/PlayerStateMachine.gd" id="1_v1kjj"]
+[ext_resource type="Script" path="res://entities/player/scripts/state/Idle.gd" id="2_tnqbq"]
+[ext_resource type="Script" path="res://entities/player/scripts/state/functionality/IdleAttackInput.gd" id="3_eve5q"]
+[ext_resource type="Script" path="res://entities/player/scripts/state/functionality/UseItemInput.gd" id="4_b1cho"]
 [ext_resource type="Script" path="res://components/shared/scripts/containers/GearManager.gd" id="4_ieury"]
-[ext_resource type="Script" path="res://components/Entities/player/scripts/state/Eating.gd" id="4_sgf1j"]
-[ext_resource type="Script" path="res://components/Entities/player/scripts/state/Windup.gd" id="5_8si8d"]
-[ext_resource type="Script" path="res://components/Entities/player/scripts/state/functionality/UseItemInput.gd" id="5_41g28"]
+[ext_resource type="Script" path="res://entities/player/scripts/state/IdleWeaponHandler.gd" id="5_8efs7"]
 [ext_resource type="PackedScene" uid="uid://blfvfc7exomsg" path="res://items/shared/scenes/GameItems.tscn" id="5_ht5ei"]
+[ext_resource type="Script" path="res://entities/player/scripts/state/Windup.gd" id="6_1456h"]
 [ext_resource type="Script" path="res://components/shared/scripts/containers/InventoryManager.gd" id="6_jyb60"]
-[ext_resource type="Script" path="res://components/Entities/player/scripts/state/Swing.gd" id="6_lp4ar"]
-[ext_resource type="Script" path="res://components/Entities/player/scripts/state/Recovery.gd" id="7_bf8en"]
-[ext_resource type="Script" path="res://components/Entities/player/scripts/DirectionalMovement.gd" id="7_djh8g"]
-[ext_resource type="Script" path="res://components/Entities/player/scripts/state/functionality/InputAttackCancel.gd" id="7_la0f7"]
-[ext_resource type="Script" path="res://components/Entities/player/scripts/DevModeMovement.gd" id="8_khi54"]
-[ext_resource type="Script" path="res://components/Entities/player/scripts/state/AttackCancel.gd" id="8_utxg2"]
+[ext_resource type="Script" path="res://entities/player/scripts/state/functionality/InputAttackCancel.gd" id="7_krbbd"]
+[ext_resource type="Script" path="res://entities/player/scripts/state/Swing.gd" id="8_541qp"]
 [ext_resource type="Script" path="res://components/shared/scripts/containers/HotbarManager.gd" id="8_yp7wi"]
-[ext_resource type="Script" path="res://components/Entities/player/scripts/state/AttackRecoil.gd" id="10_tt7v8"]
-[ext_resource type="Script" path="res://components/Entities/player/scripts/FrontLight.gd" id="11_65oqg"]
-[ext_resource type="Script" path="res://components/Entities/Player/MovementSounds.gd" id="12_ft81l"]
-[ext_resource type="Script" path="res://components/Entities/player/scripts/state/BlockStart.gd" id="12_kptwu"]
-[ext_resource type="Script" path="res://components/Entities/player/scripts/state/Blocking.gd" id="13_yx2o4"]
-[ext_resource type="Script" path="res://components/Entities/Player/Camera.gd" id="14_qb0xk"]
-[ext_resource type="Script" path="res://components/Entities/player/scripts/state/BlockEnding.gd" id="14_y68tw"]
-[ext_resource type="Script" path="res://components/Entities/player/scripts/MouseMovement.gd" id="16_gvfj2"]
+[ext_resource type="Script" path="res://entities/player/scripts/state/Recovery.gd" id="9_uqlww"]
+[ext_resource type="Script" path="res://entities/player/scripts/state/AttackCancel.gd" id="10_sqvf5"]
+[ext_resource type="Script" path="res://entities/player/scripts/state/AttackRecoil.gd" id="11_pup7f"]
+[ext_resource type="Script" path="res://entities/player/scripts/state/BlockStart.gd" id="12_7tfu5"]
+[ext_resource type="Script" path="res://entities/player/scripts/state/Blocking.gd" id="13_0isu0"]
+[ext_resource type="Script" path="res://entities/player/scripts/state/BlockEnding.gd" id="14_tgg0p"]
+[ext_resource type="Script" path="res://entities/player/scripts/state/Eating.gd" id="15_tp5ui"]
 [ext_resource type="AudioStream" uid="uid://cq8x83kwk4opl" path="res://sounds/ghostly_windy_ambience.wav" id="16_rljpy"]
 [ext_resource type="Script" path="res://items/equippable/shared/scripts/EquipmentSlotHelper.gd" id="19_auhrk"]
-[ext_resource type="Script" path="res://components/Entities/player/scripts/sounds/AttackSounds.gd" id="19_mgc05"]
-[ext_resource type="Script" path="res://components/Entities/player/scripts/sounds/RandomAmbientSounds.gd" id="21_63v10"]
+[ext_resource type="Script" path="res://entities/player/scripts/sounds/RandomAmbientSounds.gd" id="21_63v10"]
 [ext_resource type="Script" path="res://items/equippable/shared/scripts/EquipmentHelper.gd" id="21_lqqul"]
-[ext_resource type="Script" path="res://components/Entities/player/scripts/CrouchInput.gd" id="26_d22uf"]
+[ext_resource type="Script" path="res://entities/player/scripts/MouseMovement.gd" id="22_1rybo"]
+[ext_resource type="Script" path="res://entities/player/scripts/DirectionalMovement.gd" id="23_rggqs"]
+[ext_resource type="Script" path="res://entities/player/scripts/DevModeMovement.gd" id="24_pt1r8"]
+[ext_resource type="Script" path="res://entities/player/scripts/MovementSounds.gd" id="26_2mhyc"]
+[ext_resource type="Script" path="res://entities/player/scripts/CrouchInput.gd" id="26_61fuf"]
+[ext_resource type="Script" path="res://entities/player/scripts/sounds/AttackSounds.gd" id="27_dh01p"]
 [ext_resource type="Script" path="res://entities/shared/scripts/GetDamagedSounds.gd" id="29_tw623"]
 [ext_resource type="Script" path="res://skills/health/scripts/Health.gd" id="30_rb013"]
 [ext_resource type="Script" path="res://skills/endurance/scripts/Endurance.gd" id="31_ux8sm"]
 [ext_resource type="Script" path="res://skills/stealth/scripts/Stealth.gd" id="32_slno1"]
-[ext_resource type="Script" path="res://components/Entities/player/scripts/ColliderFunctionality.gd" id="32_w7w6s"]
-[ext_resource type="Script" path="res://components/Entities/player/scripts/HeadScript.gd" id="33_cl8aj"]
+[ext_resource type="Script" path="res://entities/player/scripts/ColliderFunctionality.gd" id="33_xsv4u"]
 [ext_resource type="PackedScene" uid="uid://csgf4qcsol5ih" path="res://ui/look_at_text.tscn" id="34_a5qka"]
+[ext_resource type="Script" path="res://entities/player/scripts/HeadScript.gd" id="34_nmqel"]
 [ext_resource type="PackedScene" uid="uid://ctqtltwdstq8w" path="res://ui/Inventory.tscn" id="35_36exr"]
+[ext_resource type="Script" path="res://entities/player/scripts/FrontLight.gd" id="36_0jm0o"]
 [ext_resource type="Shader" path="res://shaders/DamageVignette.gdshader" id="36_1ahqv"]
+[ext_resource type="Script" path="res://entities/player/scripts/SetCamera.gd" id="36_2o1vv"]
 [ext_resource type="PackedScene" uid="uid://db1md1x1bc2h4" path="res://ui/StatusBars.tscn" id="36_54iry"]
 [ext_resource type="Script" path="res://shaders/DamageVignette.gd" id="37_wyik8"]
 [ext_resource type="Shader" path="res://shaders/red_overlay.gdshader" id="38_62aiw"]
@@ -48,109 +49,7 @@
 [ext_resource type="Shader" path="res://shaders/vignette.gdshader" id="40_6mr1p"]
 [ext_resource type="Script" path="res://shaders/VignetteHealth.gd" id="41_22i2c"]
 [ext_resource type="Shader" path="res://shaders/PixelShader.gdshader" id="42_qnj6d"]
-[ext_resource type="Script" path="res://components/Entities/player/PlayerInteractWithObject.gd" id="49_8gqy0"]
-
-[sub_resource type="GDScript" id="GDScript_xn7no"]
-script/source = "extends CharacterBody3D
-class_name Player
-
-# Functions
-@onready var health = $Skills/Health
-@onready var stealth = $Skills/Stealth
-
-@onready var state_machine = $PlayerStateMachine
-@onready var hotbar = $Gear/Hotbar
-
-@onready var raycast : RayCast3D = $Head/Camera/RayCast
-
-@onready var movement_sounds = $MovementSystem/MovementSounds
-
-@onready var gear = $Gear
-
-@export var crouch_transition_time = 0.3
-@export var base_noise_level = 50.0
-@export var not_crouching_noise_modifier = 50.0
-@export var interaction_distance = 2.0
-
-var crouching = false:
-	set(val):
-		if val == false:
-			crouch_ended.emit()
-			crouch_toggled.emit(val)
-	
-		elif val == true:
-			crouch_started.emit()
-			crouch_toggled.emit(val)
-			
-		crouching = val
-	get:
-		return crouching
-
-signal on_hit
-signal on_blocked_hit
-
-signal crouch_started
-signal crouch_ended
-signal crouch_toggled
-
-func _ready():
-	PlayerDataExtra.set_player(self)
-	
-	movement_sounds.sound_made.connect(_process_footstep_sound)
-	raycast.target_position = Vector3(0, 0, -interaction_distance)
-	
-func _process(_delta):
-	pass
-	
-func _process_sound(source):
-	pass
-	
-func _process_footstep_sound():
-	var stealth_level = stealth.level
-	var stealth_reduction_per_level = stealth.percent_reduction_per_level
-	var percent_volume_reduction = stealth_level * stealth_reduction_per_level
-		
-	#Final_Volume=Volume_Base×(1−(Sneak_Skill_Level×Reduction_Per_Level))
-	
-	var final_volume = base_noise_level * (1 - (percent_volume_reduction))
-	
-	if crouching == false:
-		final_volume += not_crouching_noise_modifier
-		
-	# Ensure final volume is not negative
-	final_volume = max(final_volume, 0)
-	
-	#footstep_sound_made.emit(final_volume)
-	WorldData.events.do_sound_event(self, final_volume, self.global_position, Enums.SoundDescriptions.ACTION)
-	
-func get_equipped_weapon():
-	var item = hotbar.get_selected_hotbar_item()
-	
-	if item.is_in_group(\"weapons\"):
-		return item
-		
-	return null
-
-func get_thing_im_looking_at():
-	if raycast.is_colliding() == false:
-		return null
-		
-	var collided_object = raycast.get_collider()
-	return collided_object
-	
-# getting hit by an enemy.
-# - entity: the enemy
-# - damage: how much damage to apply to the player
-func hit(entity, damage):
-	if state_machine.current_state == Enums.ActorStates.BLOCKING:
-		var thing = get_thing_im_looking_at()
-		if thing == entity or thing.get_parent() == entity:
-			on_blocked_hit.emit(entity, damage)
-			return
-			
-	health.damage(damage)
-	on_hit.emit(entity, damage)
-"
+[ext_resource type="Script" path="res://entities/player/scripts/PlayerInteractWithObject.gd" id="49_qqrxn"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_gdq8c"]
 radius = 0.2
@@ -184,59 +83,59 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3, 1)
 disable_mode = 2
 collision_layer = 32
 collision_mask = 9
-script = SubResource("GDScript_xn7no")
+script = ExtResource("1_6mp8f")
 metadata/Camera = NodePath("Head/Camera")
 metadata/IsPlayer = true
 
 [node name="PlayerStateMachine" type="Node" parent="."]
-script = ExtResource("1_1nv86")
+script = ExtResource("1_v1kjj")
 
 [node name="Idle" type="Node" parent="PlayerStateMachine"]
-script = ExtResource("2_re5th")
+script = ExtResource("2_tnqbq")
 endurance_node_path = NodePath("../../Skills/Endurance")
 
 [node name="AttackInput" type="Node" parent="PlayerStateMachine/Idle"]
-script = ExtResource("3_y7it2")
+script = ExtResource("3_eve5q")
 
 [node name="UseItemInput" type="Node" parent="PlayerStateMachine/Idle"]
-script = ExtResource("5_41g28")
+script = ExtResource("4_b1cho")
 
 [node name="ItemHandler" type="Node" parent="PlayerStateMachine/Idle"]
-script = ExtResource("4_7naah")
+script = ExtResource("5_8efs7")
 
 [node name="AttackWindup" type="Node" parent="PlayerStateMachine"]
-script = ExtResource("5_8si8d")
+script = ExtResource("6_1456h")
 
 [node name="InputAttackCancel" type="Node" parent="PlayerStateMachine/AttackWindup"]
-script = ExtResource("7_la0f7")
+script = ExtResource("7_krbbd")
 
 [node name="AttackSwing" type="Node" parent="PlayerStateMachine"]
-script = ExtResource("6_lp4ar")
+script = ExtResource("8_541qp")
 endurance_node_path = NodePath("../../Skills/Endurance")
 
 [node name="AttackRecovery" type="Node" parent="PlayerStateMachine"]
-script = ExtResource("7_bf8en")
+script = ExtResource("9_uqlww")
 
 [node name="AttackCancel" type="Node" parent="PlayerStateMachine"]
-script = ExtResource("8_utxg2")
+script = ExtResource("10_sqvf5")
 
 [node name="AttackRecoil" type="Node" parent="PlayerStateMachine"]
-script = ExtResource("10_tt7v8")
+script = ExtResource("11_pup7f")
 
 [node name="BlockStart" type="Node" parent="PlayerStateMachine"]
-script = ExtResource("12_kptwu")
+script = ExtResource("12_7tfu5")
 
 [node name="Blocking" type="Node" parent="PlayerStateMachine"]
-script = ExtResource("13_yx2o4")
+script = ExtResource("13_0isu0")
 
 [node name="BlockEnding" type="Node" parent="PlayerStateMachine"]
-script = ExtResource("14_y68tw")
+script = ExtResource("14_tgg0p")
 
 [node name="Eating" type="Node" parent="PlayerStateMachine"]
-script = ExtResource("4_sgf1j")
+script = ExtResource("15_tp5ui")
 
 [node name="UseItemInput" type="Node" parent="PlayerStateMachine/Eating"]
-script = ExtResource("5_41g28")
+script = ExtResource("4_b1cho")
 
 [node name="Gear" type="Node" parent="."]
 script = ExtResource("4_ieury")
@@ -270,29 +169,31 @@ script = ExtResource("21_lqqul")
 [node name="MovementSystem" type="Node" parent="."]
 
 [node name="MouseMovement" type="Node" parent="MovementSystem"]
-script = ExtResource("16_gvfj2")
+script = ExtResource("22_1rybo")
 metadata/Camera = NodePath("../../Head/Camera")
 metadata/Player = NodePath("../..")
 
 [node name="DirectionalMovement" type="Node" parent="MovementSystem" node_paths=PackedStringArray("player", "camera")]
-script = ExtResource("7_djh8g")
+script = ExtResource("23_rggqs")
 player = NodePath("../..")
 camera = NodePath("../../Head/Camera")
 
 [node name="DevModeMovement" type="Node" parent="MovementSystem/DirectionalMovement"]
-script = ExtResource("8_khi54")
+script = ExtResource("24_pt1r8")
 
 [node name="MovementSounds" type="Node" parent="MovementSystem" node_paths=PackedStringArray("audio_stream")]
-script = ExtResource("12_ft81l")
+script = ExtResource("26_2mhyc")
 audio_stream = NodePath("../../FootstepSoundPlayer")
 
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="MovementSystem/MovementSounds"]
+
 [node name="CrouchInput" type="Node" parent="MovementSystem"]
-script = ExtResource("26_d22uf")
+script = ExtResource("26_61fuf")
 
 [node name="Sounds" type="Node" parent="."]
 
 [node name="Attacks" type="Node" parent="Sounds"]
-script = ExtResource("19_mgc05")
+script = ExtResource("27_dh01p")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Sounds/Attacks"]
 
@@ -336,17 +237,17 @@ skill_name = "Stealth"
 [node name="Collider" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0705414, 0)
 shape = SubResource("CapsuleShape3D_gdq8c")
-script = ExtResource("32_w7w6s")
+script = ExtResource("33_xsv4u")
 
 [node name="Head" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.436481, 0)
-script = ExtResource("33_cl8aj")
+script = ExtResource("34_nmqel")
 
 [node name="Camera" type="Camera3D" parent="Head"]
 cull_mask = 1048573
 current = true
 fov = 80.0
-script = ExtResource("14_qb0xk")
+script = ExtResource("36_2o1vv")
 
 [node name="RayCast" type="RayCast3D" parent="Head/Camera"]
 target_position = Vector3(0, 0, -50)
@@ -365,7 +266,7 @@ omni_attenuation = 0.707106
 
 [node name="FrontLight" type="Node3D" parent="Head/Lamp" node_paths=PackedStringArray("camera")]
 transform = Transform3D(1, 0, 0, 0, 0.99996, -0.00895342, 0, 0.00895342, 0.99996, 0, 0, 0)
-script = ExtResource("11_65oqg")
+script = ExtResource("36_0jm0o")
 camera = NodePath("../../Camera")
 
 [node name="SpotLight3D" type="SpotLight3D" parent="Head/Lamp/FrontLight"]
@@ -470,7 +371,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.555356, 0)
 shape = SubResource("BoxShape3D_qcmu2")
 
 [node name="InteractWithObject" type="Node" parent="."]
-script = ExtResource("49_8gqy0")
+script = ExtResource("49_qqrxn")
 
 [connection signal="on_hit" from="." to="HUD/ShaderStuff/DamageVignette" method="_on_hit"]
 [connection signal="state_changed" from="PlayerStateMachine" to="Sounds/Attacks" method="_on_player_state_machine_state_changed"]

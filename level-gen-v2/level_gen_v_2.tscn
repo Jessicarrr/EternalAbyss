@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://level-gen-v2/WorldEvents.gd" id="1_sqkn6"]
 [ext_resource type="Script" path="res://level-gen-v2/Generator.gd" id="2_hstt7"]
-[ext_resource type="PackedScene" uid="uid://dcb260rwf1sj2" path="res://components/Entities/player/player.tscn" id="3_a0eaq"]
+[ext_resource type="PackedScene" uid="uid://dcb260rwf1sj2" path="res://entities/player/scenes/player.tscn" id="3_a0eaq"]
 [ext_resource type="Script" path="res://level-gen-v2/GenDebug.gd" id="4_ftthq"]
 [ext_resource type="Script" path="res://level-gen-v2/algorithms/HallwaysFirst/HallwaysFirst.gd" id="5_32axo"]
 [ext_resource type="Script" path="res://level-gen-v2/AlgorithmHelper.gd" id="6_tofmr"]
