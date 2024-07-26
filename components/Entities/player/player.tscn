@@ -13,12 +13,10 @@
 [ext_resource type="Script" path="res://components/Entities/player/scripts/state/Swing.gd" id="6_lp4ar"]
 [ext_resource type="Script" path="res://components/Entities/player/scripts/state/Recovery.gd" id="7_bf8en"]
 [ext_resource type="Script" path="res://components/Entities/player/scripts/DirectionalMovement.gd" id="7_djh8g"]
-[ext_resource type="Script" path="res://components/shared/scripts/equipment/EquipmentSlotHelper.gd" id="7_juny0"]
 [ext_resource type="Script" path="res://components/Entities/player/scripts/state/functionality/InputAttackCancel.gd" id="7_la0f7"]
 [ext_resource type="Script" path="res://components/Entities/player/scripts/DevModeMovement.gd" id="8_khi54"]
 [ext_resource type="Script" path="res://components/Entities/player/scripts/state/AttackCancel.gd" id="8_utxg2"]
 [ext_resource type="Script" path="res://components/shared/scripts/containers/HotbarManager.gd" id="8_yp7wi"]
-[ext_resource type="Script" path="res://components/shared/scripts/equipment/EquipmentHelper.gd" id="9_vndym"]
 [ext_resource type="Script" path="res://components/Entities/player/scripts/state/AttackRecoil.gd" id="10_tt7v8"]
 [ext_resource type="Script" path="res://components/Entities/player/scripts/FrontLight.gd" id="11_65oqg"]
 [ext_resource type="Script" path="res://components/Entities/Player/MovementSounds.gd" id="12_ft81l"]
@@ -29,8 +27,10 @@
 [ext_resource type="Script" path="res://components/Entities/player/scripts/MouseMovement.gd" id="16_gvfj2"]
 [ext_resource type="AudioStream" uid="uid://cq8x83kwk4opl" path="res://sounds/ghostly_windy_ambience.wav" id="16_rljpy"]
 [ext_resource type="Script" path="res://components/Entities/player/hud/FPSCounter.gd" id="18_0i3d2"]
+[ext_resource type="Script" path="res://items/equippable/shared/EquipmentSlotHelper.gd" id="19_8wgjh"]
 [ext_resource type="Script" path="res://components/Entities/player/scripts/sounds/AttackSounds.gd" id="19_mgc05"]
 [ext_resource type="Script" path="res://components/Entities/player/scripts/sounds/RandomAmbientSounds.gd" id="21_63v10"]
+[ext_resource type="Script" path="res://items/equippable/shared/EquipmentHelper.gd" id="21_eq71y"]
 [ext_resource type="Script" path="res://components/shared/scripts/skills/Health.gd" id="22_bgx6x"]
 [ext_resource type="Script" path="res://components/Entities/player/scripts/CrouchInput.gd" id="26_d22uf"]
 [ext_resource type="Script" path="res://components/shared/scripts/sounds/GetDamagedSounds.gd" id="28_u2q57"]
@@ -253,7 +253,7 @@ metadata/NumSlots = 10
 [node name="Slots" type="Node" parent="Gear/Equipment"]
 
 [node name="Weapon" type="Node" parent="Gear/Equipment/Slots"]
-script = ExtResource("7_juny0")
+script = ExtResource("19_8wgjh")
 
 [node name="Hotbar" type="Node" parent="Gear" node_paths=PackedStringArray("equipment_helper", "camera")]
 script = ExtResource("8_yp7wi")
@@ -265,7 +265,7 @@ state_machine_node_path = NodePath("../../PlayerStateMachine")
 metadata/NumSlots = 3
 
 [node name="EquipmentHelper" type="Node" parent="Gear"]
-script = ExtResource("9_vndym")
+script = ExtResource("21_eq71y")
 
 [node name="MovementSystem" type="Node" parent="."]
 

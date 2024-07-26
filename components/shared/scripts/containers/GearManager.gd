@@ -84,7 +84,8 @@ func add_item_to_inventory(item):
 	if container == inventory:
 		inventory_updated.emit(get_inventory_slots())
 		
-	item.tree_exited.connect(_on_item_destroyed)
+	if(!item.tree_exited.is_connected(_on_item_destroyed)):
+		item.tree_exited.connect(_on_item_destroyed)
 		
 	return true
 
