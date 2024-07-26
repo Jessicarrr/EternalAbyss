@@ -1,18 +1,18 @@
 [gd_scene load_steps=25 format=3 uid="uid://jryb8btpc5xs"]
 
-[ext_resource type="Script" path="res://components/shared/scripts/levels/ReplaceWallWithDoor.gd" id="1_4di7a"]
-[ext_resource type="Texture2D" uid="uid://dscoavfvq5e6s" path="res://textures/prison/bricks.png" id="1_ur42q"]
-[ext_resource type="Texture2D" uid="uid://dhi5i7vm3500i" path="res://textures/decals/Cracks/crack_03.png" id="3_txxyy"]
-[ext_resource type="PackedScene" uid="uid://b6u3wrs6gna1b" path="res://components/levels/prison/WeatheredDoor.tscn" id="4_1ax4q"]
-[ext_resource type="Texture2D" uid="uid://dkua1tjulngk3" path="res://textures/decals/Grime/dust_subtle_01.png" id="4_04nnp"]
-[ext_resource type="Texture2D" uid="uid://cdn0nv0dpb81e" path="res://textures/decals/blood_01.png" id="5_qrrew"]
-[ext_resource type="PackedScene" uid="uid://bil762wvjywyo" path="res://models/blender/prison_bed.glb" id="5_ygo2m"]
-[ext_resource type="Texture2D" uid="uid://do2pa64mo5ok5" path="res://textures/decals/Grime/dust_01.png" id="7_cnbe2"]
-[ext_resource type="PackedScene" uid="uid://1trojicuae27" path="res://models/scenes/fungi/mush_01.tscn" id="9_vktry"]
-[ext_resource type="PackedScene" uid="uid://b6pniiar5v3gr" path="res://models/furniture/welder_stone.glb" id="11_tmt1p"]
+[ext_resource type="Script" path="res://world/shared/scripts/ReplaceWallWithDoor.gd" id="1_acsan"]
+[ext_resource type="PackedScene" uid="uid://bil762wvjywyo" path="res://models/blender/prison_bed.glb" id="2_gax0e"]
+[ext_resource type="Texture2D" uid="uid://dhi5i7vm3500i" path="res://textures/decals/Cracks/crack_03.png" id="3_wyx6d"]
+[ext_resource type="Texture2D" uid="uid://dkua1tjulngk3" path="res://textures/decals/Grime/dust_subtle_01.png" id="4_r5gvy"]
+[ext_resource type="Texture2D" uid="uid://cdn0nv0dpb81e" path="res://textures/decals/blood_01.png" id="5_6jpac"]
+[ext_resource type="PackedScene" uid="uid://1trojicuae27" path="res://models/scenes/fungi/mush_01.tscn" id="6_0nsdm"]
+[ext_resource type="Texture2D" uid="uid://do2pa64mo5ok5" path="res://textures/decals/Grime/dust_01.png" id="7_gbvkt"]
+[ext_resource type="Texture2D" uid="uid://dscoavfvq5e6s" path="res://textures/prison/bricks.png" id="8_f30bh"]
+[ext_resource type="PackedScene" uid="uid://b6u3wrs6gna1b" path="res://world/prison/scenes/WeatheredDoor.tscn" id="9_67gdx"]
+[ext_resource type="PackedScene" uid="uid://b6pniiar5v3gr" path="res://models/furniture/welder_stone.glb" id="10_bcmw1"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lfu00"]
-albedo_texture = ExtResource("1_ur42q")
+albedo_texture = ExtResource("8_f30bh")
 texture_filter = 0
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_2p0td"]
@@ -22,35 +22,35 @@ material = SubResource("StandardMaterial3D_lfu00")
 size = Vector3(2, 0.001, 2)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8gr8k"]
-albedo_texture = ExtResource("1_ur42q")
+albedo_texture = ExtResource("8_f30bh")
 texture_filter = 0
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_4jllp"]
 material = SubResource("StandardMaterial3D_8gr8k")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_v2lp3"]
-albedo_texture = ExtResource("1_ur42q")
+albedo_texture = ExtResource("8_f30bh")
 texture_filter = 0
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_xedni"]
 material = SubResource("StandardMaterial3D_v2lp3")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wh4q8"]
-albedo_texture = ExtResource("1_ur42q")
+albedo_texture = ExtResource("8_f30bh")
 texture_filter = 0
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_8pg0l"]
 material = SubResource("StandardMaterial3D_wh4q8")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hjn6s"]
-albedo_texture = ExtResource("1_ur42q")
+albedo_texture = ExtResource("8_f30bh")
 texture_filter = 0
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_rxjy6"]
 material = SubResource("StandardMaterial3D_hjn6s")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tl4re"]
-albedo_texture = ExtResource("1_ur42q")
+albedo_texture = ExtResource("8_f30bh")
 texture_filter = 0
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_aoyd2"]
@@ -67,7 +67,7 @@ metadata/AllowedConnections = {
 metadata/StartingArea = true
 
 [node name="ReplaceWallWithDoor" type="Node" parent="."]
-script = ExtResource("1_4di7a")
+script = ExtResource("1_acsan")
 door_node = NodePath("../WeatheredDoor")
 connection_points_node = NodePath("../ConnectionPoints")
 
@@ -75,35 +75,35 @@ connection_points_node = NodePath("../ConnectionPoints")
 
 [node name="BedOnSide" type="Node3D" parent="FurnitureVariations"]
 
-[node name="prison_bed" parent="FurnitureVariations/BedOnSide" instance=ExtResource("5_ygo2m")]
+[node name="prison_bed" parent="FurnitureVariations/BedOnSide" instance=ExtResource("2_gax0e")]
 transform = Transform3D(-0.999644, 0, -0.0266655, 0, 1, 0, 0.0266655, 0, -0.999644, -0.168896, 0, 0.529152)
 
 [node name="crack decal" type="Decal" parent="FurnitureVariations/BedOnSide"]
 transform = Transform3D(-0.41245, -0.892921, -0.180492, -0.790624, 0.252437, 0.557843, -0.452547, 0.372783, -0.810083, 1.0314, 1.23537, 0.345982)
 size = Vector3(1, 1, 1)
-texture_albedo = ExtResource("3_txxyy")
+texture_albedo = ExtResource("3_wyx6d")
 
 [node name="dirt_decal" type="Decal" parent="FurnitureVariations/BedOnSide"]
 transform = Transform3D(0.847599, 0, 0, 0, 0.0257263, 0, 0, 0, 0.760057, 0, 0, 0)
-texture_albedo = ExtResource("4_04nnp")
+texture_albedo = ExtResource("4_r5gvy")
 
 [node name="dirt_decal_wall" type="Decal" parent="FurnitureVariations/BedOnSide"]
 transform = Transform3D(-0.0342315, -0.151056, 0, 1.37898, -0.00374977, 0, 0, 0, 1.41521, 1.01482, 1.02582, -0.128027)
 size = Vector3(1, 1, 1)
-texture_albedo = ExtResource("4_04nnp")
+texture_albedo = ExtResource("4_r5gvy")
 
 [node name="blood_bed_decal" type="Decal" parent="FurnitureVariations/BedOnSide"]
 transform = Transform3D(1, 0, 0, 0, 0.247339, 0, 0, 0, 1, 0.507484, 0.433657, 0.694747)
 size = Vector3(0.5, 0.5, 0.5)
-texture_albedo = ExtResource("5_qrrew")
+texture_albedo = ExtResource("5_6jpac")
 
-[node name="mush_01" parent="FurnitureVariations/BedOnSide" instance=ExtResource("9_vktry")]
+[node name="mush_01" parent="FurnitureVariations/BedOnSide" instance=ExtResource("6_0nsdm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.261658, 0.000500023, 0.111487)
 
 [node name="dirt_wall_a_lot" type="Decal" parent="FurnitureVariations/BedOnSide"]
 transform = Transform3D(1.17368, 0, 0, 0, -0.011103, 0.905507, 0, -0.125745, -0.0799542, 0, 1.02871, 1.02608)
 size = Vector3(1.5, 1.5, 1.92972)
-texture_albedo = ExtResource("7_cnbe2")
+texture_albedo = ExtResource("7_gbvkt")
 
 [node name="ConnectionPoints" type="Node3D" parent="."]
 
@@ -176,20 +176,20 @@ collision_mask = 2
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("BoxShape3D_nv1d3")
 
-[node name="WeatheredDoor" parent="." instance=ExtResource("4_1ax4q")]
+[node name="WeatheredDoor" parent="." instance=ExtResource("9_67gdx")]
 process_mode = 3
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.62784, 1, 0)
 
-[node name="welder_stone" parent="." instance=ExtResource("11_tmt1p")]
+[node name="welder_stone" parent="." instance=ExtResource("10_bcmw1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -1)
 
-[node name="welder_stone2" parent="." instance=ExtResource("11_tmt1p")]
+[node name="welder_stone2" parent="." instance=ExtResource("10_bcmw1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -1)
 
-[node name="welder_stone3" parent="." instance=ExtResource("11_tmt1p")]
+[node name="welder_stone3" parent="." instance=ExtResource("10_bcmw1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 1)
 
-[node name="welder_stone4" parent="." instance=ExtResource("11_tmt1p")]
+[node name="welder_stone4" parent="." instance=ExtResource("10_bcmw1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 1)
 
 [node name="GhostSpawnPoint" type="Node3D" parent="." groups=["GhostSpawnPoint"]]

@@ -1,4 +1,4 @@
-extends "res://components/shared/scripts/skills/BaseSkill.gd"
+extends "res://skills/shared/scripts/BaseSkill.gd"
 class_name Health
 
 @export var hp_per_level = 5

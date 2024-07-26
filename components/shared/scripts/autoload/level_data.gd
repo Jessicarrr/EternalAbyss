@@ -6,27 +6,27 @@ var _game_levels = [
 		"Rooms" : {
 			"Administration" : {
 				"NumRequired" : 1,
-				"Path" : "res://components/levels/Prison/Administration.tscn",
+				"Path" : "res://world/prison/scenes/Administration.tscn",
 				"Weight" : 1
 			},
 			"Hallway" : {
 				"IsHallway" : true,
 				"NumRequired" : 20,
-				"Path" : "res://components/levels/Prison/Hallway.tscn",
+				"Path" : "res://world/prison/scenes/Hallway.tscn",
 				"Weight" : 10
 			},
 			"PrisonCell" : {
 				"NumRequired" : 10,
-				"Path" : "res://components/levels/Prison/PrisonCell.tscn",
+				"Path" : "res://world/prison/scenes/PrisonCell.tscn",
 				"Weight" : 4
 			},
 			"Storage" : {
 				"NumRequired" : 3,
-				"Path" : "res://components/levels/prison/Storage.tscn",
+				"Path" : "res://world/prison/scenes/Storage.tscn",
 				"Weight" : 4
 			}
 		},
-		"Environment" : "res://components/levels/prison/EnvironmentalSettings.tscn",
+		"Environment" : "res://world/prison/scenes/EnvironmentalSettings.tscn",
 		"Enemies" : [
 			{
 				"Path" : "res://components/Entities/enemies/skeleton_sword_shield_simple/skeleton_sword_shield_simple.tscn",

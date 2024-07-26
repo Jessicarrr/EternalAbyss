@@ -1,4 +1,4 @@
-extends "res://components/shared/scripts/skills/BaseSkill.gd"
+extends "res://skills/shared/scripts/BaseSkill.gd"
 
 @export var percent_reduction_per_level = 0.02
 

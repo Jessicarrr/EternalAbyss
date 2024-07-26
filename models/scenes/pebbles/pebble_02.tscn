@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://bmi1ca8oxx85n"]
 
 [ext_resource type="Texture2D" uid="uid://b6t424ywv3kun" path="res://textures/pebbles/pebble_02.png" id="1_5dlga"]
-[ext_resource type="Script" path="res://components/shared/scripts/levels/BillboardVariator.gd" id="1_pr6hn"]
+[ext_resource type="Script" path="res://world/shared/scripts/BillboardVariator.gd" id="1_pr6hn"]
 [ext_resource type="Texture2D" uid="uid://bcsqinmuynf45" path="res://textures/pebbles/pebble_08.png" id="2_45bwj"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pjq2d"]

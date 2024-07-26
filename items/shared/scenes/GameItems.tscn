@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://items/equippable/weapons/swords/rapiers/shared/scripts/StabSwordSprite3D.gd" id="3_uoc5e"]
 [ext_resource type="Script" path="res://items/equippable/weapons/shared/scripts/DamageOther.gd" id="4_wjxkk"]
 [ext_resource type="Texture2D" uid="uid://bpvpqx0yt7gg8" path="res://sprites/weapons/testsword-ground.png" id="5_ouer7"]
-[ext_resource type="Script" path="res://components/shared/scripts/items/Food.gd" id="6_8ho5e"]
+[ext_resource type="Script" path="res://items/consumables/food/shared/Food.gd" id="6_3qw1a"]
 [ext_resource type="Texture2D" uid="uid://b5u5ueclkqrja" path="res://sprites/food/salted_dried_fish.png" id="7_p1jcq"]
 [ext_resource type="Script" path="res://items/shared/scripts/HeldItemSprite3D.gd" id="8_wgahg"]
 [ext_resource type="Script" path="res://components/shared/scripts/effects/HealthRegen.gd" id="9_xar34"]
@@ -129,7 +129,7 @@ texture = ExtResource("5_ouer7")
 
 [node name="SaltedDriedFish" type="CharacterBody3D" parent="." groups=["food", "items"]]
 collision_layer = 1024
-script = ExtResource("6_8ho5e")
+script = ExtResource("6_3qw1a")
 sprite_path = NodePath("HeldItemSprite3D")
 item_name = "Salted Dried Fish"
 item_fluff_text = "Fish that has been salted and dried for preservation."

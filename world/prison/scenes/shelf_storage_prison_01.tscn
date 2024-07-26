@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://c3u17majpvdaw"]
 
-[ext_resource type="Script" path="res://components/shared/scripts/levels/Decorations.gd" id="1_j5qw2"]
+[ext_resource type="Script" path="res://world/shared/scripts/Decorations.gd" id="1_j5qw2"]
 [ext_resource type="PackedScene" uid="uid://c4u3ulga1rw6x" path="res://models/scenes/furniture/shelf_storage.tscn" id="3_381ks"]
 [ext_resource type="PackedScene" uid="uid://2vaa8kgvkawx" path="res://models/scenes/candle_01.tscn" id="3_utcs8"]
 

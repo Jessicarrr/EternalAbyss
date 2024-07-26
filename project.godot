@@ -50,6 +50,7 @@ folder_colors={
 "res://entities/": "yellow",
 "res://items/": "yellow",
 "res://level-gen-v2/": "yellow",
+"res://skills/": "yellow",
 "res://world/": "yellow"
 }
 

@@ -31,11 +31,11 @@
 [ext_resource type="Script" path="res://components/Entities/player/scripts/sounds/AttackSounds.gd" id="19_mgc05"]
 [ext_resource type="Script" path="res://components/Entities/player/scripts/sounds/RandomAmbientSounds.gd" id="21_63v10"]
 [ext_resource type="Script" path="res://items/equippable/shared/scripts/EquipmentHelper.gd" id="21_lqqul"]
-[ext_resource type="Script" path="res://components/shared/scripts/skills/Health.gd" id="22_bgx6x"]
 [ext_resource type="Script" path="res://components/Entities/player/scripts/CrouchInput.gd" id="26_d22uf"]
-[ext_resource type="Script" path="res://components/shared/scripts/sounds/GetDamagedSounds.gd" id="28_u2q57"]
-[ext_resource type="Script" path="res://components/shared/scripts/skills/Endurance.gd" id="29_smdva"]
-[ext_resource type="Script" path="res://components/Entities/player/Stealth.gd" id="32_ikuon"]
+[ext_resource type="Script" path="res://entities/shared/scripts/GetDamagedSounds.gd" id="29_tw623"]
+[ext_resource type="Script" path="res://skills/health/scripts/Health.gd" id="30_rb013"]
+[ext_resource type="Script" path="res://skills/endurance/scripts/Endurance.gd" id="31_ux8sm"]
+[ext_resource type="Script" path="res://skills/stealth/scripts/Stealth.gd" id="32_slno1"]
 [ext_resource type="Script" path="res://components/Entities/player/scripts/ColliderFunctionality.gd" id="32_w7w6s"]
 [ext_resource type="Script" path="res://components/Entities/player/scripts/HeadScript.gd" id="33_cl8aj"]
 [ext_resource type="PackedScene" uid="uid://csgf4qcsol5ih" path="res://ui/look_at_text.tscn" id="34_a5qka"]
@@ -308,7 +308,7 @@ metadata/CameraPath = NodePath("../../Head/Camera")
 
 [node name="GetDamagedSounds" type="AudioStreamPlayer" parent="Sounds" node_paths=PackedStringArray("thing_to_track")]
 bus = &"ReverbBus"
-script = ExtResource("28_u2q57")
+script = ExtResource("29_tw623")
 thing_to_track = NodePath("../..")
 possible_sounds = ["res://sounds/player/receive_damage/GOREStab_Designed Slash Gore 03_DDUMAIS_NONE.wav", "res://sounds/player/receive_damage/GOREStab_Designed Slash Gore 04_DDUMAIS_NONE.wav", "res://sounds/player/receive_damage/GOREStab_Designed Slash Gore 05_DDUMAIS_NONE.wav", "res://sounds/player/receive_damage/GOREStab_Designed Slash Gore 06_DDUMAIS_NONE.wav", "res://sounds/player/receive_damage/GOREStab_Designed Slash Gore 07_DDUMAIS_NONE.wav", "res://sounds/player/receive_damage/GOREStab_Designed Slash Gore 09_DDUMAIS_NONE.wav", "res://sounds/player/receive_damage/GOREStab_Designed Slash Gore 11_DDUMAIS_NONE.wav"]
 pitch_min = 0.5
@@ -317,17 +317,17 @@ pitch_max = 0.7
 [node name="Skills" type="Node" parent="."]
 
 [node name="Health" type="Node" parent="Skills"]
-script = ExtResource("22_bgx6x")
+script = ExtResource("30_rb013")
 level = 10
 skill_name = "Health"
 description = "Represents your overall wellbeing. Increases your hitpoints, i.e. how many hits you can take before dying."
 
 [node name="Endurance" type="Node" parent="Skills"]
-script = ExtResource("29_smdva")
+script = ExtResource("31_ux8sm")
 level = 5
 
 [node name="Stealth" type="Node" parent="Skills"]
-script = ExtResource("32_ikuon")
+script = ExtResource("32_slno1")
 level = 5
 skill_name = "Stealth"
 

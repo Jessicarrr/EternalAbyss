@@ -1,12 +1,12 @@
 [gd_scene load_steps=38 format=3 uid="uid://dcu02eeh3wjrw"]
 
-[ext_resource type="Texture2D" uid="uid://dscoavfvq5e6s" path="res://textures/prison/bricks.png" id="1_17bs6"]
-[ext_resource type="PackedScene" uid="uid://b6u3wrs6gna1b" path="res://components/levels/prison/WeatheredDoor.tscn" id="2_ifruw"]
-[ext_resource type="PackedScene" uid="uid://b6pniiar5v3gr" path="res://models/furniture/welder_stone.glb" id="4_2hd4w"]
-[ext_resource type="PackedScene" uid="uid://jd3raqi1sd88" path="res://models/furniture/bookshelf_wood.glb" id="4_5xyee"]
+[ext_resource type="Texture2D" uid="uid://dscoavfvq5e6s" path="res://textures/prison/bricks.png" id="1_blkev"]
+[ext_resource type="PackedScene" uid="uid://b6u3wrs6gna1b" path="res://world/prison/scenes/WeatheredDoor.tscn" id="2_jqwme"]
+[ext_resource type="PackedScene" uid="uid://jd3raqi1sd88" path="res://models/furniture/bookshelf_wood.glb" id="3_3sfgc"]
+[ext_resource type="PackedScene" uid="uid://b6pniiar5v3gr" path="res://models/furniture/welder_stone.glb" id="4_p1shg"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6ai6o"]
-albedo_texture = ExtResource("1_17bs6")
+albedo_texture = ExtResource("1_blkev")
 texture_filter = 0
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_gpo61"]
@@ -16,7 +16,7 @@ material = SubResource("StandardMaterial3D_6ai6o")
 size = Vector3(2, 0.001, 2)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_63opm"]
-albedo_texture = ExtResource("1_17bs6")
+albedo_texture = ExtResource("1_blkev")
 uv1_scale = Vector3(2, 1, 1)
 texture_filter = 0
 
@@ -43,7 +43,7 @@ size = Vector2(4, 4)
 size = Vector3(4, 0.001, 4)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_knwjp"]
-albedo_texture = ExtResource("1_17bs6")
+albedo_texture = ExtResource("1_blkev")
 uv1_scale = Vector3(2, 1, 1)
 texture_filter = 0
 
@@ -55,7 +55,7 @@ size = Vector2(4, 2)
 size = Vector3(4, 0.001, 2)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_q48ut"]
-albedo_texture = ExtResource("1_17bs6")
+albedo_texture = ExtResource("1_blkev")
 texture_filter = 0
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_s7pm6"]
@@ -65,7 +65,7 @@ material = SubResource("StandardMaterial3D_q48ut")
 size = Vector3(2, 0.001, 2)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_i4vvq"]
-albedo_texture = ExtResource("1_17bs6")
+albedo_texture = ExtResource("1_blkev")
 uv1_scale = Vector3(2, 1, 1)
 texture_filter = 0
 
@@ -74,7 +74,7 @@ material = SubResource("StandardMaterial3D_i4vvq")
 size = Vector2(4, 2)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ecydg"]
-albedo_texture = ExtResource("1_17bs6")
+albedo_texture = ExtResource("1_blkev")
 uv1_scale = Vector3(2, 1, 1)
 texture_filter = 0
 
@@ -83,7 +83,7 @@ material = SubResource("StandardMaterial3D_ecydg")
 size = Vector2(4, 2)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ux3or"]
-albedo_texture = ExtResource("1_17bs6")
+albedo_texture = ExtResource("1_blkev")
 uv1_scale = Vector3(2, 1, 1)
 texture_filter = 0
 
@@ -95,7 +95,7 @@ size = Vector2(4, 2)
 size = Vector3(4, 0.001, 2)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m6mhi"]
-albedo_texture = ExtResource("1_17bs6")
+albedo_texture = ExtResource("1_blkev")
 uv1_scale = Vector3(2, 1, 1)
 texture_filter = 0
 
@@ -107,7 +107,7 @@ size = Vector2(4, 2)
 size = Vector3(4, 0.001, 2)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ah6y5"]
-albedo_texture = ExtResource("1_17bs6")
+albedo_texture = ExtResource("1_blkev")
 uv1_scale = Vector3(2, 1, 1)
 texture_filter = 0
 
@@ -119,7 +119,7 @@ size = Vector2(4, 2)
 size = Vector3(4, 0.001, 2)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2v3rg"]
-albedo_texture = ExtResource("1_17bs6")
+albedo_texture = ExtResource("1_blkev")
 uv1_scale = Vector3(2, 2, 1)
 texture_filter = 0
 
@@ -245,7 +245,7 @@ mesh = SubResource("PlaneMesh_tsfi0")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="MainCeiling/StaticBody3D"]
 shape = SubResource("BoxShape3D_c50ry")
 
-[node name="MainRoomWeatheredDoor" parent="." instance=ExtResource("2_ifruw")]
+[node name="MainRoomWeatheredDoor" parent="." instance=ExtResource("2_jqwme")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -1)
 
 [node name="Bounds" type="Area3D" parent="."]
@@ -256,14 +256,14 @@ collision_mask = 2
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("BoxShape3D_lyx64")
 
-[node name="bookshelf_wood" parent="." instance=ExtResource("4_5xyee")]
+[node name="bookshelf_wood" parent="." instance=ExtResource("3_3sfgc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 2)
 
-[node name="bookshelf_wood2" parent="." instance=ExtResource("4_5xyee")]
+[node name="bookshelf_wood2" parent="." instance=ExtResource("3_3sfgc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 2)
 
-[node name="welder_stone" parent="." instance=ExtResource("4_2hd4w")]
+[node name="welder_stone" parent="." instance=ExtResource("4_p1shg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 0)
 
-[node name="welder_stone2" parent="." instance=ExtResource("4_2hd4w")]
+[node name="welder_stone2" parent="." instance=ExtResource("4_p1shg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -2)

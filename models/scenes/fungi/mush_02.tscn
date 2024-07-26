@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://oep30dfsc0n0"]
 
-[ext_resource type="Script" path="res://components/shared/scripts/levels/BillboardVariator.gd" id="1_m8tui"]
+[ext_resource type="Script" path="res://world/shared/scripts/BillboardVariator.gd" id="1_m8tui"]
 [ext_resource type="Texture2D" uid="uid://b2k8sr1488f3m" path="res://textures/fungi/mush_01.png" id="2_lhy22"]
 [ext_resource type="Texture2D" uid="uid://b0cje7uvbvt13" path="res://textures/fungi/mush_02.png" id="2_r8kd3"]
 

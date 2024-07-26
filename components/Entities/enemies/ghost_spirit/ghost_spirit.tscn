@@ -7,7 +7,7 @@
 [ext_resource type="Script" path="res://components/shared/scripts/actors/ghosts/SpriteVisibilityFlasher.gd" id="6_brqfw"]
 [ext_resource type="Texture2D" uid="uid://gh4r011gfns1" path="res://sprites/enemies/ghost_spirit/Sprite-0001.png" id="6_hlmbw"]
 [ext_resource type="Texture2D" uid="uid://biyj82l1q7wdj" path="res://textures/particles/bit.png" id="7_nv7r8"]
-[ext_resource type="Script" path="res://components/shared/scripts/skills/Health.gd" id="9_dw4gh"]
+[ext_resource type="Script" path="res://skills/health/scripts/Health.gd" id="9_dw4gh"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_mevn6"]
 radius = 0.2
