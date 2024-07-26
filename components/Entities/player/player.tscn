@@ -27,10 +27,10 @@
 [ext_resource type="Script" path="res://components/Entities/player/scripts/MouseMovement.gd" id="16_gvfj2"]
 [ext_resource type="AudioStream" uid="uid://cq8x83kwk4opl" path="res://sounds/ghostly_windy_ambience.wav" id="16_rljpy"]
 [ext_resource type="Script" path="res://components/Entities/player/hud/FPSCounter.gd" id="18_0i3d2"]
-[ext_resource type="Script" path="res://items/equippable/shared/EquipmentSlotHelper.gd" id="19_8wgjh"]
+[ext_resource type="Script" path="res://items/equippable/shared/scripts/EquipmentSlotHelper.gd" id="19_auhrk"]
 [ext_resource type="Script" path="res://components/Entities/player/scripts/sounds/AttackSounds.gd" id="19_mgc05"]
 [ext_resource type="Script" path="res://components/Entities/player/scripts/sounds/RandomAmbientSounds.gd" id="21_63v10"]
-[ext_resource type="Script" path="res://items/equippable/shared/EquipmentHelper.gd" id="21_eq71y"]
+[ext_resource type="Script" path="res://items/equippable/shared/scripts/EquipmentHelper.gd" id="21_lqqul"]
 [ext_resource type="Script" path="res://components/shared/scripts/skills/Health.gd" id="22_bgx6x"]
 [ext_resource type="Script" path="res://components/Entities/player/scripts/CrouchInput.gd" id="26_d22uf"]
 [ext_resource type="Script" path="res://components/shared/scripts/sounds/GetDamagedSounds.gd" id="28_u2q57"]
@@ -253,7 +253,7 @@ metadata/NumSlots = 10
 [node name="Slots" type="Node" parent="Gear/Equipment"]
 
 [node name="Weapon" type="Node" parent="Gear/Equipment/Slots"]
-script = ExtResource("19_8wgjh")
+script = ExtResource("19_auhrk")
 
 [node name="Hotbar" type="Node" parent="Gear" node_paths=PackedStringArray("equipment_helper", "camera")]
 script = ExtResource("8_yp7wi")
@@ -265,7 +265,7 @@ state_machine_node_path = NodePath("../../PlayerStateMachine")
 metadata/NumSlots = 3
 
 [node name="EquipmentHelper" type="Node" parent="Gear"]
-script = ExtResource("21_eq71y")
+script = ExtResource("21_lqqul")
 
 [node name="MovementSystem" type="Node" parent="."]
 

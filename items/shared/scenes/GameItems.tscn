@@ -1,20 +1,20 @@
 [gd_scene load_steps=28 format=3 uid="uid://blfvfc7exomsg"]
 
-[ext_resource type="Script" path="res://components/shared/scripts/items/weapons/Sword3D.gd" id="1_tdd22"]
-[ext_resource type="Script" path="res://components/shared/scripts/items/weapons/StabSwordSprite3D.gd" id="3_foeda"]
-[ext_resource type="Script" path="res://components/shared/scripts/items/weapons/DamageOther.gd" id="4_jpt4m"]
+[ext_resource type="Script" path="res://items/equippable/weapons/swords/shared/scripts/Sword3D.gd" id="1_cup6j"]
+[ext_resource type="Script" path="res://items/equippable/weapons/swords/rapiers/shared/scripts/StabSwordSprite3D.gd" id="3_uoc5e"]
+[ext_resource type="Script" path="res://items/equippable/weapons/shared/scripts/DamageOther.gd" id="4_wjxkk"]
 [ext_resource type="Texture2D" uid="uid://bpvpqx0yt7gg8" path="res://sprites/weapons/testsword-ground.png" id="5_ouer7"]
 [ext_resource type="Script" path="res://components/shared/scripts/items/Food.gd" id="6_8ho5e"]
 [ext_resource type="Texture2D" uid="uid://b5u5ueclkqrja" path="res://sprites/food/salted_dried_fish.png" id="7_p1jcq"]
-[ext_resource type="Script" path="res://components/shared/scripts/items/HeldItemSprite3D.gd" id="8_qmnqt"]
+[ext_resource type="Script" path="res://items/shared/scripts/HeldItemSprite3D.gd" id="8_wgahg"]
 [ext_resource type="Script" path="res://components/shared/scripts/effects/HealthRegen.gd" id="9_xar34"]
-[ext_resource type="Script" path="res://components/shared/scripts/items/OffHandItem3D.gd" id="10_qm1rl"]
-[ext_resource type="Script" path="res://components/shared/scripts/items/OffHandItemSprite3D.gd" id="11_3snux"]
+[ext_resource type="Script" path="res://items/shared/scripts/OffHandItem3D.gd" id="10_6jrj5"]
 [ext_resource type="Texture2D" uid="uid://bxvpv3a0fxka3" path="res://sprites/lights/held_torch/torch 2 main sprite.png" id="11_n75pj"]
+[ext_resource type="Script" path="res://items/shared/scripts/OffHandItemSprite3D.gd" id="12_kab7f"]
 [ext_resource type="Texture2D" uid="uid://b7cmkr1cumvja" path="res://sprites/lights/held_torch/inventoryicon.png" id="13_awief"]
 [ext_resource type="Texture2D" uid="uid://dpwm1i1kcgotx" path="res://sprites/lights/held_torch/torch 2 sprite-Sheet.png" id="13_wabxj"]
 [ext_resource type="AudioStream" uid="uid://lndvchot64kq" path="res://sounds/fire_torch.wav" id="14_tibvk"]
-[ext_resource type="Script" path="res://components/shared/scripts/items/ItemSoundPlayer3D.gd" id="15_ru7cb"]
+[ext_resource type="Script" path="res://items/shared/scripts/ItemSoundPlayer3D.gd" id="15_tb1ap"]
 [ext_resource type="Texture2D" uid="uid://dwblci623dgke" path="res://sprites/weapons/testsword.png" id="18_h6861"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a3qxk"]
@@ -85,7 +85,7 @@ animations = [{
 
 [node name="CorrodedEstoc" type="CharacterBody3D" parent="." groups=["items", "weapons"]]
 collision_layer = 1024
-script = ExtResource("1_tdd22")
+script = ExtResource("1_cup6j")
 windup_time = 0.3
 recovery_time = 0.4
 damage_min = 9
@@ -102,11 +102,11 @@ material_override = SubResource("StandardMaterial3D_a3qxk")
 flip_h = true
 pixel_size = 0.005
 texture = ExtResource("18_h6861")
-script = ExtResource("3_foeda")
+script = ExtResource("3_uoc5e")
 default_position_offset = Vector3(0.19, 0.04, 0)
 
 [node name="DamageOther" type="Node" parent="CorrodedEstoc"]
-script = ExtResource("4_jpt4m")
+script = ExtResource("4_wjxkk")
 
 [node name="InventoryIcon" type="Sprite2D" parent="CorrodedEstoc"]
 visible = false
@@ -161,7 +161,7 @@ pixel_size = 0.015
 shaded = true
 texture_filter = 0
 texture = ExtResource("7_p1jcq")
-script = ExtResource("8_qmnqt")
+script = ExtResource("8_wgahg")
 distance_in_front = 0.25
 default_position_offset = Vector3(0.2, -0.17, 0)
 
@@ -172,7 +172,7 @@ script = ExtResource("9_xar34")
 effect_type = 1
 
 [node name="FireTorch" type="CharacterBody3D" parent="."]
-script = ExtResource("10_qm1rl")
+script = ExtResource("10_6jrj5")
 sprite_path = NodePath("OffHandItemSprite3D")
 item_name = "Torch"
 item_fluff_text = "A small light in the deep dark."
@@ -189,7 +189,7 @@ pixel_size = 0.0075
 shaded = true
 texture_filter = 0
 texture = ExtResource("11_n75pj")
-script = ExtResource("11_3snux")
+script = ExtResource("12_kab7f")
 distance_in_front = 0.19
 default_rotation = Vector3(0.1, -1.855, 0.07)
 default_position_offset = Vector3(0.21, -0.01, 0)
@@ -216,7 +216,7 @@ volume_db = -30.0
 max_distance = 4.0
 panning_strength = 0.25
 bus = &"ReverbBus"
-script = ExtResource("15_ru7cb")
+script = ExtResource("15_tb1ap")
 item_path = NodePath("../..")
 
 [node name="InventoryIcon" type="Sprite2D" parent="FireTorch"]
