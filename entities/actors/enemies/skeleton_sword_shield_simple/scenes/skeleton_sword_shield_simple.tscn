@@ -1,152 +1,47 @@
 [gd_scene load_steps=119 format=3 uid="uid://vw0633l67whr"]
 
-[ext_resource type="Texture2D" uid="uid://d5wgl1bawg2k" path="res://sprites/enemies/skeleton attack anim-Sheet fix.png" id="2_dgvlb"]
-[ext_resource type="Texture2D" uid="uid://lxm8tcnahu14" path="res://sprites/enemies/skeleton 1 blocking idle 2-Sheet.png" id="3_neo8k"]
-[ext_resource type="Script" path="res://components/shared/scripts/actors/states/functionality/DetectAndFollowPlayer.gd" id="4_60a0v"]
-[ext_resource type="Texture2D" uid="uid://dcpbq40ehd0bn" path="res://sprites/enemies/skeleton 1 blocking raise shield 2 reversed-Sheet.png" id="4_lcco1"]
-[ext_resource type="Script" path="res://components/shared/scripts/actors/states/functionality/BlockingDecision.gd" id="4_qvwkq"]
-[ext_resource type="Script" path="res://components/shared/scripts/actors/states/NpcStartBlocking.gd" id="4_txae2"]
-[ext_resource type="Script" path="res://components/shared/scripts/actors/states/functionality/AttackingDecision.gd" id="5_b61t0"]
-[ext_resource type="Script" path="res://components/shared/scripts/actors/states/Blocking.gd" id="5_hev7c"]
-[ext_resource type="Texture2D" uid="uid://nqvchf2xskm2" path="res://sprites/enemies/skeleton 1 blocking recieveing a hit-Sheet.png" id="5_ycic1"]
-[ext_resource type="Script" path="res://components/shared/scripts/actors/states/functionality/PathingToggler.gd" id="6_k2s6f"]
-[ext_resource type="Script" path="res://components/shared/scripts/actors/states/NpcFinishBlocking.gd" id="6_slclh"]
-[ext_resource type="Texture2D" uid="uid://brt1i0b0gvnmq" path="res://sprites/enemies/skeleton 1 blocking raise shield 2-Sheet.png" id="6_sqwjv"]
-[ext_resource type="Script" path="res://components/shared/scripts/actors/states/functionality/StaggerDetector.gd" id="6_wpwrj"]
-[ext_resource type="Texture2D" uid="uid://bwmxr2vu6inbq" path="res://sprites/enemies/skeleton 1 dying animation -Sheet.png" id="7_hlf6k"]
-[ext_resource type="Script" path="res://components/shared/scripts/actors/states/functionality/FollowTarget.gd" id="7_jwlnw"]
-[ext_resource type="Texture2D" uid="uid://uac4r25n1ftp" path="res://sprites/enemies/skeleton 1 idle animation simple-Sheet.png" id="8_0qo52"]
-[ext_resource type="Script" path="res://components/shared/scripts/actors/states/NpcAttackWindup.gd" id="8_sfjx4"]
-[ext_resource type="Texture2D" uid="uid://c3s4slt47m377" path="res://sprites/enemies/skeleton 1 taking hit animation -Sheet.png" id="9_4pjxj"]
-[ext_resource type="Script" path="res://components/shared/scripts/actors/states/NpcAttackSwing.gd" id="9_7383i"]
-[ext_resource type="Texture2D" uid="uid://cdoipa0mibb40" path="res://sprites/enemies/skeleton 1 walking animation walk-Sheet.png" id="10_dfrnt"]
-[ext_resource type="Script" path="res://components/shared/scripts/actors/states/NpcAttackRecovery.gd" id="10_rabns"]
-[ext_resource type="Script" path="res://components/shared/scripts/animations/NpcSprite3DAnimator.gd" id="11_36y4s"]
-[ext_resource type="Script" path="res://components/shared/scripts/actors/EnemyRayCast3D.gd" id="12_m4a5c"]
-[ext_resource type="Script" path="res://components/shared/scripts/actors/states/Staggered.gd" id="13_spfbc"]
-[ext_resource type="Script" path="res://components/shared/scripts/actors/states/BlockStagger.gd" id="14_j7wip"]
-[ext_resource type="Script" path="res://components/shared/scripts/actors/states/Dormant.gd" id="15_e0wwc"]
-[ext_resource type="Script" path="res://components/shared/scripts/actors/states/functionality/ListenForPlayerFootsteps.gd" id="16_51thv"]
-[ext_resource type="Script" path="res://components/shared/scripts/actors/states/Reanimate.gd" id="16_i884d"]
-[ext_resource type="Texture2D" uid="uid://dtodycbwecgag" path="res://sprites/enemies/skeleton 1 blocking walking-Sheet.png" id="20_rcea2"]
-[ext_resource type="Script" path="res://skills/health/scripts/Health.gd" id="24_ftyo4"]
-[ext_resource type="Script" path="res://components/shared/scripts/actors/RemoveOnDeathCollisionShape3D.gd" id="26_gam0e"]
-[ext_resource type="Script" path="res://components/shared/scripts/actors/PhysicsMovement.gd" id="28_dnxam"]
-[ext_resource type="Script" path="res://components/shared/scripts/actors/DamagePlayer.gd" id="29_2n6kl"]
-[ext_resource type="Script" path="res://world/shared/scripts/RandomStreamPlayer3D.gd" id="30_li7cr"]
-[ext_resource type="Script" path="res://entities/shared/scripts/NpcDamageStreamPlayer3D.gd" id="31_lkceg"]
-[ext_resource type="Script" path="res://entities/shared/scripts/NpcBlockDmgPlayer3D.gd" id="32_klkji"]
-[ext_resource type="Script" path="res://entities/shared/scripts/NpcAttackPlayer3D.gd" id="34_kwd0c"]
-[ext_resource type="Script" path="res://entities/shared/scripts/NpcFootstepPlayer3D.gd" id="35_1dbe7"]
-[ext_resource type="Script" path="res://entities/shared/scripts/NpcIdleSoundPlayer3D.gd" id="36_1p0ts"]
-[ext_resource type="Script" path="res://entities/shared/scripts/DeathSoundPlayer3D.gd" id="37_jj73t"]
-[ext_resource type="Script" path="res://entities/shared/scripts/ReanimateSoundPlayer3D.gd" id="41_vhdih"]
-
-[sub_resource type="GDScript" id="GDScript_k8muu"]
-script/source = "extends CharacterBody3D
-class_name SimpleEnemy
-
-@onready var health = $Skills/Health
-@onready var state_machine = $StateMachine
-
-@export_category(\"States\")
-@export var chance_dormant_on_spawn = 0.1
-@export var touching_detection_distance = 0.7
-
-@export_category(\"Attacks\")
-@export var windup_time = 0.6
-@export var swing_time = 0.2
-@export var recovery_time = 0.2
-
-@export var attack_chance = 0.2
-@export var attack_chance_interval = 500
-@export var attack_min_distance = 1.0
-@export var attack_range = 1.0
-@export var min_time_between_attacks = 1.0
-
-@export var damage_min = 3
-@export var damage_max = 5
-
-@export_category(\"Blocking\")
-@export var block_chance = 0.5
-@export var block_transition_time = 0.2
-@export var block_duration_base = 1.0
-
-@export var visibility_range = 8
-
-@onready var prev_pos = global_position
-
-@export var base_stagger_time_s = 0.5
-@export var extra_time_per_damage = 0.01
-
-@export_category(\"Movement Speed\")
-@export var walk_speed = 2.0
-@export var block_mult = 0.0
-@export var block_stagger_mult = 0.0
-@export var block_start_mult = 0.1
-@export var block_end_mult = 0.1
-@export var stagger_mult = 0.0
-@export var idle_mult = 0.0
-@export var windup_mult = 0.1
-@export var swing_mult = 0.0
-@export var recovery_mult = 0.2
-@export var dormant_mult = 0.0
-
-@export_category(\"Other Timings\")
-@export var reanimation_time = 0.5
-
-@export_category(\"Hearing\")
-@export var hearing_distance_falloff = 1
-@export var minimum_hearing_volume = 30
-
-var process_update_time = 5000
-@onready var last_process = Time.get_ticks_msec()
-
-#@export_category(\"Physics\")
-#@export var knockback_strength = 2.0
-
-signal on_hit
-signal on_blocked_hit
-
-func has_moved():
-	var cur_pos = self.global_position
-	var moved = false
-	
-	if cur_pos.x != prev_pos.x or cur_pos.z != prev_pos.z:
-		moved = true
-		
-	prev_pos = cur_pos
-	return moved
-	
-func hit(entity, weapon, damage):
-	if state_machine.current_state == Enums.ActorStates.BLOCKING:
-		on_blocked_hit.emit(entity, weapon, damage)
-		return
-	
-	health.damage(damage)
-	on_hit.emit(entity, weapon, damage)
-	
-func calculate_stagger_time(damage):
-	var damage_time_modifier_s = damage * extra_time_per_damage
-	var total_stagger_time = base_stagger_time_s + damage_time_modifier_s
-	return total_stagger_time
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	if Helpers.has_enough_time_passed(process_update_time, last_process) == false:
-		return
-	
-	last_process = Time.get_ticks_msec()
-		
-	if self.global_position.y < -15:
-		push_warning(self.get_path(), \" is at a weird height, which is \", self.global_position.y, \" with relative position at \" , self.position.y)
-	pass
-
-"
+[ext_resource type="Script" path="res://entities/shared/scripts/SimpleEnemy.gd" id="1_p452m"]
+[ext_resource type="Script" path="res://components/shared/scripts/actors/states/functionality/DetectAndFollowPlayer.gd" id="1_wid26"]
+[ext_resource type="Script" path="res://components/shared/scripts/actors/states/functionality/PathingToggler.gd" id="2_xfqif"]
+[ext_resource type="Script" path="res://components/shared/scripts/actors/states/functionality/FollowTarget.gd" id="3_fkmeo"]
+[ext_resource type="Script" path="res://components/shared/scripts/actors/states/functionality/BlockingDecision.gd" id="4_r60rk"]
+[ext_resource type="Script" path="res://components/shared/scripts/actors/states/functionality/AttackingDecision.gd" id="5_efy0o"]
+[ext_resource type="Script" path="res://components/shared/scripts/actors/states/functionality/StaggerDetector.gd" id="6_3lb5b"]
+[ext_resource type="Script" path="res://components/shared/scripts/actors/states/NpcStartBlocking.gd" id="7_3sxh8"]
+[ext_resource type="Script" path="res://components/shared/scripts/actors/states/Blocking.gd" id="8_i5t3t"]
+[ext_resource type="Script" path="res://components/shared/scripts/actors/states/NpcFinishBlocking.gd" id="9_r5yad"]
+[ext_resource type="Script" path="res://components/shared/scripts/actors/states/NpcAttackWindup.gd" id="10_u3ccr"]
+[ext_resource type="Script" path="res://components/shared/scripts/actors/states/NpcAttackSwing.gd" id="11_lmhk8"]
+[ext_resource type="Script" path="res://components/shared/scripts/actors/states/NpcAttackRecovery.gd" id="12_u4wxn"]
+[ext_resource type="Script" path="res://components/shared/scripts/actors/states/Staggered.gd" id="13_y8rnc"]
+[ext_resource type="Script" path="res://components/shared/scripts/actors/states/BlockStagger.gd" id="14_v1l5v"]
+[ext_resource type="Script" path="res://components/shared/scripts/actors/states/Dormant.gd" id="15_st76a"]
+[ext_resource type="Script" path="res://components/shared/scripts/actors/states/functionality/ListenForPlayerFootsteps.gd" id="16_fcsq0"]
+[ext_resource type="Script" path="res://components/shared/scripts/actors/states/Reanimate.gd" id="17_htny4"]
+[ext_resource type="Texture2D" uid="uid://d5wgl1bawg2k" path="res://sprites/enemies/skeleton attack anim-Sheet fix.png" id="18_wa55i"]
+[ext_resource type="Texture2D" uid="uid://lxm8tcnahu14" path="res://sprites/enemies/skeleton 1 blocking idle 2-Sheet.png" id="19_8n5cq"]
+[ext_resource type="Texture2D" uid="uid://dcpbq40ehd0bn" path="res://sprites/enemies/skeleton 1 blocking raise shield 2 reversed-Sheet.png" id="20_m31yo"]
+[ext_resource type="Texture2D" uid="uid://nqvchf2xskm2" path="res://sprites/enemies/skeleton 1 blocking recieveing a hit-Sheet.png" id="21_4x7hq"]
+[ext_resource type="Texture2D" uid="uid://brt1i0b0gvnmq" path="res://sprites/enemies/skeleton 1 blocking raise shield 2-Sheet.png" id="22_kkfnf"]
+[ext_resource type="Texture2D" uid="uid://dtodycbwecgag" path="res://sprites/enemies/skeleton 1 blocking walking-Sheet.png" id="23_mhc8n"]
+[ext_resource type="Texture2D" uid="uid://bwmxr2vu6inbq" path="res://sprites/enemies/skeleton 1 dying animation -Sheet.png" id="24_7jql6"]
+[ext_resource type="Texture2D" uid="uid://uac4r25n1ftp" path="res://sprites/enemies/skeleton 1 idle animation simple-Sheet.png" id="25_h6vb4"]
+[ext_resource type="Texture2D" uid="uid://c3s4slt47m377" path="res://sprites/enemies/skeleton 1 taking hit animation -Sheet.png" id="26_7tn4j"]
+[ext_resource type="Texture2D" uid="uid://cdoipa0mibb40" path="res://sprites/enemies/skeleton 1 walking animation walk-Sheet.png" id="27_je5rg"]
+[ext_resource type="Script" path="res://components/shared/scripts/animations/NpcSprite3DAnimator.gd" id="28_k0m2t"]
+[ext_resource type="Script" path="res://components/shared/scripts/actors/RemoveOnDeathCollisionShape3D.gd" id="29_prs7s"]
+[ext_resource type="Script" path="res://components/shared/scripts/actors/EnemyRayCast3D.gd" id="30_825xu"]
+[ext_resource type="Script" path="res://skills/health/scripts/Health.gd" id="31_ckd34"]
+[ext_resource type="Script" path="res://components/shared/scripts/actors/PhysicsMovement.gd" id="32_dhmex"]
+[ext_resource type="Script" path="res://components/shared/scripts/actors/DamagePlayer.gd" id="33_7de21"]
+[ext_resource type="Script" path="res://world/shared/scripts/RandomStreamPlayer3D.gd" id="34_mo1m3"]
+[ext_resource type="Script" path="res://entities/shared/scripts/NpcDamageStreamPlayer3D.gd" id="35_o2xy2"]
+[ext_resource type="Script" path="res://entities/shared/scripts/NpcBlockDmgPlayer3D.gd" id="36_nohre"]
+[ext_resource type="Script" path="res://entities/shared/scripts/NpcAttackPlayer3D.gd" id="37_cot0w"]
+[ext_resource type="Script" path="res://entities/shared/scripts/NpcFootstepPlayer3D.gd" id="38_bkyni"]
+[ext_resource type="Script" path="res://entities/shared/scripts/NpcIdleSoundPlayer3D.gd" id="39_ighc8"]
+[ext_resource type="Script" path="res://entities/shared/scripts/DeathSoundPlayer3D.gd" id="40_ko2nd"]
+[ext_resource type="Script" path="res://entities/shared/scripts/ReanimateSoundPlayer3D.gd" id="41_7vm6f"]
 
 [sub_resource type="GDScript" id="GDScript_d8yvr"]
 script/source = "extends \"res://components/shared/scripts/actors/BaseStateMachine.gd\"
@@ -243,287 +138,287 @@ func _process(delta):
 "
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_nmw38"]
-atlas = ExtResource("2_dgvlb")
+atlas = ExtResource("18_wa55i")
 region = Rect2(928, 9, 116, 120)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ldejf"]
-atlas = ExtResource("2_dgvlb")
+atlas = ExtResource("18_wa55i")
 region = Rect2(696, 9, 116, 120)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_62wsv"]
-atlas = ExtResource("2_dgvlb")
+atlas = ExtResource("18_wa55i")
 region = Rect2(812, 9, 116, 120)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_o64x6"]
-atlas = ExtResource("2_dgvlb")
+atlas = ExtResource("18_wa55i")
 region = Rect2(0, 15, 116, 114)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_j6ako"]
-atlas = ExtResource("2_dgvlb")
+atlas = ExtResource("18_wa55i")
 region = Rect2(116, 15, 116, 114)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_38rft"]
-atlas = ExtResource("2_dgvlb")
+atlas = ExtResource("18_wa55i")
 region = Rect2(232, 15, 116, 114)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ni1s6"]
-atlas = ExtResource("2_dgvlb")
+atlas = ExtResource("18_wa55i")
 region = Rect2(348, 15, 116, 114)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_cf105"]
-atlas = ExtResource("2_dgvlb")
+atlas = ExtResource("18_wa55i")
 region = Rect2(464, 15, 116, 114)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mymiu"]
-atlas = ExtResource("2_dgvlb")
+atlas = ExtResource("18_wa55i")
 region = Rect2(580, 15, 116, 114)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_bsi3n"]
-atlas = ExtResource("3_neo8k")
+atlas = ExtResource("19_8n5cq")
 region = Rect2(0, 15, 116, 112)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_nd5mh"]
-atlas = ExtResource("3_neo8k")
+atlas = ExtResource("19_8n5cq")
 region = Rect2(116, 15, 116, 112)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qai3e"]
-atlas = ExtResource("4_lcco1")
+atlas = ExtResource("20_m31yo")
 region = Rect2(0, 15, 116, 112)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tpneb"]
-atlas = ExtResource("4_lcco1")
+atlas = ExtResource("20_m31yo")
 region = Rect2(116, 15, 116, 112)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_detmu"]
-atlas = ExtResource("4_lcco1")
+atlas = ExtResource("20_m31yo")
 region = Rect2(232, 15, 116, 112)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_eqyn0"]
-atlas = ExtResource("4_lcco1")
+atlas = ExtResource("20_m31yo")
 region = Rect2(348, 15, 116, 112)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_d6a33"]
-atlas = ExtResource("5_ycic1")
+atlas = ExtResource("21_4x7hq")
 region = Rect2(232, 15, 116, 112)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_spujr"]
-atlas = ExtResource("5_ycic1")
+atlas = ExtResource("21_4x7hq")
 region = Rect2(348, 15, 116, 112)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_s0d6d"]
-atlas = ExtResource("5_ycic1")
+atlas = ExtResource("21_4x7hq")
 region = Rect2(464, 15, 116, 112)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0xfbs"]
-atlas = ExtResource("6_sqwjv")
+atlas = ExtResource("22_kkfnf")
 region = Rect2(0, 15, 116, 112)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ybkdq"]
-atlas = ExtResource("6_sqwjv")
+atlas = ExtResource("22_kkfnf")
 region = Rect2(116, 15, 116, 112)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_odjt8"]
-atlas = ExtResource("6_sqwjv")
+atlas = ExtResource("22_kkfnf")
 region = Rect2(232, 15, 116, 112)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3uamv"]
-atlas = ExtResource("6_sqwjv")
+atlas = ExtResource("22_kkfnf")
 region = Rect2(348, 15, 116, 112)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gt22f"]
-atlas = ExtResource("20_rcea2")
+atlas = ExtResource("23_mhc8n")
 region = Rect2(0, 14, 116, 112)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_bm1v5"]
-atlas = ExtResource("20_rcea2")
+atlas = ExtResource("23_mhc8n")
 region = Rect2(116, 14, 116, 112)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_nldmt"]
-atlas = ExtResource("20_rcea2")
+atlas = ExtResource("23_mhc8n")
 region = Rect2(232, 14, 116, 112)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ojdpx"]
-atlas = ExtResource("20_rcea2")
+atlas = ExtResource("23_mhc8n")
 region = Rect2(348, 14, 116, 112)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ksh2i"]
-atlas = ExtResource("20_rcea2")
+atlas = ExtResource("23_mhc8n")
 region = Rect2(464, 14, 116, 112)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_42xue"]
-atlas = ExtResource("20_rcea2")
+atlas = ExtResource("23_mhc8n")
 region = Rect2(580, 14, 116, 112)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_n7y8y"]
-atlas = ExtResource("20_rcea2")
+atlas = ExtResource("23_mhc8n")
 region = Rect2(696, 14, 116, 112)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_hsbmn"]
-atlas = ExtResource("20_rcea2")
+atlas = ExtResource("23_mhc8n")
 region = Rect2(812, 14, 116, 112)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8wsr6"]
-atlas = ExtResource("7_hlf6k")
+atlas = ExtResource("24_7jql6")
 region = Rect2(0, 13, 116, 112)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_x4rqg"]
-atlas = ExtResource("7_hlf6k")
+atlas = ExtResource("24_7jql6")
 region = Rect2(116, 13, 116, 112)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vtcof"]
-atlas = ExtResource("7_hlf6k")
+atlas = ExtResource("24_7jql6")
 region = Rect2(232, 13, 116, 112)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5sky6"]
-atlas = ExtResource("7_hlf6k")
+atlas = ExtResource("24_7jql6")
 region = Rect2(348, 13, 116, 112)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_pvnps"]
-atlas = ExtResource("7_hlf6k")
+atlas = ExtResource("24_7jql6")
 region = Rect2(464, 13, 116, 112)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_e6udg"]
-atlas = ExtResource("7_hlf6k")
+atlas = ExtResource("24_7jql6")
 region = Rect2(580, 13, 116, 112)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tnfpb"]
-atlas = ExtResource("7_hlf6k")
+atlas = ExtResource("24_7jql6")
 region = Rect2(696, 13, 116, 112)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_bc50l"]
-atlas = ExtResource("7_hlf6k")
+atlas = ExtResource("24_7jql6")
 region = Rect2(812, 13, 116, 112)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wx3qu"]
-atlas = ExtResource("7_hlf6k")
+atlas = ExtResource("24_7jql6")
 region = Rect2(928, 13, 116, 112)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ufvut"]
-atlas = ExtResource("7_hlf6k")
+atlas = ExtResource("24_7jql6")
 region = Rect2(1044, 13, 116, 112)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jy0qr"]
-atlas = ExtResource("7_hlf6k")
+atlas = ExtResource("24_7jql6")
 region = Rect2(1160, 13, 116, 112)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_j1rwk"]
-atlas = ExtResource("7_hlf6k")
+atlas = ExtResource("24_7jql6")
 region = Rect2(1276, 13, 116, 112)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_53sfs"]
-atlas = ExtResource("7_hlf6k")
+atlas = ExtResource("24_7jql6")
 region = Rect2(1392, 13, 116, 112)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_teht5"]
-atlas = ExtResource("7_hlf6k")
+atlas = ExtResource("24_7jql6")
 region = Rect2(1392, 13, 116, 112)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_73gec"]
-atlas = ExtResource("8_0qo52")
+atlas = ExtResource("25_h6vb4")
 region = Rect2(0, 15, 116, 112)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fa5y6"]
-atlas = ExtResource("8_0qo52")
+atlas = ExtResource("25_h6vb4")
 region = Rect2(116, 15, 116, 112)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8cql7"]
-atlas = ExtResource("7_hlf6k")
+atlas = ExtResource("24_7jql6")
 region = Rect2(1392, 13, 116, 112)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_sy6cp"]
-atlas = ExtResource("7_hlf6k")
+atlas = ExtResource("24_7jql6")
 region = Rect2(1276, 13, 116, 112)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qayqj"]
-atlas = ExtResource("7_hlf6k")
+atlas = ExtResource("24_7jql6")
 region = Rect2(1160, 13, 116, 112)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mt0op"]
-atlas = ExtResource("7_hlf6k")
+atlas = ExtResource("24_7jql6")
 region = Rect2(1044, 13, 116, 112)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_e0c7d"]
-atlas = ExtResource("7_hlf6k")
+atlas = ExtResource("24_7jql6")
 region = Rect2(928, 13, 116, 112)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3stim"]
-atlas = ExtResource("7_hlf6k")
+atlas = ExtResource("24_7jql6")
 region = Rect2(812, 13, 116, 112)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jgxwt"]
-atlas = ExtResource("7_hlf6k")
+atlas = ExtResource("24_7jql6")
 region = Rect2(696, 13, 116, 112)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3wpve"]
-atlas = ExtResource("7_hlf6k")
+atlas = ExtResource("24_7jql6")
 region = Rect2(580, 13, 116, 112)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8h2sq"]
-atlas = ExtResource("7_hlf6k")
+atlas = ExtResource("24_7jql6")
 region = Rect2(464, 13, 116, 112)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mrlgp"]
-atlas = ExtResource("7_hlf6k")
+atlas = ExtResource("24_7jql6")
 region = Rect2(348, 13, 116, 112)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7tydp"]
-atlas = ExtResource("7_hlf6k")
+atlas = ExtResource("24_7jql6")
 region = Rect2(232, 13, 116, 112)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_usj7j"]
-atlas = ExtResource("7_hlf6k")
+atlas = ExtResource("24_7jql6")
 region = Rect2(116, 13, 116, 112)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kql77"]
-atlas = ExtResource("7_hlf6k")
+atlas = ExtResource("24_7jql6")
 region = Rect2(0, 13, 116, 112)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4cw84"]
-atlas = ExtResource("9_4pjxj")
+atlas = ExtResource("26_7tn4j")
 region = Rect2(232, 15, 116, 112)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6hdsn"]
-atlas = ExtResource("9_4pjxj")
+atlas = ExtResource("26_7tn4j")
 region = Rect2(348, 15, 116, 112)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_g7j7k"]
-atlas = ExtResource("9_4pjxj")
+atlas = ExtResource("26_7tn4j")
 region = Rect2(116, 15, 116, 112)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7akrl"]
-atlas = ExtResource("9_4pjxj")
+atlas = ExtResource("26_7tn4j")
 region = Rect2(0, 15, 116, 112)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_83qmx"]
-atlas = ExtResource("10_dfrnt")
+atlas = ExtResource("27_je5rg")
 region = Rect2(0, 15, 116, 112)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_p3586"]
-atlas = ExtResource("10_dfrnt")
+atlas = ExtResource("27_je5rg")
 region = Rect2(116, 15, 116, 112)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_u47gi"]
-atlas = ExtResource("10_dfrnt")
+atlas = ExtResource("27_je5rg")
 region = Rect2(232, 15, 116, 112)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6f84j"]
-atlas = ExtResource("10_dfrnt")
+atlas = ExtResource("27_je5rg")
 region = Rect2(348, 15, 116, 112)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_knd4u"]
-atlas = ExtResource("10_dfrnt")
+atlas = ExtResource("27_je5rg")
 region = Rect2(464, 15, 116, 112)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mu24i"]
-atlas = ExtResource("10_dfrnt")
+atlas = ExtResource("27_je5rg")
 region = Rect2(580, 15, 116, 112)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5uyug"]
-atlas = ExtResource("10_dfrnt")
+atlas = ExtResource("27_je5rg")
 region = Rect2(696, 15, 116, 112)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_263wa"]
-atlas = ExtResource("10_dfrnt")
+atlas = ExtResource("27_je5rg")
 region = Rect2(812, 15, 116, 112)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_guxdr"]
@@ -819,25 +714,7 @@ height = 1.2
 [node name="SkeletonSwordShield" type="CharacterBody3D"]
 collision_layer = 8
 collision_mask = 41
-script = SubResource("GDScript_k8muu")
-chance_dormant_on_spawn = 1.0
-windup_time = 0.5
-recovery_time = 0.6
-attack_chance = 0.9
-attack_chance_interval = 100
-attack_min_distance = 1.25
-attack_range = 1.1
-min_time_between_attacks = 2.0
-damage_min = 15
-damage_max = 18
-block_transition_time = 0.3
-block_duration_base = 1.5
-visibility_range = 7
-walk_speed = 1.3
-block_mult = 0.85
-windup_mult = 0.4
-reanimation_time = 2.0
-minimum_hearing_volume = 18
+script = ExtResource("1_p452m")
 
 [node name="StateMachine" type="Node" parent="."]
 script = SubResource("GDScript_d8yvr")
@@ -848,91 +725,91 @@ enemy_raycast_path = NodePath("../../EnemyRayCast3D")
 metadata/DetectionSphere = NodePath("../../DetectionSphere")
 
 [node name="DetectAndFollowPlayer" type="Node" parent="StateMachine/Idle"]
-script = ExtResource("4_60a0v")
+script = ExtResource("1_wid26")
 
 [node name="FollowPlayer" type="Node" parent="StateMachine"]
 script = SubResource("GDScript_wtlmu")
 
 [node name="PathingToggler" type="Node" parent="StateMachine/FollowPlayer"]
-script = ExtResource("6_k2s6f")
+script = ExtResource("2_xfqif")
 nav_agent_path = NodePath("../../../NavigationAgent3D")
 metadata/RayCastPhysical = NodePath("../../../RayCastPhysical")
 metadata/NavigationAgent3D = NodePath("../../../NavigationAgent3D")
 metadata/NPCPath = NodePath("../../..")
 
 [node name="UpdatePathingPosition" type="Node" parent="StateMachine/FollowPlayer"]
-script = ExtResource("7_jwlnw")
+script = ExtResource("3_fkmeo")
 nav_agent_path = NodePath("../../../NavigationAgent3D")
 
 [node name="BlockingDecision" type="Node" parent="StateMachine/FollowPlayer"]
-script = ExtResource("4_qvwkq")
+script = ExtResource("4_r60rk")
 npc_path = NodePath("../../..")
 
 [node name="AttackingDecision" type="Node" parent="StateMachine/FollowPlayer"]
-script = ExtResource("5_b61t0")
+script = ExtResource("5_efy0o")
 npc_path = NodePath("../../..")
 
 [node name="StaggerDetector" type="Node" parent="StateMachine/FollowPlayer"]
-script = ExtResource("6_wpwrj")
+script = ExtResource("6_3lb5b")
 npc_path = NodePath("../../..")
 
 [node name="NpcStartBlocking" type="Node" parent="StateMachine"]
-script = ExtResource("4_txae2")
+script = ExtResource("7_3sxh8")
 npc_path = NodePath("../..")
 
 [node name="StaggerDetector" type="Node" parent="StateMachine/NpcStartBlocking"]
-script = ExtResource("6_wpwrj")
+script = ExtResource("6_3lb5b")
 npc_path = NodePath("../../..")
 
 [node name="NpcBlocking" type="Node" parent="StateMachine"]
-script = ExtResource("5_hev7c")
+script = ExtResource("8_i5t3t")
 npc_path = NodePath("../..")
 
 [node name="UpdatePathingPosition" type="Node" parent="StateMachine/NpcBlocking"]
-script = ExtResource("7_jwlnw")
+script = ExtResource("3_fkmeo")
 nav_agent_path = NodePath("../../../NavigationAgent3D")
 
 [node name="NpcFinishBlocking" type="Node" parent="StateMachine"]
-script = ExtResource("6_slclh")
+script = ExtResource("9_r5yad")
 npc_path = NodePath("../..")
 
 [node name="StaggerDetector" type="Node" parent="StateMachine/NpcFinishBlocking"]
-script = ExtResource("6_wpwrj")
+script = ExtResource("6_3lb5b")
 npc_path = NodePath("../../..")
 
 [node name="NpcAttackWindup" type="Node" parent="StateMachine"]
-script = ExtResource("8_sfjx4")
+script = ExtResource("10_u3ccr")
 npc_path = NodePath("../..")
 
 [node name="UpdatePathingPosition" type="Node" parent="StateMachine/NpcAttackWindup"]
-script = ExtResource("7_jwlnw")
+script = ExtResource("3_fkmeo")
 nav_agent_path = NodePath("../../../NavigationAgent3D")
 
 [node name="NpcAttackSwing" type="Node" parent="StateMachine"]
-script = ExtResource("9_7383i")
+script = ExtResource("11_lmhk8")
 npc_path = NodePath("../..")
 
 [node name="NpcAttackRecovery" type="Node" parent="StateMachine"]
-script = ExtResource("10_rabns")
+script = ExtResource("12_u4wxn")
 npc_path = NodePath("../..")
 
 [node name="Staggered" type="Node" parent="StateMachine"]
-script = ExtResource("13_spfbc")
+script = ExtResource("13_y8rnc")
 
 [node name="BlockStagger" type="Node" parent="StateMachine"]
-script = ExtResource("14_j7wip")
+script = ExtResource("14_v1l5v")
 npc_path = NodePath("../..")
 
 [node name="Dormant" type="Node" parent="StateMachine"]
-script = ExtResource("15_e0wwc")
+script = ExtResource("15_st76a")
 npc_path = NodePath("../..")
 
 [node name="ListenForPlayerFootsteps" type="Node" parent="StateMachine/Dormant"]
-script = ExtResource("16_51thv")
+script = ExtResource("16_fcsq0")
 npc_path = NodePath("../../..")
 
 [node name="Reanimate" type="Node" parent="StateMachine"]
-script = ExtResource("16_i884d")
+script = ExtResource("17_htny4")
 npc_path = NodePath("../..")
 
 [node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="."]
@@ -946,7 +823,7 @@ sprite_frames = SubResource("SpriteFrames_guxdr")
 animation = &"dormant"
 
 [node name="NpcSpriteAnimator" type="Node" parent="AnimatedSprite3D"]
-script = ExtResource("11_36y4s")
+script = ExtResource("28_k0m2t")
 npc_node_path = NodePath("../..")
 
 [node name="Functionality" type="Node" parent="."]
@@ -958,55 +835,55 @@ target_desired_distance = 0.75
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.602017, 0)
 shape = SubResource("CapsuleShape3D_leqgq")
-script = ExtResource("26_gam0e")
+script = ExtResource("29_prs7s")
 
 [node name="EnemyRayCast3D" type="RayCast3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.965882, 0)
 collision_mask = 33
-script = ExtResource("12_m4a5c")
+script = ExtResource("30_825xu")
 npc_path = NodePath("..")
 
 [node name="Skills" type="Node" parent="."]
 
 [node name="Health" type="Node" parent="Skills"]
-script = ExtResource("24_ftyo4")
+script = ExtResource("31_ckd34")
 level = 3
 skill_name = "Health"
 
 [node name="PhysicsMovement" type="Node" parent="."]
-script = ExtResource("28_dnxam")
+script = ExtResource("32_dhmex")
 nav_agent_path = NodePath("../NavigationAgent3D")
 
 [node name="DamagePlayer" type="Node" parent="."]
-script = ExtResource("29_2n6kl")
+script = ExtResource("33_7de21")
 
 [node name="Sounds" type="Node" parent="."]
 
 [node name="RandomStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.720709, 0)
-script = ExtResource("30_li7cr")
+script = ExtResource("34_mo1m3")
 
 [node name="DamageStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.610768, 0)
 volume_db = -20.451
 bus = &"ReverbBus"
-script = ExtResource("31_lkceg")
+script = ExtResource("35_o2xy2")
 possible_sounds = ["res://sounds/enemies/skeleton/damage/impact_01.wav", "res://sounds/enemies/skeleton/damage/impact_02.wav", "res://sounds/enemies/skeleton/damage/impact_03.wav", "res://sounds/enemies/skeleton/damage/impact_04.wav"]
 
 [node name="NpcBlockDmgPlayer3D" type="AudioStreamPlayer3D" parent="."]
 volume_db = -20.451
 bus = &"ReverbBus"
-script = ExtResource("32_klkji")
+script = ExtResource("36_nohre")
 possible_sounds = ["res://sounds/shields/metal/METLImpt_Impact Metal Blunt 02_DDUMAIS_NONE.wav", "res://sounds/shields/metal/METLImpt_Impact Metal Blunt 04_DDUMAIS_NONE.wav", "res://sounds/shields/metal/METLImpt_Impact Metal Blunt 05_DDUMAIS_NONE.wav", "res://sounds/shields/metal/METLImpt_Impact Metal Blunt 10_DDUMAIS_NONE.wav"]
 
 [node name="NpcAttackPlayer3D" type="AudioStreamPlayer3D" parent="."]
 volume_db = -8.421
-script = ExtResource("34_kwd0c")
+script = ExtResource("37_cot0w")
 possible_sounds = ["res://sounds/weapons/sword/SWSH_Swing 2 Normal 01_DDUMAIS_NONE.wav", "res://sounds/weapons/sword/SWSH_Swing 2 Normal 02_DDUMAIS_NONE.wav", "res://sounds/weapons/sword/SWSH_Swing 2 Normal 03_DDUMAIS_NONE.wav", "res://sounds/weapons/sword/SWSH_Swing 2 Normal 04_DDUMAIS_NONE.wav", "res://sounds/weapons/sword/SWSH_Swing 2 Normal 05_DDUMAIS_NONE.wav", "res://sounds/weapons/sword/SWSH_Swing 2 Normal 06_DDUMAIS_NONE.wav", "res://sounds/weapons/sword/SWSH_Swing 2 Normal 07_DDUMAIS_NONE.wav", "res://sounds/weapons/sword/SWSH_Swing 2 Normal 08_DDUMAIS_NONE.wav", "res://sounds/weapons/sword/SWSH_Swing 2 Normal 09_DDUMAIS_NONE.wav"]
 
 [node name="NpcFootstepPlayer3D" type="AudioStreamPlayer3D" parent="."]
 volume_db = -20.0
-script = ExtResource("35_1dbe7")
+script = ExtResource("38_bkyni")
 animation_name = "block_walk"
 animation_frames = [3, 7]
 animated_sprite_path = NodePath("../AnimatedSprite3D")
@@ -1014,7 +891,7 @@ possible_sounds = ["res://sounds/enemies/skeleton/footsteps/FEETHmn_Footstep Sto
 
 [node name="NpcFootstepPlayer3D2" type="AudioStreamPlayer3D" parent="."]
 volume_db = -20.0
-script = ExtResource("35_1dbe7")
+script = ExtResource("38_bkyni")
 animation_name = "walk"
 animation_frames = [2, 6]
 animated_sprite_path = NodePath("../AnimatedSprite3D")
@@ -1027,7 +904,7 @@ unit_size = 8.0
 max_distance = 8.0
 panning_strength = 2.0
 bus = &"ReverbBus"
-script = ExtResource("36_1p0ts")
+script = ExtResource("39_ighc8")
 min_delay_between_sounds = 3.0
 possible_sounds = ["res://sounds/enemies/skeleton/idle/GHOSTS Breath Cavernous.LR.wav", "res://sounds/enemies/skeleton/idle/GHOSTS Breath Hollow Spirit.LR.wav"]
 
@@ -1038,12 +915,12 @@ pitch_scale = 0.88
 max_distance = 8.0
 panning_strength = 2.5
 bus = &"ReverbBus"
-script = ExtResource("37_jj73t")
+script = ExtResource("40_ko2nd")
 possible_sounds = ["res://sounds/enemies/skeleton/death/Hurt2.wav", "res://sounds/enemies/skeleton/death/Hurt.wav"]
 
 [node name="ReanimateSoundPlayer3D" type="AudioStreamPlayer3D" parent="."]
 max_distance = 8.0
-script = ExtResource("41_vhdih")
+script = ExtResource("41_7vm6f")
 possible_sounds = ["res://sounds/enemies/skeleton/reanimate/reanimate_01.wav", "res://sounds/enemies/skeleton/reanimate/reanimate_02.wav", "res://sounds/enemies/skeleton/reanimate/reanimate_03.wav"]
 
 [connection signal="on_blocked_hit" from="." to="StateMachine/NpcBlocking" method="_on_blocked_hit"]

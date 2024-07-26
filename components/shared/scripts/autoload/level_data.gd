@@ -29,14 +29,14 @@ var _game_levels = [
 		"Environment" : "res://world/prison/scenes/EnvironmentalSettings.tscn",
 		"Enemies" : [
 			{
-				"Path" : "res://components/Entities/enemies/skeleton_sword_shield_simple/skeleton_sword_shield_simple.tscn",
+				"Path" : "res://entities/actors/enemies/skeleton_sword_shield_simple/scenes/skeleton_sword_shield_simple.tscn",
 				"NumRequired" : 12,
 				"SpawnPoints" : [
 					"EnemySpawnPoint"
 				]
 			},
 			{
-				"Path" : "res://components/Entities/enemies/ghost_spirit/ghost_spirit.tscn",
+				"Path" : "res://entities/actors/enemies/ghost_spirit/scenes/ghost_spirit.tscn",
 				"NumRequired" : 0,
 				"SpawnPoints" : [
 					"GhostSpawnPoint"

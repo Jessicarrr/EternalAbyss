@@ -1,9 +1,9 @@
 [gd_scene load_steps=15 format=3 uid="uid://tae6rrohj85k"]
 
-[ext_resource type="Script" path="res://components/Entities/enemies/ghost_spirit/ghost_spirit.gd" id="1_a2bvh"]
-[ext_resource type="Script" path="res://components/Entities/enemies/ghost_spirit/states/GhostStateMachine.gd" id="2_yd4t5"]
-[ext_resource type="Script" path="res://components/Entities/enemies/ghost_spirit/states/GhostlyWanderIdle.gd" id="3_idisl"]
-[ext_resource type="Script" path="res://components/Entities/enemies/ghost_spirit/GhostPhysicsMovement.gd" id="4_37i5f"]
+[ext_resource type="Script" path="res://entities/actors/enemies/ghost_spirit/scripts/ghost_spirit.gd" id="1_a2bvh"]
+[ext_resource type="Script" path="res://entities/actors/enemies/ghost_spirit/scripts/states/GhostStateMachine.gd" id="2_yd4t5"]
+[ext_resource type="Script" path="res://entities/actors/enemies/ghost_spirit/scripts/states/GhostlyWanderIdle.gd" id="3_idisl"]
+[ext_resource type="Script" path="res://entities/actors/enemies/ghost_spirit/scripts/GhostPhysicsMovement.gd" id="4_37i5f"]
 [ext_resource type="Script" path="res://components/shared/scripts/actors/ghosts/SpriteVisibilityFlasher.gd" id="6_brqfw"]
 [ext_resource type="Texture2D" uid="uid://gh4r011gfns1" path="res://sprites/enemies/ghost_spirit/Sprite-0001.png" id="6_hlmbw"]
 [ext_resource type="Texture2D" uid="uid://biyj82l1q7wdj" path="res://textures/particles/bit.png" id="7_nv7r8"]

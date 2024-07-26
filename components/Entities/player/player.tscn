@@ -26,7 +26,6 @@
 [ext_resource type="Script" path="res://components/Entities/player/scripts/state/BlockEnding.gd" id="14_y68tw"]
 [ext_resource type="Script" path="res://components/Entities/player/scripts/MouseMovement.gd" id="16_gvfj2"]
 [ext_resource type="AudioStream" uid="uid://cq8x83kwk4opl" path="res://sounds/ghostly_windy_ambience.wav" id="16_rljpy"]
-[ext_resource type="Script" path="res://components/Entities/player/hud/FPSCounter.gd" id="18_0i3d2"]
 [ext_resource type="Script" path="res://items/equippable/shared/scripts/EquipmentSlotHelper.gd" id="19_auhrk"]
 [ext_resource type="Script" path="res://components/Entities/player/scripts/sounds/AttackSounds.gd" id="19_mgc05"]
 [ext_resource type="Script" path="res://components/Entities/player/scripts/sounds/RandomAmbientSounds.gd" id="21_63v10"]
@@ -44,6 +43,7 @@
 [ext_resource type="PackedScene" uid="uid://db1md1x1bc2h4" path="res://ui/StatusBars.tscn" id="36_54iry"]
 [ext_resource type="Script" path="res://shaders/DamageVignette.gd" id="37_wyik8"]
 [ext_resource type="Shader" path="res://shaders/red_overlay.gdshader" id="38_62aiw"]
+[ext_resource type="Script" path="res://ui/FPSCounter.gd" id="38_l08d4"]
 [ext_resource type="Script" path="res://shaders/RedOverlay.gd" id="39_24o3p"]
 [ext_resource type="Shader" path="res://shaders/vignette.gdshader" id="40_6mr1p"]
 [ext_resource type="Script" path="res://shaders/VignetteHealth.gd" id="41_22i2c"]
@@ -405,7 +405,7 @@ offset_bottom = 40.0
 [node name="FPSCounter" type="Label" parent="HUD/CanvasLayer"]
 offset_right = 40.0
 offset_bottom = 23.0
-script = ExtResource("18_0i3d2")
+script = ExtResource("38_l08d4")
 
 [node name="LookAtText" parent="HUD/CanvasLayer" instance=ExtResource("34_a5qka")]
 
