@@ -1,23 +1,23 @@
 [gd_scene load_steps=119 format=3 uid="uid://vw0633l67whr"]
 
 [ext_resource type="Script" path="res://entities/shared/scripts/SimpleEnemy.gd" id="1_p452m"]
-[ext_resource type="Script" path="res://entities/actors/shared/scripts/states/functionality/DetectAndFollowPlayer.gd" id="1_wid26"]
-[ext_resource type="Script" path="res://entities/actors/shared/scripts/states/functionality/PathingToggler.gd" id="2_xfqif"]
-[ext_resource type="Script" path="res://entities/actors/shared/scripts/states/functionality/FollowTarget.gd" id="3_fkmeo"]
-[ext_resource type="Script" path="res://entities/actors/shared/scripts/states/functionality/BlockingDecision.gd" id="4_r60rk"]
-[ext_resource type="Script" path="res://entities/actors/shared/scripts/states/functionality/AttackingDecision.gd" id="5_efy0o"]
-[ext_resource type="Script" path="res://entities/actors/shared/scripts/states/functionality/StaggerDetector.gd" id="6_3lb5b"]
-[ext_resource type="Script" path="res://entities/actors/shared/scripts/states/NpcStartBlocking.gd" id="7_3sxh8"]
-[ext_resource type="Script" path="res://entities/actors/shared/scripts/states/Blocking.gd" id="8_i5t3t"]
-[ext_resource type="Script" path="res://entities/actors/shared/scripts/states/NpcFinishBlocking.gd" id="9_r5yad"]
-[ext_resource type="Script" path="res://entities/actors/shared/scripts/states/NpcAttackWindup.gd" id="10_u3ccr"]
-[ext_resource type="Script" path="res://entities/actors/shared/scripts/states/NpcAttackSwing.gd" id="11_lmhk8"]
-[ext_resource type="Script" path="res://entities/actors/shared/scripts/states/NpcAttackRecovery.gd" id="12_u4wxn"]
-[ext_resource type="Script" path="res://entities/actors/shared/scripts/states/Staggered.gd" id="13_y8rnc"]
-[ext_resource type="Script" path="res://entities/actors/shared/scripts/states/BlockStagger.gd" id="14_v1l5v"]
-[ext_resource type="Script" path="res://entities/actors/shared/scripts/states/Dormant.gd" id="15_st76a"]
-[ext_resource type="Script" path="res://entities/actors/shared/scripts/states/functionality/ListenForPlayerFootsteps.gd" id="16_fcsq0"]
-[ext_resource type="Script" path="res://entities/actors/shared/scripts/states/Reanimate.gd" id="17_htny4"]
+[ext_resource type="Script" path="res://components/shared/scripts/actors/states/functionality/DetectAndFollowPlayer.gd" id="1_wid26"]
+[ext_resource type="Script" path="res://components/shared/scripts/actors/states/functionality/PathingToggler.gd" id="2_xfqif"]
+[ext_resource type="Script" path="res://components/shared/scripts/actors/states/functionality/FollowTarget.gd" id="3_fkmeo"]
+[ext_resource type="Script" path="res://components/shared/scripts/actors/states/functionality/BlockingDecision.gd" id="4_r60rk"]
+[ext_resource type="Script" path="res://components/shared/scripts/actors/states/functionality/AttackingDecision.gd" id="5_efy0o"]
+[ext_resource type="Script" path="res://components/shared/scripts/actors/states/functionality/StaggerDetector.gd" id="6_3lb5b"]
+[ext_resource type="Script" path="res://components/shared/scripts/actors/states/NpcStartBlocking.gd" id="7_3sxh8"]
+[ext_resource type="Script" path="res://components/shared/scripts/actors/states/Blocking.gd" id="8_i5t3t"]
+[ext_resource type="Script" path="res://components/shared/scripts/actors/states/NpcFinishBlocking.gd" id="9_r5yad"]
+[ext_resource type="Script" path="res://components/shared/scripts/actors/states/NpcAttackWindup.gd" id="10_u3ccr"]
+[ext_resource type="Script" path="res://components/shared/scripts/actors/states/NpcAttackSwing.gd" id="11_lmhk8"]
+[ext_resource type="Script" path="res://components/shared/scripts/actors/states/NpcAttackRecovery.gd" id="12_u4wxn"]
+[ext_resource type="Script" path="res://components/shared/scripts/actors/states/Staggered.gd" id="13_y8rnc"]
+[ext_resource type="Script" path="res://components/shared/scripts/actors/states/BlockStagger.gd" id="14_v1l5v"]
+[ext_resource type="Script" path="res://components/shared/scripts/actors/states/Dormant.gd" id="15_st76a"]
+[ext_resource type="Script" path="res://components/shared/scripts/actors/states/functionality/ListenForPlayerFootsteps.gd" id="16_fcsq0"]
+[ext_resource type="Script" path="res://components/shared/scripts/actors/states/Reanimate.gd" id="17_htny4"]
 [ext_resource type="Texture2D" uid="uid://d5wgl1bawg2k" path="res://sprites/enemies/skeleton attack anim-Sheet fix.png" id="18_wa55i"]
 [ext_resource type="Texture2D" uid="uid://lxm8tcnahu14" path="res://sprites/enemies/skeleton 1 blocking idle 2-Sheet.png" id="19_8n5cq"]
 [ext_resource type="Texture2D" uid="uid://dcpbq40ehd0bn" path="res://sprites/enemies/skeleton 1 blocking raise shield 2 reversed-Sheet.png" id="20_m31yo"]
@@ -84,7 +84,7 @@ func _on_state_change(state, data):
 "
 
 [sub_resource type="GDScript" id="GDScript_cunci"]
-script/source = "extends \"res://entities/shared/scripts/BaseState.gd\"
+script/source = "extends \"res://components/shared/scripts/actors/BaseState.gd\"
 
 @export var enemy_raycast_path : NodePath = \"\"
 var raycast
@@ -114,7 +114,7 @@ func _process(delta):
 "
 
 [sub_resource type="GDScript" id="GDScript_wtlmu"]
-script/source = "extends \"res://entities/shared/scripts/BaseState.gd\"
+script/source = "extends \"res://components/shared/scripts/actors/BaseState.gd\"
 
 signal move_npc
 
@@ -941,10 +941,6 @@ possible_sounds = ["res://sounds/enemies/skeleton/reanimate/reanimate_01.wav", "
 [connection signal="state_changed" from="StateMachine" to="ReanimateSoundPlayer3D" method="_on_state_changed"]
 [connection signal="state_changed_to_dead" from="StateMachine" to="CollisionShape3D" method="_on_state_changed_to_dead"]
 [connection signal="state_changed_to_dead" from="StateMachine" to="DeathSoundPlayer3D" method="_on_state_machine_state_changed_to_dead"]
-[connection signal="request_state_change" from="StateMachine/Idle" to="StateMachine" method="_on_request_state_change"]
-[connection signal="began" from="StateMachine/FollowPlayer" to="StateMachine/FollowPlayer/BlockingDecision" method="_on_combat_follow_began"]
-[connection signal="ended" from="StateMachine/FollowPlayer" to="StateMachine/FollowPlayer/BlockingDecision" method="_on_follow_player_ended"]
-[connection signal="request_state_change" from="StateMachine/FollowPlayer" to="StateMachine" method="_on_request_state_change"]
 [connection signal="request_state_change" from="StateMachine/NpcStartBlocking" to="StateMachine" method="_on_request_state_change"]
 [connection signal="request_state_change" from="StateMachine/NpcBlocking" to="StateMachine" method="_on_request_state_change"]
 [connection signal="request_state_change" from="StateMachine/NpcFinishBlocking" to="StateMachine" method="_on_request_state_change"]

@@ -48,6 +48,7 @@ project/assembly_name="Eternal Abyss"
 
 folder_colors={
 "res://entities/": "yellow",
+"res://helpers/": "yellow",
 "res://items/": "yellow",
 "res://level-gen-v2/": "yellow",
 "res://skills/": "yellow",

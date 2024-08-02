@@ -15,6 +15,14 @@ var dead = false
 signal state_changed
 signal state_changed_to_dead
 
+func connect_states_signals():
+	for state in states_to_nodes:
+		var node = states_to_nodes[state]
+		
+		if node.request_state_change.is_connected(
+		_on_request_state_change) == false:
+			node.request_state_change.connect(_on_request_state_change)
+
 func get_node_for_next_state(state):
 	if states_to_nodes.has(state):
 		return get_node(states_to_nodes[state].get_path())
@@ -107,6 +115,7 @@ func _on_death():
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	_add_death_state_if_missing()
+	connect_states_signals()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

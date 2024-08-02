@@ -1,4 +1,4 @@
-extends "res://components/shared/scripts/actors/BaseState.gd"
+extends "res://entities/shared/scripts/BaseState.gd"
 class_name DormantState
 
 @export var npc_path : NodePath = ""

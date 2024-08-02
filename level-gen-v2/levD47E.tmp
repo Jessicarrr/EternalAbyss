@@ -1,0 +1,71 @@
+[gd_scene load_steps=11 format=3 uid="uid://c8npgk35edn28"]
+
+[ext_resource type="Script" path="res://level-gen-v2/WorldEvents.gd" id="1_sqkn6"]
+[ext_resource type="Script" path="res://level-gen-v2/Generator.gd" id="2_hstt7"]
+[ext_resource type="PackedScene" uid="uid://dcb260rwf1sj2" path="res://entities/player/scenes/player.tscn" id="3_a0eaq"]
+[ext_resource type="Script" path="res://level-gen-v2/GenDebug.gd" id="4_ftthq"]
+[ext_resource type="Script" path="res://level-gen-v2/algorithms/HallwaysFirst/HallwaysFirst.gd" id="5_32axo"]
+[ext_resource type="Script" path="res://level-gen-v2/AlgorithmHelper.gd" id="6_tofmr"]
+[ext_resource type="Script" path="res://world/shared/scripts/TextureVariations.gd" id="7_1hotn"]
+[ext_resource type="Script" path="res://level-gen-v2/EnemyAdder.gd" id="8_pa2jw"]
+[ext_resource type="Script" path="res://level-gen-v2/RemoveOverlappingWelders.gd" id="9_kxs5v"]
+[ext_resource type="Script" path="res://level-gen-v2/ConvexWallWelderPlacer.gd" id="10_g1f3t"]
+
+[node name="LevelGenV2" type="Node"]
+
+[node name="WorldEvents" type="Node" parent="."]
+script = ExtResource("1_sqkn6")
+
+[node name="Layout" type="Node" parent="."]
+
+[node name="Actors" type="Node" parent="."]
+
+[node name="GenerationLogic" type="Node" parent="."]
+
+[node name="Generator" type="Node" parent="GenerationLogic" node_paths=PackedStringArray("algorithm", "algorithm_helper")]
+script = ExtResource("2_hstt7")
+algorithm = NodePath("../Algorithms/HallwaysFirst")
+algorithm_helper = NodePath("../Helpers/AlgorithmHelper")
+maximum_allowed_fails = 100
+player_scene = ExtResource("3_a0eaq")
+metadata/LayoutPath = NodePath("../../Layout")
+metadata/RootPath = NodePath("../..")
+metadata/ActorsPath = NodePath("../../Actors")
+metadata/EventsPath = NodePath("../../WorldEvents")
+
+[node name="GenDebug" type="Node" parent="GenerationLogic/Generator"]
+script = ExtResource("4_ftthq")
+
+[node name="Algorithms" type="Node" parent="GenerationLogic"]
+
+[node name="HallwaysFirst" type="Node" parent="GenerationLogic/Algorithms"]
+script = ExtResource("5_32axo")
+min_hallways_before_turn = 3
+percent_chance_of_hallway_turning = 70
+total_hallways_to_create = 200
+
+[node name="Helpers" type="Node" parent="GenerationLogic"]
+
+[node name="AlgorithmHelper" type="Node" parent="GenerationLogic/Helpers"]
+script = ExtResource("6_tofmr")
+
+[node name="TextureVariation" type="Node" parent="GenerationLogic/Helpers"]
+script = ExtResource("7_1hotn")
+metadata/LayoutPath = NodePath("../../../Layout")
+
+[node name="EnemyAdder" type="Node" parent="GenerationLogic/Helpers"]
+script = ExtResource("8_pa2jw")
+metadata/LayoutsNodePath = NodePath("../../../Layout")
+metadata/ActorsNodePath = NodePath("../../../Actors")
+
+[node name="RemoveOverlappingWelders" type="Node" parent="GenerationLogic/Helpers"]
+script = ExtResource("9_kxs5v")
+
+[node name="ConvexWallWelderPlacer" type="Node" parent="GenerationLogic/Helpers"]
+script = ExtResource("10_g1f3t")
+layout_node_path = NodePath("../../../Layout")
+
+[connection signal="generation_finished" from="GenerationLogic/Generator" to="GenerationLogic/Helpers/TextureVariation" method="_on_generator_generation_finished"]
+[connection signal="generation_finished" from="GenerationLogic/Generator" to="GenerationLogic/Helpers/EnemyAdder" method="_on_generator_generation_finished"]
+[connection signal="generation_finished" from="GenerationLogic/Generator" to="GenerationLogic/Helpers/RemoveOverlappingWelders" method="_on_generator_generation_finished"]
+[connection signal="generation_finished" from="GenerationLogic/Generator" to="GenerationLogic/Helpers/ConvexWallWelderPlacer" method="_on_generator_generation_finished"]

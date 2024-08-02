@@ -25,10 +25,10 @@ const SHOW_HITBOXES = false
 var print_flags = {
 	COMBAT: false,
 	GENERAL_STATES: false,
-	PLAYER_STATES: false,
-	PLAYER_STATE_MACHINE: false,
+	PLAYER_STATES: true,
+	PLAYER_STATE_MACHINE: true,
 	NPC_STATES: false,
-	NPC_STATE_MACHINE: true,
+	NPC_STATE_MACHINE: false,
 	OBJECT_STATES: false,
 	GENERATION: false,
 	GENERATION_COLLISION: false,

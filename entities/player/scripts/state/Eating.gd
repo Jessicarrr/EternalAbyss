@@ -1,4 +1,4 @@
-extends "res://components/shared/scripts/actors/BaseState.gd"
+extends "res://entities/shared/scripts/BaseState.gd"
 
 var item
 @onready var use_item_input = $UseItemInput

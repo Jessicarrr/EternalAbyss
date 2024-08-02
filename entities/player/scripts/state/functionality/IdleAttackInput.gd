@@ -26,10 +26,11 @@ func _input(_event):
 			var duration_pressed = (Time.get_ticks_msec() - attack_pressed_time) / 1000.0  # Convert to seconds
 			
 			# Emit the appropriate signal based on duration
-			if duration_pressed < attack_held_threshold: 
-				emit_signal("attack_clicked")
+			if duration_pressed < attack_held_threshold:
+				Debug.msg(Debug.PLAYER_STATES, ["Attack clicked"])
+				attack_clicked.emit()
 			else:
-				emit_signal("attack_held")
+				attack_held.emit()
 			
 			# Reset the press time after handling
 			attack_pressed_time = null

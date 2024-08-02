@@ -1,4 +1,4 @@
-# Skeleton Enemy Design Document
+k# Skeleton Enemy Design Document
 
 ## Overview
 The skeleton enemy will add a layer of tension and strategy to the game by introducing a dormant state where they appear as harmless piles of bones. Players can choose to sneak past, risking waking them, or confront them directly. This mechanic encourages careful observation and decision-making.

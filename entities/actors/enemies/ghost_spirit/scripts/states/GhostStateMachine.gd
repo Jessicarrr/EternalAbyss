@@ -1,4 +1,4 @@
-extends "res://components/shared/scripts/actors/BaseStateMachine.gd"
+extends "res://entities/shared/scripts/BaseStateMachine.gd"
 class_name GhostStateMachine
 
 # Called when the node enters the scene tree for the first time.

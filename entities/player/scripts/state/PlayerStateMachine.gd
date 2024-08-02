@@ -1,5 +1,4 @@
-extends "res://components/shared/scripts/actors/BaseStateMachine.gd"
-
+extends "res://entities/shared/scripts/BaseStateMachine.gd"
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -19,6 +18,7 @@ func _ready():
 	super._ready()
 	default_state = Enums.ActorStates.IDLE
 	transition_to_default_state()
+	#connect_states_signals() #already called in base class now
 	self.state_changed.connect(_on_state_change)
 
 func _on_state_change(state, data):

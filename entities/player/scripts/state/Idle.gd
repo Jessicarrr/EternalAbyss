@@ -1,4 +1,4 @@
-extends "res://components/shared/scripts/actors/BaseState.gd"
+extends "res://entities/shared/scripts/BaseState.gd"
 
 @onready var item_handler = $ItemHandler
 @onready var use_item_input = $UseItemInput
@@ -58,21 +58,22 @@ func _process(delta):
 func _on_item_used():
 	var item = item_handler.hotbar_item
 	
-	if item.can_use_item() == false:
-		Debug.msg(Debug.PLAYER_STATES, ["Idle state tried to use an item but it can't be used due to missing var assignments"])
-		return
-	
-	if item.usage_type == Enums.ItemUsages.BLOCK:
-		_on_block()
-		return
-		
-	if item_handler.is_hotbar_item_food() == true:
-		request_state_change.emit(self, Enums.ActorStates.EATING, {
-			"item" : item_handler.hotbar_item
-		})
-		return
+	#if item.can_use_item() == false:
+		#Debug.msg(Debug.PLAYER_STATES, ["Idle state tried to use an item but it can't be used due to missing var assignments"])
+		#return
+	#
+	#if item.usage_type == Enums.ItemUsages.BLOCK:
+		#_on_block()
+		#return
+		#
+	#if item_handler.is_hotbar_item_food() == true:
+		#request_state_change.emit(self, Enums.ActorStates.EATING, {
+			#"item" : item_handler.hotbar_item
+		#})
+		#return
 
 func _on_attack_input_attack_clicked():
+	Debug.msg(Debug.PLAYER_STATES, ["Trying to go to windup state?"])
 	try_go_to_windup_state()
 
 

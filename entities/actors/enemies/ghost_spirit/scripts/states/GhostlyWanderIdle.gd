@@ -1,4 +1,4 @@
-extends "res://components/shared/scripts/actors/BaseState.gd"
+extends "res://entities/shared/scripts/BaseState.gd"
 class_name GhostlyIdleState
 
 # Called when the node enters the scene tree for the first time.
