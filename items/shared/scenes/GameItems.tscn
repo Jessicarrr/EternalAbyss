@@ -1,0 +1,230 @@
+[gd_scene load_steps=27 format=3 uid="uid://blfvfc7exomsg"]
+
+[ext_resource type="Script" path="res://items/equippable/weapons/swords/shared/scripts/Sword3D.gd" id="1_cup6j"]
+[ext_resource type="Texture2D" uid="uid://dwblci623dgke" path="res://items/equippable/weapons/swords/rapiers/corroded-estoc/textures/testsword.png" id="2_yia71"]
+[ext_resource type="Script" path="res://items/equippable/weapons/swords/rapiers/shared/scripts/StabSwordSprite3D.gd" id="3_uoc5e"]
+[ext_resource type="Script" path="res://items/equippable/weapons/shared/scripts/DamageOther.gd" id="4_wjxkk"]
+[ext_resource type="Texture2D" uid="uid://bpvpqx0yt7gg8" path="res://items/equippable/weapons/swords/rapiers/corroded-estoc/textures/testsword-ground.png" id="5_qpjfv"]
+[ext_resource type="Script" path="res://items/consumables/food/shared/Food.gd" id="6_3qw1a"]
+[ext_resource type="Texture2D" uid="uid://b5u5ueclkqrja" path="res://items/consumables/food/salted_dried_fish/textures/salted_dried_fish.png" id="7_68lbu"]
+[ext_resource type="Script" path="res://items/shared/scripts/HeldItemSprite3D.gd" id="8_wgahg"]
+[ext_resource type="Script" path="res://items/shared/scripts/OffHandItem3D.gd" id="10_6jrj5"]
+[ext_resource type="Texture2D" uid="uid://bxvpv3a0fxka3" path="res://items/equippable/misc/held_torch/textures/torch 2 main sprite.png" id="10_aqh4n"]
+[ext_resource type="Texture2D" uid="uid://dpwm1i1kcgotx" path="res://items/equippable/misc/held_torch/textures/torch 2 sprite-Sheet.png" id="12_0urn2"]
+[ext_resource type="Script" path="res://items/shared/scripts/OffHandItemSprite3D.gd" id="12_kab7f"]
+[ext_resource type="AudioStream" uid="uid://lndvchot64kq" path="res://items/equippable/misc/held_torch/sounds/fire_torch.wav" id="14_tibvk"]
+[ext_resource type="Texture2D" uid="uid://b7cmkr1cumvja" path="res://items/equippable/misc/held_torch/textures/inventoryicon.png" id="15_psxqf"]
+[ext_resource type="Script" path="res://items/shared/scripts/ItemSoundPlayer3D.gd" id="15_tb1ap"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a3qxk"]
+transparency = 1
+albedo_texture = ExtResource("2_yia71")
+texture_filter = 0
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_2sapx"]
+size = Vector3(0.35, 0.75, 0.35)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_kp3iu"]
+size = Vector3(0.25, 0.25, 0.25)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_2l7pu"]
+size = Vector3(0.35, 0.75, 0.35)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ujlrr"]
+atlas = ExtResource("12_0urn2")
+region = Rect2(0, 0, 15, 37)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_baua4"]
+atlas = ExtResource("12_0urn2")
+region = Rect2(15, 0, 15, 37)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qu668"]
+atlas = ExtResource("12_0urn2")
+region = Rect2(30, 0, 15, 37)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_80w5t"]
+atlas = ExtResource("12_0urn2")
+region = Rect2(45, 0, 15, 37)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yypvo"]
+atlas = ExtResource("12_0urn2")
+region = Rect2(60, 0, 15, 37)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w4duw"]
+atlas = ExtResource("12_0urn2")
+region = Rect2(75, 0, 15, 37)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_2k15k"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ujlrr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_baua4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qu668")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_80w5t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yypvo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w4duw")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="GameItems" type="Node"]
+
+[node name="CorrodedEstoc" type="CharacterBody3D" parent="." groups=["items", "weapons"]]
+collision_layer = 1024
+script = ExtResource("1_cup6j")
+windup_time = 0.3
+recovery_time = 0.4
+damage_min = 9
+damage_max = 12
+material = 2
+sprite_path = NodePath("Sprite3D")
+item_name = "Corroded Estoc"
+item_fluff_text = "A remnant of a bygone era, this blade has tasted the despair of time."
+
+[node name="Sprite3D" type="Sprite3D" parent="CorrodedEstoc"]
+transform = Transform3D(-0.068085, 0, -0.997679, -0.982583, 0.173304, 0.0670547, 0.172902, 0.984869, -0.0117994, 0, 0.0609407, 0)
+visible = false
+material_override = SubResource("StandardMaterial3D_a3qxk")
+flip_h = true
+pixel_size = 0.005
+texture = ExtResource("2_yia71")
+script = ExtResource("3_uoc5e")
+default_position_offset = Vector3(0.19, 0.04, 0)
+
+[node name="DamageOther" type="Node" parent="CorrodedEstoc"]
+script = ExtResource("4_wjxkk")
+
+[node name="InventoryIcon" type="Sprite2D" parent="CorrodedEstoc"]
+visible = false
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("5_qpjfv")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CorrodedEstoc"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.374591, 0)
+shape = SubResource("BoxShape3D_2sapx")
+disabled = true
+
+[node name="GroundSprite" type="Sprite3D" parent="CorrodedEstoc"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.24494, 0)
+visible = false
+pixel_size = 0.0075
+billboard = 2
+shaded = true
+texture_filter = 0
+texture = ExtResource("5_qpjfv")
+
+[node name="SaltedDriedFish" type="CharacterBody3D" parent="." groups=["food", "items"]]
+collision_layer = 1024
+script = ExtResource("6_3qw1a")
+sprite_path = NodePath("HeldItemSprite3D")
+item_name = "Salted Dried Fish"
+item_fluff_text = "Fish that has been salted and dried for preservation."
+usage_type = 1
+destroy_on_use = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SaltedDriedFish"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.129059, 0)
+shape = SubResource("BoxShape3D_kp3iu")
+disabled = true
+
+[node name="InventoryIcon" type="Sprite2D" parent="SaltedDriedFish"]
+visible = false
+modulate = Color(0.733333, 0.733333, 0.733333, 1)
+scale = Vector2(1.9, 1.9)
+texture = ExtResource("7_68lbu")
+offset = Vector2(0, 2)
+
+[node name="GroundSprite" type="Sprite3D" parent="SaltedDriedFish"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.123031, 0)
+billboard = 2
+shaded = true
+texture_filter = 0
+texture = ExtResource("7_68lbu")
+
+[node name="HeldItemSprite3D" type="Sprite3D" parent="SaltedDriedFish"]
+visible = false
+pixel_size = 0.015
+shaded = true
+texture_filter = 0
+texture = ExtResource("7_68lbu")
+script = ExtResource("8_wgahg")
+distance_in_front = 0.25
+default_position_offset = Vector3(0.2, -0.17, 0)
+
+[node name="Effects" type="Node" parent="SaltedDriedFish"]
+
+[node name="FireTorch" type="CharacterBody3D" parent="."]
+script = ExtResource("10_6jrj5")
+sprite_path = NodePath("OffHandItemSprite3D")
+item_name = "Torch"
+item_fluff_text = "A small light in the deep dark."
+equipment_type = 4
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="FireTorch"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.375, 0)
+shape = SubResource("BoxShape3D_2l7pu")
+disabled = true
+
+[node name="OffHandItemSprite3D" type="Sprite3D" parent="FireTorch"]
+visible = false
+pixel_size = 0.0075
+shaded = true
+texture_filter = 0
+texture = ExtResource("10_aqh4n")
+script = ExtResource("12_kab7f")
+distance_in_front = 0.19
+default_rotation = Vector3(0.1, -1.855, 0.07)
+default_position_offset = Vector3(0.21, -0.01, 0)
+
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="FireTorch/OffHandItemSprite3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25409, 0)
+pixel_size = 0.008
+texture_filter = 0
+render_priority = 1
+sprite_frames = SubResource("SpriteFrames_2k15k")
+autoplay = "default"
+frame = 5
+frame_progress = 0.338455
+
+[node name="OmniLight3D" type="OmniLight3D" parent="FireTorch/OffHandItemSprite3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.17458, 0.0645317)
+light_color = Color(0.572549, 0.368627, 0.141176, 1)
+light_energy = 0.3
+shadow_enabled = true
+omni_attenuation = 0.5
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer3D" parent="FireTorch/OffHandItemSprite3D"]
+stream = ExtResource("14_tibvk")
+volume_db = -30.0
+max_distance = 4.0
+panning_strength = 0.25
+bus = &"ReverbBus"
+script = ExtResource("15_tb1ap")
+item_path = NodePath("../..")
+
+[node name="InventoryIcon" type="Sprite2D" parent="FireTorch"]
+visible = false
+texture = ExtResource("15_psxqf")
+
+[node name="GroundSprite" type="Sprite3D" parent="FireTorch"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.34855, 0)
+visible = false
+billboard = 2
+shaded = true
+texture_filter = 0
+texture = ExtResource("15_psxqf")
+
+[connection signal="on_swing_start" from="CorrodedEstoc/Sprite3D" to="CorrodedEstoc/DamageOther" method="_on_sprite_3d_on_swing_start"]

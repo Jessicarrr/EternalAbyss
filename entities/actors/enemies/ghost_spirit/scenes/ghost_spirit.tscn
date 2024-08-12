@@ -1,0 +1,100 @@
+[gd_scene load_steps=15 format=3 uid="uid://tae6rrohj85k"]
+
+[ext_resource type="Script" path="res://entities/actors/enemies/ghost_spirit/scripts/ghost_spirit.gd" id="1_a2bvh"]
+[ext_resource type="Script" path="res://entities/actors/enemies/ghost_spirit/scripts/states/GhostStateMachine.gd" id="2_yd4t5"]
+[ext_resource type="Script" path="res://entities/actors/enemies/ghost_spirit/scripts/states/GhostlyWanderIdle.gd" id="3_idisl"]
+[ext_resource type="Script" path="res://entities/actors/enemies/ghost_spirit/scripts/GhostPhysicsMovement.gd" id="4_37i5f"]
+[ext_resource type="Script" path="res://entities/actors/enemies/ghost_spirit/scripts/SpriteVisibilityFlasher.gd" id="6_brqfw"]
+[ext_resource type="Texture2D" uid="uid://gh4r011gfns1" path="res://entities/actors/enemies/ghost_spirit/textures/Sprite-0001.png" id="6_hlmbw"]
+[ext_resource type="Texture2D" uid="uid://biyj82l1q7wdj" path="res://world/shared/textures/particles/bit.png" id="7_nv7r8"]
+[ext_resource type="Script" path="res://skills/health/scripts/Health.gd" id="9_dw4gh"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_mevn6"]
+radius = 0.2
+height = 1.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4kc3l"]
+atlas = ExtResource("6_hlmbw")
+region = Rect2(0, 0, 32, 112)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_is3f0"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4kc3l")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_7hyre"]
+emission_shape = 3
+emission_box_extents = Vector3(1, 1, 1)
+flatness = 0.07
+initial_velocity_min = 0.1
+initial_velocity_max = 0.1
+gravity = Vector3(0, 0, 0)
+color = Color(0.666667, 0.666667, 0.666667, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_d6pn5"]
+albedo_texture = ExtResource("7_nv7r8")
+billboard_mode = 2
+
+[sub_resource type="QuadMesh" id="QuadMesh_f7681"]
+material = SubResource("StandardMaterial3D_d6pn5")
+size = Vector2(0.015, 0.015)
+
+[node name="ghost_spirit" type="CharacterBody3D"]
+collision_layer = 2048
+collision_mask = 0
+script = ExtResource("1_a2bvh")
+
+[node name="GhostStateMachine" type="Node" parent="."]
+script = ExtResource("2_yd4t5")
+
+[node name="Idle" type="Node" parent="GhostStateMachine"]
+script = ExtResource("3_idisl")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.618818, 0)
+shape = SubResource("CapsuleShape3D_mevn6")
+
+[node name="PhysicsMovement" type="Node" parent="."]
+script = ExtResource("4_37i5f")
+nav_agent_path = NodePath("../NavigationAgent3D")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.552809, 0)
+modulate = Color(0.937255, 0.937255, 0.937255, 0.976471)
+billboard = 2
+texture_filter = 0
+sprite_frames = SubResource("SpriteFrames_is3f0")
+
+[node name="SpriteVisibilityFlasher" type="Node" parent="AnimatedSprite3D"]
+script = ExtResource("6_brqfw")
+ghost_npc_parent = NodePath("../..")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+cast_shadow = 0
+visibility_range_end = 10.0
+amount = 16
+lifetime = 4.0
+speed_scale = 2.0
+randomness = 1.0
+visibility_aabb = AABB(-0.5, -1, -0.5, 1, 2, 1)
+process_material = SubResource("ParticleProcessMaterial_7hyre")
+draw_pass_1 = SubResource("QuadMesh_f7681")
+
+[node name="Skills" type="Node" parent="."]
+
+[node name="Health" type="Node" parent="Skills"]
+script = ExtResource("9_dw4gh")
+level = 8
+skill_name = "Health"
+description = "Determines the amount of hitpoints"
+
+[connection signal="state_changed" from="GhostStateMachine" to="AnimatedSprite3D/SpriteVisibilityFlasher" method="_on_ghost_state_machine_state_changed"]

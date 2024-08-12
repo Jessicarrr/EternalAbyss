@@ -1,0 +1,958 @@
+[gd_scene load_steps=119 format=3 uid="uid://vw0633l67whr"]
+
+[ext_resource type="Script" path="res://entities/shared/scripts/SimpleEnemy.gd" id="1_p452m"]
+[ext_resource type="Script" path="res://components/shared/scripts/actors/states/functionality/DetectAndFollowPlayer.gd" id="1_wid26"]
+[ext_resource type="Script" path="res://components/shared/scripts/actors/states/functionality/PathingToggler.gd" id="2_xfqif"]
+[ext_resource type="Script" path="res://components/shared/scripts/actors/states/functionality/FollowTarget.gd" id="3_fkmeo"]
+[ext_resource type="Script" path="res://components/shared/scripts/actors/states/functionality/BlockingDecision.gd" id="4_r60rk"]
+[ext_resource type="Script" path="res://components/shared/scripts/actors/states/functionality/AttackingDecision.gd" id="5_efy0o"]
+[ext_resource type="Script" path="res://components/shared/scripts/actors/states/functionality/StaggerDetector.gd" id="6_3lb5b"]
+[ext_resource type="Script" path="res://components/shared/scripts/actors/states/NpcStartBlocking.gd" id="7_3sxh8"]
+[ext_resource type="Script" path="res://components/shared/scripts/actors/states/Blocking.gd" id="8_i5t3t"]
+[ext_resource type="Script" path="res://components/shared/scripts/actors/states/NpcFinishBlocking.gd" id="9_r5yad"]
+[ext_resource type="Script" path="res://components/shared/scripts/actors/states/NpcAttackWindup.gd" id="10_u3ccr"]
+[ext_resource type="Script" path="res://components/shared/scripts/actors/states/NpcAttackSwing.gd" id="11_lmhk8"]
+[ext_resource type="Script" path="res://components/shared/scripts/actors/states/NpcAttackRecovery.gd" id="12_u4wxn"]
+[ext_resource type="Script" path="res://components/shared/scripts/actors/states/Staggered.gd" id="13_y8rnc"]
+[ext_resource type="Script" path="res://components/shared/scripts/actors/states/BlockStagger.gd" id="14_v1l5v"]
+[ext_resource type="Script" path="res://components/shared/scripts/actors/states/Dormant.gd" id="15_st76a"]
+[ext_resource type="Script" path="res://components/shared/scripts/actors/states/functionality/ListenForPlayerFootsteps.gd" id="16_fcsq0"]
+[ext_resource type="Script" path="res://components/shared/scripts/actors/states/Reanimate.gd" id="17_htny4"]
+[ext_resource type="Texture2D" uid="uid://d5wgl1bawg2k" path="res://sprites/enemies/skeleton attack anim-Sheet fix.png" id="18_wa55i"]
+[ext_resource type="Texture2D" uid="uid://lxm8tcnahu14" path="res://sprites/enemies/skeleton 1 blocking idle 2-Sheet.png" id="19_8n5cq"]
+[ext_resource type="Texture2D" uid="uid://dcpbq40ehd0bn" path="res://sprites/enemies/skeleton 1 blocking raise shield 2 reversed-Sheet.png" id="20_m31yo"]
+[ext_resource type="Texture2D" uid="uid://nqvchf2xskm2" path="res://sprites/enemies/skeleton 1 blocking recieveing a hit-Sheet.png" id="21_4x7hq"]
+[ext_resource type="Texture2D" uid="uid://brt1i0b0gvnmq" path="res://sprites/enemies/skeleton 1 blocking raise shield 2-Sheet.png" id="22_kkfnf"]
+[ext_resource type="Texture2D" uid="uid://dtodycbwecgag" path="res://sprites/enemies/skeleton 1 blocking walking-Sheet.png" id="23_mhc8n"]
+[ext_resource type="Texture2D" uid="uid://bwmxr2vu6inbq" path="res://sprites/enemies/skeleton 1 dying animation -Sheet.png" id="24_7jql6"]
+[ext_resource type="Texture2D" uid="uid://uac4r25n1ftp" path="res://sprites/enemies/skeleton 1 idle animation simple-Sheet.png" id="25_h6vb4"]
+[ext_resource type="Texture2D" uid="uid://c3s4slt47m377" path="res://sprites/enemies/skeleton 1 taking hit animation -Sheet.png" id="26_7tn4j"]
+[ext_resource type="Texture2D" uid="uid://cdoipa0mibb40" path="res://sprites/enemies/skeleton 1 walking animation walk-Sheet.png" id="27_je5rg"]
+[ext_resource type="Script" path="res://components/shared/scripts/animations/NpcSprite3DAnimator.gd" id="28_k0m2t"]
+[ext_resource type="Script" path="res://entities/shared/scripts/RemoveOnDeathCollisionShape3D.gd" id="29_prs7s"]
+[ext_resource type="Script" path="res://entities/actors/enemies/shared/scripts/EnemyRayCast3D.gd" id="30_825xu"]
+[ext_resource type="Script" path="res://skills/health/scripts/Health.gd" id="31_ckd34"]
+[ext_resource type="Script" path="res://entities/shared/scripts/PhysicsMovement.gd" id="32_dhmex"]
+[ext_resource type="Script" path="res://entities/shared/scripts/DamagePlayer.gd" id="33_7de21"]
+[ext_resource type="Script" path="res://world/shared/scripts/RandomStreamPlayer3D.gd" id="34_mo1m3"]
+[ext_resource type="Script" path="res://entities/shared/scripts/NpcDamageStreamPlayer3D.gd" id="35_o2xy2"]
+[ext_resource type="Script" path="res://entities/shared/scripts/NpcBlockDmgPlayer3D.gd" id="36_nohre"]
+[ext_resource type="Script" path="res://entities/shared/scripts/NpcAttackPlayer3D.gd" id="37_cot0w"]
+[ext_resource type="Script" path="res://entities/shared/scripts/NpcFootstepPlayer3D.gd" id="38_bkyni"]
+[ext_resource type="Script" path="res://entities/shared/scripts/NpcIdleSoundPlayer3D.gd" id="39_ighc8"]
+[ext_resource type="Script" path="res://entities/shared/scripts/DeathSoundPlayer3D.gd" id="40_ko2nd"]
+[ext_resource type="Script" path="res://entities/shared/scripts/ReanimateSoundPlayer3D.gd" id="41_7vm6f"]
+
+[sub_resource type="GDScript" id="GDScript_d8yvr"]
+script/source = "extends \"res://entities/shared/scripts/BaseStateMachine.gd\"
+class_name EnemyStateMachine
+
+@onready var npc = get_parent()
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	states_to_nodes = {
+		Enums.ActorStates.IDLE : $Idle,
+		Enums.ActorStates.FOLLOW_PLAYER : $FollowPlayer,
+		Enums.ActorStates.STAGGERED : $Staggered,
+		Enums.ActorStates.BLOCK_START : $NpcStartBlocking,
+		Enums.ActorStates.BLOCK_END : $NpcFinishBlocking,
+		Enums.ActorStates.BLOCKING : $NpcBlocking,
+		Enums.ActorStates.BLOCK_STAGGER : $BlockStagger,
+		Enums.ActorStates.ATK_WINDUP : $NpcAttackWindup,
+		Enums.ActorStates.ATK_SWING : $NpcAttackSwing,
+		Enums.ActorStates.ATK_RECOVERY : $NpcAttackRecovery,
+		Enums.ActorStates.DORMANT : $Dormant,
+		Enums.ActorStates.REANIMATING : $Reanimate
+	}
+	
+	super._ready()
+	default_state = Enums.ActorStates.IDLE
+	self.state_changed.connect(_on_state_change)
+	
+	if \"chance_dormant_on_spawn\" in npc and states_to_nodes.has(Enums.ActorStates.DORMANT):
+		if Helpers.should_chance_succeed(npc.chance_dormant_on_spawn):
+			transition_to_state(Enums.ActorStates.DORMANT, {})
+		else:
+			transition_to_default_state()
+	
+func _on_state_change(state, data):
+	Debug.msg(Debug.NPC_STATE_MACHINE, [\"NPC: \", get_parent().get_name()])
+	Debug.msg(Debug.NPC_STATE_MACHINE, [\"State: \", Helpers.state_name(state)])
+	Debug.msg(Debug.NPC_STATE_MACHINE, [\"Data: \", data])
+	Debug.msg(Debug.NPC_STATE_MACHINE, [\"----\\n\"])
+"
+
+[sub_resource type="GDScript" id="GDScript_cunci"]
+script/source = "extends \"res://components/shared/scripts/actors/BaseState.gd\"
+
+@export var enemy_raycast_path : NodePath = \"\"
+var raycast
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	raycast = Helpers.try_load_node(self, enemy_raycast_path)
+	pass # Replace with function body.
+
+func begin(_data = {}):
+	super.begin(_data)
+	Debug.msg(Debug.NPC_STATES, [\"Npc is in idle state\"])
+	
+	if raycast == null:
+		return
+		
+	if raycast.can_see_player():
+		request_state_change.emit(self, Enums.ActorStates.FOLLOW_PLAYER, {})
+	
+func end():
+	Debug.msg(Debug.NPC_STATES, [\"Npc idle state ended.\"])
+	super.end()
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	super._process(delta)
+"
+
+[sub_resource type="GDScript" id="GDScript_wtlmu"]
+script/source = "extends \"res://components/shared/scripts/actors/BaseState.gd\"
+
+signal move_npc
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	pass # Replace with function body.
+
+func begin(_data = {}):
+	super.begin(_data)
+	Debug.msg(Debug.NPC_STATES, [\"Npc is in follow state\"])
+	
+func end():
+	Debug.msg(Debug.NPC_STATES, [\"Npc follow state ended.\"])
+	super.end()
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	super._process(delta)
+	
+	
+"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nmw38"]
+atlas = ExtResource("18_wa55i")
+region = Rect2(928, 9, 116, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ldejf"]
+atlas = ExtResource("18_wa55i")
+region = Rect2(696, 9, 116, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_62wsv"]
+atlas = ExtResource("18_wa55i")
+region = Rect2(812, 9, 116, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o64x6"]
+atlas = ExtResource("18_wa55i")
+region = Rect2(0, 15, 116, 114)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j6ako"]
+atlas = ExtResource("18_wa55i")
+region = Rect2(116, 15, 116, 114)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_38rft"]
+atlas = ExtResource("18_wa55i")
+region = Rect2(232, 15, 116, 114)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ni1s6"]
+atlas = ExtResource("18_wa55i")
+region = Rect2(348, 15, 116, 114)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cf105"]
+atlas = ExtResource("18_wa55i")
+region = Rect2(464, 15, 116, 114)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mymiu"]
+atlas = ExtResource("18_wa55i")
+region = Rect2(580, 15, 116, 114)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bsi3n"]
+atlas = ExtResource("19_8n5cq")
+region = Rect2(0, 15, 116, 112)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nd5mh"]
+atlas = ExtResource("19_8n5cq")
+region = Rect2(116, 15, 116, 112)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qai3e"]
+atlas = ExtResource("20_m31yo")
+region = Rect2(0, 15, 116, 112)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tpneb"]
+atlas = ExtResource("20_m31yo")
+region = Rect2(116, 15, 116, 112)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_detmu"]
+atlas = ExtResource("20_m31yo")
+region = Rect2(232, 15, 116, 112)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eqyn0"]
+atlas = ExtResource("20_m31yo")
+region = Rect2(348, 15, 116, 112)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d6a33"]
+atlas = ExtResource("21_4x7hq")
+region = Rect2(232, 15, 116, 112)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_spujr"]
+atlas = ExtResource("21_4x7hq")
+region = Rect2(348, 15, 116, 112)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s0d6d"]
+atlas = ExtResource("21_4x7hq")
+region = Rect2(464, 15, 116, 112)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0xfbs"]
+atlas = ExtResource("22_kkfnf")
+region = Rect2(0, 15, 116, 112)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ybkdq"]
+atlas = ExtResource("22_kkfnf")
+region = Rect2(116, 15, 116, 112)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_odjt8"]
+atlas = ExtResource("22_kkfnf")
+region = Rect2(232, 15, 116, 112)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3uamv"]
+atlas = ExtResource("22_kkfnf")
+region = Rect2(348, 15, 116, 112)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gt22f"]
+atlas = ExtResource("23_mhc8n")
+region = Rect2(0, 14, 116, 112)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bm1v5"]
+atlas = ExtResource("23_mhc8n")
+region = Rect2(116, 14, 116, 112)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nldmt"]
+atlas = ExtResource("23_mhc8n")
+region = Rect2(232, 14, 116, 112)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ojdpx"]
+atlas = ExtResource("23_mhc8n")
+region = Rect2(348, 14, 116, 112)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ksh2i"]
+atlas = ExtResource("23_mhc8n")
+region = Rect2(464, 14, 116, 112)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_42xue"]
+atlas = ExtResource("23_mhc8n")
+region = Rect2(580, 14, 116, 112)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n7y8y"]
+atlas = ExtResource("23_mhc8n")
+region = Rect2(696, 14, 116, 112)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hsbmn"]
+atlas = ExtResource("23_mhc8n")
+region = Rect2(812, 14, 116, 112)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8wsr6"]
+atlas = ExtResource("24_7jql6")
+region = Rect2(0, 13, 116, 112)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x4rqg"]
+atlas = ExtResource("24_7jql6")
+region = Rect2(116, 13, 116, 112)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vtcof"]
+atlas = ExtResource("24_7jql6")
+region = Rect2(232, 13, 116, 112)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5sky6"]
+atlas = ExtResource("24_7jql6")
+region = Rect2(348, 13, 116, 112)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pvnps"]
+atlas = ExtResource("24_7jql6")
+region = Rect2(464, 13, 116, 112)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e6udg"]
+atlas = ExtResource("24_7jql6")
+region = Rect2(580, 13, 116, 112)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tnfpb"]
+atlas = ExtResource("24_7jql6")
+region = Rect2(696, 13, 116, 112)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bc50l"]
+atlas = ExtResource("24_7jql6")
+region = Rect2(812, 13, 116, 112)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wx3qu"]
+atlas = ExtResource("24_7jql6")
+region = Rect2(928, 13, 116, 112)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ufvut"]
+atlas = ExtResource("24_7jql6")
+region = Rect2(1044, 13, 116, 112)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jy0qr"]
+atlas = ExtResource("24_7jql6")
+region = Rect2(1160, 13, 116, 112)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j1rwk"]
+atlas = ExtResource("24_7jql6")
+region = Rect2(1276, 13, 116, 112)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_53sfs"]
+atlas = ExtResource("24_7jql6")
+region = Rect2(1392, 13, 116, 112)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_teht5"]
+atlas = ExtResource("24_7jql6")
+region = Rect2(1392, 13, 116, 112)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_73gec"]
+atlas = ExtResource("25_h6vb4")
+region = Rect2(0, 15, 116, 112)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fa5y6"]
+atlas = ExtResource("25_h6vb4")
+region = Rect2(116, 15, 116, 112)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8cql7"]
+atlas = ExtResource("24_7jql6")
+region = Rect2(1392, 13, 116, 112)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sy6cp"]
+atlas = ExtResource("24_7jql6")
+region = Rect2(1276, 13, 116, 112)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qayqj"]
+atlas = ExtResource("24_7jql6")
+region = Rect2(1160, 13, 116, 112)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mt0op"]
+atlas = ExtResource("24_7jql6")
+region = Rect2(1044, 13, 116, 112)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e0c7d"]
+atlas = ExtResource("24_7jql6")
+region = Rect2(928, 13, 116, 112)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3stim"]
+atlas = ExtResource("24_7jql6")
+region = Rect2(812, 13, 116, 112)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jgxwt"]
+atlas = ExtResource("24_7jql6")
+region = Rect2(696, 13, 116, 112)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3wpve"]
+atlas = ExtResource("24_7jql6")
+region = Rect2(580, 13, 116, 112)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8h2sq"]
+atlas = ExtResource("24_7jql6")
+region = Rect2(464, 13, 116, 112)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mrlgp"]
+atlas = ExtResource("24_7jql6")
+region = Rect2(348, 13, 116, 112)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7tydp"]
+atlas = ExtResource("24_7jql6")
+region = Rect2(232, 13, 116, 112)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_usj7j"]
+atlas = ExtResource("24_7jql6")
+region = Rect2(116, 13, 116, 112)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kql77"]
+atlas = ExtResource("24_7jql6")
+region = Rect2(0, 13, 116, 112)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4cw84"]
+atlas = ExtResource("26_7tn4j")
+region = Rect2(232, 15, 116, 112)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6hdsn"]
+atlas = ExtResource("26_7tn4j")
+region = Rect2(348, 15, 116, 112)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g7j7k"]
+atlas = ExtResource("26_7tn4j")
+region = Rect2(116, 15, 116, 112)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7akrl"]
+atlas = ExtResource("26_7tn4j")
+region = Rect2(0, 15, 116, 112)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_83qmx"]
+atlas = ExtResource("27_je5rg")
+region = Rect2(0, 15, 116, 112)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p3586"]
+atlas = ExtResource("27_je5rg")
+region = Rect2(116, 15, 116, 112)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u47gi"]
+atlas = ExtResource("27_je5rg")
+region = Rect2(232, 15, 116, 112)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6f84j"]
+atlas = ExtResource("27_je5rg")
+region = Rect2(348, 15, 116, 112)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_knd4u"]
+atlas = ExtResource("27_je5rg")
+region = Rect2(464, 15, 116, 112)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mu24i"]
+atlas = ExtResource("27_je5rg")
+region = Rect2(580, 15, 116, 112)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5uyug"]
+atlas = ExtResource("27_je5rg")
+region = Rect2(696, 15, 116, 112)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_263wa"]
+atlas = ExtResource("27_je5rg")
+region = Rect2(812, 15, 116, 112)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_guxdr"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nmw38")
+}],
+"loop": false,
+"name": &"attack_recovery",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ldejf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_62wsv")
+}],
+"loop": false,
+"name": &"attack_swing",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o64x6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j6ako")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_38rft")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ni1s6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cf105")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mymiu")
+}],
+"loop": false,
+"name": &"attack_windup",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bsi3n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nd5mh")
+}],
+"loop": true,
+"name": &"block",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qai3e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tpneb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_detmu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eqyn0")
+}],
+"loop": false,
+"name": &"block_end",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d6a33")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_spujr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s0d6d")
+}],
+"loop": false,
+"name": &"block_stagger",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0xfbs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ybkdq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_odjt8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3uamv")
+}],
+"loop": false,
+"name": &"block_start",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gt22f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bm1v5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nldmt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ojdpx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ksh2i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_42xue")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n7y8y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hsbmn")
+}],
+"loop": true,
+"name": &"block_walk",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8wsr6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x4rqg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vtcof")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5sky6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pvnps")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e6udg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tnfpb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bc50l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wx3qu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ufvut")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jy0qr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j1rwk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_53sfs")
+}],
+"loop": false,
+"name": &"death",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_teht5")
+}],
+"loop": true,
+"name": &"dormant",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_73gec")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fa5y6")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 0.5
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8cql7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sy6cp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qayqj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mt0op")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e0c7d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3stim")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jgxwt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3wpve")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8h2sq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mrlgp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7tydp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_usj7j")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kql77")
+}],
+"loop": true,
+"name": &"reanimate",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4cw84")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6hdsn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g7j7k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7akrl")
+}],
+"loop": false,
+"name": &"staggered",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_83qmx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p3586")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u47gi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6f84j")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_knd4u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mu24i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5uyug")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_263wa")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 6.0
+}]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_leqgq"]
+radius = 0.35
+height = 1.2
+
+[node name="SkeletonSwordShield" type="CharacterBody3D"]
+collision_layer = 8
+collision_mask = 41
+script = ExtResource("1_p452m")
+
+[node name="StateMachine" type="Node" parent="."]
+script = SubResource("GDScript_d8yvr")
+
+[node name="Idle" type="Node" parent="StateMachine"]
+script = SubResource("GDScript_cunci")
+enemy_raycast_path = NodePath("../../EnemyRayCast3D")
+metadata/DetectionSphere = NodePath("../../DetectionSphere")
+
+[node name="DetectAndFollowPlayer" type="Node" parent="StateMachine/Idle"]
+script = ExtResource("1_wid26")
+
+[node name="FollowPlayer" type="Node" parent="StateMachine"]
+script = SubResource("GDScript_wtlmu")
+
+[node name="PathingToggler" type="Node" parent="StateMachine/FollowPlayer"]
+script = ExtResource("2_xfqif")
+nav_agent_path = NodePath("../../../NavigationAgent3D")
+metadata/RayCastPhysical = NodePath("../../../RayCastPhysical")
+metadata/NavigationAgent3D = NodePath("../../../NavigationAgent3D")
+metadata/NPCPath = NodePath("../../..")
+
+[node name="UpdatePathingPosition" type="Node" parent="StateMachine/FollowPlayer"]
+script = ExtResource("3_fkmeo")
+nav_agent_path = NodePath("../../../NavigationAgent3D")
+
+[node name="BlockingDecision" type="Node" parent="StateMachine/FollowPlayer"]
+script = ExtResource("4_r60rk")
+npc_path = NodePath("../../..")
+
+[node name="AttackingDecision" type="Node" parent="StateMachine/FollowPlayer"]
+script = ExtResource("5_efy0o")
+npc_path = NodePath("../../..")
+
+[node name="StaggerDetector" type="Node" parent="StateMachine/FollowPlayer"]
+script = ExtResource("6_3lb5b")
+npc_path = NodePath("../../..")
+
+[node name="NpcStartBlocking" type="Node" parent="StateMachine"]
+script = ExtResource("7_3sxh8")
+npc_path = NodePath("../..")
+
+[node name="StaggerDetector" type="Node" parent="StateMachine/NpcStartBlocking"]
+script = ExtResource("6_3lb5b")
+npc_path = NodePath("../../..")
+
+[node name="NpcBlocking" type="Node" parent="StateMachine"]
+script = ExtResource("8_i5t3t")
+npc_path = NodePath("../..")
+
+[node name="UpdatePathingPosition" type="Node" parent="StateMachine/NpcBlocking"]
+script = ExtResource("3_fkmeo")
+nav_agent_path = NodePath("../../../NavigationAgent3D")
+
+[node name="NpcFinishBlocking" type="Node" parent="StateMachine"]
+script = ExtResource("9_r5yad")
+npc_path = NodePath("../..")
+
+[node name="StaggerDetector" type="Node" parent="StateMachine/NpcFinishBlocking"]
+script = ExtResource("6_3lb5b")
+npc_path = NodePath("../../..")
+
+[node name="NpcAttackWindup" type="Node" parent="StateMachine"]
+script = ExtResource("10_u3ccr")
+npc_path = NodePath("../..")
+
+[node name="UpdatePathingPosition" type="Node" parent="StateMachine/NpcAttackWindup"]
+script = ExtResource("3_fkmeo")
+nav_agent_path = NodePath("../../../NavigationAgent3D")
+
+[node name="NpcAttackSwing" type="Node" parent="StateMachine"]
+script = ExtResource("11_lmhk8")
+npc_path = NodePath("../..")
+
+[node name="NpcAttackRecovery" type="Node" parent="StateMachine"]
+script = ExtResource("12_u4wxn")
+npc_path = NodePath("../..")
+
+[node name="Staggered" type="Node" parent="StateMachine"]
+script = ExtResource("13_y8rnc")
+
+[node name="BlockStagger" type="Node" parent="StateMachine"]
+script = ExtResource("14_v1l5v")
+npc_path = NodePath("../..")
+
+[node name="Dormant" type="Node" parent="StateMachine"]
+script = ExtResource("15_st76a")
+npc_path = NodePath("../..")
+
+[node name="ListenForPlayerFootsteps" type="Node" parent="StateMachine/Dormant"]
+script = ExtResource("16_fcsq0")
+npc_path = NodePath("../../..")
+
+[node name="Reanimate" type="Node" parent="StateMachine"]
+script = ExtResource("17_htny4")
+npc_path = NodePath("../..")
+
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.736539, 0)
+modulate = Color(0.572549, 0.572549, 0.572549, 1)
+pixel_size = 0.0134
+billboard = 2
+shaded = true
+texture_filter = 0
+sprite_frames = SubResource("SpriteFrames_guxdr")
+animation = &"dormant"
+
+[node name="NpcSpriteAnimator" type="Node" parent="AnimatedSprite3D"]
+script = ExtResource("28_k0m2t")
+npc_node_path = NodePath("../..")
+
+[node name="Functionality" type="Node" parent="."]
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+path_desired_distance = 0.85
+target_desired_distance = 0.75
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.602017, 0)
+shape = SubResource("CapsuleShape3D_leqgq")
+script = ExtResource("29_prs7s")
+
+[node name="EnemyRayCast3D" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.965882, 0)
+collision_mask = 33
+script = ExtResource("30_825xu")
+npc_path = NodePath("..")
+
+[node name="Skills" type="Node" parent="."]
+
+[node name="Health" type="Node" parent="Skills"]
+script = ExtResource("31_ckd34")
+level = 3
+skill_name = "Health"
+
+[node name="PhysicsMovement" type="Node" parent="."]
+script = ExtResource("32_dhmex")
+nav_agent_path = NodePath("../NavigationAgent3D")
+
+[node name="DamagePlayer" type="Node" parent="."]
+script = ExtResource("33_7de21")
+
+[node name="Sounds" type="Node" parent="."]
+
+[node name="RandomStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.720709, 0)
+script = ExtResource("34_mo1m3")
+
+[node name="DamageStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.610768, 0)
+volume_db = -20.451
+bus = &"ReverbBus"
+script = ExtResource("35_o2xy2")
+possible_sounds = ["res://sounds/enemies/skeleton/damage/impact_01.wav", "res://sounds/enemies/skeleton/damage/impact_02.wav", "res://sounds/enemies/skeleton/damage/impact_03.wav", "res://sounds/enemies/skeleton/damage/impact_04.wav"]
+
+[node name="NpcBlockDmgPlayer3D" type="AudioStreamPlayer3D" parent="."]
+volume_db = -20.451
+bus = &"ReverbBus"
+script = ExtResource("36_nohre")
+possible_sounds = ["res://sounds/shields/metal/METLImpt_Impact Metal Blunt 02_DDUMAIS_NONE.wav", "res://sounds/shields/metal/METLImpt_Impact Metal Blunt 04_DDUMAIS_NONE.wav", "res://sounds/shields/metal/METLImpt_Impact Metal Blunt 05_DDUMAIS_NONE.wav", "res://sounds/shields/metal/METLImpt_Impact Metal Blunt 10_DDUMAIS_NONE.wav"]
+
+[node name="NpcAttackPlayer3D" type="AudioStreamPlayer3D" parent="."]
+volume_db = -8.421
+script = ExtResource("37_cot0w")
+possible_sounds = ["res://sounds/weapons/sword/SWSH_Swing 2 Normal 01_DDUMAIS_NONE.wav", "res://sounds/weapons/sword/SWSH_Swing 2 Normal 02_DDUMAIS_NONE.wav", "res://sounds/weapons/sword/SWSH_Swing 2 Normal 03_DDUMAIS_NONE.wav", "res://sounds/weapons/sword/SWSH_Swing 2 Normal 04_DDUMAIS_NONE.wav", "res://sounds/weapons/sword/SWSH_Swing 2 Normal 05_DDUMAIS_NONE.wav", "res://sounds/weapons/sword/SWSH_Swing 2 Normal 06_DDUMAIS_NONE.wav", "res://sounds/weapons/sword/SWSH_Swing 2 Normal 07_DDUMAIS_NONE.wav", "res://sounds/weapons/sword/SWSH_Swing 2 Normal 08_DDUMAIS_NONE.wav", "res://sounds/weapons/sword/SWSH_Swing 2 Normal 09_DDUMAIS_NONE.wav"]
+
+[node name="NpcFootstepPlayer3D" type="AudioStreamPlayer3D" parent="."]
+volume_db = -20.0
+script = ExtResource("38_bkyni")
+animation_name = "block_walk"
+animation_frames = [3, 7]
+animated_sprite_path = NodePath("../AnimatedSprite3D")
+possible_sounds = ["res://sounds/enemies/skeleton/footsteps/FEETHmn_Footstep Stone Explorer Run Fast Dirt Outside 03_ESM_DGF.wav", "res://sounds/enemies/skeleton/footsteps/FEETHmn_Footstep Stone Explorer Run Fast Dirt Outside 06_ESM_DGF.wav", "res://sounds/enemies/skeleton/footsteps/FEETHmn_Footstep Stone Explorer Walk Faster Dirt Outside 05_ESM_DGF.wav", "res://sounds/enemies/skeleton/footsteps/FEETHmn_Footstep Stone Explorer Walk Faster Dirt Outside 07_ESM_DGF.wav"]
+
+[node name="NpcFootstepPlayer3D2" type="AudioStreamPlayer3D" parent="."]
+volume_db = -20.0
+script = ExtResource("38_bkyni")
+animation_name = "walk"
+animation_frames = [2, 6]
+animated_sprite_path = NodePath("../AnimatedSprite3D")
+possible_sounds = ["res://sounds/enemies/skeleton/footsteps/FEETHmn_Footstep Stone Explorer Run Fast Dirt Outside 03_ESM_DGF.wav", "res://sounds/enemies/skeleton/footsteps/FEETHmn_Footstep Stone Explorer Run Fast Dirt Outside 06_ESM_DGF.wav", "res://sounds/enemies/skeleton/footsteps/FEETHmn_Footstep Stone Explorer Walk Faster Dirt Outside 05_ESM_DGF.wav", "res://sounds/enemies/skeleton/footsteps/FEETHmn_Footstep Stone Explorer Walk Faster Dirt Outside 07_ESM_DGF.wav"]
+
+[node name="NpcIdleSoundPlayer3D" type="AudioStreamPlayer3D" parent="."]
+attenuation_model = 1
+volume_db = -40.421
+unit_size = 8.0
+max_distance = 8.0
+panning_strength = 2.0
+bus = &"ReverbBus"
+script = ExtResource("39_ighc8")
+min_delay_between_sounds = 3.0
+possible_sounds = ["res://sounds/enemies/skeleton/idle/GHOSTS Breath Cavernous.LR.wav", "res://sounds/enemies/skeleton/idle/GHOSTS Breath Hollow Spirit.LR.wav"]
+
+[node name="DeathSoundPlayer3D" type="AudioStreamPlayer3D" parent="."]
+volume_db = -12.0
+unit_size = 8.0
+pitch_scale = 0.88
+max_distance = 8.0
+panning_strength = 2.5
+bus = &"ReverbBus"
+script = ExtResource("40_ko2nd")
+possible_sounds = ["res://sounds/enemies/skeleton/death/Hurt2.wav", "res://sounds/enemies/skeleton/death/Hurt.wav"]
+
+[node name="ReanimateSoundPlayer3D" type="AudioStreamPlayer3D" parent="."]
+max_distance = 8.0
+script = ExtResource("41_7vm6f")
+possible_sounds = ["res://sounds/enemies/skeleton/reanimate/reanimate_01.wav", "res://sounds/enemies/skeleton/reanimate/reanimate_02.wav", "res://sounds/enemies/skeleton/reanimate/reanimate_03.wav"]
+
+[connection signal="on_blocked_hit" from="." to="StateMachine/NpcBlocking" method="_on_blocked_hit"]
+[connection signal="on_blocked_hit" from="." to="PhysicsMovement" method="_on_blocked_hit"]
+[connection signal="on_blocked_hit" from="." to="NpcBlockDmgPlayer3D" method="_on_blocked_hit"]
+[connection signal="on_hit" from="." to="StateMachine/FollowPlayer/StaggerDetector" method="_on_hit"]
+[connection signal="on_hit" from="." to="StateMachine/NpcStartBlocking/StaggerDetector" method="_on_hit"]
+[connection signal="on_hit" from="." to="StateMachine/NpcBlocking" method="_on_hit"]
+[connection signal="on_hit" from="." to="StateMachine/NpcFinishBlocking/StaggerDetector" method="_on_hit"]
+[connection signal="on_hit" from="." to="PhysicsMovement" method="_on_hit"]
+[connection signal="on_hit" from="." to="DamageStreamPlayer3D" method="_on_hit"]
+[connection signal="state_changed" from="StateMachine" to="AnimatedSprite3D/NpcSpriteAnimator" method="_on_skeleton_state_machine_state_changed"]
+[connection signal="state_changed" from="StateMachine" to="CollisionShape3D" method="_on_state_changed"]
+[connection signal="state_changed" from="StateMachine" to="PhysicsMovement" method="_on_state_machine_state_changed"]
+[connection signal="state_changed" from="StateMachine" to="DamagePlayer" method="_on_state_changed"]
+[connection signal="state_changed" from="StateMachine" to="NpcAttackPlayer3D" method="_on_state_machine_state_changed"]
+[connection signal="state_changed" from="StateMachine" to="NpcIdleSoundPlayer3D" method="_on_state_changed"]
+[connection signal="state_changed" from="StateMachine" to="ReanimateSoundPlayer3D" method="_on_state_changed"]
+[connection signal="state_changed_to_dead" from="StateMachine" to="CollisionShape3D" method="_on_state_changed_to_dead"]
+[connection signal="state_changed_to_dead" from="StateMachine" to="DeathSoundPlayer3D" method="_on_state_machine_state_changed_to_dead"]
+[connection signal="request_state_change" from="StateMachine/NpcStartBlocking" to="StateMachine" method="_on_request_state_change"]
+[connection signal="request_state_change" from="StateMachine/NpcBlocking" to="StateMachine" method="_on_request_state_change"]
+[connection signal="request_state_change" from="StateMachine/NpcFinishBlocking" to="StateMachine" method="_on_request_state_change"]
+[connection signal="request_state_change" from="StateMachine/NpcAttackWindup" to="StateMachine" method="_on_request_state_change"]
+[connection signal="request_state_change" from="StateMachine/NpcAttackSwing" to="StateMachine" method="_on_request_state_change"]
+[connection signal="request_state_change" from="StateMachine/NpcAttackRecovery" to="StateMachine" method="_on_request_state_change"]
+[connection signal="request_state_change" from="StateMachine/Staggered" to="StateMachine" method="_on_request_state_change"]
+[connection signal="request_state_change" from="StateMachine/BlockStagger" to="StateMachine" method="_on_request_state_change"]
+[connection signal="request_state_change" from="StateMachine/Dormant" to="StateMachine" method="_on_request_state_change"]
+[connection signal="request_state_change" from="StateMachine/Reanimate" to="StateMachine" method="_on_request_state_change"]
+[connection signal="disable_toggled" from="CollisionShape3D" to="PhysicsMovement" method="_on_collision_shape_3d_disable_toggled"]
+[connection signal="gained_player_visibility" from="EnemyRayCast3D" to="StateMachine/Idle/DetectAndFollowPlayer" method="_on_enemy_ray_cast_3d_gained_player_visibility"]
+[connection signal="gained_player_visibility" from="EnemyRayCast3D" to="StateMachine/FollowPlayer/PathingToggler" method="_on_enemy_ray_cast_3d_gained_player_visibility"]
+[connection signal="lost_player_visibility" from="EnemyRayCast3D" to="StateMachine/FollowPlayer/PathingToggler" method="_on_enemy_ray_cast_3d_lost_player_visibility"]
+[connection signal="reached_zero_hp" from="Skills/Health" to="StateMachine" method="_on_death"]
