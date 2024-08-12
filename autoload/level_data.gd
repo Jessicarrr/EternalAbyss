@@ -44,17 +44,17 @@ var _game_levels = [
 			}
 		],
 		"AmbientSounds" : [
-			"res://sounds/ambience/random/rocks/singular_stone_01.wav",
-			"res://sounds/ambience/random/rocks/singular_stone_02.wav",
-			"res://sounds/ambience/random/rocks/singular_stone_03.wav",
-			"res://sounds/ambience/random/rocks/stones-falling.wav",
-			"res://sounds/ambience/random/rocks/stones_falling_02.wav",
-			"res://sounds/ambience/random/ghosts/581090__magnuswaker__cavernous-moan.wav",
-			#"res://sounds/ambience/random/ghosts/ghost_distance_01.wav",
-			"res://sounds/ambience/random/ghosts/ghost_distance_02.wav",
-			#"res://sounds/ambience/random/ghosts/groan_01.wav",
-			"res://sounds/ambience/random/footsteps/random_singular_step.wav",
-			"res://sounds/ambience/impacts/381602__dorianmastin__snd_impactnormalwood05.wav"
+			"res://world/shared/sounds/ambience/random/rocks/singular_stone_01.wav",
+			"res://world/shared/sounds/ambience/random/rocks/singular_stone_02.wav",
+			"res://world/shared/sounds/ambience/random/rocks/singular_stone_03.wav",
+			"res://world/shared/sounds/ambience/random/rocks/stones-falling.wav",
+			"res://world/shared/sounds/ambience/random/rocks/stones_falling_02.wav",
+			"res://world/shared/sounds/ambience/random/ghosts/581090__magnuswaker__cavernous-moan.wav",
+			#"res://world/shared/sounds/ambience/random/ghosts/ghost_distance_01.wav",
+			"res://world/shared/sounds/ambience/random/ghosts/ghost_distance_02.wav",
+			#"res://world/shared/sounds/ambience/random/ghosts/groan_01.wav",
+			"res://world/shared/sounds/ambience/random/footsteps/random_singular_step.wav",
+			"res://world/shared/sounds/ambience/impacts/381602__dorianmastin__snd_impactnormalwood05.wav"
 		]
 	}
 ]

@@ -1,4 +1,4 @@
-extends "res://components/shared/scripts/containers/BaseInventory.gd"
+extends "res://items/inventory/BaseInventory.gd"
 
 @export var equipment_helper : Node
 @export var camera : Camera3D

@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://dxie5lrflt7kv"]
 
-[ext_resource type="Texture2D" uid="uid://dwblci623dgke" path="res://sprites/weapons/testsword.png" id="1_tvgsv"]
+[ext_resource type="Texture2D" uid="uid://dwblci623dgke" path="res://items/equippable/weapons/swords/rapiers/corroded-estoc/textures/testsword.png" id="1_tvgsv"]
 
 [node name="GearMenu" type="Node"]
 

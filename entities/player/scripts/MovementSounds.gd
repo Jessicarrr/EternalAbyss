@@ -6,13 +6,13 @@ var footstep_sound_delay = 0.55
 @export var audio_stream: AudioStreamPlayer
 
 var walk_stone_sounds = [
-	"res://sounds/footsteps/stone_brick/step_01.wav",
-	"res://sounds/footsteps/stone_brick/step_02.wav",
-	"res://sounds/footsteps/stone_brick/step_03.wav",
-	"res://sounds/footsteps/stone_brick/step_04.wav",
-	"res://sounds/footsteps/stone_brick/step_05.wav",
-	"res://sounds/footsteps/stone_brick/step_06.wav",
-	"res://sounds/footsteps/stone_brick/step_07.wav"
+	"res://entities/actors/shared/sounds/footsteps/stone_brick/step_01.wav",
+	"res://entities/actors/shared/sounds/footsteps/stone_brick/step_02.wav",
+	"res://entities/actors/shared/sounds/footsteps/stone_brick/step_03.wav",
+	"res://entities/actors/shared/sounds/footsteps/stone_brick/step_04.wav",
+	"res://entities/actors/shared/sounds/footsteps/stone_brick/step_05.wav",
+	"res://entities/actors/shared/sounds/footsteps/stone_brick/step_06.wav",
+	"res://entities/actors/shared/sounds/footsteps/stone_brick/step_07.wav"
 ]
 
 var sound_pool = []

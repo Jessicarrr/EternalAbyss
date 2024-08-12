@@ -20,7 +20,9 @@ func do_sound_event(source, volume : float, sound_global_position : Vector3, des
 		if Enums.SoundDescriptions[key] == description:
 			description_name = key
 	
-	Debug.msg(Debug.EVENTS, ["Sound event emitted. Source: ", source.get_name(), " volume: ", volume, " pos: ", sound_global_position, ". description: " + description_name])
+	Debug.msg(Debug.EVENTS, ["Sound event emitted. Source: ", source.get_name(),
+			 " volume: ", volume, " pos: ", sound_global_position,
+			 ". description: " + description_name])
 
 func do_world_gen_complete_event():
 	world_gen_complete.emit()

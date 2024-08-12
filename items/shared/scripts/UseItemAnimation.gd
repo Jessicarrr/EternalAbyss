@@ -1,4 +1,4 @@
-extends "res://components/shared/scripts/animations/Base2dAnimation.gd"
+extends "res://helpers/animations/Base2dAnimation.gd"
 
 func _ready():
 	super._ready()

@@ -1,9 +1,9 @@
 [gd_scene load_steps=38 format=3 uid="uid://dcu02eeh3wjrw"]
 
-[ext_resource type="Texture2D" uid="uid://dscoavfvq5e6s" path="res://textures/prison/bricks.png" id="1_blkev"]
+[ext_resource type="Texture2D" uid="uid://dscoavfvq5e6s" path="res://world/prison/textures/bricks.png" id="1_blkev"]
 [ext_resource type="PackedScene" uid="uid://b6u3wrs6gna1b" path="res://world/prison/scenes/WeatheredDoor.tscn" id="2_jqwme"]
-[ext_resource type="PackedScene" uid="uid://jd3raqi1sd88" path="res://models/furniture/bookshelf_wood.glb" id="3_3sfgc"]
-[ext_resource type="PackedScene" uid="uid://b6pniiar5v3gr" path="res://models/furniture/welder_stone.glb" id="4_p1shg"]
+[ext_resource type="PackedScene" uid="uid://jd3raqi1sd88" path="res://world/shared/models/furniture/bookshelf_wood.glb" id="3_3sfgc"]
+[ext_resource type="PackedScene" uid="uid://b6pniiar5v3gr" path="res://world/shared/models/furniture/welder_stone.glb" id="4_p1shg"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6ai6o"]
 albedo_texture = ExtResource("1_blkev")
@@ -257,10 +257,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("BoxShape3D_lyx64")
 
 [node name="bookshelf_wood" parent="." instance=ExtResource("3_3sfgc")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 2)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 1.88198)
 
 [node name="bookshelf_wood2" parent="." instance=ExtResource("3_3sfgc")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 2)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 1.88198)
 
 [node name="welder_stone" parent="." instance=ExtResource("4_p1shg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 0)

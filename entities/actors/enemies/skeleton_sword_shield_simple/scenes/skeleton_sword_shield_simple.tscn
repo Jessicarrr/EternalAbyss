@@ -18,17 +18,17 @@
 [ext_resource type="Script" path="res://entities/actors/shared/scripts/states/Dormant.gd" id="15_st76a"]
 [ext_resource type="Script" path="res://entities/actors/shared/scripts/states/functionality/ListenForPlayerFootsteps.gd" id="16_fcsq0"]
 [ext_resource type="Script" path="res://entities/actors/shared/scripts/states/Reanimate.gd" id="17_htny4"]
-[ext_resource type="Texture2D" uid="uid://d5wgl1bawg2k" path="res://sprites/enemies/skeleton attack anim-Sheet fix.png" id="18_wa55i"]
-[ext_resource type="Texture2D" uid="uid://lxm8tcnahu14" path="res://sprites/enemies/skeleton 1 blocking idle 2-Sheet.png" id="19_8n5cq"]
-[ext_resource type="Texture2D" uid="uid://dcpbq40ehd0bn" path="res://sprites/enemies/skeleton 1 blocking raise shield 2 reversed-Sheet.png" id="20_m31yo"]
-[ext_resource type="Texture2D" uid="uid://nqvchf2xskm2" path="res://sprites/enemies/skeleton 1 blocking recieveing a hit-Sheet.png" id="21_4x7hq"]
-[ext_resource type="Texture2D" uid="uid://brt1i0b0gvnmq" path="res://sprites/enemies/skeleton 1 blocking raise shield 2-Sheet.png" id="22_kkfnf"]
-[ext_resource type="Texture2D" uid="uid://dtodycbwecgag" path="res://sprites/enemies/skeleton 1 blocking walking-Sheet.png" id="23_mhc8n"]
-[ext_resource type="Texture2D" uid="uid://bwmxr2vu6inbq" path="res://sprites/enemies/skeleton 1 dying animation -Sheet.png" id="24_7jql6"]
-[ext_resource type="Texture2D" uid="uid://uac4r25n1ftp" path="res://sprites/enemies/skeleton 1 idle animation simple-Sheet.png" id="25_h6vb4"]
-[ext_resource type="Texture2D" uid="uid://c3s4slt47m377" path="res://sprites/enemies/skeleton 1 taking hit animation -Sheet.png" id="26_7tn4j"]
-[ext_resource type="Texture2D" uid="uid://cdoipa0mibb40" path="res://sprites/enemies/skeleton 1 walking animation walk-Sheet.png" id="27_je5rg"]
-[ext_resource type="Script" path="res://components/shared/scripts/animations/NpcSprite3DAnimator.gd" id="28_k0m2t"]
+[ext_resource type="Texture2D" uid="uid://d5wgl1bawg2k" path="res://entities/actors/enemies/skeleton_sword_shield_simple/textures/skeleton attack anim-Sheet fix.png" id="18_wa55i"]
+[ext_resource type="Texture2D" uid="uid://lxm8tcnahu14" path="res://entities/actors/enemies/skeleton_sword_shield_simple/textures/skeleton 1 blocking idle 2-Sheet.png" id="19_8n5cq"]
+[ext_resource type="Texture2D" uid="uid://dcpbq40ehd0bn" path="res://entities/actors/enemies/skeleton_sword_shield_simple/textures/skeleton 1 blocking raise shield 2 reversed-Sheet.png" id="20_m31yo"]
+[ext_resource type="Texture2D" uid="uid://nqvchf2xskm2" path="res://entities/actors/enemies/skeleton_sword_shield_simple/textures/skeleton 1 blocking recieveing a hit-Sheet.png" id="21_4x7hq"]
+[ext_resource type="Texture2D" uid="uid://brt1i0b0gvnmq" path="res://entities/actors/enemies/skeleton_sword_shield_simple/textures/skeleton 1 blocking raise shield 2-Sheet.png" id="22_kkfnf"]
+[ext_resource type="Texture2D" uid="uid://dtodycbwecgag" path="res://entities/actors/enemies/skeleton_sword_shield_simple/textures/skeleton 1 blocking walking-Sheet.png" id="23_mhc8n"]
+[ext_resource type="Texture2D" uid="uid://bwmxr2vu6inbq" path="res://entities/actors/enemies/skeleton_sword_shield_simple/textures/skeleton 1 dying animation -Sheet.png" id="24_7jql6"]
+[ext_resource type="Texture2D" uid="uid://uac4r25n1ftp" path="res://entities/actors/enemies/skeleton_sword_shield_simple/textures/skeleton 1 idle animation simple-Sheet.png" id="25_h6vb4"]
+[ext_resource type="Texture2D" uid="uid://c3s4slt47m377" path="res://entities/actors/enemies/skeleton_sword_shield_simple/textures/skeleton 1 taking hit animation -Sheet.png" id="26_7tn4j"]
+[ext_resource type="Texture2D" uid="uid://cdoipa0mibb40" path="res://entities/actors/enemies/skeleton_sword_shield_simple/textures/skeleton 1 walking animation walk-Sheet.png" id="27_je5rg"]
+[ext_resource type="Script" path="res://helpers/animations/NpcSprite3DAnimator.gd" id="28_k0m2t"]
 [ext_resource type="Script" path="res://entities/shared/scripts/RemoveOnDeathCollisionShape3D.gd" id="29_prs7s"]
 [ext_resource type="Script" path="res://entities/actors/enemies/shared/scripts/EnemyRayCast3D.gd" id="30_825xu"]
 [ext_resource type="Script" path="res://skills/health/scripts/Health.gd" id="31_ckd34"]
@@ -868,7 +868,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.610768, 0)
 volume_db = -20.451
 bus = &"ReverbBus"
 script = ExtResource("35_o2xy2")
-possible_sounds = ["res://sounds/enemies/skeleton/damage/impact_01.wav", "res://sounds/enemies/skeleton/damage/impact_02.wav", "res://sounds/enemies/skeleton/damage/impact_03.wav", "res://sounds/enemies/skeleton/damage/impact_04.wav"]
+possible_sounds = ["res://entities/actors/enemies/skeletons/sounds/damage/impact_01.wav", "res://entities/actors/enemies/skeletons/sounds/damage/impact_02.wav", "res://entities/actors/enemies/skeletons/sounds/damage/impact_03.wav", "res://entities/actors/enemies/skeletons/sounds/damage/impact_04.wav"]
 
 [node name="NpcBlockDmgPlayer3D" type="AudioStreamPlayer3D" parent="."]
 volume_db = -20.451
@@ -879,7 +879,7 @@ possible_sounds = ["res://sounds/shields/metal/METLImpt_Impact Metal Blunt 02_DD
 [node name="NpcAttackPlayer3D" type="AudioStreamPlayer3D" parent="."]
 volume_db = -8.421
 script = ExtResource("37_cot0w")
-possible_sounds = ["res://sounds/weapons/sword/SWSH_Swing 2 Normal 01_DDUMAIS_NONE.wav", "res://sounds/weapons/sword/SWSH_Swing 2 Normal 02_DDUMAIS_NONE.wav", "res://sounds/weapons/sword/SWSH_Swing 2 Normal 03_DDUMAIS_NONE.wav", "res://sounds/weapons/sword/SWSH_Swing 2 Normal 04_DDUMAIS_NONE.wav", "res://sounds/weapons/sword/SWSH_Swing 2 Normal 05_DDUMAIS_NONE.wav", "res://sounds/weapons/sword/SWSH_Swing 2 Normal 06_DDUMAIS_NONE.wav", "res://sounds/weapons/sword/SWSH_Swing 2 Normal 07_DDUMAIS_NONE.wav", "res://sounds/weapons/sword/SWSH_Swing 2 Normal 08_DDUMAIS_NONE.wav", "res://sounds/weapons/sword/SWSH_Swing 2 Normal 09_DDUMAIS_NONE.wav"]
+possible_sounds = ["res://items/equippable/weapons/swords/shared/sounds/SWSH_Swing 2 Normal 01_DDUMAIS_NONE.wav", "res://items/equippable/weapons/swords/shared/sounds/SWSH_Swing 2 Normal 02_DDUMAIS_NONE.wav", "res://items/equippable/weapons/swords/shared/sounds/SWSH_Swing 2 Normal 03_DDUMAIS_NONE.wav", "res://items/equippable/weapons/swords/shared/sounds/SWSH_Swing 2 Normal 04_DDUMAIS_NONE.wav", "res://items/equippable/weapons/swords/shared/sounds/SWSH_Swing 2 Normal 05_DDUMAIS_NONE.wav", "res://items/equippable/weapons/swords/shared/sounds/SWSH_Swing 2 Normal 06_DDUMAIS_NONE.wav", "res://items/equippable/weapons/swords/shared/sounds/SWSH_Swing 2 Normal 07_DDUMAIS_NONE.wav", "res://items/equippable/weapons/swords/shared/sounds/SWSH_Swing 2 Normal 08_DDUMAIS_NONE.wav", "res://items/equippable/weapons/swords/shared/sounds/SWSH_Swing 2 Normal 09_DDUMAIS_NONE.wav"]
 
 [node name="NpcFootstepPlayer3D" type="AudioStreamPlayer3D" parent="."]
 volume_db = -20.0
@@ -887,7 +887,7 @@ script = ExtResource("38_bkyni")
 animation_name = "block_walk"
 animation_frames = [3, 7]
 animated_sprite_path = NodePath("../AnimatedSprite3D")
-possible_sounds = ["res://sounds/enemies/skeleton/footsteps/FEETHmn_Footstep Stone Explorer Run Fast Dirt Outside 03_ESM_DGF.wav", "res://sounds/enemies/skeleton/footsteps/FEETHmn_Footstep Stone Explorer Run Fast Dirt Outside 06_ESM_DGF.wav", "res://sounds/enemies/skeleton/footsteps/FEETHmn_Footstep Stone Explorer Walk Faster Dirt Outside 05_ESM_DGF.wav", "res://sounds/enemies/skeleton/footsteps/FEETHmn_Footstep Stone Explorer Walk Faster Dirt Outside 07_ESM_DGF.wav"]
+possible_sounds = ["res://entities/actors/enemies/skeletons/sounds/footsteps/FEETHmn_Footstep Stone Explorer Run Fast Dirt Outside 03_ESM_DGF.wav", "res://entities/actors/enemies/skeletons/sounds/footsteps/FEETHmn_Footstep Stone Explorer Run Fast Dirt Outside 06_ESM_DGF.wav", "res://entities/actors/enemies/skeletons/sounds/footsteps/FEETHmn_Footstep Stone Explorer Walk Faster Dirt Outside 05_ESM_DGF.wav", "res://entities/actors/enemies/skeletons/sounds/footsteps/FEETHmn_Footstep Stone Explorer Walk Faster Dirt Outside 07_ESM_DGF.wav"]
 
 [node name="NpcFootstepPlayer3D2" type="AudioStreamPlayer3D" parent="."]
 volume_db = -20.0
@@ -906,7 +906,7 @@ panning_strength = 2.0
 bus = &"ReverbBus"
 script = ExtResource("39_ighc8")
 min_delay_between_sounds = 3.0
-possible_sounds = ["res://sounds/enemies/skeleton/idle/GHOSTS Breath Cavernous.LR.wav", "res://sounds/enemies/skeleton/idle/GHOSTS Breath Hollow Spirit.LR.wav"]
+possible_sounds = ["res://entities/actors/enemies/skeletons/sounds/idle/GHOSTS Breath Cavernous.LR.wav", "res://entities/actors/enemies/skeletons/sounds/idle/GHOSTS Breath Hollow Spirit.LR.wav"]
 
 [node name="DeathSoundPlayer3D" type="AudioStreamPlayer3D" parent="."]
 volume_db = -12.0
@@ -916,12 +916,12 @@ max_distance = 8.0
 panning_strength = 2.5
 bus = &"ReverbBus"
 script = ExtResource("40_ko2nd")
-possible_sounds = ["res://sounds/enemies/skeleton/death/Hurt2.wav", "res://sounds/enemies/skeleton/death/Hurt.wav"]
+possible_sounds = ["res://entities/actors/enemies/skeletons/sounds/death/Hurt.wav", "res://entities/actors/enemies/skeletons/sounds/death/Hurt2.wav"]
 
 [node name="ReanimateSoundPlayer3D" type="AudioStreamPlayer3D" parent="."]
 max_distance = 8.0
 script = ExtResource("41_7vm6f")
-possible_sounds = ["res://sounds/enemies/skeleton/reanimate/reanimate_01.wav", "res://sounds/enemies/skeleton/reanimate/reanimate_02.wav", "res://sounds/enemies/skeleton/reanimate/reanimate_03.wav"]
+possible_sounds = ["res://entities/actors/enemies/skeletons/sounds/reanimate/reanimate_01.wav", "res://entities/actors/enemies/skeletons/sounds/reanimate/reanimate_02.wav", "res://entities/actors/enemies/skeletons/sounds/reanimate/reanimate_03.wav"]
 
 [connection signal="on_blocked_hit" from="." to="StateMachine/NpcBlocking" method="_on_blocked_hit"]
 [connection signal="on_blocked_hit" from="." to="PhysicsMovement" method="_on_blocked_hit"]

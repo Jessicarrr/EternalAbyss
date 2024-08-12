@@ -1,9 +1,9 @@
 extends Node
 
 var windup_sounds = [
-	"res://sounds/weapons/windup1.wav",
-	"res://sounds/weapons/windup2.wav",
-	"res://sounds/weapons/windup3.wav"
+	"res://items/equippable/weapons/shared/sounds/windup1.wav",
+	"res://items/equippable/weapons/shared/sounds/windup2.wav",
+	"res://items/equippable/weapons/shared/sounds/windup3.wav"
 ]
 
 var windup_sound_playing = false

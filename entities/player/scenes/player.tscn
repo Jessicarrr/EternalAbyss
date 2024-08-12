@@ -5,14 +5,11 @@
 [ext_resource type="Script" path="res://entities/player/scripts/state/Idle.gd" id="2_tnqbq"]
 [ext_resource type="Script" path="res://entities/player/scripts/state/functionality/IdleAttackInput.gd" id="3_eve5q"]
 [ext_resource type="Script" path="res://entities/player/scripts/state/functionality/UseItemInput.gd" id="4_b1cho"]
-[ext_resource type="Script" path="res://components/shared/scripts/containers/GearManager.gd" id="4_ieury"]
 [ext_resource type="Script" path="res://entities/player/scripts/state/functionality/IdleWeaponHandler.gd" id="5_8efs7"]
 [ext_resource type="PackedScene" uid="uid://blfvfc7exomsg" path="res://items/shared/scenes/GameItems.tscn" id="5_ht5ei"]
 [ext_resource type="Script" path="res://entities/player/scripts/state/Windup.gd" id="6_1456h"]
-[ext_resource type="Script" path="res://components/shared/scripts/containers/InventoryManager.gd" id="6_jyb60"]
 [ext_resource type="Script" path="res://entities/player/scripts/state/functionality/InputAttackCancel.gd" id="7_krbbd"]
 [ext_resource type="Script" path="res://entities/player/scripts/state/Swing.gd" id="8_541qp"]
-[ext_resource type="Script" path="res://components/shared/scripts/containers/HotbarManager.gd" id="8_yp7wi"]
 [ext_resource type="Script" path="res://entities/player/scripts/state/Recovery.gd" id="9_uqlww"]
 [ext_resource type="Script" path="res://entities/player/scripts/state/AttackCancel.gd" id="10_sqvf5"]
 [ext_resource type="Script" path="res://entities/player/scripts/state/AttackRecoil.gd" id="11_pup7f"]
@@ -20,9 +17,12 @@
 [ext_resource type="Script" path="res://entities/player/scripts/state/Blocking.gd" id="13_0isu0"]
 [ext_resource type="Script" path="res://entities/player/scripts/state/BlockEnding.gd" id="14_tgg0p"]
 [ext_resource type="Script" path="res://entities/player/scripts/state/Eating.gd" id="15_tp5ui"]
-[ext_resource type="AudioStream" uid="uid://cq8x83kwk4opl" path="res://sounds/ghostly_windy_ambience.wav" id="16_rljpy"]
+[ext_resource type="AudioStream" uid="uid://cq8x83kwk4opl" path="res://world/shared/sounds/ambience/ghostly_windy_ambience.wav" id="16_rljpy"]
+[ext_resource type="Script" path="res://items/inventory/GearManager.gd" id="17_amwtu"]
 [ext_resource type="Script" path="res://items/equippable/shared/scripts/EquipmentSlotHelper.gd" id="19_auhrk"]
+[ext_resource type="Script" path="res://items/inventory/InventoryManager.gd" id="19_f8is2"]
 [ext_resource type="Script" path="res://entities/player/scripts/sounds/RandomAmbientSounds.gd" id="21_63v10"]
+[ext_resource type="Script" path="res://items/inventory/HotbarManager.gd" id="21_eh733"]
 [ext_resource type="Script" path="res://items/equippable/shared/scripts/EquipmentHelper.gd" id="21_lqqul"]
 [ext_resource type="Script" path="res://entities/player/scripts/MouseMovement.gd" id="22_1rybo"]
 [ext_resource type="Script" path="res://entities/player/scripts/DirectionalMovement.gd" id="23_rggqs"]
@@ -138,11 +138,11 @@ script = ExtResource("15_tp5ui")
 script = ExtResource("4_b1cho")
 
 [node name="Gear" type="Node" parent="."]
-script = ExtResource("4_ieury")
+script = ExtResource("17_amwtu")
 metadata/GameItems = ExtResource("5_ht5ei")
 
 [node name="Inventory" type="Node" parent="Gear"]
-script = ExtResource("6_jyb60")
+script = ExtResource("19_f8is2")
 
 [node name="Slots" type="Node" parent="Gear/Inventory"]
 metadata/NumSlots = 10
@@ -155,7 +155,7 @@ metadata/NumSlots = 10
 script = ExtResource("19_auhrk")
 
 [node name="Hotbar" type="Node" parent="Gear" node_paths=PackedStringArray("equipment_helper", "camera")]
-script = ExtResource("8_yp7wi")
+script = ExtResource("21_eh733")
 equipment_helper = NodePath("../EquipmentHelper")
 camera = NodePath("../../Head/Camera")
 state_machine_node_path = NodePath("../../PlayerStateMachine")
@@ -211,7 +211,7 @@ metadata/CameraPath = NodePath("../../Head/Camera")
 bus = &"ReverbBus"
 script = ExtResource("29_tw623")
 thing_to_track = NodePath("../..")
-possible_sounds = ["res://sounds/player/receive_damage/GOREStab_Designed Slash Gore 03_DDUMAIS_NONE.wav", "res://sounds/player/receive_damage/GOREStab_Designed Slash Gore 04_DDUMAIS_NONE.wav", "res://sounds/player/receive_damage/GOREStab_Designed Slash Gore 05_DDUMAIS_NONE.wav", "res://sounds/player/receive_damage/GOREStab_Designed Slash Gore 06_DDUMAIS_NONE.wav", "res://sounds/player/receive_damage/GOREStab_Designed Slash Gore 07_DDUMAIS_NONE.wav", "res://sounds/player/receive_damage/GOREStab_Designed Slash Gore 09_DDUMAIS_NONE.wav", "res://sounds/player/receive_damage/GOREStab_Designed Slash Gore 11_DDUMAIS_NONE.wav"]
+possible_sounds = ["res://entities/actors/shared/sounds/damage/flesh-metal/GOREStab_Designed Slash Gore 03_DDUMAIS_NONE.wav", "res://entities/actors/shared/sounds/damage/flesh-metal/GOREStab_Designed Slash Gore 04_DDUMAIS_NONE.wav", "res://entities/actors/shared/sounds/damage/flesh-metal/GOREStab_Designed Slash Gore 05_DDUMAIS_NONE.wav", "res://entities/actors/shared/sounds/damage/flesh-metal/GOREStab_Designed Slash Gore 06_DDUMAIS_NONE.wav", "res://entities/actors/shared/sounds/damage/flesh-metal/GOREStab_Designed Slash Gore 07_DDUMAIS_NONE.wav", "res://entities/actors/shared/sounds/damage/flesh-metal/GOREStab_Designed Slash Gore 09_DDUMAIS_NONE.wav", "res://entities/actors/shared/sounds/damage/flesh-metal/GOREStab_Designed Slash Gore 11_DDUMAIS_NONE.wav"]
 pitch_min = 0.5
 pitch_max = 0.7
 

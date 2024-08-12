@@ -1,11 +1,11 @@
 [gd_scene load_steps=20 format=3 uid="uid://b6u3wrs6gna1b"]
 
 [ext_resource type="Script" path="res://world/shared/scripts/interactable_objects/DestroyableDoor.gd" id="1_l3o5k"]
-[ext_resource type="Texture2D" uid="uid://cxdrpbkdhlshm" path="res://textures/prison/Doors/bricks_doorway.png" id="2_8q10l"]
-[ext_resource type="Texture2D" uid="uid://bhdi0hpe024b6" path="res://textures/doors/door wooden shed door old damaged.png" id="3_f7nif"]
-[ext_resource type="Texture2D" uid="uid://guq31rcaaw7k" path="res://textures/doors/door wooden shed door old damaged flipped.png" id="4_v3lk2"]
-[ext_resource type="PackedScene" uid="uid://c0dxexhhsvvcv" path="res://models/furniture/welder_wood.glb" id="5_6o2o1"]
-[ext_resource type="PackedScene" uid="uid://b6pniiar5v3gr" path="res://models/furniture/welder_stone.glb" id="5_e6ou1"]
+[ext_resource type="Texture2D" uid="uid://cxdrpbkdhlshm" path="res://world/prison/textures/Doors/bricks_doorway.png" id="2_8q10l"]
+[ext_resource type="Texture2D" uid="uid://bhdi0hpe024b6" path="res://world/shared/textures/doors/door wooden shed door old damaged.png" id="3_f7nif"]
+[ext_resource type="Texture2D" uid="uid://guq31rcaaw7k" path="res://world/shared/textures/doors/door wooden shed door old damaged flipped.png" id="4_v3lk2"]
+[ext_resource type="PackedScene" uid="uid://c0dxexhhsvvcv" path="res://world/shared/models/furniture/welder_wood.glb" id="5_6o2o1"]
+[ext_resource type="PackedScene" uid="uid://b6pniiar5v3gr" path="res://world/shared/models/furniture/welder_stone.glb" id="5_e6ou1"]
 [ext_resource type="Script" path="res://world/shared/scripts/RandomStreamPlayer3D.gd" id="7_rmkid"]
 [ext_resource type="Script" path="res://world/shared/scripts/SoundEventOnSignal.gd" id="8_4a0tx"]
 
@@ -145,13 +145,13 @@ shape = SubResource("BoxShape3D_83qa1")
 [node name="DoorCloseSounds" type="AudioStreamPlayer3D" parent="."]
 volume_db = -20.556
 script = ExtResource("7_rmkid")
-possible_sounds = ["res://sounds/doors/wood_door_close_01.wav", "res://sounds/doors/wood_door_close_02.wav", "res://sounds/doors/wood_door_close_03.wav", "res://sounds/doors/wood_door_close_04.wav"]
+possible_sounds = ["res://world/shared/sounds/doors/wood_door_close_01.wav", "res://world/shared/sounds/doors/wood_door_close_02.wav", "res://world/shared/sounds/doors/wood_door_close_03.wav", "res://world/shared/sounds/doors/wood_door_close_04.wav"]
 bus_name_string = "ReverbBus"
 
 [node name="DoorOpenSounds" type="AudioStreamPlayer3D" parent="."]
 volume_db = -20.556
 script = ExtResource("7_rmkid")
-possible_sounds = ["res://sounds/doors/wood_door_open_01.wav", "res://sounds/doors/wood_door_open_02.wav", "res://sounds/doors/wood_door_open_03.wav"]
+possible_sounds = ["res://world/shared/sounds/doors/wood_door_open_01.wav", "res://world/shared/sounds/doors/wood_door_open_02.wav", "res://world/shared/sounds/doors/wood_door_open_03.wav"]
 bus_name_string = "ReverbBus"
 
 [node name="DoorCloseSoundEvent" type="Node" parent="."]
