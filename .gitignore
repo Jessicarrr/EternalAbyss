@@ -8,3 +8,10 @@
 /fonts/
 /models/
 /images/
+
+**/textures/
+**/sounds/
+**/models/
+**/blender/
+
+**/media-backups/
