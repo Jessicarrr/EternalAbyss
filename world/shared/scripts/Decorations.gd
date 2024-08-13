@@ -25,4 +25,5 @@ func _ready():
 				child.visible = true
 			else:
 				child.visible = false
+				child.queue_free()
 
