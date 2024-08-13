@@ -5,7 +5,7 @@
 [ext_resource type="AudioStream" uid="uid://bupb3ognjg6b5" path="res://world/shared/sounds/ambience/ATMO EERIE Cave, Water Drips, Emptyness, Howling Interior Wind, Oppressive, LOOP.wav" id="3_rpga0"]
 [ext_resource type="AudioStream" uid="uid://dxe7dr3ud2ljj" path="res://world/shared/sounds/ambience/random/Abnormal&Experimental - Religious Moan.wav" id="4_ii82p"]
 [ext_resource type="Script" path="res://scripts/hud.gd" id="5_4ajxy"]
-[ext_resource type="FontFile" path="res://fonts/lilita_one_regular.ttf" id="6_s7ns3"]
+[ext_resource type="FontFile" uid="uid://byuvmmg840ppl" path="res://fonts/Alagard/alagard.ttf" id="6_s7ns3"]
 [ext_resource type="Texture2D" uid="uid://b1nmn3rorrdsk" path="res://world/prison/textures/welder_stone.png" id="7_w378e"]
 [ext_resource type="Texture2D" uid="uid://dscoavfvq5e6s" path="res://world/prison/textures/bricks.png" id="8_ra46i"]
 [ext_resource type="Texture2D" uid="uid://cklv83hp3804y" path="res://world/prison/textures/bricks64x_doorway.png" id="9_rnwih"]

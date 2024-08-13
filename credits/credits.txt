@@ -1,3 +1,13 @@
 Food items
 EternalAbyss\sprites\food
 https://soda-1.itch.io/realistic-rpg-maker-32x32-icon-set
+
+
+Font
+Alagard - https://www.dafont.com/alagard.font
+Note from Author:
+"Give credit if used. That's it.
+Alagard is a bitmap gothic font made for game projects that could use a gothic font to
+create a fantasy feel. This font design focuses on legibility."
+Font by Hewett Tsoi
+https://www.dafont.com/hewett-tsoi.d4888

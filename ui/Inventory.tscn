@@ -1,13 +1,13 @@
 [gd_scene load_steps=6 format=3 uid="uid://ctqtltwdstq8w"]
 
 [ext_resource type="Script" path="res://ui/Inventory.gd" id="1_7aywv"]
-[ext_resource type="FontFile" uid="uid://diym884fjdvn5" path="res://fonts/DuolosSILR/DoulosSILR.ttf" id="2_4vp2y"]
 [ext_resource type="Script" path="res://ui/InventorySlot.gd" id="2_k5ip4"]
+[ext_resource type="FontFile" uid="uid://byuvmmg840ppl" path="res://fonts/Alagard/alagard.ttf" id="2_w050y"]
 [ext_resource type="Script" path="res://ui/DropItemRect.gd" id="3_4cc56"]
 
 [sub_resource type="Theme" id="Theme_k7maa"]
-default_font = ExtResource("2_4vp2y")
-default_font_size = 18
+default_font = ExtResource("2_w050y")
+default_font_size = 22
 
 [node name="Inventory" type="Control"]
 layout_mode = 3
