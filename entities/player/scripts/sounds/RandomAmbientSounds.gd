@@ -12,7 +12,7 @@ var sound_queue = []
 var min_distance_from_camera = 4
 var max_distance_from_camera = 8
 
-var decibel_modifier = -26
+var decibel_modifier = 0
 
 func populate_sound_queue():
 	sound_queue.clear()

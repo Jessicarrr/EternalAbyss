@@ -17,7 +17,7 @@
 [ext_resource type="Script" path="res://entities/player/scripts/state/Blocking.gd" id="13_0isu0"]
 [ext_resource type="Script" path="res://entities/player/scripts/state/BlockEnding.gd" id="14_tgg0p"]
 [ext_resource type="Script" path="res://entities/player/scripts/state/Eating.gd" id="15_tp5ui"]
-[ext_resource type="AudioStream" uid="uid://cq8x83kwk4opl" path="res://world/shared/sounds/ambience/ghostly_windy_ambience.wav" id="16_rljpy"]
+[ext_resource type="AudioStream" uid="uid://cbmbogbdgbf1p" path="res://world/shared/sounds/ambience/ghostly_windy_ambience.wav" id="16_rljpy"]
 [ext_resource type="Script" path="res://items/inventory/GearManager.gd" id="17_amwtu"]
 [ext_resource type="Script" path="res://items/equippable/shared/scripts/EquipmentSlotHelper.gd" id="19_auhrk"]
 [ext_resource type="Script" path="res://items/inventory/InventoryManager.gd" id="19_f8is2"]
@@ -284,12 +284,11 @@ one_shot = true
 [node name="FootstepSoundTimer" type="Timer" parent="."]
 
 [node name="FootstepSoundPlayer" type="AudioStreamPlayer" parent="."]
-volume_db = -15.927
 pitch_scale = 1.18
+bus = &"ReverbBus"
 
-[node name="Ambience_EerieCaveDripping" type="AudioStreamPlayer" parent="."]
+[node name="Ambience" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("16_rljpy")
-volume_db = -17.909
 pitch_scale = 0.76
 autoplay = true
 bus = &"ReverbBus"
