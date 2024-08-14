@@ -1,4 +1,4 @@
-[gd_scene load_steps=52 format=3 uid="uid://bug4m8f68fkbn"]
+[gd_scene load_steps=56 format=3 uid="uid://bug4m8f68fkbn"]
 
 [ext_resource type="Script" path="res://world/shared/scripts/Decorations.gd" id="1_ftwmp"]
 [ext_resource type="PackedScene" uid="uid://bmi1ca8oxx85n" path="res://world/shared/models/scenes/pebbles/pebble_02.tscn" id="2_4m67s"]
@@ -9,8 +9,12 @@
 [ext_resource type="PackedScene" uid="uid://dwssxgcd6pwki" path="res://world/shared/models/scenes/pebbles/pebble_07.tscn" id="7_m6ke4"]
 [ext_resource type="PackedScene" uid="uid://hmqr7kiwjpg5" path="res://world/shared/models/scenes/pebbles/pebble_08.tscn" id="8_wvs1c"]
 [ext_resource type="PackedScene" uid="uid://cuk4pl5jo1jw6" path="res://world/shared/models/scenes/vines/vines_ceiling_01.tscn" id="9_gsn7n"]
+[ext_resource type="Texture2D" uid="uid://by48uqd3yhp71" path="res://world/shared/textures/grasses/grasses 1.png" id="9_sglqp"]
+[ext_resource type="Texture2D" uid="uid://ce1s8jjrj1xl5" path="res://world/shared/textures/grasses/grasses 2.png" id="10_awmb1"]
 [ext_resource type="PackedScene" uid="uid://bn3rb164yx6kr" path="res://world/shared/models/scenes/vines/vines_ceiling_02.tscn" id="10_enj11"]
 [ext_resource type="PackedScene" uid="uid://d0ijf62xi4ig" path="res://world/shared/models/scenes/vines/vines_ceiling_03.tscn" id="11_4pcyg"]
+[ext_resource type="Texture2D" uid="uid://ca8phwjy0s15y" path="res://world/shared/textures/grasses/grasses 3.png" id="11_gwojd"]
+[ext_resource type="Texture2D" uid="uid://cdh5xgwywlwa4" path="res://world/shared/textures/grasses/grasses 4.png" id="12_gi6sm"]
 [ext_resource type="PackedScene" uid="uid://c6e4sueliundj" path="res://world/shared/models/scenes/vines/vines_ceiling_04.tscn" id="12_l4k4l"]
 [ext_resource type="PackedScene" uid="uid://cuvl4ncxl738u" path="res://world/shared/models/scenes/vines/vines_ceiling_small_01.tscn" id="13_rjlmj"]
 [ext_resource type="PackedScene" uid="uid://c10mp77km6kgx" path="res://world/shared/models/scenes/vines/vines_ceiling_small_02.tscn" id="14_7hlog"]
@@ -19,9 +23,12 @@
 [ext_resource type="Script" path="res://world/shared/scripts/ReplaceWallWithDoor.gd" id="17_o4i0t"]
 [ext_resource type="Texture2D" uid="uid://dscoavfvq5e6s" path="res://world/prison/textures/bricks.png" id="18_lvjsb"]
 [ext_resource type="Texture2D" uid="uid://s11r07hgjcu3" path="res://world/prison/textures/bricks_n.png" id="19_4vhrb"]
+[ext_resource type="Texture2D" uid="uid://0u7jc2wmm65b" path="res://world/prison/textures/Floor/floor_tile_v2_sz.png" id="19_yxv4n"]
 [ext_resource type="PackedScene" uid="uid://b6u3wrs6gna1b" path="res://world/prison/scenes/WeatheredDoor.tscn" id="20_7ouyh"]
+[ext_resource type="Texture2D" uid="uid://cx6tuyti1ixfe" path="res://world/prison/textures/Walls/bricks_variation_03.png" id="21_6yka5"]
 [ext_resource type="PackedScene" uid="uid://c41eu1m1g72vu" path="res://world/shared/models/scenes/wall_torch.tscn" id="21_7dly1"]
 [ext_resource type="PackedScene" uid="uid://c3u17majpvdaw" path="res://world/prison/scenes/shelf_storage_prison_01.tscn" id="22_2cvaa"]
+[ext_resource type="Texture2D" uid="uid://dt1n8qycqfape" path="res://world/prison/textures/Walls/bricks_variation_05.png" id="22_juc2q"]
 [ext_resource type="PackedScene" uid="uid://0g4mt0nae6s4" path="res://world/shared/models/furniture/barrel.glb" id="23_ilj7r"]
 [ext_resource type="PackedScene" uid="uid://dbt4kud7pj44s" path="res://world/shared/scenes/item-spawners/ItemSpawner.tscn" id="24_aeh2d"]
 [ext_resource type="PackedScene" uid="uid://b6pniiar5v3gr" path="res://world/shared/models/furniture/welder_stone.glb" id="25_cdxqa"]
@@ -36,11 +43,8 @@ material = SubResource("StandardMaterial3D_lfu00")
 [sub_resource type="BoxShape3D" id="BoxShape3D_jxidv"]
 size = Vector3(2, 0.001, 2)
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_p7hxc"]
-load_path = "res://.godot/imported/bricks.png-a1cbf4706eb1131ca478a6908aad6c45.bptc.ctex"
-
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ncjx3"]
-albedo_texture = SubResource("CompressedTexture2D_p7hxc")
+albedo_texture = ExtResource("19_yxv4n")
 normal_enabled = true
 normal_texture = ExtResource("19_4vhrb")
 uv1_scale = Vector3(2, 2, 2)
@@ -62,11 +66,8 @@ texture_filter = 0
 [sub_resource type="PlaneMesh" id="PlaneMesh_xedni"]
 material = SubResource("StandardMaterial3D_v2lp3")
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_j5brb"]
-load_path = "res://.godot/imported/bricks.png-a1cbf4706eb1131ca478a6908aad6c45.bptc.ctex"
-
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wiroj"]
-albedo_texture = SubResource("CompressedTexture2D_j5brb")
+albedo_texture = ExtResource("21_6yka5")
 normal_enabled = true
 normal_texture = ExtResource("19_4vhrb")
 texture_filter = 0
@@ -75,7 +76,7 @@ texture_filter = 0
 material = SubResource("StandardMaterial3D_wiroj")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_buxl7"]
-albedo_texture = SubResource("CompressedTexture2D_j5brb")
+albedo_texture = ExtResource("22_juc2q")
 normal_enabled = true
 normal_texture = ExtResource("19_4vhrb")
 uv1_scale = Vector3(0.5, 1, 1)
@@ -108,11 +109,8 @@ texture_filter = 0
 [sub_resource type="PlaneMesh" id="PlaneMesh_rxjy6"]
 material = SubResource("StandardMaterial3D_hjn6s")
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_8wlws"]
-load_path = "res://.godot/imported/bricks.png-a1cbf4706eb1131ca478a6908aad6c45.bptc.ctex"
-
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qhn6v"]
-albedo_texture = SubResource("CompressedTexture2D_8wlws")
+albedo_texture = ExtResource("18_lvjsb")
 normal_enabled = true
 normal_texture = ExtResource("19_4vhrb")
 uv1_scale = Vector3(2, 2, 2)
@@ -185,6 +183,308 @@ metadata/PercentChance = 50
 
 [node name="pebble_09" parent="Pebbles" instance=ExtResource("8_wvs1c")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.07673, 0.0656438, -0.690873)
+metadata/PercentChance = 50
+
+[node name="Grasses" type="Node3D" parent="."]
+
+[node name="Grass1" type="Sprite3D" parent="Grasses"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.146006, 0)
+flip_h = true
+billboard = 2
+shaded = true
+double_sided = false
+texture_filter = 0
+texture = ExtResource("9_sglqp")
+metadata/PercentChance = 50
+
+[node name="Grass24" type="Sprite3D" parent="Grasses"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.474714, 0.146006, 0.487064)
+flip_h = true
+billboard = 2
+shaded = true
+double_sided = false
+texture_filter = 0
+texture = ExtResource("9_sglqp")
+metadata/PercentChance = 50
+
+[node name="Grass10" type="Sprite3D" parent="Grasses"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.20556, 0.146006, 0.261804)
+flip_h = true
+billboard = 2
+shaded = true
+double_sided = false
+texture_filter = 0
+texture = ExtResource("9_sglqp")
+metadata/PercentChance = 50
+
+[node name="Grass28" type="Sprite3D" parent="Grasses"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.04366, 0.146006, 0.66108)
+flip_h = true
+billboard = 2
+shaded = true
+double_sided = false
+texture_filter = 0
+texture = ExtResource("9_sglqp")
+metadata/PercentChance = 50
+
+[node name="Grass2" type="Sprite3D" parent="Grasses"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.511507, 0.146006, 1.40574)
+flip_h = true
+billboard = 2
+shaded = true
+double_sided = false
+texture_filter = 0
+texture = ExtResource("10_awmb1")
+metadata/PercentChance = 50
+
+[node name="Grass17" type="Sprite3D" parent="Grasses"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.36962, 0.146006, 1.20885)
+flip_h = true
+billboard = 2
+shaded = true
+double_sided = false
+texture_filter = 0
+texture = ExtResource("10_awmb1")
+metadata/PercentChance = 50
+
+[node name="Grass18" type="Sprite3D" parent="Grasses"]
+transform = Transform3D(1, 0, 0, 0, 0.999997, 0.00233874, 0, -0.00233874, 0.999997, -1.36962, 0.146006, 2.63613)
+flip_h = true
+billboard = 2
+shaded = true
+double_sided = false
+texture_filter = 0
+texture = ExtResource("10_awmb1")
+metadata/PercentChance = 50
+
+[node name="Grass19" type="Sprite3D" parent="Grasses"]
+transform = Transform3D(1, 0, 0, 0, 0.999997, 0.00233874, 0, -0.00233874, 0.999997, -0.295962, 0.146006, 0.933421)
+flip_h = true
+billboard = 2
+shaded = true
+double_sided = false
+texture_filter = 0
+texture = ExtResource("10_awmb1")
+metadata/PercentChance = 50
+
+[node name="Grass20" type="Sprite3D" parent="Grasses"]
+transform = Transform3D(1, 0, 0, 0, 0.999997, 0.00233874, 0, -0.00233874, 0.999997, 1.39372, 0.146006, 1.90263)
+flip_h = true
+billboard = 2
+shaded = true
+double_sided = false
+texture_filter = 0
+texture = ExtResource("10_awmb1")
+metadata/PercentChance = 50
+
+[node name="Grass12" type="Sprite3D" parent="Grasses"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.54057, 0.146006, -0.463891)
+flip_h = true
+billboard = 2
+shaded = true
+double_sided = false
+texture_filter = 0
+texture = ExtResource("10_awmb1")
+metadata/PercentChance = 50
+
+[node name="Grass7" type="Sprite3D" parent="Grasses"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.20934, 0.146006, -0.290791)
+flip_h = true
+billboard = 2
+shaded = true
+double_sided = false
+texture_filter = 0
+texture = ExtResource("10_awmb1")
+metadata/PercentChance = 50
+
+[node name="Grass3" type="Sprite3D" parent="Grasses"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.05675, 0.0765379, 0.952744)
+flip_h = true
+billboard = 2
+shaded = true
+double_sided = false
+texture_filter = 0
+texture = ExtResource("11_gwojd")
+metadata/PercentChance = 50
+
+[node name="Grass30" type="Sprite3D" parent="Grasses"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0597205, 0.0765379, 2.77973)
+flip_h = true
+billboard = 2
+shaded = true
+double_sided = false
+texture_filter = 0
+texture = ExtResource("11_gwojd")
+metadata/PercentChance = 50
+
+[node name="Grass11" type="Sprite3D" parent="Grasses"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.15125, 0.0765379, 0.952744)
+flip_h = true
+billboard = 2
+shaded = true
+double_sided = false
+texture_filter = 0
+texture = ExtResource("11_gwojd")
+metadata/PercentChance = 50
+
+[node name="Grass13" type="Sprite3D" parent="Grasses"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.960854, 0.0765379, -0.467739)
+flip_h = true
+billboard = 2
+shaded = true
+double_sided = false
+texture_filter = 0
+texture = ExtResource("11_gwojd")
+metadata/PercentChance = 50
+
+[node name="Grass4" type="Sprite3D" parent="Grasses"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.328263, 0.0765379, 2.51817)
+flip_h = true
+billboard = 2
+shaded = true
+double_sided = false
+texture_filter = 0
+texture = ExtResource("11_gwojd")
+metadata/PercentChance = 50
+
+[node name="Grass26" type="Sprite3D" parent="Grasses"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.328263, 0.0765379, -0.518944)
+flip_h = true
+billboard = 2
+shaded = true
+double_sided = false
+texture_filter = 0
+texture = ExtResource("11_gwojd")
+metadata/PercentChance = 50
+
+[node name="Grass15" type="Sprite3D" parent="Grasses"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.33299, 0.0765379, -0.71599)
+flip_h = true
+billboard = 2
+shaded = true
+double_sided = false
+texture_filter = 0
+texture = ExtResource("11_gwojd")
+metadata/PercentChance = 50
+
+[node name="Grass6" type="Sprite3D" parent="Grasses"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.50254, 0.0765379, -0.757035)
+flip_h = true
+billboard = 2
+shaded = true
+double_sided = false
+texture_filter = 0
+texture = ExtResource("11_gwojd")
+metadata/PercentChance = 50
+
+[node name="Grass5" type="Sprite3D" parent="Grasses"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.328263, 0.142717, 0.640725)
+flip_h = true
+billboard = 2
+shaded = true
+double_sided = false
+texture_filter = 0
+texture = ExtResource("12_gi6sm")
+metadata/PercentChance = 50
+
+[node name="Grass29" type="Sprite3D" parent="Grasses"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.57947, 0.142717, 2.57921)
+flip_h = true
+billboard = 2
+shaded = true
+double_sided = false
+texture_filter = 0
+texture = ExtResource("12_gi6sm")
+metadata/PercentChance = 50
+
+[node name="Grass16" type="Sprite3D" parent="Grasses"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.33312, 0.142717, 1.99933)
+flip_h = true
+billboard = 2
+shaded = true
+double_sided = false
+texture_filter = 0
+texture = ExtResource("12_gi6sm")
+metadata/PercentChance = 50
+
+[node name="Grass8" type="Sprite3D" parent="Grasses"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.661874, 0.142717, -0.62916)
+flip_h = true
+billboard = 2
+shaded = true
+double_sided = false
+texture_filter = 0
+texture = ExtResource("12_gi6sm")
+metadata/PercentChance = 50
+
+[node name="Grass25" type="Sprite3D" parent="Grasses"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.661874, 0.142717, 0.0363046)
+flip_h = true
+billboard = 2
+shaded = true
+double_sided = false
+texture_filter = 0
+texture = ExtResource("12_gi6sm")
+metadata/PercentChance = 50
+
+[node name="Grass14" type="Sprite3D" parent="Grasses"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.06818, 0.142717, 0.233966)
+flip_h = true
+billboard = 2
+shaded = true
+double_sided = false
+texture_filter = 0
+texture = ExtResource("12_gi6sm")
+metadata/PercentChance = 50
+
+[node name="Grass27" type="Sprite3D" parent="Grasses"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.184811, 0.142717, 1.32164)
+flip_h = true
+billboard = 2
+shaded = true
+double_sided = false
+texture_filter = 0
+texture = ExtResource("12_gi6sm")
+metadata/PercentChance = 50
+
+[node name="Grass21" type="Sprite3D" parent="Grasses"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.69162, 0.142717, 0.732171)
+flip_h = true
+billboard = 2
+shaded = true
+double_sided = false
+texture_filter = 0
+texture = ExtResource("12_gi6sm")
+metadata/PercentChance = 50
+
+[node name="Grass22" type="Sprite3D" parent="Grasses"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.375482, 0.142717, 1.71724)
+flip_h = true
+billboard = 2
+shaded = true
+double_sided = false
+texture_filter = 0
+texture = ExtResource("12_gi6sm")
+metadata/PercentChance = 50
+
+[node name="Grass23" type="Sprite3D" parent="Grasses"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.772534, 0.142717, 2.0406)
+flip_h = true
+billboard = 2
+shaded = true
+double_sided = false
+texture_filter = 0
+texture = ExtResource("12_gi6sm")
+metadata/PercentChance = 50
+
+[node name="Grass9" type="Sprite3D" parent="Grasses"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.77034, 0.142717, 0.093869)
+flip_h = true
+billboard = 2
+shaded = true
+double_sided = false
+texture_filter = 0
+texture = ExtResource("12_gi6sm")
 metadata/PercentChance = 50
 
 [node name="Vines" type="Node3D" parent="."]

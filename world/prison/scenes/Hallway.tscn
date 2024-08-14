@@ -1,7 +1,8 @@
-[gd_scene load_steps=74 format=3 uid="uid://cjbrvc38vhm6n"]
+[gd_scene load_steps=78 format=3 uid="uid://cjbrvc38vhm6n"]
 
 [ext_resource type="Script" path="res://world/shared/scripts/Decorations.gd" id="1_xvgsv"]
 [ext_resource type="PackedScene" uid="uid://gnbfqvrb7ouh" path="res://world/shared/models/scenes/gore_bones/gore_bones_01.tscn" id="2_2fjbb"]
+[ext_resource type="Script" path="res://world/shared/scripts/layout_chooser.gd" id="2_whtcp"]
 [ext_resource type="PackedScene" uid="uid://ta85cw1riwb7" path="res://world/shared/models/scenes/gore_bones/gore_bones_02.tscn" id="3_up468"]
 [ext_resource type="PackedScene" uid="uid://dan4mtakje34t" path="res://world/shared/models/scenes/gore_bones/gore_bones_03.tscn" id="4_fycf7"]
 [ext_resource type="Script" path="res://world/shared/scripts/BillboardVariator.gd" id="5_uptrg"]
@@ -44,6 +45,7 @@
 [ext_resource type="Texture2D" uid="uid://bcbu7rffkikyt" path="res://world/shared/textures/decals/Leaking/green_leakage_02.png" id="42_aq0qy"]
 [ext_resource type="Texture2D" uid="uid://detbygbni8tu2" path="res://world/shared/textures/decals/Vines/vines_decal_01.png" id="43_ccipg"]
 [ext_resource type="PackedScene" uid="uid://2vaa8kgvkawx" path="res://world/shared/models/scenes/candle_01.tscn" id="44_avye2"]
+[ext_resource type="PackedScene" uid="uid://bw2xjhbfcsf01" path="res://world/shared/models/scenes/furniture/destroyable_barrel.tscn" id="44_wdpmt"]
 [ext_resource type="PackedScene" uid="uid://c41eu1m1g72vu" path="res://world/shared/models/scenes/wall_torch.tscn" id="45_q5llx"]
 [ext_resource type="Texture2D" uid="uid://c505tlwtju57x" path="res://world/shared/textures/bones/bone femur.png" id="46_vwtar"]
 [ext_resource type="Texture2D" uid="uid://by8tq68a6uwpt" path="res://world/shared/textures/bones/bone lower arm.png" id="47_0xg80"]
@@ -54,8 +56,10 @@
 [ext_resource type="Texture2D" uid="uid://dlfj8tmlbibah" path="res://world/shared/textures/vines/wines 3.png" id="52_rusb0"]
 [ext_resource type="Texture2D" uid="uid://tmbhht076axs" path="res://world/shared/textures/vines/wines 4.png" id="53_vcasi"]
 [ext_resource type="Texture2D" uid="uid://csm3tmvrnb1of" path="res://world/shared/textures/decals/Leaking/green_leakage_03.png" id="54_6y0mp"]
+[ext_resource type="Script" path="res://world/shared/scripts/DependentNode3D.gd" id="55_3q1h3"]
 [ext_resource type="Texture2D" uid="uid://ny7yeuc5yi5k" path="res://world/shared/textures/decals/Vines/wall_vines_02.png" id="55_jyjk0"]
 [ext_resource type="Texture2D" uid="uid://biyj82l1q7wdj" path="res://world/shared/textures/particles/bit.png" id="56_2nhip"]
+[ext_resource type="PackedScene" uid="uid://b6pniiar5v3gr" path="res://world/shared/models/furniture/welder_stone.glb" id="56_7btgk"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8gr8k"]
 albedo_texture = ExtResource("38_tb62j")
@@ -141,25 +145,31 @@ metadata/AllowedConnections = {
 "PrisonCell": 3.0
 }
 
-[node name="GoreBones" type="Node3D" parent="."]
+[node name="LayoutPossibilities" type="Node3D" parent="."]
+script = ExtResource("2_whtcp")
 
-[node name="gore_bones_01" parent="GoreBones" instance=ExtResource("2_2fjbb")]
+[node name="Possibility1" type="Node3D" parent="LayoutPossibilities"]
+visible = false
+
+[node name="GoreBones" type="Node3D" parent="LayoutPossibilities/Possibility1"]
+
+[node name="gore_bones_01" parent="LayoutPossibilities/Possibility1/GoreBones" instance=ExtResource("2_2fjbb")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.199189, 0, 0.658332)
 metadata/PercentChance = 2
 
-[node name="gore_bones_02" parent="GoreBones" instance=ExtResource("3_up468")]
+[node name="gore_bones_02" parent="LayoutPossibilities/Possibility1/GoreBones" instance=ExtResource("3_up468")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.621998, 0, -0.786219)
 metadata/PercentChance = 2
 
-[node name="gore_bones_03" parent="GoreBones" instance=ExtResource("4_fycf7")]
+[node name="gore_bones_03" parent="LayoutPossibilities/Possibility1/GoreBones" instance=ExtResource("4_fycf7")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.611261, 0, -0.650256)
 metadata/PercentChance = 2
 
-[node name="BloodstainsFloor" type="Node3D" parent="."]
+[node name="BloodstainsFloor" type="Node3D" parent="LayoutPossibilities/Possibility1"]
 script = ExtResource("5_uptrg")
 max_scale_variance = 0.008
 
-[node name="Blood1" type="Sprite3D" parent="BloodstainsFloor"]
+[node name="Blood1" type="Sprite3D" parent="LayoutPossibilities/Possibility1/BloodstainsFloor"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.001, 0.380925)
 modulate = Color(0.552941, 0.239216, 0, 0.976471)
 shaded = true
@@ -167,7 +177,7 @@ texture_filter = 0
 texture = ExtResource("6_u2gft")
 metadata/PercentChance = 1
 
-[node name="Blood7" type="Sprite3D" parent="BloodstainsFloor"]
+[node name="Blood7" type="Sprite3D" parent="LayoutPossibilities/Possibility1/BloodstainsFloor"]
 transform = Transform3D(-0.00823791, 0.999966, 4.37099e-08, 0, -4.37114e-08, 1, 0.999966, 0.00823791, 3.6009e-10, 0.636068, 0.001, -0.667964)
 modulate = Color(0.552941, 0.239216, 0, 0.976471)
 shaded = true
@@ -175,7 +185,7 @@ texture_filter = 0
 texture = ExtResource("6_u2gft")
 metadata/PercentChance = 1
 
-[node name="Blood2" type="Sprite3D" parent="BloodstainsFloor"]
+[node name="Blood2" type="Sprite3D" parent="LayoutPossibilities/Possibility1/BloodstainsFloor"]
 transform = Transform3D(0.172651, -0.984983, -4.3055e-08, 0, -4.37114e-08, 1, -0.984983, -0.172651, -7.54682e-09, 0.113781, 0.001, -0.619075)
 modulate = Color(0.552941, 0.239216, 0, 0.976471)
 shaded = true
@@ -183,7 +193,7 @@ texture_filter = 0
 texture = ExtResource("7_5spkc")
 metadata/PercentChance = 1
 
-[node name="Blood3" type="Sprite3D" parent="BloodstainsFloor"]
+[node name="Blood3" type="Sprite3D" parent="LayoutPossibilities/Possibility1/BloodstainsFloor"]
 transform = Transform3D(0.172651, -0.984983, -4.3055e-08, 0, -4.37114e-08, 1, -0.984983, -0.172651, -7.54682e-09, 0.325846, 0.001, -0.0345826)
 modulate = Color(0.552941, 0.239216, 0, 0.976471)
 shaded = true
@@ -191,7 +201,7 @@ texture_filter = 0
 texture = ExtResource("8_3tkfr")
 metadata/PercentChance = 1
 
-[node name="Blood8" type="Sprite3D" parent="BloodstainsFloor"]
+[node name="Blood8" type="Sprite3D" parent="LayoutPossibilities/Possibility1/BloodstainsFloor"]
 transform = Transform3D(0.627515, 0.778605, 3.40339e-08, 0, -4.37114e-08, 1, 0.778605, -0.627515, -2.74295e-08, 0.723217, 0.001, 0.660263)
 modulate = Color(0.552941, 0.239216, 0, 0.976471)
 shaded = true
@@ -199,7 +209,7 @@ texture_filter = 0
 texture = ExtResource("8_3tkfr")
 metadata/PercentChance = 1
 
-[node name="Blood4" type="Sprite3D" parent="BloodstainsFloor"]
+[node name="Blood4" type="Sprite3D" parent="LayoutPossibilities/Possibility1/BloodstainsFloor"]
 transform = Transform3D(0.172651, -0.984983, -4.3055e-08, 0, -4.37114e-08, 1, -0.984983, -0.172651, -7.54682e-09, -0.591454, 0.001, -0.401947)
 modulate = Color(0.552941, 0.239216, 0, 0.976471)
 shaded = true
@@ -207,7 +217,7 @@ texture_filter = 0
 texture = ExtResource("9_vtbk2")
 metadata/PercentChance = 1
 
-[node name="Blood5" type="Sprite3D" parent="BloodstainsFloor"]
+[node name="Blood5" type="Sprite3D" parent="LayoutPossibilities/Possibility1/BloodstainsFloor"]
 transform = Transform3D(0.172651, -0.984983, -4.3055e-08, 0, -4.37114e-08, 1, -0.984983, -0.172651, -7.54682e-09, -0.437974, 0.001, 0.0356559)
 modulate = Color(0.552941, 0.239216, 0, 0.976471)
 shaded = true
@@ -215,7 +225,7 @@ texture_filter = 0
 texture = ExtResource("10_gabsu")
 metadata/PercentChance = 1
 
-[node name="Blood9" type="Sprite3D" parent="BloodstainsFloor"]
+[node name="Blood9" type="Sprite3D" parent="LayoutPossibilities/Possibility1/BloodstainsFloor"]
 transform = Transform3D(-0.906772, -0.421622, -1.84297e-08, 0, -4.37114e-08, 1, -0.421622, 0.906772, 3.96363e-08, -0.733196, 0.001, -0.814324)
 modulate = Color(0.552941, 0.239216, 0, 0.976471)
 shaded = true
@@ -223,7 +233,7 @@ texture_filter = 0
 texture = ExtResource("10_gabsu")
 metadata/PercentChance = 1
 
-[node name="Blood6" type="Sprite3D" parent="BloodstainsFloor"]
+[node name="Blood6" type="Sprite3D" parent="LayoutPossibilities/Possibility1/BloodstainsFloor"]
 transform = Transform3D(0.172651, -0.984983, -4.3055e-08, 0, -4.37114e-08, 1, -0.984983, -0.172651, -7.54682e-09, -0.768026, 0.001, 0.638992)
 modulate = Color(0.552941, 0.239216, 0, 0.976471)
 shaded = true
@@ -231,11 +241,11 @@ texture_filter = 0
 texture = ExtResource("10_gabsu")
 metadata/PercentChance = 1
 
-[node name="PuddleMeshes" type="Node3D" parent="."]
+[node name="PuddleMeshes" type="Node3D" parent="LayoutPossibilities/Possibility1"]
 script = ExtResource("5_uptrg")
 max_scale_variance = 0.006
 
-[node name="Puddle1" type="Sprite3D" parent="PuddleMeshes"]
+[node name="Puddle1" type="Sprite3D" parent="LayoutPossibilities/Possibility1/PuddleMeshes"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.002, 0)
 modulate = Color(0.611765, 0.74902, 0.764706, 0.729412)
 pixel_size = 0.011
@@ -244,7 +254,7 @@ texture_filter = 0
 texture = ExtResource("11_0oyhr")
 metadata/PercentChance = 7
 
-[node name="Puddle4" type="Sprite3D" parent="PuddleMeshes"]
+[node name="Puddle4" type="Sprite3D" parent="LayoutPossibilities/Possibility1/PuddleMeshes"]
 transform = Transform3D(-0.359622, -0.933098, 4.0787e-08, 0, -4.37114e-08, -1, 0.933098, -0.359622, 1.57196e-08, -0.622369, 0.002, 0.554034)
 modulate = Color(0.611765, 0.74902, 0.764706, 0.729412)
 pixel_size = 0.011
@@ -253,7 +263,7 @@ texture_filter = 0
 texture = ExtResource("11_0oyhr")
 metadata/PercentChance = 7
 
-[node name="Puddle5" type="Sprite3D" parent="PuddleMeshes"]
+[node name="Puddle5" type="Sprite3D" parent="LayoutPossibilities/Possibility1/PuddleMeshes"]
 transform = Transform3D(-0.757986, 0.65227, -2.85116e-08, 0, -4.37114e-08, -1, -0.65227, -0.757986, 3.31326e-08, 0.545428, 0.002, -0.692162)
 modulate = Color(0.611765, 0.74902, 0.764706, 0.729412)
 pixel_size = 0.011
@@ -262,7 +272,7 @@ texture_filter = 0
 texture = ExtResource("11_0oyhr")
 metadata/PercentChance = 7
 
-[node name="Puddle2" type="Sprite3D" parent="PuddleMeshes"]
+[node name="Puddle2" type="Sprite3D" parent="LayoutPossibilities/Possibility1/PuddleMeshes"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0.511638, 0.002, 0.484454)
 modulate = Color(0.611765, 0.74902, 0.764706, 0.729412)
 pixel_size = 0.011
@@ -271,7 +281,7 @@ texture_filter = 0
 texture = ExtResource("12_qnpfv")
 metadata/PercentChance = 7
 
-[node name="Puddle3" type="Sprite3D" parent="PuddleMeshes"]
+[node name="Puddle3" type="Sprite3D" parent="LayoutPossibilities/Possibility1/PuddleMeshes"]
 transform = Transform3D(0.10281, -0.994701, 4.34798e-08, 0, -4.37114e-08, -1, 0.994701, 0.10281, -4.49396e-09, -0.597362, 0.002, -0.671301)
 modulate = Color(0.611765, 0.74902, 0.764706, 0.729412)
 pixel_size = 0.011
@@ -280,12 +290,12 @@ texture_filter = 0
 texture = ExtResource("12_qnpfv")
 metadata/PercentChance = 7
 
-[node name="Grasses" type="Node3D" parent="."]
+[node name="Grasses" type="Node3D" parent="LayoutPossibilities/Possibility1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0207782, 0)
 script = ExtResource("5_uptrg")
 max_scale_variance = 0.004
 
-[node name="Grass1" type="Sprite3D" parent="Grasses"]
+[node name="Grass1" type="Sprite3D" parent="LayoutPossibilities/Possibility1/Grasses"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.139731, 0)
 modulate = Color(0.776471, 0.776471, 0.776471, 1)
 billboard = 2
@@ -294,7 +304,7 @@ texture_filter = 0
 texture = ExtResource("13_rpdjx")
 metadata/PercentChance = 35
 
-[node name="Grass7" type="Sprite3D" parent="Grasses"]
+[node name="Grass7" type="Sprite3D" parent="LayoutPossibilities/Possibility1/Grasses"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.139731, -0.652093)
 modulate = Color(0.776471, 0.776471, 0.776471, 1)
 billboard = 2
@@ -303,7 +313,7 @@ texture_filter = 0
 texture = ExtResource("13_rpdjx")
 metadata/PercentChance = 35
 
-[node name="Grass8" type="Sprite3D" parent="Grasses"]
+[node name="Grass8" type="Sprite3D" parent="LayoutPossibilities/Possibility1/Grasses"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.68901, 0.139731, -0.683273)
 modulate = Color(0.776471, 0.776471, 0.776471, 1)
 billboard = 2
@@ -312,7 +322,7 @@ texture_filter = 0
 texture = ExtResource("13_rpdjx")
 metadata/PercentChance = 35
 
-[node name="Grass9" type="Sprite3D" parent="Grasses"]
+[node name="Grass9" type="Sprite3D" parent="LayoutPossibilities/Possibility1/Grasses"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.376066, 0.139731, 0.462041)
 modulate = Color(0.776471, 0.776471, 0.776471, 1)
 billboard = 2
@@ -321,7 +331,7 @@ texture_filter = 0
 texture = ExtResource("13_rpdjx")
 metadata/PercentChance = 35
 
-[node name="Grass2" type="Sprite3D" parent="Grasses"]
+[node name="Grass2" type="Sprite3D" parent="LayoutPossibilities/Possibility1/Grasses"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.454148, 0.100265, -0.641256)
 modulate = Color(0.776471, 0.776471, 0.776471, 1)
 billboard = 2
@@ -330,7 +340,7 @@ texture_filter = 0
 texture = ExtResource("14_n0k36")
 metadata/PercentChance = 35
 
-[node name="Grass11" type="Sprite3D" parent="Grasses"]
+[node name="Grass11" type="Sprite3D" parent="LayoutPossibilities/Possibility1/Grasses"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.805601, 0.100265, -0.818983)
 modulate = Color(0.776471, 0.776471, 0.776471, 1)
 billboard = 2
@@ -339,7 +349,7 @@ texture_filter = 0
 texture = ExtResource("14_n0k36")
 metadata/PercentChance = 35
 
-[node name="Grass12" type="Sprite3D" parent="Grasses"]
+[node name="Grass12" type="Sprite3D" parent="LayoutPossibilities/Possibility1/Grasses"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.805601, 0.100265, 0.709751)
 modulate = Color(0.776471, 0.776471, 0.776471, 1)
 billboard = 2
@@ -348,7 +358,7 @@ texture_filter = 0
 texture = ExtResource("14_n0k36")
 metadata/PercentChance = 35
 
-[node name="Grass3" type="Sprite3D" parent="Grasses"]
+[node name="Grass3" type="Sprite3D" parent="LayoutPossibilities/Possibility1/Grasses"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.534514, 0.0809912, -0.365896)
 modulate = Color(0.776471, 0.776471, 0.776471, 1)
 billboard = 2
@@ -357,7 +367,7 @@ texture_filter = 0
 texture = ExtResource("15_8bapg")
 metadata/PercentChance = 35
 
-[node name="Grass10" type="Sprite3D" parent="Grasses"]
+[node name="Grass10" type="Sprite3D" parent="LayoutPossibilities/Possibility1/Grasses"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.534514, 0.0809912, 0.193232)
 modulate = Color(0.776471, 0.776471, 0.776471, 1)
 billboard = 2
@@ -366,7 +376,7 @@ texture_filter = 0
 texture = ExtResource("15_8bapg")
 metadata/PercentChance = 35
 
-[node name="Grass4" type="Sprite3D" parent="Grasses"]
+[node name="Grass4" type="Sprite3D" parent="LayoutPossibilities/Possibility1/Grasses"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.666156, 0.0939874, 0.598967)
 modulate = Color(0.776471, 0.776471, 0.776471, 1)
 billboard = 2
@@ -375,7 +385,7 @@ texture_filter = 0
 texture = ExtResource("16_am2vw")
 metadata/PercentChance = 35
 
-[node name="Grass5" type="Sprite3D" parent="Grasses"]
+[node name="Grass5" type="Sprite3D" parent="LayoutPossibilities/Possibility1/Grasses"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.43293, 0.0939874, 0.598967)
 modulate = Color(0.776471, 0.776471, 0.776471, 1)
 billboard = 2
@@ -384,7 +394,7 @@ texture_filter = 0
 texture = ExtResource("16_am2vw")
 metadata/PercentChance = 35
 
-[node name="Grass6" type="Sprite3D" parent="Grasses"]
+[node name="Grass6" type="Sprite3D" parent="LayoutPossibilities/Possibility1/Grasses"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.609098, 0.0939874, 0.109918)
 modulate = Color(0.776471, 0.776471, 0.776471, 1)
 billboard = 2
@@ -393,143 +403,1070 @@ texture_filter = 0
 texture = ExtResource("16_am2vw")
 metadata/PercentChance = 35
 
-[node name="Decorations" type="Node3D" parent="."]
+[node name="Decorations" type="Node3D" parent="LayoutPossibilities/Possibility1"]
 
-[node name="Dust3" type="Decal" parent="Decorations"]
+[node name="Dust3" type="Decal" parent="LayoutPossibilities/Possibility1/Decorations"]
 transform = Transform3D(1, 0, 0, 0, -0.998695, 0.0510635, 0, -0.0510635, -0.998695, -0.09577, 0.0771152, 0.0267564)
 size = Vector3(1.5, 0.5, 1.5)
 texture_albedo = ExtResource("17_umix3")
 metadata/PercentChance = 30
 
-[node name="Dust4" type="Decal" parent="Decorations"]
+[node name="Dust4" type="Decal" parent="LayoutPossibilities/Possibility1/Decorations"]
 transform = Transform3D(0.497458, 0.114084, -0.859953, -0.0795197, 0.993138, 0.0857534, 0.863835, 0.0257245, 0.503117, 0.0208586, 1.96129, 0.0267564)
 size = Vector3(1.5, 0.5, 1.5)
 texture_albedo = ExtResource("17_umix3")
 metadata/PercentChance = 30
 
-[node name="Crack3" type="Decal" parent="Decorations"]
+[node name="Crack3" type="Decal" parent="LayoutPossibilities/Possibility1/Decorations"]
 transform = Transform3D(-0.845717, 0.0431531, -0.531883, 0.0517288, 0.99866, -0.00122713, 0.531117, -0.0285515, -0.846817, 0.173907, 0.161309, -0.236636)
 size = Vector3(1.5, 1, 1.5)
 texture_albedo = ExtResource("18_obm12")
 metadata/PercentChance = 30
 
-[node name="Crack4" type="Decal" parent="Decorations"]
+[node name="Crack4" type="Decal" parent="LayoutPossibilities/Possibility1/Decorations"]
 transform = Transform3D(-0.959309, 0.050032, 0.277888, 0.0517288, 0.99866, -0.00122713, -0.277577, 0.0131976, -0.960613, -0.442112, 0.161309, -0.120418)
 size = Vector3(1.5, 1, 1.5)
 texture_albedo = ExtResource("19_tdby1")
 metadata/PercentChance = 30
 
-[node name="vines_ceiling_small_01" parent="Decorations" instance=ExtResource("20_bkjfj")]
+[node name="vines_ceiling_small_01" parent="LayoutPossibilities/Possibility1/Decorations" instance=ExtResource("20_bkjfj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.419115, 1.99705, 0.0768701)
 metadata/PercentChance = 35
 
-[node name="vines_ceiling_small_02" parent="Decorations" instance=ExtResource("21_8sk02")]
+[node name="vines_ceiling_small_02" parent="LayoutPossibilities/Possibility1/Decorations" instance=ExtResource("21_8sk02")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.258392, 1.99634, 0.490551)
 metadata/PercentChance = 35
 
-[node name="vines_ceiling_small_03" parent="Decorations" instance=ExtResource("22_4uto8")]
+[node name="vines_ceiling_small_03" parent="LayoutPossibilities/Possibility1/Decorations" instance=ExtResource("22_4uto8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.143733, 1.9991, -0.495721)
 metadata/PercentChance = 35
 
-[node name="vines_ceiling_small_04" parent="Decorations" instance=ExtResource("23_wfxi1")]
+[node name="vines_ceiling_small_04" parent="LayoutPossibilities/Possibility1/Decorations" instance=ExtResource("23_wfxi1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.509229, 1.99988, -0.105263)
 metadata/PercentChance = 35
 
-[node name="vines_ceiling_01" parent="Decorations" instance=ExtResource("24_fv232")]
+[node name="vines_ceiling_01" parent="LayoutPossibilities/Possibility1/Decorations" instance=ExtResource("24_fv232")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.99527, 0)
 metadata/PercentChance = 35
 
-[node name="vines_ceiling_02" parent="Decorations" instance=ExtResource("25_4nlwp")]
+[node name="vines_ceiling_02" parent="LayoutPossibilities/Possibility1/Decorations" instance=ExtResource("25_4nlwp")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.543834, 2.00835, 0.547652)
 metadata/PercentChance = 35
 
-[node name="vines_ceiling_03" parent="Decorations" instance=ExtResource("26_t3w4l")]
+[node name="vines_ceiling_03" parent="LayoutPossibilities/Possibility1/Decorations" instance=ExtResource("26_t3w4l")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.515726, 1.99783, -0.594729)
 metadata/PercentChance = 35
 
-[node name="vines_ceiling_04" parent="Decorations" instance=ExtResource("27_bxk8q")]
+[node name="vines_ceiling_04" parent="LayoutPossibilities/Possibility1/Decorations" instance=ExtResource("27_bxk8q")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.734751, 2.0004, -0.771214)
 metadata/PercentChance = 35
 
-[node name="pebble_13" parent="Decorations" instance=ExtResource("28_o3vw7")]
+[node name="pebble_13" parent="LayoutPossibilities/Possibility1/Decorations" instance=ExtResource("28_o3vw7")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.81453, 0.0627781, 0)
 metadata/PercentChance = 25
 
-[node name="pebble_03" parent="Decorations" instance=ExtResource("29_aln73")]
+[node name="pebble_03" parent="LayoutPossibilities/Possibility1/Decorations" instance=ExtResource("29_aln73")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.147001, 0.0613936, 0.587546)
 metadata/PercentChance = 25
 
-[node name="pebble_04" parent="Decorations" instance=ExtResource("30_8ff3w")]
+[node name="pebble_04" parent="LayoutPossibilities/Possibility1/Decorations" instance=ExtResource("30_8ff3w")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.221904, 0.0619487, -0.293082)
 metadata/PercentChance = 25
 
-[node name="pebble_15" parent="Decorations" instance=ExtResource("30_8ff3w")]
+[node name="pebble_15" parent="LayoutPossibilities/Possibility1/Decorations" instance=ExtResource("30_8ff3w")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.460702, 0.0534884, 0.793849)
 metadata/PercentChance = 25
 
-[node name="pebble_16" parent="Decorations" instance=ExtResource("30_8ff3w")]
+[node name="pebble_16" parent="LayoutPossibilities/Possibility1/Decorations" instance=ExtResource("30_8ff3w")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0908012, 0.0534884, -0.659419)
 metadata/PercentChance = 25
 
-[node name="pebble_05" parent="Decorations" instance=ExtResource("31_0ld30")]
+[node name="pebble_05" parent="LayoutPossibilities/Possibility1/Decorations" instance=ExtResource("31_0ld30")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.658198, 0.0615354, 0.552685)
 metadata/PercentChance = 25
 
-[node name="pebble_14" parent="Decorations" instance=ExtResource("31_0ld30")]
+[node name="pebble_14" parent="LayoutPossibilities/Possibility1/Decorations" instance=ExtResource("31_0ld30")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.439788, 0.0615354, -0.0201191)
 metadata/PercentChance = 25
 
-[node name="pebble_10" parent="Decorations" instance=ExtResource("31_0ld30")]
+[node name="pebble_10" parent="LayoutPossibilities/Possibility1/Decorations" instance=ExtResource("31_0ld30")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.201318, 0.0615354, -0.63683)
 metadata/PercentChance = 25
 
-[node name="pebble_06" parent="Decorations" instance=ExtResource("32_xsvjq")]
+[node name="pebble_06" parent="LayoutPossibilities/Possibility1/Decorations" instance=ExtResource("32_xsvjq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.546268, 0.0690186, -0.557367)
 metadata/PercentChance = 25
 
-[node name="pebble_11" parent="Decorations" instance=ExtResource("32_xsvjq")]
+[node name="pebble_11" parent="LayoutPossibilities/Possibility1/Decorations" instance=ExtResource("32_xsvjq")]
 transform = Transform3D(0.999581, 0, 0.0289335, 0, 1, 0, -0.0289335, 0, 0.999581, 0.0186862, 0.0690186, 0.203469)
 metadata/PercentChance = 25
 
-[node name="pebble_07" parent="Decorations" instance=ExtResource("33_gj58f")]
+[node name="pebble_07" parent="LayoutPossibilities/Possibility1/Decorations" instance=ExtResource("33_gj58f")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.57575, 0.06173, -0.782179)
 metadata/PercentChance = 25
 
-[node name="pebble_08" parent="Decorations" instance=ExtResource("34_qb8o4")]
+[node name="pebble_08" parent="LayoutPossibilities/Possibility1/Decorations" instance=ExtResource("34_qb8o4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.490368, 0.0643048, 0)
 metadata/PercentChance = 25
 
-[node name="pebble_12" parent="Decorations" instance=ExtResource("34_qb8o4")]
+[node name="pebble_12" parent="LayoutPossibilities/Possibility1/Decorations" instance=ExtResource("34_qb8o4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.797396, 0.0643048, -0.417211)
 metadata/PercentChance = 25
 
-[node name="pebble_09" parent="Decorations" instance=ExtResource("34_qb8o4")]
+[node name="pebble_09" parent="LayoutPossibilities/Possibility1/Decorations" instance=ExtResource("34_qb8o4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.68008, 0.0643048, 0.456475)
 metadata/PercentChance = 25
 
-[node name="mush_01" parent="Decorations" instance=ExtResource("35_y55kg")]
+[node name="mush_01" parent="LayoutPossibilities/Possibility1/Decorations" instance=ExtResource("35_y55kg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.41374, 0, -0.30519)
 metadata/PercentChance = 5
 
-[node name="mush_05" parent="Decorations" instance=ExtResource("35_y55kg")]
+[node name="mush_05" parent="LayoutPossibilities/Possibility1/Decorations" instance=ExtResource("35_y55kg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.531632, 0, -0.652042)
 metadata/PercentChance = 5
 
-[node name="mush_04" parent="Decorations" instance=ExtResource("35_y55kg")]
+[node name="mush_04" parent="LayoutPossibilities/Possibility1/Decorations" instance=ExtResource("35_y55kg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.155822, 0, 0.784636)
 metadata/PercentChance = 4
 
-[node name="mush_cluster_01" parent="Decorations" instance=ExtResource("36_6wvbt")]
+[node name="mush_cluster_01" parent="LayoutPossibilities/Possibility1/Decorations" instance=ExtResource("36_6wvbt")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.578498, 0, 0.496303)
 metadata/PercentChance = 3
 
-[node name="mush_02" parent="Decorations" instance=ExtResource("37_tjh16")]
+[node name="mush_02" parent="LayoutPossibilities/Possibility1/Decorations" instance=ExtResource("37_tjh16")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.798615, 0, 0.76652)
 metadata/PercentChance = 5
 
-[node name="mush_03" parent="Decorations" instance=ExtResource("37_tjh16")]
+[node name="mush_03" parent="LayoutPossibilities/Possibility1/Decorations" instance=ExtResource("37_tjh16")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00185561, 0, -0.175314)
 metadata/PercentChance = 5
+
+[node name="random_bones" type="Node3D" parent="LayoutPossibilities/Possibility1" node_paths=PackedStringArray("dependencies")]
+transform = Transform3D(1, 1.06581e-14, -4.65882e-22, 0, -4.37114e-08, -1, -1.06581e-14, 1, -4.37114e-08, 0, 1, -1)
+script = ExtResource("55_3q1h3")
+dependencies = [NodePath("../../../ConnectionPoints/Wall1")]
+
+[node name="Sprite3D" type="Sprite3D" parent="LayoutPossibilities/Possibility1/random_bones"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.326507, 0.332932, 0.74668)
+modulate = Color(0.580392, 0.580392, 0.580392, 1)
+billboard = 2
+shaded = true
+texture_filter = 0
+texture = ExtResource("46_vwtar")
+metadata/PercentChance = 5
+
+[node name="bones_group" type="Node3D" parent="LayoutPossibilities/Possibility1/random_bones"]
+metadata/PercentChance = 1
+
+[node name="Sprite3D" type="Sprite3D" parent="LayoutPossibilities/Possibility1/random_bones/bones_group"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.417797, 0.332932, 0.74668)
+modulate = Color(0.580392, 0.580392, 0.580392, 1)
+billboard = 2
+shaded = true
+texture_filter = 0
+texture = ExtResource("46_vwtar")
+
+[node name="Sprite3D2" type="Sprite3D" parent="LayoutPossibilities/Possibility1/random_bones/bones_group"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.351353, 0.383696, 0.74668)
+modulate = Color(0.580392, 0.580392, 0.580392, 1)
+billboard = 2
+shaded = true
+texture_filter = 0
+texture = ExtResource("47_0xg80")
+
+[node name="Sprite3D3" type="Sprite3D" parent="LayoutPossibilities/Possibility1/random_bones/bones_group"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.559713, 0.211039, 0.74668)
+modulate = Color(0.580392, 0.580392, 0.580392, 1)
+billboard = 2
+shaded = true
+texture_filter = 0
+texture = ExtResource("48_j1a27")
+
+[node name="Sprite3D4" type="Sprite3D" parent="LayoutPossibilities/Possibility1/random_bones/bones_group"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.680856, 0.275734, 0.817355)
+modulate = Color(0.580392, 0.580392, 0.580392, 1)
+billboard = 2
+shaded = true
+texture_filter = 0
+texture = ExtResource("49_p4mx7")
+
+[node name="wall_1_stuff" type="Node3D" parent="LayoutPossibilities/Possibility1" node_paths=PackedStringArray("dependencies")]
+script = ExtResource("55_3q1h3")
+dependencies = [NodePath("../../../ConnectionPoints/Wall1")]
+
+[node name="candle_01" parent="LayoutPossibilities/Possibility1/wall_1_stuff" instance=ExtResource("44_avye2")]
+transform = Transform3D(1, 1.51461e-27, 1.06581e-14, 0, 1, 0, -1.06581e-14, 0, 1, 0.204532, 0, -0.874406)
+metadata/PercentChance = 10
+
+[node name="wall_2_stuff" type="Node3D" parent="LayoutPossibilities/Possibility1" node_paths=PackedStringArray("dependencies")]
+script = ExtResource("55_3q1h3")
+dependencies = [NodePath("../../../ConnectionPoints/Wall2")]
+
+[node name="random_bones" type="Node3D" parent="LayoutPossibilities/Possibility1/wall_2_stuff"]
+transform = Transform3D(-4.37114e-08, 1, -4.37114e-08, 0, -4.37114e-08, -1, -1, -4.37114e-08, 1.91069e-15, -1, 1, 0)
+
+[node name="Sprite3D" type="Sprite3D" parent="LayoutPossibilities/Possibility1/wall_2_stuff/random_bones"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.326507, 0.332932, 0.74668)
+modulate = Color(0.580392, 0.580392, 0.580392, 1)
+billboard = 2
+shaded = true
+texture_filter = 0
+texture = ExtResource("46_vwtar")
+metadata/PercentChance = 5
+
+[node name="Sprite3D2" type="Sprite3D" parent="LayoutPossibilities/Possibility1/wall_2_stuff/random_bones"]
+transform = Transform3D(1, 0, 0, 0, 1, -8.35189e-23, 0, -8.35188e-23, 1, -0.030074, 0.553527, 0.74668)
+modulate = Color(0.580392, 0.580392, 0.580392, 1)
+billboard = 2
+shaded = true
+texture_filter = 0
+texture = ExtResource("47_0xg80")
+metadata/PercentChance = 5
+
+[node name="Sprite3D3" type="Sprite3D" parent="LayoutPossibilities/Possibility1/wall_2_stuff/random_bones"]
+transform = Transform3D(1, 0, 0, 0, 1, -8.35189e-23, 0, -8.35188e-23, 1, -0.661928, 0.201953, 0.74668)
+modulate = Color(0.580392, 0.580392, 0.580392, 1)
+billboard = 2
+shaded = true
+texture_filter = 0
+texture = ExtResource("47_0xg80")
+metadata/PercentChance = 5
+
+[node name="Sprite3D4" type="Sprite3D" parent="LayoutPossibilities/Possibility1/wall_2_stuff/random_bones"]
+transform = Transform3D(1, 0, 0, 0, 1, -8.35189e-23, 0, -8.35188e-23, 1, -0.650192, 0.328822, 0.839105)
+modulate = Color(0.580392, 0.580392, 0.580392, 1)
+billboard = 2
+shaded = true
+texture_filter = 0
+texture = ExtResource("49_p4mx7")
+metadata/PercentChance = 2
+
+[node name="Sprite3D5" type="Sprite3D" parent="LayoutPossibilities/Possibility1/wall_2_stuff/random_bones"]
+transform = Transform3D(1, 0, 0, 0, 1, -8.35189e-23, 0, -8.35188e-23, 1, -0.0268965, 0.20559, 0.74668)
+modulate = Color(0.580392, 0.580392, 0.580392, 1)
+billboard = 2
+shaded = true
+texture_filter = 0
+texture = ExtResource("48_j1a27")
+metadata/PercentChance = 5
+
+[node name="bones_group" type="Node3D" parent="LayoutPossibilities/Possibility1/wall_2_stuff/random_bones"]
+metadata/PercentChance = 1
+
+[node name="Sprite3D" type="Sprite3D" parent="LayoutPossibilities/Possibility1/wall_2_stuff/random_bones/bones_group"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.417797, 0.332932, 0.74668)
+modulate = Color(0.580392, 0.580392, 0.580392, 1)
+billboard = 2
+shaded = true
+texture_filter = 0
+texture = ExtResource("46_vwtar")
+
+[node name="Sprite3D2" type="Sprite3D" parent="LayoutPossibilities/Possibility1/wall_2_stuff/random_bones/bones_group"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.351353, 0.383696, 0.74668)
+modulate = Color(0.580392, 0.580392, 0.580392, 1)
+billboard = 2
+shaded = true
+texture_filter = 0
+texture = ExtResource("47_0xg80")
+
+[node name="Sprite3D3" type="Sprite3D" parent="LayoutPossibilities/Possibility1/wall_2_stuff/random_bones/bones_group"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.559713, 0.211039, 0.74668)
+modulate = Color(0.580392, 0.580392, 0.580392, 1)
+billboard = 2
+shaded = true
+texture_filter = 0
+texture = ExtResource("48_j1a27")
+
+[node name="Sprite3D4" type="Sprite3D" parent="LayoutPossibilities/Possibility1/wall_2_stuff/random_bones/bones_group"]
+transform = Transform3D(1, 0, 0, 0, 1, -8.35189e-23, 0, -8.35188e-23, 1, 0.680856, 0.275734, 0.825204)
+modulate = Color(0.580392, 0.580392, 0.580392, 1)
+billboard = 2
+shaded = true
+texture_filter = 0
+texture = ExtResource("49_p4mx7")
+
+[node name="candle_01" parent="LayoutPossibilities/Possibility1/wall_2_stuff" instance=ExtResource("44_avye2")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, -3.59989e-21, -4.37114e-08, -0.874406, 0, -0.204532)
+metadata/PercentChance = 10
+
+[node name="wall_3_stuff" type="Node3D" parent="LayoutPossibilities/Possibility1" node_paths=PackedStringArray("dependencies")]
+script = ExtResource("55_3q1h3")
+dependencies = [NodePath("../../../ConnectionPoints/Wall3")]
+
+[node name="random_bones" type="Node3D" parent="LayoutPossibilities/Possibility1/wall_3_stuff"]
+transform = Transform3D(-1, -3.82137e-15, 8.74228e-08, -8.74228e-08, 4.37114e-08, -1, 0, -1, -4.37114e-08, 0, 1, 1)
+
+[node name="Sprite3D" type="Sprite3D" parent="LayoutPossibilities/Possibility1/wall_3_stuff/random_bones"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.326507, 0.332932, 0.74668)
+modulate = Color(0.580392, 0.580392, 0.580392, 1)
+billboard = 2
+shaded = true
+texture_filter = 0
+texture = ExtResource("46_vwtar")
+metadata/PercentChance = 5
+
+[node name="Sprite3D2" type="Sprite3D" parent="LayoutPossibilities/Possibility1/wall_3_stuff/random_bones"]
+transform = Transform3D(1, 0, 0, 0, 1, -8.35189e-23, 0, -8.35188e-23, 1, -0.030074, 0.553527, 0.74668)
+modulate = Color(0.580392, 0.580392, 0.580392, 1)
+billboard = 2
+shaded = true
+texture_filter = 0
+texture = ExtResource("47_0xg80")
+metadata/PercentChance = 5
+
+[node name="Sprite3D3" type="Sprite3D" parent="LayoutPossibilities/Possibility1/wall_3_stuff/random_bones"]
+transform = Transform3D(1, 0, 0, 0, 1, -8.35189e-23, 0, -8.35188e-23, 1, -0.661928, 0.201953, 0.74668)
+modulate = Color(0.580392, 0.580392, 0.580392, 1)
+billboard = 2
+shaded = true
+texture_filter = 0
+texture = ExtResource("47_0xg80")
+metadata/PercentChance = 5
+
+[node name="Sprite3D4" type="Sprite3D" parent="LayoutPossibilities/Possibility1/wall_3_stuff/random_bones"]
+transform = Transform3D(1, 0, 1.11075e-28, 0, 1, 0, 0, 0, 1, -0.650191, 0.328822, 0.801744)
+modulate = Color(0.580392, 0.580392, 0.580392, 1)
+billboard = 2
+shaded = true
+texture_filter = 0
+texture = ExtResource("49_p4mx7")
+metadata/PercentChance = 2
+
+[node name="Sprite3D5" type="Sprite3D" parent="LayoutPossibilities/Possibility1/wall_3_stuff/random_bones"]
+transform = Transform3D(1, 0, 0, 0, 1, -8.35189e-23, 0, -8.35188e-23, 1, -0.0268965, 0.20559, 0.74668)
+modulate = Color(0.580392, 0.580392, 0.580392, 1)
+billboard = 2
+shaded = true
+texture_filter = 0
+texture = ExtResource("48_j1a27")
+metadata/PercentChance = 5
+
+[node name="bones_group" type="Node3D" parent="LayoutPossibilities/Possibility1/wall_3_stuff/random_bones"]
+metadata/PercentChance = 1
+
+[node name="Sprite3D" type="Sprite3D" parent="LayoutPossibilities/Possibility1/wall_3_stuff/random_bones/bones_group"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.417797, 0.332932, 0.74668)
+modulate = Color(0.580392, 0.580392, 0.580392, 1)
+billboard = 2
+shaded = true
+texture_filter = 0
+texture = ExtResource("46_vwtar")
+
+[node name="Sprite3D2" type="Sprite3D" parent="LayoutPossibilities/Possibility1/wall_3_stuff/random_bones/bones_group"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.351353, 0.383696, 0.74668)
+modulate = Color(0.580392, 0.580392, 0.580392, 1)
+billboard = 2
+shaded = true
+texture_filter = 0
+texture = ExtResource("47_0xg80")
+
+[node name="Sprite3D3" type="Sprite3D" parent="LayoutPossibilities/Possibility1/wall_3_stuff/random_bones/bones_group"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.559713, 0.211039, 0.74668)
+modulate = Color(0.580392, 0.580392, 0.580392, 1)
+billboard = 2
+shaded = true
+texture_filter = 0
+texture = ExtResource("48_j1a27")
+
+[node name="Sprite3D4" type="Sprite3D" parent="LayoutPossibilities/Possibility1/wall_3_stuff/random_bones/bones_group"]
+transform = Transform3D(1, 0, 1.11075e-28, 0, 1, 0, 0, 0, 1, 0.680856, 0.275734, 0.824342)
+modulate = Color(0.580392, 0.580392, 0.580392, 1)
+billboard = 2
+shaded = true
+texture_filter = 0
+texture = ExtResource("49_p4mx7")
+
+[node name="candle_01" parent="LayoutPossibilities/Possibility1/wall_3_stuff" instance=ExtResource("44_avye2")]
+transform = Transform3D(-1, -8.74228e-08, -7.64274e-15, -8.74228e-08, 1, 8.74228e-08, 0, 8.74228e-08, -1, -0.0372443, 0, 0.800609)
+metadata/PercentChance = 10
+
+[node name="wall_4_stuff" type="Node3D" parent="LayoutPossibilities/Possibility1" node_paths=PackedStringArray("dependencies")]
+script = ExtResource("55_3q1h3")
+dependencies = [NodePath("../../../ConnectionPoints/Wall4")]
+
+[node name="random_bones" type="Node3D" parent="LayoutPossibilities/Possibility1/wall_4_stuff"]
+transform = Transform3D(-5.96046e-08, -1, 0, -4.37114e-08, 2.6054e-15, -1, 1, -5.96046e-08, -4.37114e-08, 1, 1, 0)
+
+[node name="Sprite3D" type="Sprite3D" parent="LayoutPossibilities/Possibility1/wall_4_stuff/random_bones"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.326507, 0.332932, 0.74668)
+modulate = Color(0.580392, 0.580392, 0.580392, 1)
+billboard = 2
+shaded = true
+texture_filter = 0
+texture = ExtResource("46_vwtar")
+metadata/PercentChance = 5
+
+[node name="Sprite3D2" type="Sprite3D" parent="LayoutPossibilities/Possibility1/wall_4_stuff/random_bones"]
+transform = Transform3D(1, 0, 0, 0, 1, -8.35189e-23, 0, -8.35188e-23, 1, -0.030074, 0.553527, 0.74668)
+modulate = Color(0.580392, 0.580392, 0.580392, 1)
+billboard = 2
+shaded = true
+texture_filter = 0
+texture = ExtResource("47_0xg80")
+metadata/PercentChance = 5
+
+[node name="Sprite3D3" type="Sprite3D" parent="LayoutPossibilities/Possibility1/wall_4_stuff/random_bones"]
+transform = Transform3D(1, 0, 0, 0, 1, -8.35189e-23, 0, -8.35188e-23, 1, -0.661928, 0.201953, 0.74668)
+modulate = Color(0.580392, 0.580392, 0.580392, 1)
+billboard = 2
+shaded = true
+texture_filter = 0
+texture = ExtResource("47_0xg80")
+metadata/PercentChance = 5
+
+[node name="Sprite3D4" type="Sprite3D" parent="LayoutPossibilities/Possibility1/wall_4_stuff/random_bones"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.650191, 0.328822, 0.851424)
+modulate = Color(0.580392, 0.580392, 0.580392, 1)
+billboard = 2
+shaded = true
+texture_filter = 0
+texture = ExtResource("49_p4mx7")
+metadata/PercentChance = 2
+
+[node name="Sprite3D5" type="Sprite3D" parent="LayoutPossibilities/Possibility1/wall_4_stuff/random_bones"]
+transform = Transform3D(1, 0, 0, 0, 1, -8.35189e-23, 0, -8.35188e-23, 1, -0.0268965, 0.20559, 0.74668)
+modulate = Color(0.580392, 0.580392, 0.580392, 1)
+billboard = 2
+shaded = true
+texture_filter = 0
+texture = ExtResource("48_j1a27")
+metadata/PercentChance = 5
+
+[node name="bones_group" type="Node3D" parent="LayoutPossibilities/Possibility1/wall_4_stuff/random_bones"]
+metadata/PercentChance = 1
+
+[node name="Sprite3D" type="Sprite3D" parent="LayoutPossibilities/Possibility1/wall_4_stuff/random_bones/bones_group"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.417797, 0.332932, 0.74668)
+modulate = Color(0.580392, 0.580392, 0.580392, 1)
+billboard = 2
+shaded = true
+texture_filter = 0
+texture = ExtResource("46_vwtar")
+
+[node name="Sprite3D2" type="Sprite3D" parent="LayoutPossibilities/Possibility1/wall_4_stuff/random_bones/bones_group"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.351353, 0.383696, 0.74668)
+modulate = Color(0.580392, 0.580392, 0.580392, 1)
+billboard = 2
+shaded = true
+texture_filter = 0
+texture = ExtResource("47_0xg80")
+
+[node name="Sprite3D3" type="Sprite3D" parent="LayoutPossibilities/Possibility1/wall_4_stuff/random_bones/bones_group"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.559713, 0.211039, 0.74668)
+modulate = Color(0.580392, 0.580392, 0.580392, 1)
+billboard = 2
+shaded = true
+texture_filter = 0
+texture = ExtResource("48_j1a27")
+
+[node name="Sprite3D4" type="Sprite3D" parent="LayoutPossibilities/Possibility1/wall_4_stuff/random_bones/bones_group"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.680856, 0.275734, 0.821731)
+modulate = Color(0.580392, 0.580392, 0.580392, 1)
+billboard = 2
+shaded = true
+texture_filter = 0
+texture = ExtResource("49_p4mx7")
+
+[node name="candle_01" parent="LayoutPossibilities/Possibility1/wall_4_stuff" instance=ExtResource("44_avye2")]
+transform = Transform3D(-5.96046e-08, 4.37114e-08, -1, -4.37114e-08, 1, 4.37114e-08, 1, 4.37114e-08, -5.96046e-08, 0.837961, 0, -0.0710607)
+metadata/PercentChance = 10
+
+[node name="Possibility2" type="Node3D" parent="LayoutPossibilities"]
+visible = false
+
+[node name="GoreBones" type="Node3D" parent="LayoutPossibilities/Possibility2"]
+
+[node name="gore_bones_01" parent="LayoutPossibilities/Possibility2/GoreBones" instance=ExtResource("2_2fjbb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.199189, 0, 0.658332)
+metadata/PercentChance = 2
+
+[node name="gore_bones_02" parent="LayoutPossibilities/Possibility2/GoreBones" instance=ExtResource("3_up468")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.189259, 0, -0.786219)
+metadata/PercentChance = 2
+
+[node name="gore_bones_03" parent="LayoutPossibilities/Possibility2/GoreBones" instance=ExtResource("4_fycf7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.224604, 0, -0.0266784)
+metadata/PercentChance = 2
+
+[node name="BloodstainsFloor" type="Node3D" parent="LayoutPossibilities/Possibility2"]
+script = ExtResource("5_uptrg")
+max_scale_variance = 0.008
+
+[node name="Blood1" type="Sprite3D" parent="LayoutPossibilities/Possibility2/BloodstainsFloor"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.001, 0.380925)
+modulate = Color(0.552941, 0.239216, 0, 0.976471)
+shaded = true
+texture_filter = 0
+texture = ExtResource("6_u2gft")
+metadata/PercentChance = 1
+
+[node name="Blood7" type="Sprite3D" parent="LayoutPossibilities/Possibility2/BloodstainsFloor"]
+transform = Transform3D(-0.00823791, 0.999966, 4.37099e-08, 0, -4.37114e-08, 1, 0.999966, 0.00823791, 3.6009e-10, 0.636068, 0.001, -0.667964)
+modulate = Color(0.552941, 0.239216, 0, 0.976471)
+shaded = true
+texture_filter = 0
+texture = ExtResource("6_u2gft")
+metadata/PercentChance = 1
+
+[node name="Blood2" type="Sprite3D" parent="LayoutPossibilities/Possibility2/BloodstainsFloor"]
+transform = Transform3D(0.172651, -0.984983, -4.3055e-08, 0, -4.37114e-08, 1, -0.984983, -0.172651, -7.54682e-09, 0.113781, 0.001, -0.619075)
+modulate = Color(0.552941, 0.239216, 0, 0.976471)
+shaded = true
+texture_filter = 0
+texture = ExtResource("7_5spkc")
+metadata/PercentChance = 1
+
+[node name="Blood3" type="Sprite3D" parent="LayoutPossibilities/Possibility2/BloodstainsFloor"]
+transform = Transform3D(0.172651, -0.984983, -4.3055e-08, 0, -4.37114e-08, 1, -0.984983, -0.172651, -7.54682e-09, 0.325846, 0.001, -0.0345826)
+modulate = Color(0.552941, 0.239216, 0, 0.976471)
+shaded = true
+texture_filter = 0
+texture = ExtResource("8_3tkfr")
+metadata/PercentChance = 1
+
+[node name="Blood8" type="Sprite3D" parent="LayoutPossibilities/Possibility2/BloodstainsFloor"]
+transform = Transform3D(0.627515, 0.778605, 3.40339e-08, 0, -4.37114e-08, 1, 0.778605, -0.627515, -2.74295e-08, 0.723217, 0.001, 0.660263)
+modulate = Color(0.552941, 0.239216, 0, 0.976471)
+shaded = true
+texture_filter = 0
+texture = ExtResource("8_3tkfr")
+metadata/PercentChance = 1
+
+[node name="Blood4" type="Sprite3D" parent="LayoutPossibilities/Possibility2/BloodstainsFloor"]
+transform = Transform3D(0.172651, -0.984983, -4.3055e-08, 0, -4.37114e-08, 1, -0.984983, -0.172651, -7.54682e-09, -0.591454, 0.001, -0.401947)
+modulate = Color(0.552941, 0.239216, 0, 0.976471)
+shaded = true
+texture_filter = 0
+texture = ExtResource("9_vtbk2")
+metadata/PercentChance = 1
+
+[node name="Blood5" type="Sprite3D" parent="LayoutPossibilities/Possibility2/BloodstainsFloor"]
+transform = Transform3D(0.172651, -0.984983, -4.3055e-08, 0, -4.37114e-08, 1, -0.984983, -0.172651, -7.54682e-09, -0.437974, 0.001, 0.0356559)
+modulate = Color(0.552941, 0.239216, 0, 0.976471)
+shaded = true
+texture_filter = 0
+texture = ExtResource("10_gabsu")
+metadata/PercentChance = 1
+
+[node name="Blood9" type="Sprite3D" parent="LayoutPossibilities/Possibility2/BloodstainsFloor"]
+transform = Transform3D(-0.906772, -0.421622, -1.84297e-08, 0, -4.37114e-08, 1, -0.421622, 0.906772, 3.96363e-08, -0.733196, 0.001, -0.814324)
+modulate = Color(0.552941, 0.239216, 0, 0.976471)
+shaded = true
+texture_filter = 0
+texture = ExtResource("10_gabsu")
+metadata/PercentChance = 1
+
+[node name="Blood6" type="Sprite3D" parent="LayoutPossibilities/Possibility2/BloodstainsFloor"]
+transform = Transform3D(0.172651, -0.984983, -4.3055e-08, 0, -4.37114e-08, 1, -0.984983, -0.172651, -7.54682e-09, -0.768026, 0.001, 0.638992)
+modulate = Color(0.552941, 0.239216, 0, 0.976471)
+shaded = true
+texture_filter = 0
+texture = ExtResource("10_gabsu")
+metadata/PercentChance = 1
+
+[node name="PuddleMeshes" type="Node3D" parent="LayoutPossibilities/Possibility2"]
+script = ExtResource("5_uptrg")
+max_scale_variance = 0.006
+
+[node name="Puddle1" type="Sprite3D" parent="LayoutPossibilities/Possibility2/PuddleMeshes"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.002, 0)
+modulate = Color(0.611765, 0.74902, 0.764706, 0.729412)
+pixel_size = 0.011
+shaded = true
+texture_filter = 0
+texture = ExtResource("11_0oyhr")
+metadata/PercentChance = 7
+
+[node name="Puddle4" type="Sprite3D" parent="LayoutPossibilities/Possibility2/PuddleMeshes"]
+transform = Transform3D(-0.359622, -0.933098, 4.0787e-08, 0, -4.37114e-08, -1, 0.933098, -0.359622, 1.57196e-08, -0.622369, 0.002, 0.554034)
+modulate = Color(0.611765, 0.74902, 0.764706, 0.729412)
+pixel_size = 0.011
+shaded = true
+texture_filter = 0
+texture = ExtResource("11_0oyhr")
+metadata/PercentChance = 7
+
+[node name="Puddle5" type="Sprite3D" parent="LayoutPossibilities/Possibility2/PuddleMeshes"]
+transform = Transform3D(-0.757986, 0.65227, -2.85116e-08, 0, -4.37114e-08, -1, -0.65227, -0.757986, 3.31326e-08, 0.545428, 0.002, -0.692162)
+modulate = Color(0.611765, 0.74902, 0.764706, 0.729412)
+pixel_size = 0.011
+shaded = true
+texture_filter = 0
+texture = ExtResource("11_0oyhr")
+metadata/PercentChance = 7
+
+[node name="Puddle2" type="Sprite3D" parent="LayoutPossibilities/Possibility2/PuddleMeshes"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0.511638, 0.002, 0.484454)
+modulate = Color(0.611765, 0.74902, 0.764706, 0.729412)
+pixel_size = 0.011
+shaded = true
+texture_filter = 0
+texture = ExtResource("12_qnpfv")
+metadata/PercentChance = 7
+
+[node name="Puddle3" type="Sprite3D" parent="LayoutPossibilities/Possibility2/PuddleMeshes"]
+transform = Transform3D(0.10281, -0.994701, 4.34798e-08, 0, -4.37114e-08, -1, 0.994701, 0.10281, -4.49396e-09, -0.597362, 0.002, -0.671301)
+modulate = Color(0.611765, 0.74902, 0.764706, 0.729412)
+pixel_size = 0.011
+shaded = true
+texture_filter = 0
+texture = ExtResource("12_qnpfv")
+metadata/PercentChance = 7
+
+[node name="Grasses" type="Node3D" parent="LayoutPossibilities/Possibility2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0207782, 0)
+script = ExtResource("5_uptrg")
+max_scale_variance = 0.004
+
+[node name="Grass1" type="Sprite3D" parent="LayoutPossibilities/Possibility2/Grasses"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.139731, 0)
+modulate = Color(0.776471, 0.776471, 0.776471, 1)
+billboard = 2
+shaded = true
+texture_filter = 0
+texture = ExtResource("13_rpdjx")
+metadata/PercentChance = 35
+
+[node name="Grass7" type="Sprite3D" parent="LayoutPossibilities/Possibility2/Grasses"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.139731, -0.652093)
+modulate = Color(0.776471, 0.776471, 0.776471, 1)
+billboard = 2
+shaded = true
+texture_filter = 0
+texture = ExtResource("13_rpdjx")
+metadata/PercentChance = 35
+
+[node name="Grass9" type="Sprite3D" parent="LayoutPossibilities/Possibility2/Grasses"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.376066, 0.139731, 0.462041)
+modulate = Color(0.776471, 0.776471, 0.776471, 1)
+billboard = 2
+shaded = true
+texture_filter = 0
+texture = ExtResource("13_rpdjx")
+metadata/PercentChance = 35
+
+[node name="Grass2" type="Sprite3D" parent="LayoutPossibilities/Possibility2/Grasses"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.252906, 0.100265, -0.512934)
+modulate = Color(0.776471, 0.776471, 0.776471, 1)
+billboard = 2
+shaded = true
+texture_filter = 0
+texture = ExtResource("14_n0k36")
+metadata/PercentChance = 35
+
+[node name="Grass3" type="Sprite3D" parent="LayoutPossibilities/Possibility2/Grasses"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.534514, 0.0809912, -0.365896)
+modulate = Color(0.776471, 0.776471, 0.776471, 1)
+billboard = 2
+shaded = true
+texture_filter = 0
+texture = ExtResource("15_8bapg")
+metadata/PercentChance = 35
+
+[node name="Grass10" type="Sprite3D" parent="LayoutPossibilities/Possibility2/Grasses"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.534514, 0.0809912, 0.193232)
+modulate = Color(0.776471, 0.776471, 0.776471, 1)
+billboard = 2
+shaded = true
+texture_filter = 0
+texture = ExtResource("15_8bapg")
+metadata/PercentChance = 35
+
+[node name="Grass6" type="Sprite3D" parent="LayoutPossibilities/Possibility2/Grasses"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.609098, 0.0939874, 0.109918)
+modulate = Color(0.776471, 0.776471, 0.776471, 1)
+billboard = 2
+shaded = true
+texture_filter = 0
+texture = ExtResource("16_am2vw")
+metadata/PercentChance = 35
+
+[node name="Decorations" type="Node3D" parent="LayoutPossibilities/Possibility2"]
+
+[node name="Dust3" type="Decal" parent="LayoutPossibilities/Possibility2/Decorations"]
+transform = Transform3D(1, 0, 0, 0, -0.998695, 0.0510635, 0, -0.0510635, -0.998695, -0.09577, 0.0771152, 0.0267564)
+size = Vector3(1.5, 0.5, 1.5)
+texture_albedo = ExtResource("17_umix3")
+metadata/PercentChance = 30
+
+[node name="Dust4" type="Decal" parent="LayoutPossibilities/Possibility2/Decorations"]
+transform = Transform3D(0.497458, 0.114084, -0.859953, -0.0795197, 0.993138, 0.0857534, 0.863835, 0.0257245, 0.503117, 0.0208586, 1.96129, 0.0267564)
+size = Vector3(1.5, 0.5, 1.5)
+texture_albedo = ExtResource("17_umix3")
+metadata/PercentChance = 30
+
+[node name="Crack3" type="Decal" parent="LayoutPossibilities/Possibility2/Decorations"]
+transform = Transform3D(-0.845717, 0.0431531, -0.531883, 0.0517288, 0.99866, -0.00122713, 0.531117, -0.0285515, -0.846817, 0.173907, 0.161309, -0.236636)
+size = Vector3(1.5, 1, 1.5)
+texture_albedo = ExtResource("18_obm12")
+metadata/PercentChance = 30
+
+[node name="Crack4" type="Decal" parent="LayoutPossibilities/Possibility2/Decorations"]
+transform = Transform3D(-0.959309, 0.050032, 0.277888, 0.0517288, 0.99866, -0.00122713, -0.277577, 0.0131976, -0.960613, -0.442112, 0.161309, -0.120418)
+size = Vector3(1.5, 1, 1.5)
+texture_albedo = ExtResource("19_tdby1")
+metadata/PercentChance = 30
+
+[node name="vines_ceiling_small_01" parent="LayoutPossibilities/Possibility2/Decorations" instance=ExtResource("20_bkjfj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.419115, 1.99705, 0.0768701)
+metadata/PercentChance = 35
+
+[node name="vines_ceiling_small_02" parent="LayoutPossibilities/Possibility2/Decorations" instance=ExtResource("21_8sk02")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.258392, 1.99634, 0.490551)
+metadata/PercentChance = 35
+
+[node name="vines_ceiling_small_03" parent="LayoutPossibilities/Possibility2/Decorations" instance=ExtResource("22_4uto8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.143733, 1.9991, -0.495721)
+metadata/PercentChance = 35
+
+[node name="vines_ceiling_small_04" parent="LayoutPossibilities/Possibility2/Decorations" instance=ExtResource("23_wfxi1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.509229, 1.99988, -0.105263)
+metadata/PercentChance = 35
+
+[node name="vines_ceiling_01" parent="LayoutPossibilities/Possibility2/Decorations" instance=ExtResource("24_fv232")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.99527, 0)
+metadata/PercentChance = 35
+
+[node name="vines_ceiling_02" parent="LayoutPossibilities/Possibility2/Decorations" instance=ExtResource("25_4nlwp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.543834, 2.00835, 0.547652)
+metadata/PercentChance = 35
+
+[node name="vines_ceiling_03" parent="LayoutPossibilities/Possibility2/Decorations" instance=ExtResource("26_t3w4l")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.515726, 1.99783, -0.594729)
+metadata/PercentChance = 35
+
+[node name="vines_ceiling_04" parent="LayoutPossibilities/Possibility2/Decorations" instance=ExtResource("27_bxk8q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.734751, 2.0004, -0.771214)
+metadata/PercentChance = 35
+
+[node name="pebble_13" parent="LayoutPossibilities/Possibility2/Decorations" instance=ExtResource("28_o3vw7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.81453, 0.0627781, 0)
+metadata/PercentChance = 25
+
+[node name="pebble_03" parent="LayoutPossibilities/Possibility2/Decorations" instance=ExtResource("29_aln73")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.147001, 0.0613936, 0.587546)
+metadata/PercentChance = 25
+
+[node name="pebble_04" parent="LayoutPossibilities/Possibility2/Decorations" instance=ExtResource("30_8ff3w")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.221904, 0.0619487, -0.293082)
+metadata/PercentChance = 25
+
+[node name="pebble_15" parent="LayoutPossibilities/Possibility2/Decorations" instance=ExtResource("30_8ff3w")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.460702, 0.0534884, 0.793849)
+metadata/PercentChance = 25
+
+[node name="pebble_16" parent="LayoutPossibilities/Possibility2/Decorations" instance=ExtResource("30_8ff3w")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0908012, 0.0534884, -0.659419)
+metadata/PercentChance = 25
+
+[node name="pebble_05" parent="LayoutPossibilities/Possibility2/Decorations" instance=ExtResource("31_0ld30")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.552196, 0.0615354, 0.433434)
+metadata/PercentChance = 25
+
+[node name="pebble_14" parent="LayoutPossibilities/Possibility2/Decorations" instance=ExtResource("31_0ld30")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.439788, 0.0615354, -0.0201191)
+metadata/PercentChance = 25
+
+[node name="pebble_10" parent="LayoutPossibilities/Possibility2/Decorations" instance=ExtResource("31_0ld30")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.201318, 0.0615354, -0.63683)
+metadata/PercentChance = 25
+
+[node name="pebble_06" parent="LayoutPossibilities/Possibility2/Decorations" instance=ExtResource("32_xsvjq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.546268, 0.0690186, -0.187026)
+metadata/PercentChance = 25
+
+[node name="pebble_11" parent="LayoutPossibilities/Possibility2/Decorations" instance=ExtResource("32_xsvjq")]
+transform = Transform3D(0.999581, 0, 0.0289335, 0, 1, 0, -0.0289335, 0, 0.999581, 0.0186862, 0.0690186, 0.203469)
+metadata/PercentChance = 25
+
+[node name="pebble_07" parent="LayoutPossibilities/Possibility2/Decorations" instance=ExtResource("33_gj58f")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.57575, 0.06173, -0.4017)
+metadata/PercentChance = 25
+
+[node name="pebble_08" parent="LayoutPossibilities/Possibility2/Decorations" instance=ExtResource("34_qb8o4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.490368, 0.0643048, 0)
+metadata/PercentChance = 25
+
+[node name="pebble_12" parent="LayoutPossibilities/Possibility2/Decorations" instance=ExtResource("34_qb8o4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.797396, 0.0643048, -0.246463)
+metadata/PercentChance = 25
+
+[node name="mush_01" parent="LayoutPossibilities/Possibility2/Decorations" instance=ExtResource("35_y55kg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.41374, 0, -0.30519)
+metadata/PercentChance = 5
+
+[node name="mush_05" parent="LayoutPossibilities/Possibility2/Decorations" instance=ExtResource("35_y55kg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.392318, 0, -0.496669)
+metadata/PercentChance = 5
+
+[node name="mush_04" parent="LayoutPossibilities/Possibility2/Decorations" instance=ExtResource("35_y55kg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.155822, 0, 0.784636)
+metadata/PercentChance = 4
+
+[node name="mush_cluster_01" parent="LayoutPossibilities/Possibility2/Decorations" instance=ExtResource("36_6wvbt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.323668, 0, 0.0271367)
+metadata/PercentChance = 3
+
+[node name="mush_03" parent="LayoutPossibilities/Possibility2/Decorations" instance=ExtResource("37_tjh16")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00185561, 0, -0.175314)
+metadata/PercentChance = 5
+
+[node name="Wall1Stuff" type="Node3D" parent="LayoutPossibilities/Possibility2" node_paths=PackedStringArray("dependencies")]
+script = ExtResource("55_3q1h3")
+dependencies = [NodePath("../../../ConnectionPoints/Wall1")]
+
+[node name="candle_01" parent="LayoutPossibilities/Possibility2/Wall1Stuff" instance=ExtResource("44_avye2")]
+transform = Transform3D(1, 1.51461e-27, 1.06581e-14, 0, 1, 0, -1.06581e-14, 0, 1, 0.204532, 0, -0.874406)
+metadata/PercentChance = 10
+
+[node name="random_bones" type="Node3D" parent="LayoutPossibilities/Possibility2/Wall1Stuff"]
+transform = Transform3D(1, 1.06581e-14, -4.65882e-22, 0, -4.37114e-08, -1, -1.06581e-14, 1, -4.37114e-08, 0, 1, -1)
+script = ExtResource("55_3q1h3")
+
+[node name="Sprite3D" type="Sprite3D" parent="LayoutPossibilities/Possibility2/Wall1Stuff/random_bones"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.154378, 0.332932, 0.74668)
+modulate = Color(0.580392, 0.580392, 0.580392, 1)
+billboard = 2
+shaded = true
+texture_filter = 0
+texture = ExtResource("46_vwtar")
+metadata/PercentChance = 5
+
+[node name="bones_group" type="Node3D" parent="LayoutPossibilities/Possibility2/Wall1Stuff/random_bones"]
+metadata/PercentChance = 1
+
+[node name="Sprite3D" type="Sprite3D" parent="LayoutPossibilities/Possibility2/Wall1Stuff/random_bones/bones_group"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0261845, 0.525088, 0.74668)
+modulate = Color(0.580392, 0.580392, 0.580392, 1)
+billboard = 2
+shaded = true
+texture_filter = 0
+texture = ExtResource("46_vwtar")
+
+[node name="Sprite3D2" type="Sprite3D" parent="LayoutPossibilities/Possibility2/Wall1Stuff/random_bones/bones_group"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0236737, 0.383696, 0.74668)
+modulate = Color(0.580392, 0.580392, 0.580392, 1)
+billboard = 2
+shaded = true
+texture_filter = 0
+texture = ExtResource("47_0xg80")
+
+[node name="Wal2Stuff" type="Node3D" parent="LayoutPossibilities/Possibility2" node_paths=PackedStringArray("dependencies")]
+script = ExtResource("55_3q1h3")
+dependencies = [NodePath("../../../ConnectionPoints/Wall2")]
+
+[node name="random_bones" type="Node3D" parent="LayoutPossibilities/Possibility2/Wal2Stuff"]
+transform = Transform3D(-4.37114e-08, 1, -4.37114e-08, 0, -4.37114e-08, -1, -1, -4.37114e-08, 1.91069e-15, -1, 1, 0)
+
+[node name="Sprite3D" type="Sprite3D" parent="LayoutPossibilities/Possibility2/Wal2Stuff/random_bones"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.326507, 0.332932, 0.74668)
+modulate = Color(0.580392, 0.580392, 0.580392, 1)
+billboard = 2
+shaded = true
+texture_filter = 0
+texture = ExtResource("46_vwtar")
+metadata/PercentChance = 5
+
+[node name="Sprite3D2" type="Sprite3D" parent="LayoutPossibilities/Possibility2/Wal2Stuff/random_bones"]
+transform = Transform3D(1, 0, 0, 0, 1, -8.35189e-23, 0, -8.35188e-23, 1, -0.030074, 0.553527, 0.74668)
+modulate = Color(0.580392, 0.580392, 0.580392, 1)
+billboard = 2
+shaded = true
+texture_filter = 0
+texture = ExtResource("47_0xg80")
+metadata/PercentChance = 5
+
+[node name="Sprite3D5" type="Sprite3D" parent="LayoutPossibilities/Possibility2/Wal2Stuff/random_bones"]
+transform = Transform3D(1, 0, 0, 0, 1, -8.35189e-23, 0, -8.35188e-23, 1, -0.0268965, 0.20559, 0.74668)
+modulate = Color(0.580392, 0.580392, 0.580392, 1)
+billboard = 2
+shaded = true
+texture_filter = 0
+texture = ExtResource("48_j1a27")
+metadata/PercentChance = 5
+
+[node name="bones_group" type="Node3D" parent="LayoutPossibilities/Possibility2/Wal2Stuff/random_bones"]
+metadata/PercentChance = 1
+
+[node name="Sprite3D" type="Sprite3D" parent="LayoutPossibilities/Possibility2/Wal2Stuff/random_bones/bones_group"]
+transform = Transform3D(1, 0, 0, 0, 1, -8.35189e-23, 0, -8.35188e-23, 1, 0.417797, 0.915064, 0.74668)
+modulate = Color(0.580392, 0.580392, 0.580392, 1)
+billboard = 2
+shaded = true
+texture_filter = 0
+texture = ExtResource("46_vwtar")
+
+[node name="Sprite3D4" type="Sprite3D" parent="LayoutPossibilities/Possibility2/Wal2Stuff/random_bones/bones_group"]
+transform = Transform3D(1, 0, 0, 0, 1, -8.35189e-23, 0, -8.35188e-23, 1, 0.680856, 1.09607, 0.825204)
+modulate = Color(0.580392, 0.580392, 0.580392, 1)
+billboard = 2
+shaded = true
+texture_filter = 0
+texture = ExtResource("49_p4mx7")
+
+[node name="candle_01" parent="LayoutPossibilities/Possibility2/Wal2Stuff" instance=ExtResource("44_avye2")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, -3.59989e-21, -4.37114e-08, -0.874406, 0, -0.204532)
+metadata/PercentChance = 10
+
+[node name="Wall3Stuff" type="Node3D" parent="LayoutPossibilities/Possibility2" node_paths=PackedStringArray("dependencies")]
+script = ExtResource("55_3q1h3")
+dependencies = [NodePath("../../../ConnectionPoints/Wall3")]
+
+[node name="random_bones" type="Node3D" parent="LayoutPossibilities/Possibility2/Wall3Stuff"]
+transform = Transform3D(-1, -3.82137e-15, 8.74228e-08, -8.74228e-08, 4.37114e-08, -1, 0, -1, -4.37114e-08, 0, 1, 1)
+
+[node name="Sprite3D" type="Sprite3D" parent="LayoutPossibilities/Possibility2/Wall3Stuff/random_bones"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.326507, 0.332932, 0.74668)
+modulate = Color(0.580392, 0.580392, 0.580392, 1)
+billboard = 2
+shaded = true
+texture_filter = 0
+texture = ExtResource("46_vwtar")
+metadata/PercentChance = 5
+
+[node name="Sprite3D2" type="Sprite3D" parent="LayoutPossibilities/Possibility2/Wall3Stuff/random_bones"]
+transform = Transform3D(1, 0, 0, 0, 1, -8.35189e-23, 0, -8.35188e-23, 1, -0.030074, 0.553527, 0.74668)
+modulate = Color(0.580392, 0.580392, 0.580392, 1)
+billboard = 2
+shaded = true
+texture_filter = 0
+texture = ExtResource("47_0xg80")
+metadata/PercentChance = 5
+
+[node name="Sprite3D4" type="Sprite3D" parent="LayoutPossibilities/Possibility2/Wall3Stuff/random_bones"]
+transform = Transform3D(1, 0, 1.11075e-28, 0, 1, 0, 0, 0, 1, -0.298576, 0.328822, 0.801744)
+modulate = Color(0.580392, 0.580392, 0.580392, 1)
+billboard = 2
+shaded = true
+texture_filter = 0
+texture = ExtResource("49_p4mx7")
+metadata/PercentChance = 2
+
+[node name="Sprite3D5" type="Sprite3D" parent="LayoutPossibilities/Possibility2/Wall3Stuff/random_bones"]
+transform = Transform3D(1, 0, 0, 0, 1, -8.35189e-23, 0, -8.35188e-23, 1, -0.0268965, 0.20559, 0.74668)
+modulate = Color(0.580392, 0.580392, 0.580392, 1)
+billboard = 2
+shaded = true
+texture_filter = 0
+texture = ExtResource("48_j1a27")
+metadata/PercentChance = 5
+
+[node name="bones_group" type="Node3D" parent="LayoutPossibilities/Possibility2/Wall3Stuff/random_bones"]
+metadata/PercentChance = 1
+
+[node name="Sprite3D" type="Sprite3D" parent="LayoutPossibilities/Possibility2/Wall3Stuff/random_bones/bones_group"]
+transform = Transform3D(1, 0, 1.11075e-28, 0, 1, 0, 0, 0, 1, 0.1379, 0.332932, 0.74668)
+modulate = Color(0.580392, 0.580392, 0.580392, 1)
+billboard = 2
+shaded = true
+texture_filter = 0
+texture = ExtResource("46_vwtar")
+
+[node name="Sprite3D2" type="Sprite3D" parent="LayoutPossibilities/Possibility2/Wall3Stuff/random_bones/bones_group"]
+transform = Transform3D(1, 0, 1.11075e-28, 0, 1, 0, 0, 0, 1, 0.141259, 0.383696, 0.74668)
+modulate = Color(0.580392, 0.580392, 0.580392, 1)
+billboard = 2
+shaded = true
+texture_filter = 0
+texture = ExtResource("47_0xg80")
+
+[node name="candle_01" parent="LayoutPossibilities/Possibility2/Wall3Stuff" instance=ExtResource("44_avye2")]
+transform = Transform3D(-1, -8.74228e-08, -7.64274e-15, -8.74228e-08, 1, 8.74228e-08, 0, 8.74228e-08, -1, -0.0372443, 0, 0.800609)
+metadata/PercentChance = 10
+
+[node name="Wall4Stuff" type="Node3D" parent="LayoutPossibilities/Possibility2" node_paths=PackedStringArray("dependencies")]
+script = ExtResource("55_3q1h3")
+dependencies = [NodePath("../../../ConnectionPoints/Wall4")]
+
+[node name="random_bones" type="Node3D" parent="LayoutPossibilities/Possibility2/Wall4Stuff"]
+transform = Transform3D(-5.96046e-08, -1, 0, -4.37114e-08, 2.6054e-15, -1, 1, -5.96046e-08, -4.37114e-08, 1, 1, 0)
+
+[node name="Sprite3D" type="Sprite3D" parent="LayoutPossibilities/Possibility2/Wall4Stuff/random_bones"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.223663, 0.332932, 0.74668)
+modulate = Color(0.580392, 0.580392, 0.580392, 1)
+billboard = 2
+shaded = true
+texture_filter = 0
+texture = ExtResource("46_vwtar")
+metadata/PercentChance = 5
+
+[node name="Sprite3D2" type="Sprite3D" parent="LayoutPossibilities/Possibility2/Wall4Stuff/random_bones"]
+transform = Transform3D(1, 0, 0, 0, 1, -8.35189e-23, 0, -8.35188e-23, 1, -0.030074, 0.553527, 0.74668)
+modulate = Color(0.580392, 0.580392, 0.580392, 1)
+billboard = 2
+shaded = true
+texture_filter = 0
+texture = ExtResource("47_0xg80")
+metadata/PercentChance = 5
+
+[node name="Sprite3D4" type="Sprite3D" parent="LayoutPossibilities/Possibility2/Wall4Stuff/random_bones"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.188938, 0.627996, 0.851424)
+modulate = Color(0.580392, 0.580392, 0.580392, 1)
+billboard = 2
+shaded = true
+texture_filter = 0
+texture = ExtResource("49_p4mx7")
+metadata/PercentChance = 2
+
+[node name="Sprite3D5" type="Sprite3D" parent="LayoutPossibilities/Possibility2/Wall4Stuff/random_bones"]
+transform = Transform3D(1, 0, 0, 0, 1, -8.35189e-23, 0, -8.35188e-23, 1, -0.0268965, 0.20559, 0.74668)
+modulate = Color(0.580392, 0.580392, 0.580392, 1)
+billboard = 2
+shaded = true
+texture_filter = 0
+texture = ExtResource("48_j1a27")
+metadata/PercentChance = 5
+
+[node name="bones_group" type="Node3D" parent="LayoutPossibilities/Possibility2/Wall4Stuff/random_bones"]
+metadata/PercentChance = 1
+
+[node name="Sprite3D" type="Sprite3D" parent="LayoutPossibilities/Possibility2/Wall4Stuff/random_bones/bones_group"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.314628, 0.332932, 0.74668)
+modulate = Color(0.580392, 0.580392, 0.580392, 1)
+billboard = 2
+shaded = true
+texture_filter = 0
+texture = ExtResource("46_vwtar")
+
+[node name="Sprite3D2" type="Sprite3D" parent="LayoutPossibilities/Possibility2/Wall4Stuff/random_bones/bones_group"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.228724, 0.383696, 0.74668)
+modulate = Color(0.580392, 0.580392, 0.580392, 1)
+billboard = 2
+shaded = true
+texture_filter = 0
+texture = ExtResource("47_0xg80")
+
+[node name="candle_01" parent="LayoutPossibilities/Possibility2/Wall4Stuff" instance=ExtResource("44_avye2")]
+transform = Transform3D(-5.96046e-08, 4.37114e-08, -1, -4.37114e-08, 1, 4.37114e-08, 1, 4.37114e-08, -5.96046e-08, 0.837961, 0, -0.0710607)
+metadata/PercentChance = 10
+
+[node name="Corner1Stuff" type="Node3D" parent="LayoutPossibilities/Possibility2" node_paths=PackedStringArray("dependencies")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.681284, 0, -0.672769)
+script = ExtResource("55_3q1h3")
+dependencies = [NodePath("../../../ConnectionPoints/Wall1"), NodePath("../../../ConnectionPoints/Wall2")]
+
+[node name="DestroyableBarrel" parent="LayoutPossibilities/Possibility2/Corner1Stuff" instance=ExtResource("44_wdpmt")]
+
+[node name="Corner2Stuff" type="Node3D" parent="LayoutPossibilities/Possibility2" node_paths=PackedStringArray("dependencies")]
+script = ExtResource("55_3q1h3")
+dependencies = [NodePath("../../../ConnectionPoints/Wall1"), NodePath("../../../ConnectionPoints/Wall4")]
+
+[node name="DestroyableBarrel" parent="LayoutPossibilities/Possibility2/Corner2Stuff" instance=ExtResource("44_wdpmt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.667433, 0, -0.7264)
+
+[node name="Corner3Stuff" type="Node3D" parent="LayoutPossibilities/Possibility2" node_paths=PackedStringArray("dependencies")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.74185, 0, 0.699544)
+script = ExtResource("55_3q1h3")
+dependencies = [NodePath("../../../ConnectionPoints/Wall4"), NodePath("../../../ConnectionPoints/Wall3")]
+
+[node name="DestroyableBarrel" parent="LayoutPossibilities/Possibility2/Corner3Stuff" instance=ExtResource("44_wdpmt")]
+
+[node name="Corner4Stuff" type="Node3D" parent="LayoutPossibilities/Possibility2" node_paths=PackedStringArray("dependencies")]
+script = ExtResource("55_3q1h3")
+dependencies = [NodePath("../../../ConnectionPoints/Wall2"), NodePath("../../../ConnectionPoints/Wall3")]
+
+[node name="DestroyableBarrel" parent="LayoutPossibilities/Possibility2/Corner4Stuff" instance=ExtResource("44_wdpmt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.658498, 0, 0.686781)
 
 [node name="Floor" type="MeshInstance3D" parent="."]
 mesh = SubResource("PlaneMesh_4jllp")
@@ -578,59 +1515,9 @@ metadata/PercentChance = 10
 [node name="NavigationObstacle3D" type="NavigationObstacle3D" parent="ConnectionPoints/Wall1"]
 radius = 0.1
 
-[node name="candle_01" parent="ConnectionPoints/Wall1" instance=ExtResource("44_avye2")]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0.204532, 0.125594, 1)
-metadata/PercentChance = 10
-
 [node name="wall_torch" parent="ConnectionPoints/Wall1" instance=ExtResource("45_q5llx")]
 transform = Transform3D(-1, -8.74228e-08, 0, -3.55271e-15, 4.37114e-08, -1, 8.74228e-08, -1, -4.37114e-08, -2.19325e-08, 0.061099, -0.101463)
 metadata/PercentChance = 13
-
-[node name="random_bones" type="Node3D" parent="ConnectionPoints/Wall1"]
-
-[node name="Sprite3D" type="Sprite3D" parent="ConnectionPoints/Wall1/random_bones"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.326507, 0.332932, 0.74668)
-modulate = Color(0.580392, 0.580392, 0.580392, 1)
-billboard = 2
-shaded = true
-texture_filter = 0
-texture = ExtResource("46_vwtar")
-metadata/PercentChance = 5
-
-[node name="bones_group" type="Node3D" parent="ConnectionPoints/Wall1/random_bones"]
-metadata/PercentChance = 1
-
-[node name="Sprite3D" type="Sprite3D" parent="ConnectionPoints/Wall1/random_bones/bones_group"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.417797, 0.332932, 0.74668)
-modulate = Color(0.580392, 0.580392, 0.580392, 1)
-billboard = 2
-shaded = true
-texture_filter = 0
-texture = ExtResource("46_vwtar")
-
-[node name="Sprite3D2" type="Sprite3D" parent="ConnectionPoints/Wall1/random_bones/bones_group"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.351353, 0.383696, 0.74668)
-modulate = Color(0.580392, 0.580392, 0.580392, 1)
-billboard = 2
-shaded = true
-texture_filter = 0
-texture = ExtResource("47_0xg80")
-
-[node name="Sprite3D3" type="Sprite3D" parent="ConnectionPoints/Wall1/random_bones/bones_group"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.559713, 0.211039, 0.74668)
-modulate = Color(0.580392, 0.580392, 0.580392, 1)
-billboard = 2
-shaded = true
-texture_filter = 0
-texture = ExtResource("48_j1a27")
-
-[node name="Sprite3D4" type="Sprite3D" parent="ConnectionPoints/Wall1/random_bones/bones_group"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.680856, 0.275734, 0.817355)
-modulate = Color(0.580392, 0.580392, 0.580392, 1)
-billboard = 2
-shaded = true
-texture_filter = 0
-texture = ExtResource("49_p4mx7")
 
 [node name="VinesNotDecals" type="Node3D" parent="ConnectionPoints/Wall1"]
 script = ExtResource("5_uptrg")
@@ -684,6 +1571,10 @@ texture_filter = 0
 texture = ExtResource("50_asi4m")
 metadata/PercentChance = 35
 
+[node name="welder_stone" parent="ConnectionPoints/Wall1" instance=ExtResource("56_7btgk")]
+transform = Transform3D(0.95, 1.06581e-14, 4.42586e-22, 0, -4.37114e-08, 0.95, 1.01252e-14, -1, -4.15258e-08, 1, 0, 1)
+metadata/PercentChance = 100
+
 [node name="Wall2" type="MeshInstance3D" parent="ConnectionPoints" groups=["WeldedWall"]]
 transform = Transform3D(-4.37114e-08, 1, -4.37114e-08, 0, -4.37114e-08, -1, -1, -4.37114e-08, 1.91069e-15, -1, 1, 0)
 mesh = SubResource("PlaneMesh_xedni")
@@ -712,95 +1603,9 @@ metadata/PercentChance = 10
 [node name="NavigationObstacle3D" type="NavigationObstacle3D" parent="ConnectionPoints/Wall2"]
 radius = 0.1
 
-[node name="candle_01" parent="ConnectionPoints/Wall2" instance=ExtResource("44_avye2")]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0.204532, 0.125594, 1)
-metadata/PercentChance = 10
-
 [node name="wall_torch" parent="ConnectionPoints/Wall2" instance=ExtResource("45_q5llx")]
 transform = Transform3D(-1, -8.74228e-08, 0, -3.55271e-15, 4.37114e-08, -1, 8.74228e-08, -1, -4.37114e-08, -1.9653e-08, 0.0565348, -0.101463)
 metadata/PercentChance = 13
-
-[node name="random_bones" type="Node3D" parent="ConnectionPoints/Wall2"]
-
-[node name="Sprite3D" type="Sprite3D" parent="ConnectionPoints/Wall2/random_bones"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.326507, 0.332932, 0.74668)
-modulate = Color(0.580392, 0.580392, 0.580392, 1)
-billboard = 2
-shaded = true
-texture_filter = 0
-texture = ExtResource("46_vwtar")
-metadata/PercentChance = 5
-
-[node name="Sprite3D2" type="Sprite3D" parent="ConnectionPoints/Wall2/random_bones"]
-transform = Transform3D(1, 0, 0, 0, 1, -8.35189e-23, 0, -8.35188e-23, 1, -0.030074, 0.553527, 0.74668)
-modulate = Color(0.580392, 0.580392, 0.580392, 1)
-billboard = 2
-shaded = true
-texture_filter = 0
-texture = ExtResource("47_0xg80")
-metadata/PercentChance = 5
-
-[node name="Sprite3D3" type="Sprite3D" parent="ConnectionPoints/Wall2/random_bones"]
-transform = Transform3D(1, 0, 0, 0, 1, -8.35189e-23, 0, -8.35188e-23, 1, -0.661928, 0.201953, 0.74668)
-modulate = Color(0.580392, 0.580392, 0.580392, 1)
-billboard = 2
-shaded = true
-texture_filter = 0
-texture = ExtResource("47_0xg80")
-metadata/PercentChance = 5
-
-[node name="Sprite3D4" type="Sprite3D" parent="ConnectionPoints/Wall2/random_bones"]
-transform = Transform3D(1, 0, 0, 0, 1, -8.35189e-23, 0, -8.35188e-23, 1, -0.650192, 0.328822, 0.839105)
-modulate = Color(0.580392, 0.580392, 0.580392, 1)
-billboard = 2
-shaded = true
-texture_filter = 0
-texture = ExtResource("49_p4mx7")
-metadata/PercentChance = 2
-
-[node name="Sprite3D5" type="Sprite3D" parent="ConnectionPoints/Wall2/random_bones"]
-transform = Transform3D(1, 0, 0, 0, 1, -8.35189e-23, 0, -8.35188e-23, 1, -0.0268965, 0.20559, 0.74668)
-modulate = Color(0.580392, 0.580392, 0.580392, 1)
-billboard = 2
-shaded = true
-texture_filter = 0
-texture = ExtResource("48_j1a27")
-metadata/PercentChance = 5
-
-[node name="bones_group" type="Node3D" parent="ConnectionPoints/Wall2/random_bones"]
-metadata/PercentChance = 1
-
-[node name="Sprite3D" type="Sprite3D" parent="ConnectionPoints/Wall2/random_bones/bones_group"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.417797, 0.332932, 0.74668)
-modulate = Color(0.580392, 0.580392, 0.580392, 1)
-billboard = 2
-shaded = true
-texture_filter = 0
-texture = ExtResource("46_vwtar")
-
-[node name="Sprite3D2" type="Sprite3D" parent="ConnectionPoints/Wall2/random_bones/bones_group"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.351353, 0.383696, 0.74668)
-modulate = Color(0.580392, 0.580392, 0.580392, 1)
-billboard = 2
-shaded = true
-texture_filter = 0
-texture = ExtResource("47_0xg80")
-
-[node name="Sprite3D3" type="Sprite3D" parent="ConnectionPoints/Wall2/random_bones/bones_group"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.559713, 0.211039, 0.74668)
-modulate = Color(0.580392, 0.580392, 0.580392, 1)
-billboard = 2
-shaded = true
-texture_filter = 0
-texture = ExtResource("48_j1a27")
-
-[node name="Sprite3D4" type="Sprite3D" parent="ConnectionPoints/Wall2/random_bones/bones_group"]
-transform = Transform3D(1, 0, 0, 0, 1, -8.35189e-23, 0, -8.35188e-23, 1, 0.680856, 0.275734, 0.825204)
-modulate = Color(0.580392, 0.580392, 0.580392, 1)
-billboard = 2
-shaded = true
-texture_filter = 0
-texture = ExtResource("49_p4mx7")
 
 [node name="VinesNotDecals" type="Node3D" parent="ConnectionPoints/Wall2"]
 script = ExtResource("5_uptrg")
@@ -854,6 +1659,10 @@ texture_filter = 0
 texture = ExtResource("50_asi4m")
 metadata/PercentChance = 35
 
+[node name="welder_stone2" parent="ConnectionPoints/Wall2" instance=ExtResource("56_7btgk")]
+transform = Transform3D(-4.15258e-08, 4.37114e-08, -0.95, 0.95, -4.37114e-08, -4.15258e-08, -4.15258e-08, -1, -4.15258e-08, 1, 5.96046e-08, 1)
+metadata/PercentChance = 100
+
 [node name="Wall3" type="MeshInstance3D" parent="ConnectionPoints" groups=["WeldedWall"]]
 transform = Transform3D(-1, -3.82137e-15, 8.74228e-08, -8.74228e-08, 4.37114e-08, -1, 0, -1, -4.37114e-08, 0, 1, 1)
 mesh = SubResource("PlaneMesh_8pg0l")
@@ -881,95 +1690,9 @@ metadata/PercentChance = 10
 [node name="NavigationObstacle3D" type="NavigationObstacle3D" parent="ConnectionPoints/Wall3"]
 radius = 0.1
 
-[node name="candle_01" parent="ConnectionPoints/Wall3" instance=ExtResource("44_avye2")]
-transform = Transform3D(1, -2.2215e-28, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0.0372444, 0.199391, 1)
-metadata/PercentChance = 10
-
 [node name="wall_torch" parent="ConnectionPoints/Wall3" instance=ExtResource("45_q5llx")]
 transform = Transform3D(-1, -8.74228e-08, -2.5411e-21, -3.82137e-15, 4.37114e-08, -1, 8.74228e-08, -1, -4.37114e-08, -8.87012e-09, 0.063945, -0.101462)
 metadata/PercentChance = 13
-
-[node name="random_bones" type="Node3D" parent="ConnectionPoints/Wall3"]
-
-[node name="Sprite3D" type="Sprite3D" parent="ConnectionPoints/Wall3/random_bones"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.326507, 0.332932, 0.74668)
-modulate = Color(0.580392, 0.580392, 0.580392, 1)
-billboard = 2
-shaded = true
-texture_filter = 0
-texture = ExtResource("46_vwtar")
-metadata/PercentChance = 5
-
-[node name="Sprite3D2" type="Sprite3D" parent="ConnectionPoints/Wall3/random_bones"]
-transform = Transform3D(1, 0, 0, 0, 1, -8.35189e-23, 0, -8.35188e-23, 1, -0.030074, 0.553527, 0.74668)
-modulate = Color(0.580392, 0.580392, 0.580392, 1)
-billboard = 2
-shaded = true
-texture_filter = 0
-texture = ExtResource("47_0xg80")
-metadata/PercentChance = 5
-
-[node name="Sprite3D3" type="Sprite3D" parent="ConnectionPoints/Wall3/random_bones"]
-transform = Transform3D(1, 0, 0, 0, 1, -8.35189e-23, 0, -8.35188e-23, 1, -0.661928, 0.201953, 0.74668)
-modulate = Color(0.580392, 0.580392, 0.580392, 1)
-billboard = 2
-shaded = true
-texture_filter = 0
-texture = ExtResource("47_0xg80")
-metadata/PercentChance = 5
-
-[node name="Sprite3D4" type="Sprite3D" parent="ConnectionPoints/Wall3/random_bones"]
-transform = Transform3D(1, 0, 1.11075e-28, 0, 1, 0, 0, 0, 1, -0.650191, 0.328822, 0.801744)
-modulate = Color(0.580392, 0.580392, 0.580392, 1)
-billboard = 2
-shaded = true
-texture_filter = 0
-texture = ExtResource("49_p4mx7")
-metadata/PercentChance = 2
-
-[node name="Sprite3D5" type="Sprite3D" parent="ConnectionPoints/Wall3/random_bones"]
-transform = Transform3D(1, 0, 0, 0, 1, -8.35189e-23, 0, -8.35188e-23, 1, -0.0268965, 0.20559, 0.74668)
-modulate = Color(0.580392, 0.580392, 0.580392, 1)
-billboard = 2
-shaded = true
-texture_filter = 0
-texture = ExtResource("48_j1a27")
-metadata/PercentChance = 5
-
-[node name="bones_group" type="Node3D" parent="ConnectionPoints/Wall3/random_bones"]
-metadata/PercentChance = 1
-
-[node name="Sprite3D" type="Sprite3D" parent="ConnectionPoints/Wall3/random_bones/bones_group"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.417797, 0.332932, 0.74668)
-modulate = Color(0.580392, 0.580392, 0.580392, 1)
-billboard = 2
-shaded = true
-texture_filter = 0
-texture = ExtResource("46_vwtar")
-
-[node name="Sprite3D2" type="Sprite3D" parent="ConnectionPoints/Wall3/random_bones/bones_group"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.351353, 0.383696, 0.74668)
-modulate = Color(0.580392, 0.580392, 0.580392, 1)
-billboard = 2
-shaded = true
-texture_filter = 0
-texture = ExtResource("47_0xg80")
-
-[node name="Sprite3D3" type="Sprite3D" parent="ConnectionPoints/Wall3/random_bones/bones_group"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.559713, 0.211039, 0.74668)
-modulate = Color(0.580392, 0.580392, 0.580392, 1)
-billboard = 2
-shaded = true
-texture_filter = 0
-texture = ExtResource("48_j1a27")
-
-[node name="Sprite3D4" type="Sprite3D" parent="ConnectionPoints/Wall3/random_bones/bones_group"]
-transform = Transform3D(1, 0, 1.11075e-28, 0, 1, 0, 0, 0, 1, 0.680856, 0.275734, 0.824342)
-modulate = Color(0.580392, 0.580392, 0.580392, 1)
-billboard = 2
-shaded = true
-texture_filter = 0
-texture = ExtResource("49_p4mx7")
 
 [node name="VinesNotDecals" type="Node3D" parent="ConnectionPoints/Wall3"]
 script = ExtResource("5_uptrg")
@@ -1023,6 +1746,10 @@ texture_filter = 0
 texture = ExtResource("50_asi4m")
 metadata/PercentChance = 35
 
+[node name="welder_stone3" parent="ConnectionPoints/Wall3" instance=ExtResource("56_7btgk")]
+transform = Transform3D(-0.95, -1.50996e-07, 6.27022e-15, 0, -4.37114e-08, -0.95, 1.43446e-07, -1, 4.15258e-08, 1, -1.78814e-07, 1)
+metadata/PercentChance = 100
+
 [node name="Wall4" type="MeshInstance3D" parent="ConnectionPoints" groups=["WeldedWall"]]
 transform = Transform3D(-5.96046e-08, -1, 0, -4.37114e-08, 2.6054e-15, -1, 1, -5.96046e-08, -4.37114e-08, 1, 1, 0)
 mesh = SubResource("PlaneMesh_rxjy6")
@@ -1050,95 +1777,9 @@ metadata/PercentChance = 10
 [node name="NavigationObstacle3D" type="NavigationObstacle3D" parent="ConnectionPoints/Wall4"]
 radius = 0.1
 
-[node name="candle_01" parent="ConnectionPoints/Wall4" instance=ExtResource("44_avye2")]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -0.0710606, 0.162039, 1)
-metadata/PercentChance = 10
-
 [node name="wall_torch" parent="ConnectionPoints/Wall4" instance=ExtResource("45_q5llx")]
 transform = Transform3D(-1, -8.74228e-08, 0, -3.55271e-15, 4.37114e-08, -1, 8.74228e-08, -1, -4.37114e-08, -1.82418e-08, 0.0610284, -0.101462)
 metadata/PercentChance = 13
-
-[node name="random_bones" type="Node3D" parent="ConnectionPoints/Wall4"]
-
-[node name="Sprite3D" type="Sprite3D" parent="ConnectionPoints/Wall4/random_bones"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.326507, 0.332932, 0.74668)
-modulate = Color(0.580392, 0.580392, 0.580392, 1)
-billboard = 2
-shaded = true
-texture_filter = 0
-texture = ExtResource("46_vwtar")
-metadata/PercentChance = 5
-
-[node name="Sprite3D2" type="Sprite3D" parent="ConnectionPoints/Wall4/random_bones"]
-transform = Transform3D(1, 0, 0, 0, 1, -8.35189e-23, 0, -8.35188e-23, 1, -0.030074, 0.553527, 0.74668)
-modulate = Color(0.580392, 0.580392, 0.580392, 1)
-billboard = 2
-shaded = true
-texture_filter = 0
-texture = ExtResource("47_0xg80")
-metadata/PercentChance = 5
-
-[node name="Sprite3D3" type="Sprite3D" parent="ConnectionPoints/Wall4/random_bones"]
-transform = Transform3D(1, 0, 0, 0, 1, -8.35189e-23, 0, -8.35188e-23, 1, -0.661928, 0.201953, 0.74668)
-modulate = Color(0.580392, 0.580392, 0.580392, 1)
-billboard = 2
-shaded = true
-texture_filter = 0
-texture = ExtResource("47_0xg80")
-metadata/PercentChance = 5
-
-[node name="Sprite3D4" type="Sprite3D" parent="ConnectionPoints/Wall4/random_bones"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.650191, 0.328822, 0.851424)
-modulate = Color(0.580392, 0.580392, 0.580392, 1)
-billboard = 2
-shaded = true
-texture_filter = 0
-texture = ExtResource("49_p4mx7")
-metadata/PercentChance = 2
-
-[node name="Sprite3D5" type="Sprite3D" parent="ConnectionPoints/Wall4/random_bones"]
-transform = Transform3D(1, 0, 0, 0, 1, -8.35189e-23, 0, -8.35188e-23, 1, -0.0268965, 0.20559, 0.74668)
-modulate = Color(0.580392, 0.580392, 0.580392, 1)
-billboard = 2
-shaded = true
-texture_filter = 0
-texture = ExtResource("48_j1a27")
-metadata/PercentChance = 5
-
-[node name="bones_group" type="Node3D" parent="ConnectionPoints/Wall4/random_bones"]
-metadata/PercentChance = 1
-
-[node name="Sprite3D" type="Sprite3D" parent="ConnectionPoints/Wall4/random_bones/bones_group"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.417797, 0.332932, 0.74668)
-modulate = Color(0.580392, 0.580392, 0.580392, 1)
-billboard = 2
-shaded = true
-texture_filter = 0
-texture = ExtResource("46_vwtar")
-
-[node name="Sprite3D2" type="Sprite3D" parent="ConnectionPoints/Wall4/random_bones/bones_group"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.351353, 0.383696, 0.74668)
-modulate = Color(0.580392, 0.580392, 0.580392, 1)
-billboard = 2
-shaded = true
-texture_filter = 0
-texture = ExtResource("47_0xg80")
-
-[node name="Sprite3D3" type="Sprite3D" parent="ConnectionPoints/Wall4/random_bones/bones_group"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.559713, 0.211039, 0.74668)
-modulate = Color(0.580392, 0.580392, 0.580392, 1)
-billboard = 2
-shaded = true
-texture_filter = 0
-texture = ExtResource("48_j1a27")
-
-[node name="Sprite3D4" type="Sprite3D" parent="ConnectionPoints/Wall4/random_bones/bones_group"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.680856, 0.275734, 0.821731)
-modulate = Color(0.580392, 0.580392, 0.580392, 1)
-billboard = 2
-shaded = true
-texture_filter = 0
-texture = ExtResource("49_p4mx7")
 
 [node name="VinesNotDecals" type="Node3D" parent="ConnectionPoints/Wall4"]
 script = ExtResource("5_uptrg")
@@ -1191,6 +1832,10 @@ shaded = true
 texture_filter = 0
 texture = ExtResource("50_asi4m")
 metadata/PercentChance = 35
+
+[node name="welder_stone4" parent="ConnectionPoints/Wall4" instance=ExtResource("56_7btgk")]
+transform = Transform3D(-5.66244e-08, -4.37114e-08, 0.95, -0.95, -4.37114e-08, -5.66244e-08, 4.15258e-08, -1, -4.15258e-08, 1, 0, 1)
+metadata/PercentChance = 100
 
 [node name="Bounds" type="Area3D" parent="."]
 collision_layer = 2
