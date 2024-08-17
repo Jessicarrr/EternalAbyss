@@ -12,7 +12,7 @@ var subtitles_sound : BoolSetting = BoolSetting.new(
 var color_blind_mode : MultiChoiceSetting = MultiChoiceSetting.new(
 		"Color blind mode",
 		"Various shaders to colour the screen in order to compensate for common types of colour blindness.",
-		[ "Type A", "Type B", "Type C", "Type D" ]
+		[ "None", "Type A", "Type B", "Type C", "Type D" ]
 )
 
 # Color blindness

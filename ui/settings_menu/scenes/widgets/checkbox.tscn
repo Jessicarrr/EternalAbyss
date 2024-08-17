@@ -37,7 +37,7 @@ size_flags_horizontal = 2
 size_flags_stretch_ratio = 3.36
 theme = ExtResource("1_bn3qx")
 theme_override_constants/line_spacing = 5
-theme_override_font_sizes/font_size = 22
+theme_override_font_sizes/font_size = 26
 text = "Film Grain - General"
 
 [node name="CheckBox" type="CheckBox" parent="."]

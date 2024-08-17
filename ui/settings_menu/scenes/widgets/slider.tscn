@@ -28,7 +28,7 @@ size_flags_horizontal = 2
 size_flags_stretch_ratio = 3.81
 theme = ExtResource("1_m1g8y")
 theme_override_constants/line_spacing = 5
-theme_override_font_sizes/font_size = 22
+theme_override_font_sizes/font_size = 26
 text = "Film Grain - General Intensity"
 
 [node name="PercentageLabel" type="Label" parent="."]
@@ -36,7 +36,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.72
 theme = ExtResource("1_m1g8y")
-theme_override_font_sizes/font_size = 22
+theme_override_font_sizes/font_size = 26
 text = "0%"
 
 [node name="HSlider" type="HSlider" parent="."]
