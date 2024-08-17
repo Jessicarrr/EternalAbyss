@@ -1,7 +1,7 @@
 extends BaseSetting
 class_name MultiChoiceSetting
 
-var options : Array[String] = [ "High", "Medium", "Low" ]
+var options : Array = [ "High", "Medium", "Low" ]
 
 func _init(_name = "[No name assigned]", _description = "[No description assigned]", _options = [ "High", "Medium", "Low" ]):
 	self.setting_name = _name

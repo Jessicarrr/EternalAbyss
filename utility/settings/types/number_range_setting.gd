@@ -3,7 +3,7 @@ class_name NumberRangeSetting
 
 var min_value = 0
 var max_value = 100
-var units = "%"
+var units = ""
 
 func _init(_name = "[No name assigned]", _description = "[No description assigned]", _min = 0, _max = 100, _current = 50, _units = "%"):
 	self.setting_name = _name

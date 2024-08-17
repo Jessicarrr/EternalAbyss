@@ -17,6 +17,7 @@ func _on_widget_value_changed(new_value, setting):
 
 func populate():
 	var all_settings = category_instance.get_all_settings()
+	var controller = SettingsController.new()
 
 	for setting in all_settings:
 		var type = setting.type
@@ -31,8 +32,11 @@ func populate():
 		
 		label_node.text = setting.setting_name
 		label_node.tooltip_text = setting.description
-		prefab_instance.set_value(setting.get_value())
+
+		controller.connect_ui_to_backend(prefab_instance, setting)
 
 		prefab_instance.widget_value_changed.connect(self._on_widget_value_changed.bind(setting))
+
+		
 		
 

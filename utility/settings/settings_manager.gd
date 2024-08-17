@@ -4,6 +4,7 @@ class_name SettingsManager
 # Dynamic settings where technically any script can add a setting to the game. Just call the Game autoload script.
 # Game.settings.graphics.add_bool_setting etc
 
+var display = DisplayCategory.new()
 var graphics = GraphicsCategory.new()
 var audio = AudioCategory.new()
 var accessibility = AccessibilityCategory.new()

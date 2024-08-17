@@ -1,6 +1,7 @@
 extends Widget
 
 var units = "%"
+var current_value
 
 @onready var percentage_label : Label = get_node("PercentageLabel")
 
@@ -16,10 +17,19 @@ func _ready():
 
 func listen(value):
 	widget_value_changed.emit(value)
-	percentage_label.text = str(value) + units
+	current_value = value
+	_set_display_text()
 	Debug.msg(Debug.SETTINGS_UI, ["Changed UI value to " + str(value)])
 
 func set_value(the_value):
 	super(the_value)
-	percentage_label.text = str(the_value) + units
+	current_value = the_value
+	_set_display_text()
 	option_node.set_value(the_value)
+
+func _set_display_text():
+	percentage_label.text = str(current_value) + units
+
+func set_min_max(_min, _max):
+	option_node.min_value = _min
+	option_node.max_value = _max

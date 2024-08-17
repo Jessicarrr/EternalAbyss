@@ -24,3 +24,9 @@ func set_value(the_value):
 			option_node.select(i)
 
 	option_node.select(0)
+
+func set_multi_choice_options(_opt_array):
+	option_node.clear()
+
+	for option in _opt_array:
+		option_node.add_item(option)
