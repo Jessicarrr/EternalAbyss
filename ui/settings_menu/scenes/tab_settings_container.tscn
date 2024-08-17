@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://ygf1kcr5yn2x"]
+
+[ext_resource type="Script" path="res://ui/settings_menu/scripts/base_settings_loader.gd" id="1_wa848"]
+
+[node name="GraphicsSettings" type="VBoxContainer"]
+theme_override_constants/separation = 25
+script = ExtResource("1_wa848")

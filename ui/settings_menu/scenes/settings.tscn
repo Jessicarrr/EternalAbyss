@@ -1,45 +1,7 @@
-[gd_scene load_steps=10 format=3 uid="uid://bd1jvqvgvsiv3"]
+[gd_scene load_steps=4 format=3 uid="uid://bd1jvqvgvsiv3"]
 
 [ext_resource type="Theme" uid="uid://c73ag3aisfpte" path="res://fonts_themes/Alagard/alagard_medium.tres" id="1_3wc35"]
 [ext_resource type="Script" path="res://ui/settings_menu/scripts/settings.gd" id="1_x1163"]
-[ext_resource type="Script" path="res://ui/settings_menu/scripts/tab_handler.gd" id="2_gt8ei"]
-[ext_resource type="Script" path="res://ui/settings_menu/scripts/graphics_loader.gd" id="4_ae2c3"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_46wjj"]
-bg_color = Color(0.226707, 0.226708, 0.226707, 1)
-corner_radius_top_left = 8
-corner_radius_top_right = 8
-corner_radius_bottom_right = 8
-corner_radius_bottom_left = 8
-expand_margin_left = 10.0
-expand_margin_right = 10.0
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y31n6"]
-bg_color = Color(0.295866, 0.295867, 0.295866, 1)
-corner_radius_top_left = 8
-corner_radius_top_right = 8
-corner_radius_bottom_right = 8
-corner_radius_bottom_left = 8
-expand_margin_left = 10.0
-expand_margin_right = 10.0
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8u43e"]
-bg_color = Color(0.103744, 0.103744, 0.103743, 1)
-corner_radius_top_left = 8
-corner_radius_top_right = 8
-corner_radius_bottom_right = 8
-corner_radius_bottom_left = 8
-expand_margin_left = 10.0
-expand_margin_right = 10.0
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4m50b"]
-bg_color = Color(0.427493, 0.427493, 0.427492, 1)
-corner_radius_top_left = 8
-corner_radius_top_right = 8
-corner_radius_bottom_right = 8
-corner_radius_bottom_left = 8
-expand_margin_left = 10.0
-expand_margin_right = 10.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wsahg"]
 content_margin_left = 150.0
@@ -97,48 +59,6 @@ anchor_right = 0.964
 anchor_bottom = 0.211
 alignment = 1
 
-[node name="GraphicsTab" type="Button" parent="ColorRect/HBoxContainer" node_paths=PackedStringArray("tabs_container", "tab_to_handle")]
-layout_mode = 2
-size_flags_horizontal = 6
-theme = ExtResource("1_3wc35")
-theme_override_font_sizes/font_size = 36
-theme_override_styles/normal = SubResource("StyleBoxFlat_46wjj")
-theme_override_styles/hover = SubResource("StyleBoxFlat_y31n6")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_8u43e")
-theme_override_styles/focus = SubResource("StyleBoxFlat_4m50b")
-text = "Graphics"
-script = ExtResource("2_gt8ei")
-tabs_container = NodePath("../../ScrollContainer/VBoxContainer")
-tab_to_handle = NodePath("../../ScrollContainer/VBoxContainer/GraphicsSettings")
-
-[node name="AudioTab" type="Button" parent="ColorRect/HBoxContainer" node_paths=PackedStringArray("tabs_container", "tab_to_handle")]
-layout_mode = 2
-size_flags_horizontal = 6
-theme = ExtResource("1_3wc35")
-theme_override_font_sizes/font_size = 36
-theme_override_styles/normal = SubResource("StyleBoxFlat_46wjj")
-theme_override_styles/hover = SubResource("StyleBoxFlat_y31n6")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_8u43e")
-theme_override_styles/focus = SubResource("StyleBoxFlat_4m50b")
-text = "Audio"
-script = ExtResource("2_gt8ei")
-tabs_container = NodePath("../../ScrollContainer/VBoxContainer")
-tab_to_handle = NodePath("../../ScrollContainer/VBoxContainer/AudioSettings")
-
-[node name="AccessibilityTab" type="Button" parent="ColorRect/HBoxContainer" node_paths=PackedStringArray("tabs_container", "tab_to_handle")]
-layout_mode = 2
-size_flags_horizontal = 6
-theme = ExtResource("1_3wc35")
-theme_override_font_sizes/font_size = 36
-theme_override_styles/normal = SubResource("StyleBoxFlat_46wjj")
-theme_override_styles/hover = SubResource("StyleBoxFlat_y31n6")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_8u43e")
-theme_override_styles/focus = SubResource("StyleBoxFlat_4m50b")
-text = "Accessibility"
-script = ExtResource("2_gt8ei")
-tabs_container = NodePath("../../ScrollContainer/VBoxContainer")
-tab_to_handle = NodePath("../../ScrollContainer/VBoxContainer/AccessibilitySettings")
-
 [node name="ScrollContainer" type="ScrollContainer" parent="ColorRect"]
 layout_mode = 1
 anchors_preset = -1
@@ -158,19 +78,4 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
 size_flags_stretch_ratio = 2.53
-theme_override_constants/separation = 25
-
-[node name="GraphicsSettings" type="VBoxContainer" parent="ColorRect/ScrollContainer/VBoxContainer"]
-layout_mode = 2
-theme_override_constants/separation = 25
-script = ExtResource("4_ae2c3")
-
-[node name="AudioSettings" type="VBoxContainer" parent="ColorRect/ScrollContainer/VBoxContainer"]
-visible = false
-layout_mode = 2
-theme_override_constants/separation = 25
-
-[node name="AccessibilitySettings" type="VBoxContainer" parent="ColorRect/ScrollContainer/VBoxContainer"]
-visible = false
-layout_mode = 2
 theme_override_constants/separation = 25

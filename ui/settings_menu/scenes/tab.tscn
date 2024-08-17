@@ -39,7 +39,7 @@ corner_radius_bottom_left = 8
 expand_margin_left = 10.0
 expand_margin_right = 10.0
 
-[node name="Tab" type="Button" node_paths=PackedStringArray("tabs_container", "tab_to_handle")]
+[node name="Tab" type="Button"]
 size_flags_horizontal = 6
 theme = ExtResource("1_omfbf")
 theme_override_font_sizes/font_size = 36
@@ -49,5 +49,3 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_ai0b3")
 theme_override_styles/focus = SubResource("StyleBoxFlat_vqojg")
 text = "Tab Name"
 script = ExtResource("2_j8eqs")
-tabs_container = NodePath("")
-tab_to_handle = NodePath("")

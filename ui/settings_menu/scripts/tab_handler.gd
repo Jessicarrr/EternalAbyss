@@ -3,9 +3,16 @@ extends Button
 @export var tabs_container : Node
 @export var tab_to_handle : Node
 
-@onready var all_tabs = tabs_container.get_children()
+var all_tabs = null
 
 func open_tab():
+	if all_tabs == null:
+		if tabs_container == null:
+			push_warning("Tried to open a settings tab but the settings area given to the tab button was null?")
+			return
+
+		all_tabs = tabs_container.get_children()
+
 	for tab in all_tabs:
 		tab.visible = false
 
