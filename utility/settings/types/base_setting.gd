@@ -6,6 +6,7 @@ var description = ""
 var type : Enums.SettingsType
 var _value : Variant
 var _extra_data : Dictionary = {}
+signal setting_changed
 
 func _init(_name = "[No name assigned]", _description = "[No description assigned]", _current = null):
 	self.name = _name
@@ -15,6 +16,7 @@ func _init(_name = "[No name assigned]", _description = "[No description assigne
 
 func set_value(param_value):
 	self._value = param_value
+	setting_changed.emit(param_value)
 
 func get_value() -> Variant:
 	return self._value

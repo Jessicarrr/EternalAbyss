@@ -26,6 +26,7 @@ func set_value(param_value : String):
 
 	self._value = param_value
 	Debug.msg(Debug.SETTINGS, ["Set " + setting_name + " to " + str(param_value)])
+	setting_changed.emit(param_value)
 
 func add_value(param_value : String) -> bool:
 	if _extra_data.options.has(param_value):

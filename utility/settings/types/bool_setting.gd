@@ -10,6 +10,7 @@ func _init(_name = "[No name assigned]", _description = "[No description assigne
 func set_value(param_value : bool):
 	self._value = param_value
 	Debug.msg(Debug.SETTINGS, ["Set " + setting_name + " to " + str(param_value)])
+	setting_changed.emit(param_value)
 
 func get_value() -> bool:
 	return self._value

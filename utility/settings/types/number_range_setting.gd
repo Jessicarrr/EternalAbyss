@@ -21,6 +21,7 @@ func set_value(param_value : int):
 
 	self._value = param_value
 	Debug.msg(Debug.SETTINGS, ["Set " + setting_name + " to " + str(param_value)])
+	setting_changed.emit(param_value)
 
 func get_value() -> int:
 	return self._value
