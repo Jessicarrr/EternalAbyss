@@ -5,11 +5,10 @@ class_name SettingsManager
 # Game.settings.graphics.add_bool_setting etc
 
 var display = DisplayCategory.new()
+var camera = CameraCategory.new()
 var graphics = GraphicsCategory.new()
 var audio = AudioCategory.new()
 var accessibility = AccessibilityCategory.new()
-#var audio = SettingsCategory.new("Audio")
-#var _accessibility_instance = SettingsCategory.new("Accessibility")
 
 # Called when the node enters the scene tree for the first time.
 func _init():

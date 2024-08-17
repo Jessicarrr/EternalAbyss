@@ -31,8 +31,3 @@ If you need to add a new category of setting:
 		res://utility/settings/settings_manager.gd
 	6. Make sure you call new() on your category inside settings manager so it's added
 		to the game.
-	7. Add your tab to the UI inside the scene:
-		res://ui/settings_menu/scenes/settings.tscn
-	8. Add / edit the script relevant to your tab so that it selects the correct
-		category from when you edited settings_manager.gd
-		settings_manager is referenced via Game.settings (from anywhere)
