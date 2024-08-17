@@ -14,7 +14,7 @@ func check_integrity_of_items():
 func spawn_random_item():
 	print("ItemSpawner ", get_path(), " spawning item at ", str(self.global_position))
 	
-	var chance_float = percent_chance_spawn_item / 100
+	var chance_float = float(percent_chance_spawn_item) / 100
 	if Helpers.should_chance_succeed(chance_float) == false:
 		return
 	
@@ -25,15 +25,15 @@ func spawn_random_item():
 		push_warning(get_path(), " tried to spawn item ", random_item_name, " but item could not be found.")
 		return
 
-	var duplicate = item.duplicate()
+	var duplicated = item.duplicate()
 		
 	#if duplicate.is_node_ready() == false:
 	#	await duplicate.ready
 	
-	duplicate.put_in_3d_world()
+	duplicated.put_in_3d_world()
 	#await get_tree().create_timer(0.5).timeout
 	#duplicate.velocity = Vector3.ZERO
-	duplicate.global_position = self.global_position
+	duplicated.global_position = self.global_position
 	
 	#await get_tree().create_timer(5).timeout
 	#var pos = duplicate.global_position
