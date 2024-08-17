@@ -20,3 +20,10 @@ func set_value(the_value):
 
 func set_extra_data(data : Dictionary):
 	pass
+
+func set_description(_text):
+
+	label.set_tooltip_text(_text)
+
+
+	option_node.set_tooltip_text(_text)

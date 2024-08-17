@@ -15,6 +15,7 @@ script = ExtResource("1_nb56c")
 layout_mode = 2
 size_flags_horizontal = 2
 size_flags_stretch_ratio = 3.36
+mouse_filter = 1
 theme = ExtResource("2_nupyp")
 theme_override_constants/line_spacing = 5
 theme_override_font_sizes/font_size = 26

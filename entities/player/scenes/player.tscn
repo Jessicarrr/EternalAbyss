@@ -353,8 +353,8 @@ mouse_filter = 2
 script = ExtResource("41_22i2c")
 
 [node name="FunPixelShader" type="ColorRect" parent="HUD/ShaderStuff"]
+visible = false
 show_behind_parent = true
-z_index = -1
 material = SubResource("ShaderMaterial_656pa")
 anchors_preset = 15
 anchor_right = 1.0

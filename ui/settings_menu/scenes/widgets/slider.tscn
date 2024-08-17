@@ -26,6 +26,7 @@ script = ExtResource("1_o2lbj")
 layout_mode = 2
 size_flags_horizontal = 2
 size_flags_stretch_ratio = 3.81
+mouse_filter = 1
 theme = ExtResource("1_m1g8y")
 theme_override_constants/line_spacing = 5
 theme_override_font_sizes/font_size = 26
