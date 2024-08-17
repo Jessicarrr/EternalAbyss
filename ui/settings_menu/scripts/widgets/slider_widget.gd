@@ -33,3 +33,8 @@ func _set_display_text():
 func set_min_max(_min, _max):
 	option_node.min_value = _min
 	option_node.max_value = _max
+
+func set_extra_data(data : Dictionary):
+	units = data.units
+	self.set_min_max(data.min_value, data.max_value)
+	_set_display_text()

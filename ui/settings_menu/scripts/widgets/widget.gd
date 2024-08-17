@@ -17,3 +17,6 @@ func get_value():
 func set_value(the_value):
 	if self.is_node_ready() == false:
 		await self.ready
+
+func set_extra_data(data : Dictionary):
+	pass

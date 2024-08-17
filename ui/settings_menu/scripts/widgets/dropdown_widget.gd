@@ -30,3 +30,6 @@ func set_multi_choice_options(_opt_array):
 
 	for option in _opt_array:
 		option_node.add_item(option)
+
+func set_extra_data(data : Dictionary):
+	self.set_multi_choice_options(data.options)

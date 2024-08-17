@@ -5,6 +5,7 @@ var setting_name = ""
 var description = ""
 var type : Enums.SettingsType
 var _value : Variant
+var _extra_data : Dictionary = {}
 
 func _init(_name = "[No name assigned]", _description = "[No description assigned]", _current = null):
 	self.name = _name
@@ -20,3 +21,6 @@ func get_value() -> Variant:
 
 func _to_string():
 	return self.get_class() + ": '" + setting_name + "'', " + str(_value)
+
+func get_extra_data():
+	return _extra_data
