@@ -1,5 +1,12 @@
 extends Node
 
+enum SettingsType {
+	NONE = 0,
+	BOOLEAN = 1,
+	RANGE = 2,
+	MULTI_CHOICE = 3,
+}
+
 enum EquipmentType { 
 	HELMET = 0,
 	AMULET = 1,

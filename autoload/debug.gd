@@ -19,14 +19,17 @@ const INVENTORY_UI = 15
 const NPC_HEARING = 16
 const INTERACT_WITH_OBJECTS = 17
 const EVENTS = 18
+const SETTINGS_INIT = 19
+const SETTINGS = 20
+const SETTINGS_UI = 21
 
 const SHOW_HITBOXES = false
 
 var print_flags = {
 	COMBAT: false,
 	GENERAL_STATES: false,
-	PLAYER_STATES: true,
-	PLAYER_STATE_MACHINE: true,
+	PLAYER_STATES: false,
+	PLAYER_STATE_MACHINE: false,
 	NPC_STATES: false,
 	NPC_STATE_MACHINE: false,
 	OBJECT_STATES: false,
@@ -41,7 +44,10 @@ var print_flags = {
 	INVENTORY_UI : false,
 	NPC_HEARING : false,
 	INTERACT_WITH_OBJECTS : false,
-	EVENTS : false
+	EVENTS : false,
+	SETTINGS_INIT : true,
+	SETTINGS : true,
+	SETTINGS_UI : true,
 }
 
 func msg(type, args = []):
