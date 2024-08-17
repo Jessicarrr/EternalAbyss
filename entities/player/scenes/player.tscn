@@ -1,4 +1,4 @@
-[gd_scene load_steps=58 format=3 uid="uid://dcb260rwf1sj2"]
+[gd_scene load_steps=63 format=3 uid="uid://dcb260rwf1sj2"]
 
 [ext_resource type="Script" path="res://entities/player/scripts/player.gd" id="1_6mp8f"]
 [ext_resource type="Script" path="res://entities/player/scripts/state/PlayerStateMachine.gd" id="1_v1kjj"]
@@ -50,7 +50,10 @@
 [ext_resource type="Script" path="res://shaders/VignetteHealth.gd" id="41_22i2c"]
 [ext_resource type="Shader" path="res://shaders/PixelShader.gdshader" id="42_qnj6d"]
 [ext_resource type="Script" path="res://entities/player/scripts/PlayerInteractWithObject.gd" id="49_qqrxn"]
+[ext_resource type="Shader" path="res://shaders/film_grain.gdshader" id="50_0j03c"]
 [ext_resource type="PackedScene" uid="uid://ckjun0up8s5rn" path="res://ui/pause_menu/scenes/pause_menu.tscn" id="50_mwsoe"]
+[ext_resource type="Script" path="res://shaders/film_grain.gd" id="51_0lrkr"]
+[ext_resource type="Shader" path="res://shaders/mind_altering_shader.gdshader" id="52_keacp"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_gdq8c"]
 radius = 0.2
@@ -75,6 +78,15 @@ shader_parameter/vignette_rgb = Color(0, 0, 0, 1)
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_656pa"]
 shader = ExtResource("42_qnj6d")
 shader_parameter/pixelation_level = 92.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jowjn"]
+shader = ExtResource("50_0j03c")
+shader_parameter/grain_amount = 0.05
+shader_parameter/grain_size = 1.0
+shader_parameter/animate = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_idl6s"]
+shader = ExtResource("52_keacp")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_qcmu2"]
 size = Vector3(1, 2, 1)
@@ -356,6 +368,26 @@ script = ExtResource("41_22i2c")
 visible = false
 show_behind_parent = true
 material = SubResource("ShaderMaterial_656pa")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="FilmGrain" type="ColorRect" parent="HUD/ShaderStuff"]
+material = SubResource("ShaderMaterial_jowjn")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("51_0lrkr")
+
+[node name="MindAlteringShader" type="ColorRect" parent="HUD/ShaderStuff"]
+visible = false
+material = SubResource("ShaderMaterial_idl6s")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0

@@ -4,12 +4,12 @@ class_name GraphicsCategory
 var film_grain : BoolSetting = BoolSetting.new(
 		"Film Grain",
 		"Adds a TV static like effect to the screen, which will show all the time.",
-		false
+		true
 )
 var film_grain_intensity : NumberRangeSetting = NumberRangeSetting.new(
 		"Film Grain Intensity",
 		"Determines how strong film grain is for the constant effect. Film grain setting must be on.",
-		0, 100, 50, "%"
+		0, 100, 34, "%"
 )
 
 var film_grain_gameplay : BoolSetting = BoolSetting.new(
