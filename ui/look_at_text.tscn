@@ -1,11 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://csgf4qcsol5ih"]
+[gd_scene load_steps=3 format=3 uid="uid://csgf4qcsol5ih"]
 
 [ext_resource type="Script" path="res://ui/look_at_text.gd" id="1_pdxg2"]
-[ext_resource type="FontFile" uid="uid://byuvmmg840ppl" path="res://fonts/Alagard/alagard.ttf" id="2_wytbj"]
-
-[sub_resource type="Theme" id="Theme_2qh75"]
-default_font = ExtResource("2_wytbj")
-default_font_size = 28
+[ext_resource type="Theme" uid="uid://c73ag3aisfpte" path="res://fonts_themes/Alagard/alagard_medium.tres" id="2_yo1kb"]
 
 [node name="LookAtText" type="VBoxContainer"]
 anchors_preset = -1
@@ -24,6 +20,9 @@ script = ExtResource("1_pdxg2")
 
 [node name="Text" type="Label" parent="."]
 layout_mode = 2
-theme = SubResource("Theme_2qh75")
+theme = ExtResource("2_yo1kb")
 theme_type_variation = &"HeaderLarge"
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 4
+theme_override_constants/shadow_offset_y = 4
 horizontal_alignment = 1

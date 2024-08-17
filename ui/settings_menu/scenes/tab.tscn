@@ -1,0 +1,53 @@
+[gd_scene load_steps=7 format=3 uid="uid://mf3rndjmcui4"]
+
+[ext_resource type="Theme" uid="uid://c73ag3aisfpte" path="res://fonts_themes/Alagard/alagard_medium.tres" id="1_omfbf"]
+[ext_resource type="Script" path="res://ui/settings_menu/scripts/tab_handler.gd" id="2_j8eqs"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jafvb"]
+bg_color = Color(0.226707, 0.226708, 0.226707, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+expand_margin_left = 10.0
+expand_margin_right = 10.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2l83j"]
+bg_color = Color(0.295866, 0.295867, 0.295866, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+expand_margin_left = 10.0
+expand_margin_right = 10.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ai0b3"]
+bg_color = Color(0.103744, 0.103744, 0.103743, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+expand_margin_left = 10.0
+expand_margin_right = 10.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vqojg"]
+bg_color = Color(0.427493, 0.427493, 0.427492, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+expand_margin_left = 10.0
+expand_margin_right = 10.0
+
+[node name="Tab" type="Button" node_paths=PackedStringArray("tabs_container", "tab_to_handle")]
+size_flags_horizontal = 6
+theme = ExtResource("1_omfbf")
+theme_override_font_sizes/font_size = 36
+theme_override_styles/normal = SubResource("StyleBoxFlat_jafvb")
+theme_override_styles/hover = SubResource("StyleBoxFlat_2l83j")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_ai0b3")
+theme_override_styles/focus = SubResource("StyleBoxFlat_vqojg")
+text = "Tab Name"
+script = ExtResource("2_j8eqs")
+tabs_container = NodePath("")
+tab_to_handle = NodePath("")

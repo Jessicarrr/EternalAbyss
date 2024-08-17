@@ -20,18 +20,19 @@ config/icon="res://icon.png"
 
 [autoload]
 
+Debug="*res://autoload/debug.gd"
+Game="*res://autoload/game.gd"
 GenerationConstants="*res://autoload/generation_constants.gd"
 Enums="*res://autoload/enums.gd"
 PlayerDataExtra="*res://autoload/player_data_extra.gd"
 Helpers="*res://autoload/helpers.gd"
-Debug="*res://autoload/debug.gd"
 LevelData="*res://autoload/level_data.gd"
 WorldData="*res://autoload/world_data.gd"
 InputDescriptor="*res://autoload/input_descriptor.gd"
 
 [debug]
 
-gdscript/warnings/unused_variable=0
+gdscript/warnings/unused_parameter=0
 
 [display]
 
@@ -55,6 +56,7 @@ folder_colors={
 "res://items/inventory/": "yellow",
 "res://level-gen-v2/": "yellow",
 "res://skills/": "yellow",
+"res://utility/": "yellow",
 "res://world/": "yellow"
 }
 
@@ -235,6 +237,11 @@ dev_speed_up={
 dev_slow_down={
 "deadzone": 0.5,
 "events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194440,"key_label":0,"unicode":0,"echo":false,"script":null)
+]
+}
+pause_menu_toggle={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194305,"key_label":0,"unicode":0,"echo":false,"script":null)
 ]
 }
 

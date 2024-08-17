@@ -1,0 +1,38 @@
+If you want to add a new setting to the existing categories using an existing setting type
+	You can add new settings to the game easily by editing the files in:
+	res://utility/settings/categories/...
+	and select one of the categories (accessibility, graphics, audio, etc)
+	Currently it accepts:
+	- slider number range settings (select a number between x and y)
+	- checkbox setting (boolean)
+	- multiple choice setting (e.g. high, medium, low) basically a series of strings to choose from
+
+If you need to add a new type of setting:
+	1. add new type that extends base_setting in:
+		res://utility/settings/types/...
+	2. add the setting to one of the categories in:
+		res://utility/settings/categories/...
+	3. add a new UI widget to represent the setting. Extend Widget. located in:
+		res://ui/settings_menu/scripts/widgets/...
+	3.5 Make sure the set_value changes the UI widget appropriately so that the game
+		itself can change the ui to represent the back-end
+	4. add the widget to be loaded automatically in the settings ui via:
+		ui/settings_menu/scripts/base_settings_loader.gd
+	this can be done by adding to the prefabs array.
+
+If you need to add a new category of setting:
+	1. Go to:
+		res://utility/settings/categories
+	2. Add a new category extending SettingsCategory
+	3. Add relevant settings variables to the category.
+	4. Don't forget to define _init() to name the category properly
+		(use other categories as a reference)
+	5. Go to:
+		res://utility/settings/settings_manager.gd
+	6. Make sure you call new() on your category inside settings manager so it's added
+		to the game.
+	7. Add your tab to the UI inside the scene:
+		res://ui/settings_menu/scenes/settings.tscn
+	8. Add / edit the script relevant to your tab so that it selects the correct
+		category from when you edited settings_manager.gd
+		settings_manager is referenced via Game.settings (from anywhere)

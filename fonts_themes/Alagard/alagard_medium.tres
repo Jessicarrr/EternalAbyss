@@ -1,0 +1,7 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://c73ag3aisfpte"]
+
+[ext_resource type="FontFile" uid="uid://byuvmmg840ppl" path="res://fonts/Alagard/alagard.ttf" id="1_2qsry"]
+
+[resource]
+default_font = ExtResource("1_2qsry")
+default_font_size = 28

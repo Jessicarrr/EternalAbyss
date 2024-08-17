@@ -1,0 +1,37 @@
+[gd_scene load_steps=4 format=3 uid="uid://cauivgluwo75s"]
+
+[ext_resource type="Script" path="res://ui/settings_menu/scripts/widgets/dropdown_widget.gd" id="1_nb56c"]
+[ext_resource type="Theme" uid="uid://c73ag3aisfpte" path="res://fonts_themes/Alagard/alagard_medium.tres" id="2_nupyp"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rdm4l"]
+bg_color = Color(0.197937, 0.197937, 0.197937, 1)
+
+[node name="Dropdown" type="HBoxContainer"]
+size_flags_vertical = 0
+alignment = 1
+script = ExtResource("1_nb56c")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_stretch_ratio = 3.36
+theme = ExtResource("2_nupyp")
+theme_override_constants/line_spacing = 5
+theme_override_font_sizes/font_size = 22
+text = "Particle Effects"
+
+[node name="OptionButton" type="OptionButton" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 4.75
+theme = ExtResource("2_nupyp")
+theme_override_font_sizes/font_size = 22
+theme_override_styles/normal = SubResource("StyleBoxFlat_rdm4l")
+item_count = 3
+selected = 0
+popup/item_0/text = "High"
+popup/item_0/id = 0
+popup/item_1/text = "Medium"
+popup/item_1/id = 1
+popup/item_2/text = "Low"
+popup/item_2/id = 2

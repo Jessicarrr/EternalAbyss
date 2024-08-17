@@ -1,4 +1,4 @@
-[gd_scene load_steps=57 format=3 uid="uid://dcb260rwf1sj2"]
+[gd_scene load_steps=58 format=3 uid="uid://dcb260rwf1sj2"]
 
 [ext_resource type="Script" path="res://entities/player/scripts/player.gd" id="1_6mp8f"]
 [ext_resource type="Script" path="res://entities/player/scripts/state/PlayerStateMachine.gd" id="1_v1kjj"]
@@ -50,6 +50,7 @@
 [ext_resource type="Script" path="res://shaders/VignetteHealth.gd" id="41_22i2c"]
 [ext_resource type="Shader" path="res://shaders/PixelShader.gdshader" id="42_qnj6d"]
 [ext_resource type="Script" path="res://entities/player/scripts/PlayerInteractWithObject.gd" id="49_qqrxn"]
+[ext_resource type="PackedScene" uid="uid://ckjun0up8s5rn" path="res://ui/pause_menu/scenes/pause_menu.tscn" id="50_mwsoe"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_gdq8c"]
 radius = 0.2
@@ -361,6 +362,9 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+
+[node name="PauseMenu" parent="." instance=ExtResource("50_mwsoe")]
+visible = false
 
 [node name="Area3D" type="Area3D" parent="." groups=["PlayerDetection"]]
 

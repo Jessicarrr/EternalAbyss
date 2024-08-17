@@ -1,0 +1,52 @@
+[gd_scene load_steps=8 format=3 uid="uid://dfpgoj6jsmte6"]
+
+[ext_resource type="Script" path="res://ui/settings_menu/scripts/widgets/checkbox_widget.gd" id="1_3dhd3"]
+[ext_resource type="Theme" uid="uid://c73ag3aisfpte" path="res://fonts_themes/Alagard/alagard_medium.tres" id="1_bn3qx"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6kf7m"]
+border_color = Color(0.8, 0.8, 0.8, 0)
+expand_margin_left = 5.0
+expand_margin_right = 5.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xtxs6"]
+bg_color = Color(0.262932, 0.262932, 0.262932, 1)
+expand_margin_left = 5.0
+expand_margin_right = 5.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fdpnw"]
+bg_color = Color(0.674815, 0.674815, 0.674814, 1)
+expand_margin_left = 5.0
+expand_margin_right = 5.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fksom"]
+bg_color = Color(0.674815, 0.674815, 0.674814, 1)
+expand_margin_left = 5.0
+expand_margin_right = 5.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1pv16"]
+
+[node name="Checkbox" type="HBoxContainer"]
+size_flags_vertical = 0
+tooltip_text = "A setting."
+alignment = 1
+script = ExtResource("1_3dhd3")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_stretch_ratio = 3.36
+theme = ExtResource("1_bn3qx")
+theme_override_constants/line_spacing = 5
+theme_override_font_sizes/font_size = 22
+text = "Film Grain - General"
+
+[node name="CheckBox" type="CheckBox" parent="."]
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_stretch_ratio = 4.61
+theme_override_styles/normal = SubResource("StyleBoxFlat_6kf7m")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_xtxs6")
+theme_override_styles/hover = SubResource("StyleBoxFlat_fdpnw")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_fksom")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_1pv16")
+button_pressed = true
