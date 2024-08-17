@@ -24,7 +24,7 @@ func get_all_settings_categories():
 		var prop_value = self.get(prop_name)
 
 		if prop_value is SettingsCategory:
-			settings.append(prop_value)
+			categories.append(prop_value)
 
 	return categories
 
