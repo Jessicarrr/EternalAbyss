@@ -93,3 +93,12 @@ func object_has_signal( object: Object, signal_name: String ) -> bool:
 			return true
 		
 	return false
+
+func get_player_when_ready():
+	while Game.player == null:
+		await get_tree().process_frame
+
+	if Game.player.is_node_ready() == false:
+		await Game.player.ready
+
+	return Game.player

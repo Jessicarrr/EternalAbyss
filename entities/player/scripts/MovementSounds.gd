@@ -1,9 +1,14 @@
 extends Node
 
-@onready var player = get_parent().get_parent()
-var footstep_sound_playing = false
-var footstep_sound_delay = 0.55
 @export var audio_stream: AudioStreamPlayer
+
+var player_moving = false
+var player_sprinting = false
+
+var player = null
+
+var last_footstep_sound = Time.get_ticks_msec()
+@export var directional_movement : Node
 
 var walk_stone_sounds = [
 	"res://entities/actors/shared/sounds/footsteps/stone_brick/step_01.wav",
@@ -26,32 +31,42 @@ func grab_sound_from_sound_pool():
 	sound_pool.erase(random_sound)
 	return random_sound
 
-func play_movement_sound(velocity):
-	if footstep_sound_playing:
+func play_movement_sound():
+	var rando_sound_effect = grab_sound_from_sound_pool()
+		
+	# Load the audio file into an AudioStream
+	var audio_stream_resource = load(rando_sound_effect)
+	
+	# Set the stream to the loaded AudioStream
+	audio_stream.stream = audio_stream_resource
+	
+	audio_stream.play()
+	sound_made.emit()
+
+
+func _process(_delta):
+	if player_moving == false:
 		return
-	else:
-		footstep_sound_playing = true
-		var rando_sound_effect = grab_sound_from_sound_pool()
-			
-		# Load the audio file into an AudioStream
-		var audio_stream_resource = load(rando_sound_effect)
-		
-		# Set the stream to the loaded AudioStream
-		audio_stream.stream = audio_stream_resource
-		
-		audio_stream.play()
-		sound_made.emit()
-		
-		var velocity_magnitude = velocity.length()
-		var scaled_footstep_delay = footstep_sound_delay / max(velocity_magnitude, 1) * 1.7
-		
-		
-		await get_tree().create_timer(scaled_footstep_delay).timeout
-		footstep_sound_playing = false
+
+	var wait_time_ms = (player.footstep_interval_sprinting if player_sprinting else player.footstep_interval_walking) * 1000
+
+	if Helpers.has_enough_time_passed(wait_time_ms, last_footstep_sound) == false:
+		return
+
+	play_movement_sound()
+	last_footstep_sound = Time.get_ticks_msec()
 		
 func _ready():
+	player = await Helpers.get_player_when_ready()
 	player.crouch_toggled.connect(_on_crouch_toggled)
 	audio_stream.bus = "ReverbBus"
+
+	directional_movement.player_started_movement.connect(_on_player_started_movement)
+	directional_movement.player_stopped_movement.connect(_on_player_stopped_movement)
+
+	directional_movement.player_started_sprinting.connect(_on_player_started_sprinting)
+	directional_movement.player_stopped_sprinting.connect(_on_player_stopped_sprinting)
+	
 
 func _on_crouch_toggled(crouching):
 	if crouching == true:
@@ -61,5 +76,14 @@ func _on_crouch_toggled(crouching):
 		audio_stream.bus = "ReverbBus"
 		audio_stream.pitch_scale = 1.0
 
-func _on_directional_movement_player_ground_movement(velocity):
-	play_movement_sound(velocity)
+func _on_player_started_movement():
+	player_moving = true
+
+func _on_player_stopped_movement():
+	player_moving = false
+
+func _on_player_started_sprinting():
+	player_sprinting = true
+
+func _on_player_stopped_sprinting():
+	player_sprinting = false

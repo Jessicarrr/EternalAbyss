@@ -1,4 +1,4 @@
-[gd_scene load_steps=63 format=3 uid="uid://dcb260rwf1sj2"]
+[gd_scene load_steps=64 format=3 uid="uid://dcb260rwf1sj2"]
 
 [ext_resource type="Script" path="res://entities/player/scripts/player.gd" id="1_6mp8f"]
 [ext_resource type="Script" path="res://entities/player/scripts/state/PlayerStateMachine.gd" id="1_v1kjj"]
@@ -30,6 +30,7 @@
 [ext_resource type="Script" path="res://entities/player/scripts/MovementSounds.gd" id="26_2mhyc"]
 [ext_resource type="Script" path="res://entities/player/scripts/CrouchInput.gd" id="26_61fuf"]
 [ext_resource type="Script" path="res://entities/player/scripts/sounds/AttackSounds.gd" id="27_dh01p"]
+[ext_resource type="Script" path="res://entities/player/scripts/head_bob.gd" id="28_sb8gu"]
 [ext_resource type="Script" path="res://entities/shared/scripts/GetDamagedSounds.gd" id="29_tw623"]
 [ext_resource type="Script" path="res://skills/health/scripts/Health.gd" id="30_rb013"]
 [ext_resource type="Script" path="res://skills/endurance/scripts/Endurance.gd" id="31_ux8sm"]
@@ -190,18 +191,26 @@ metadata/Player = NodePath("../..")
 script = ExtResource("23_rggqs")
 player = NodePath("../..")
 camera = NodePath("../../Head/Camera")
+run_speed_modifier = 40
+gravity_power = 16
 
 [node name="DevModeMovement" type="Node" parent="MovementSystem/DirectionalMovement"]
 script = ExtResource("24_pt1r8")
 
-[node name="MovementSounds" type="Node" parent="MovementSystem" node_paths=PackedStringArray("audio_stream")]
+[node name="MovementSounds" type="Node" parent="MovementSystem" node_paths=PackedStringArray("audio_stream", "directional_movement")]
 script = ExtResource("26_2mhyc")
 audio_stream = NodePath("../../FootstepSoundPlayer")
+directional_movement = NodePath("../DirectionalMovement")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="MovementSystem/MovementSounds"]
 
 [node name="CrouchInput" type="Node" parent="MovementSystem"]
 script = ExtResource("26_61fuf")
+
+[node name="HeadBob" type="Node" parent="MovementSystem" node_paths=PackedStringArray("camera", "directional_movement")]
+script = ExtResource("28_sb8gu")
+camera = NodePath("../../Head/Camera")
+directional_movement = NodePath("../DirectionalMovement")
 
 [node name="Sounds" type="Node" parent="."]
 

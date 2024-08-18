@@ -18,6 +18,9 @@ class_name Player
 @export var base_noise_level = 50.0
 @export var not_crouching_noise_modifier = 50.0
 @export var interaction_distance = 2.0
+@export var footstep_interval_walking = 0.7
+@export var footstep_interval_sprinting = 0.4
+@export var footstep_interval_crouching_mult = 0.6
 
 var crouching = false:
 	set(val):
@@ -42,6 +45,7 @@ signal crouch_toggled
 
 func _ready():
 	PlayerDataExtra.set_player(self)
+	Game.player = self
 	
 	movement_sounds.sound_made.connect(_process_footstep_sound)
 	raycast.target_position = Vector3(0, 0, -interaction_distance)

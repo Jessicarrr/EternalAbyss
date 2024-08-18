@@ -6,7 +6,7 @@ extends Node
 
 # Movement-related variables
 @export_subgroup("Movement Properties")
-@export var walking_speed = 95  # Speed of the player
+@export var walking_speed = 75  # Speed of the player
 @export var run_speed_modifier = 60
 @export var backwards_movement_multiplier = 0.55
 @export var jump_force = 4  # Jump strength

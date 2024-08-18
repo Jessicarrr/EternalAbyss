@@ -9,7 +9,7 @@ var head_bob : BoolSetting = BoolSetting.new(
 var head_bob_intensity : NumberRangeSetting = NumberRangeSetting.new(
 		"Head bob intensity",
 		"Determines how much the camera moves when walking and running.",
-		0, 100, 50, "%"
+		0, 100, 25, "%"
 )
 
 

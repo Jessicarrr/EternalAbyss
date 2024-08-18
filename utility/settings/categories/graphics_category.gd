@@ -9,7 +9,7 @@ var film_grain : BoolSetting = BoolSetting.new(
 var film_grain_intensity : NumberRangeSetting = NumberRangeSetting.new(
 		"Film Grain Intensity",
 		"Determines how strong film grain is for the constant effect. Film grain setting must be on.",
-		0, 100, 34, "%"
+		0, 100, 40, "%"
 )
 
 var film_grain_gameplay : BoolSetting = BoolSetting.new(

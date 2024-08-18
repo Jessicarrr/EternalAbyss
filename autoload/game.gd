@@ -1,6 +1,7 @@
 extends Node
 
 var settings = SettingsManager.new()
+var player = null
 
 
 # Called when the node enters the scene tree for the first time.
